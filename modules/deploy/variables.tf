@@ -1,0 +1,13 @@
+variable "alerts_topic_name" {}
+variable "aws_account" {}
+variable "aws_region" {}
+variable "docker_image_name" {}
+variable "ecs_cloudwatch_log_group_name" {}
+variable "ecs_cluster_id" {}
+variable "environment_name" {}
+variable "kms_key_id" {}
+variable "rds_address" {}
+variable "rds_port" {}
+variable "rds_db_username" {}
+variable "rds_db_name" {}
+variable "target_group_arn" {}

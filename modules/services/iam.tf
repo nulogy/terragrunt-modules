@@ -1,0 +1,4 @@
+resource "aws_key_pair" "ecs_key" {
+  key_name = "${var.environment_name}-ecs-key"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCCWQftG9swMVWlfeRsbV0L6cKF9yMLBXSfI4SXuryV5Td3GK+SwC9Gd1sf5ip0tR5c634knliniWOrdzzt+WSflulustDqRXzDfmEk6bPrBUP/JZeKPtQPfBcC1drJbciojDPqiEC8/tjeWH0Q0vh9F2XDM9M5YwIx1Q71cc2xKUAcZJ7I5R7kTBozBHn19TH9HuAiNdR9paVJij3Cex1OybgiYGpKo3Sxml5H2EmVRmkirhsmwetB7SIyNnHBnUIHqxtG+PmjuqeEIIErVuCOaE82LvGhuDHHdNZEtvZ7sldFc0zzOYOvb4+JTo+mqN6CoPe5NgoEtbz5QCCZ5SiT"
+}

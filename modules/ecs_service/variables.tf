@@ -4,8 +4,8 @@ variable "container_port" {}
 variable "cpuReservation" {}
 variable "desired_count" {}
 variable "docker_image_name" {}
-variable "ecs_cluster_id" {}
-variable "envars" { type = "list" }
+variable "ecs_cluster_name" {}
+variable "envars" {}
 variable "environment_name" {}
 variable "kms_key_id" { default = ""}
 variable "log_group_name" {}

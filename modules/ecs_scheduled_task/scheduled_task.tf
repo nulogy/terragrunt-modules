@@ -6,7 +6,7 @@ resource "aws_cloudwatch_event_rule" "scheduled_task_event_rule" {
 }
 
 resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
-  arn = "${aws_ecs_service.ecs_service.cluster}"
+  arn = "${var.ecs_cluster_name}"
   rule = "${aws_cloudwatch_event_rule.scheduled_task_event_rule.name}"
   role_arn = "${aws_iam_role.ecs_eventrole.arn}"
   input = <<JSON
@@ -21,13 +21,13 @@ resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
   JSON
 
   ecs_target {
-    task_definition_arn = "${aws_ecs_task_definition.ecs_task.arn}"
+    task_definition_arn = "${var.ecs_task_arn}"
     task_count = 1
   }
 }
 
 // Terraform does not support 'email' topic subscription (see https://www.terraform.io/docs/providers/aws/r/sns_topic_subscription.html#email)
-// We will assume a "go-team-alerts" topic subscription was already created
+// We will assume a topic subscription was already created
 data "aws_sns_topic" "alert_topic" {
   name = "${var.alerts_topic_name}"
 }

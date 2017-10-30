@@ -6,7 +6,8 @@ variable "container_port" {}
 variable "encrypted_storage" {}
 variable "docker_image_name" {}
 variable "ecs_cloudwatch_log_group_name" {}
-variable "ecs_cluster_id" {}
+variable "ecs_cluster_name" {}
+variable "ecs_task_arn" {}
 variable "environment_name" {}
 variable "kms_key_id" {}
 variable "rds_address" {}

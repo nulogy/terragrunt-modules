@@ -32,7 +32,7 @@ DEFINITION
 
 resource "aws_ecs_service" "ecs_service" {
   name = "${var.environment_name}_service"
-  cluster = "${var.ecs_cluster_id}"
+  cluster = "${var.ecs_cluster_name}"
   task_definition = "${aws_ecs_task_definition.ecs_task.arn}"
   desired_count = "${var.desired_count}"
   iam_role = "${aws_iam_role.ecs_servicerole.arn}"

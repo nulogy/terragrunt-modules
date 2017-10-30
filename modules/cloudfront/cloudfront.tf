@@ -8,7 +8,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   aliases = ["${var.route_53_subdomain}.${var.route_53_domain}"]
 
   origin {
-    domain_name = "${var.public_load_balancer_fqdn}"
+    domain_name = "${var.app_fqdn}"
     origin_id = "${var.environment_name}-app"
 
     custom_origin_config {
@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
     allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods = ["GET", "HEAD"]
     target_origin_id = "${var.environment_name}-staticAssets"
-    path_pattern = "${static_assets_path}"
+    path_pattern = "${var.static_assets_path}"
     compress = true
 
     forwarded_values {

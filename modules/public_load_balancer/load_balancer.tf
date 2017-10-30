@@ -2,7 +2,7 @@ resource "aws_alb" "public_load_balancer" {
   name = "${var.environment_name}-PLB"
   internal = false
   security_groups = ["${aws_security_group.ecs_lb_security_group.id}"]
-  subnets = ["${var.ecs_public_subnet_1_id}", "${var.ecs_public_subnet_2_id}"]
+  subnets = ["${var.alb_subnets}"]
 
   tags {
     Name = "${var.environment_name} public load balancer"

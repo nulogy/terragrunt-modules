@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name_prefix = "${var.environment_name}-rds-subnet-group-"
-  subnet_ids = ["${var.rds_subnets}"]
+  subnet_ids = ["${var.rds_subnet_ids}"]
 
   tags {
     Name = "${var.environment_name} RDS subnet group"

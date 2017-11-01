@@ -78,7 +78,7 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
         "ssm:GetParameter"
       ],
       "Resource": [
-        "arn:aws:ssm:${var.aws_region}:${var.aws_account}:parameter/${var.environment_name}/*"
+        "arn:aws:ssm:${var.aws_region}:${var.aws_account}:parameter/${var.parameter_namespace}/*"
       ]
     },
     {

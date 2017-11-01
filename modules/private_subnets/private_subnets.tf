@@ -6,7 +6,7 @@ resource "aws_subnet" "private_subnets" {
   cidr_block = "${var.private_subnets[count.index]}"
 
   tags {
-    Name = "${var.environment_name} private subnet ${count.index + 1}"
+    Name = "${var.environment_name} private ${var.private_subnet_adjective} subnet ${count.index + 1}"
     resource_group = "${var.environment_name}"
   }
 }
@@ -16,7 +16,7 @@ resource "aws_route_table" "private_routing_tables" {
   vpc_id = "${var.vpc_id}"
 
   tags {
-    Name = "${var.environment_name} private subnets routing table ${count.index + 1}"
+    Name = "${var.environment_name} private ${var.private_subnet_adjective} subnets routing table ${count.index + 1}"
     resource_group = "${var.environment_name}"
   }
 }

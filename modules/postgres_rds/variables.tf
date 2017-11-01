@@ -7,6 +7,6 @@ variable "instance_class" {}
 variable "parameter_group_name" {}
 variable "production_mode" {}
 variable "rds_db_username" {}
-variable "rds_subnets" { type = "list" }
+variable "rds_subnet_ids" { type = "list" }
 variable "vpc_cidr" {}
 variable "vpc_id" {}

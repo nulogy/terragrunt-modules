@@ -17,7 +17,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
       origin_read_timeout = 30
       origin_keepalive_timeout = 5
       origin_protocol_policy = "https-only"
-      origin_ssl_protocols = ["TLSv1.1", "TLSv1.2", "TLSv1"]
+      origin_ssl_protocols = ["TLSv1.1", "TLSv1.2"]
     }
   }
 

@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "ELB"
   desired_capacity = "${var.desired_capacity}"
   launch_configuration = "${aws_launch_configuration.launch_conf.name}"
-  vpc_zone_identifier = "${var.ec2_subnet_ids}"
+  vpc_zone_identifier = ["${var.ec2_subnet_ids}"]
 
   lifecycle {
     create_before_destroy = true

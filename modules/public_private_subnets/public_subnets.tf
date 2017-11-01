@@ -6,7 +6,7 @@ resource "aws_subnet" "public_subnets" {
   cidr_block = "${var.public_subnets[count.index]}"
 
   tags {
-    Name = "${var.environment_name} public subnet ${count.index + 1}"
+    Name = "${var.environment_name} public ${var.subnet_adjective} subnet ${count.index + 1}"
     resource_group = "${var.environment_name}"
   }
 }
@@ -15,8 +15,13 @@ resource "aws_route_table" "public_routing_tables" {
   count = "${length(var.public_subnets)}"
   vpc_id = "${var.vpc_id}"
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${var.internet_gw_id}"
+  }
+
   tags {
-    Name = "${var.environment_name} public subnets routing table ${count.index + 1}"
+    Name = "${var.environment_name} public ${var.subnet_adjective} subnets routing table ${count.index + 1}"
     resource_group = "${var.environment_name}"
   }
 }

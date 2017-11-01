@@ -1,19 +1,18 @@
 resource "aws_ecs_task_definition" "ecs_task" {
   family = "${var.environment_name}_td"
   task_role_arn = "${aws_iam_role.ecs_taskrole.arn}"
-  depends_on = ["aws_iam_role.ecs_taskrole"]
   container_definitions = <<DEFINITION
 [
   {
-    "cpu": "${var.cpuReservation}",
+    "cpu": ${var.cpuReservation},
     "environment": ${var.envars},
     "essential": true,
     "image": "${var.docker_image_name}",
-    "memoryReservation": "${var.memoryReservation}",
+    "memoryReservation": ${var.memoryReservation},
     "name": "${var.environment_name}",
     "portMappings": [{
       "hostPort": 0,
-      "containerPort": "${var.container_port}",
+      "containerPort": ${var.container_port},
       "protocol": "tcp"
     }],
     "logConfiguration": {
@@ -36,7 +35,6 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = "${aws_ecs_task_definition.ecs_task.arn}"
   desired_count = "${var.desired_count}"
   iam_role = "${aws_iam_role.ecs_servicerole.arn}"
-  depends_on= ["aws_iam_role.ecs_servicerole"]
 
   load_balancer {
     target_group_arn = "${var.target_group_arn}"

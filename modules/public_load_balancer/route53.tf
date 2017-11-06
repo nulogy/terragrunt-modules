@@ -1,4 +1,5 @@
 resource "aws_route53_record" "plb_route53_record" {
+  count = "${length(var.route_53_subdomain) > 0 ? 1 : 0}"
   name = "plb-${var.route_53_subdomain}"
   type = "A"
   zone_id = "${data.aws_route53_zone.route53_zone.id}"

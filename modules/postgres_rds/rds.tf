@@ -21,7 +21,7 @@ resource "aws_db_instance" "db" {
   skip_final_snapshot = "${local.skip_final_snapshot}"
   storage_encrypted = "${local.encrypted_storage}"
   storage_type = "gp2"
-  username = "${var.rds_db_username}"
+  username = "${var.db_username}"
   vpc_security_group_ids = ["${aws_security_group.db_security_group.id}"]
 
   tags {

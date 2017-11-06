@@ -3,14 +3,6 @@ resource "aws_security_group" "ecs_lb_security_group" {
 
   vpc_id = "${var.vpc_id}"
 
-  # Accept all public HTTP traffic
-  ingress {
-    cidr_blocks = ["0.0.0.0/0"]
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-  }
-
   # Accept all public HTTPS traffic
   ingress {
     cidr_blocks = ["0.0.0.0/0"]

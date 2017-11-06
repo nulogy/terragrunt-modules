@@ -12,6 +12,6 @@ variable "environment_name" {}
 variable "kms_key_id" {}
 variable "rds_address" {}
 variable "rds_port" {}
-variable "rds_db_username" {}
+variable "db_username" {}
 variable "rds_db_name" {}
 variable "target_group_arn" {}

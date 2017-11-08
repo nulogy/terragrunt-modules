@@ -13,6 +13,7 @@ resource "aws_subnet" "private_subnets" {
 
 resource "aws_route_table" "private_routing_tables" {
   count = "${length(var.skip) > 0 ? 0 : length(var.private_subnets)}"
+
   vpc_id = "${var.vpc_id}"
 
   tags {

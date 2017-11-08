@@ -4,40 +4,41 @@ locals {
 
 module "vpc" {
   source = "../../modules/vpc"
+  skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
-  skip = "${var.skip}"
   vpc_cidr = "${var.vpc_cidr}"
 }
 
 module "ecs_subnets" {
   source = "../../modules/public_private_subnets"
+  skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
   internet_gw_id = "${module.vpc.internet_gw_id}"
   private_subnets = "${var.private_ecs_subnets}"
   public_subnets = "${var.public_subnets}"
-  skip = "${var.skip}"
   subnet_adjective = "ECS"
   vpc_id = "${module.vpc.vpc_id}"
 }
 
 module "ecs_cluster" {
   source = "../../modules/ecs_cluster"
+  skip = "${var.skip}"
 
   name = "${var.environment_name}-cluster"
-  skip = "${var.skip}"
 }
 
 module "ecr" {
   source = "../../modules/ecr"
+  skip = "${var.skip}"
 
   name = "${var.environment_name}"
-  skip = "${var.skip}"
 }
 
 module "ecs_auto_scaling_group" {
   source = "../../modules/ecs_auto_scaling_group"
+  skip = "${var.skip}"
 
   desired_capacity = "2"
   max_size = "4"
@@ -49,26 +50,25 @@ module "ecs_auto_scaling_group" {
   environment_name = "${var.environment_name}"
   lc_instance_type = "${var.lc_instance_type}"
   public_key = "${var.ec2_public_key}"
-  skip = "${var.skip}"
   vpc_cidr = "${var.vpc_cidr}"
   vpc_id = "${module.vpc.vpc_id}"
 }
 
 module "public_load_balancer" {
   source = "../../modules/public_load_balancer"
+  skip = "${var.skip}"
 
   alb_subnets = "${module.ecs_subnets.public_subnet_ids}"
   cert_domain = "${var.cert_domain}"
   environment_name = "${var.environment_name}"
-  skip = "${var.skip}"
   vpc_id = "${module.vpc.vpc_id}"
 }
 
 module "route53_for_load_balancer" {
   source = "../../modules/route53_alias_record"
+  skip = "${(length(var.skip_route53) > 0 || length(var.skip) > 0) ? "true" : ""}"
 
   domain = "${var.route53_domain}"
-  skip = "${(length(var.skip_route53) == 0 && length(var.skip) == 0) ? 1 : 0}"
   subdomain = "${local.subdomain}"
   target_domain = "${module.public_load_balancer.dns_name}"
   target_zone_id = "${module.public_load_balancer.zone_id}"
@@ -76,7 +76,7 @@ module "route53_for_load_balancer" {
 
 module "log_group" {
   source = "../../modules/log_group"
+  skip = "${var.skip}"
 
   name = "${var.environment_name}-log"
-  skip = "${var.skip}"
 }

@@ -17,6 +17,8 @@ resource "aws_s3_bucket" "static_assets" {
 }
 
 data "aws_iam_policy_document" "s3_static_assets_policy" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   statement {
     actions = ["s3:GetObject"]
     resources = ["arn:aws:s3:::${local.static_assets_bucket_name}/*"]

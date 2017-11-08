@@ -70,7 +70,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "parameter_store_policy" {
-  count = "${(length(var.kms_key_id) > 0 && length(var.skip) == 0) ? 1 : 0}"
+  count = "${length(var.skip) > 0 ? 0 : (length(var.kms_key_id) > 0 ? 1 : 0)}"
 
   name_prefix = "parameter-store-policy-${var.environment_name}"
   role = "${aws_iam_role.ecs_taskrole.id}"
@@ -84,7 +84,7 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
         "ssm:GetParameter"
       ],
       "Resource": [
-        "arn:aws:ssm:${var.aws_region}:${var.aws_account}:parameter/${var.parameter_namespace}/*"
+        "arn:aws:ssm:${var.aws_region}:${var.aws_account}:parameter/${var.param_store_namespace}/*"
       ]
     },
     {

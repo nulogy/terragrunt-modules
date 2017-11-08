@@ -13,6 +13,7 @@ resource "aws_subnet" "public_subnets" {
 
 resource "aws_route_table" "public_routing_tables" {
   count = "${length(var.skip) > 0 ? 0 : length(var.public_subnets)}"
+
   vpc_id = "${var.vpc_id}"
 
   route {

@@ -1,5 +1,5 @@
 resource "aws_route53_record" "plb_route53_record" {
-  count = "${length(var.skip) == 0 ? 1 : 0}"
+  count = "${length(var.skip) > 0 ? 0 : 1}"
 
   name = "${var.subdomain}"
   type = "A"
@@ -12,6 +12,7 @@ resource "aws_route53_record" "plb_route53_record" {
 }
 
 data "aws_route53_zone" "route53_zone" {
-  count = "${length(var.skip) == 0 ? 1 : 0}"
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name = "${var.domain}"
 }

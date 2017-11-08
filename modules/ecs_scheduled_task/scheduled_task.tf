@@ -33,6 +33,8 @@ resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
 // Terraform does not support 'email' topic subscription (see https://www.terraform.io/docs/providers/aws/r/sns_topic_subscription.html#email)
 // We will assume a topic subscription was already created
 data "aws_sns_topic" "alert_topic" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name = "${var.alerts_topic_name}"
 }
 

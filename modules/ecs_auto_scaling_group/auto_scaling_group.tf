@@ -1,4 +1,6 @@
 data "aws_ami" "ecs_ami" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   filter {
     name = "name"
     values = ["amzn-ami-${var.ecs_ami_version}-amazon-ecs-optimized"]

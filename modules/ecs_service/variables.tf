@@ -11,4 +11,5 @@ variable "kms_key_id" { default = ""}
 variable "log_group_name" {}
 variable "memoryReservation" {}
 variable "parameter_namespace" {}
+variable "skip" { default = "" }
 variable "target_group_arn" {}

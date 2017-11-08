@@ -1,4 +1,6 @@
 resource "aws_security_group" "db_security_group" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "${var.environment_name}-rds-security-group-"
 
   vpc_id = "${var.vpc_id}"

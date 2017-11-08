@@ -1,6 +1,8 @@
-variable "acm_cf_cert_arn" {}
 variable "app_fqdn" {}
+variable "cert_domain" {}
 variable "environment_name" {}
-variable "route_53_domain" {}
-variable "route_53_subdomain" {}
+variable "route53_domain" {}
+variable "route53_subdomain" {}
+variable "skip" { default = "" }
+variable "skip_route53" { default = "" }
 variable "static_assets_path" {}

@@ -1,4 +1,6 @@
- resource "aws_iam_role" "ecs_eventrole" {
+resource "aws_iam_role" "ecs_eventrole" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "ecs-event-${var.environment_name}-"
   assume_role_policy = <<EOF
 {
@@ -18,6 +20,8 @@ EOF
 }
 
 resource "aws_iam_role_policy" "test_schedule_policy" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name = "test-schedule-policy-${var.environment_name}"
   role = "${aws_iam_role.ecs_eventrole.id}"
   policy = <<EOF

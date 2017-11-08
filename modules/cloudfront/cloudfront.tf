@@ -1,11 +1,13 @@
 resource "aws_cloudfront_distribution" "cf_distribution" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   tags {
     Name = "${var.environment_name} Cloud Front Distribution"
     resource_group = "${var.environment_name}"
   }
 
   enabled = true
-  aliases = ["${var.route_53_subdomain}.${var.route_53_domain}"]
+  aliases = ["${var.route53_subdomain}.${var.route53_domain}"]
 
   origin {
     domain_name = "${var.app_fqdn}"
@@ -118,7 +120,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
 
   viewer_certificate {
     minimum_protocol_version = "TLSv1.1_2016"
-    acm_certificate_arn = "${var.cf_cert_arn}"
+    acm_certificate_arn = "${data.aws_acm_certificate.acm_cf_cert.arn}"
     ssl_support_method = "sni-only"
   }
 }

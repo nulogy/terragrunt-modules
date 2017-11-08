@@ -1,11 +1,11 @@
 resource "aws_eip" "nat" {
-  count = "${length(var.private_subnets)}"
+  count = "${length(var.skip) > 0 ? 0 : length(var.private_subnets)}"
 
   vpc = true
 }
 
 resource "aws_nat_gateway" "nat_gateways" {
-  count = "${length(var.private_subnets)}"
+  count = "${length(var.skip) > 0 ? 0 : length(var.private_subnets)}"
 
   allocation_id = "${element(aws_eip.nat.*.id, count.index)}"
   subnet_id     = "${element(aws_subnet.public_subnets.*.id, count.index)}"
@@ -17,7 +17,7 @@ resource "aws_nat_gateway" "nat_gateways" {
 }
 
 resource "aws_route" "private_nat_gateway_route" {
-  count = "${length(var.private_subnets)}"
+  count = "${length(var.skip) > 0 ? 0 : length(var.private_subnets)}"
 
   route_table_id         = "${element(aws_route_table.private_routing_tables.*.id, count.index)}"
   destination_cidr_block = "0.0.0.0/0"

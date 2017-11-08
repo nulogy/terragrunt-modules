@@ -1,6 +1,5 @@
 variable "alb_subnets" { type = "list" }
+variable "cert_domain" {}
 variable "environment_name" {}
-variable "region_cert_arn" {}
-variable "route_53_domain" { default = "" }
-variable "route_53_subdomain" { default = "" }
+variable "skip" { default = "" }
 variable "vpc_id" {}

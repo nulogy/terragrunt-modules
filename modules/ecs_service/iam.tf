@@ -1,4 +1,6 @@
 resource "aws_iam_role" "ecs_servicerole" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "ecs-service-${var.environment_name}-"
   assume_role_policy = <<EOF
 {
@@ -18,6 +20,8 @@ EOF
 }
 
 resource "aws_iam_role_policy" "ecs_servicerole_policy" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "ecs-service-policy-${var.environment_name}"
   role = "${aws_iam_role.ecs_servicerole.id}"
   policy = <<EOF
@@ -45,6 +49,8 @@ EOF
 }
 
 resource "aws_iam_role" "ecs_taskrole" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "ecs-task-${var.environment_name}-"
   assume_role_policy = <<EOF
 {
@@ -64,7 +70,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "parameter_store_policy" {
-  count = "${length(var.kms_key_id) > 0 ? 1 : 0}"
+  count = "${(length(var.kms_key_id) > 0 && length(var.skip) == 0) ? 1 : 0}"
 
   name_prefix = "parameter-store-policy-${var.environment_name}"
   role = "${aws_iam_role.ecs_taskrole.id}"

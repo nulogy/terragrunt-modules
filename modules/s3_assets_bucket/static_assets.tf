@@ -3,6 +3,8 @@ locals {
 }
 
 resource "aws_s3_bucket" "static_assets" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   bucket = "${local.static_assets_bucket_name}"
   acl = "public-read"
   policy = "${data.aws_iam_policy_document.s3_static_assets_policy.json}"

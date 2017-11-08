@@ -8,6 +8,8 @@ data "aws_ami" "ecs_ami" {
 }
 
 resource "aws_launch_configuration" "launch_conf" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "${var.environment_name}-ecs"
   image_id = "${data.aws_ami.ecs_ami.id}"
   instance_type = "${var.lc_instance_type}"
@@ -29,6 +31,8 @@ EOF
 }
 
 resource "aws_autoscaling_group" "asg" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name_prefix = "${var.environment_name}-${aws_launch_configuration.launch_conf.name}-autoscaling-group"
   max_size = "${var.max_size}"
   min_size = "${var.min_size}"

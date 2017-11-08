@@ -7,5 +7,6 @@ variable "environment_name" {}
 variable "max_size" {}
 variable "min_size" {}
 variable "public_key" {}
+variable "skip" { default = "" }
 variable "vpc_cidr" {}
 variable "vpc_id" {}

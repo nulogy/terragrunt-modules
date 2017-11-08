@@ -1,4 +1,6 @@
 resource "aws_cloudwatch_event_rule" "scheduled_task_event_rule" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   name = "${var.environment_name}_scheduled_task_event_rule"
   description = "This event rule runs the GO scheduled task"
 
@@ -6,6 +8,8 @@ resource "aws_cloudwatch_event_rule" "scheduled_task_event_rule" {
 }
 
 resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   arn = "${var.ecs_cluster_name}"
   rule = "${aws_cloudwatch_event_rule.scheduled_task_event_rule.name}"
   role_arn = "${aws_iam_role.ecs_eventrole.arn}"
@@ -33,6 +37,8 @@ data "aws_sns_topic" "alert_topic" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scheduled_task_failed_invocation_alarm" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   alarm_name = "${var.environment_name}-scheduled_task_failed_invocation"
   alarm_description = "This alarm monitors ${var.environment_name} scheduled task failed invocations. It monitors if there was at least one failed invocation in the last evaluation period."
   period = "60" // = 1 min. We don't need a high-resolution alarm (< 30 seconds). Note: High-resolution alarms are more expensive
@@ -52,6 +58,8 @@ resource "aws_cloudwatch_metric_alarm" "scheduled_task_failed_invocation_alarm" 
 }
 
 resource "aws_cloudwatch_metric_alarm" "scheduled_task_invocations_alarm" {
+  count = "${length(var.skip) > 0 ? 0 : 1}"
+
   alarm_name = "${var.environment_name}-scheduled_task_invocations"
   alarm_description = "This alarm monitors ${var.environment_name} scheduled task invocations. It monitors if there was at least one invocations in the last evaluation period."
   period = "300" // = 5 mins. We don't need a high-resolution alarm (< 30 seconds). Note: High-resolution alarms are more expensive

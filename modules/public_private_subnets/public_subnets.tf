@@ -1,5 +1,5 @@
 resource "aws_subnet" "public_subnets" {
-  count = "${length(var.public_subnets)}"
+  count = "${length(var.skip) > 0 ? 0 : length(var.public_subnets)}"
 
   vpc_id = "${var.vpc_id}"
   availability_zone = "${data.aws_availability_zones.availability_zones.names[count.index]}"
@@ -12,7 +12,7 @@ resource "aws_subnet" "public_subnets" {
 }
 
 resource "aws_route_table" "public_routing_tables" {
-  count = "${length(var.public_subnets)}"
+  count = "${length(var.skip) > 0 ? 0 : length(var.public_subnets)}"
   vpc_id = "${var.vpc_id}"
 
   route {
@@ -27,7 +27,7 @@ resource "aws_route_table" "public_routing_tables" {
 }
 
 resource "aws_route_table_association" "public_associations" {
-  count = "${length(var.public_subnets)}"
+  count = "${length(var.skip) > 0 ? 0 : length(var.public_subnets)}"
 
   subnet_id      = "${element(aws_subnet.public_subnets.*.id, count.index)}"
   route_table_id = "${element(aws_route_table.public_routing_tables.*.id, count.index)}"

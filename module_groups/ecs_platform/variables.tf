@@ -1,8 +1,9 @@
 variable "cert_domain" {}
 variable "ec2_public_key" {}
-variable "ecs_ami_version" {}
+variable "ecs_ami_version" { default = "2017.03.g" }
 variable "environment_name" {}
 variable "lc_instance_type" {}
+variable "prefix_plb_subdomain" { default = "" }
 variable "private_ecs_subnets" { type = "list" }
 variable "public_subnets" { type = "list" }
 variable "route53_domain" { default = "" }

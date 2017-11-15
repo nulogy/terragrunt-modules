@@ -1,5 +1,5 @@
 locals {
-  subdomain = "plb-${var.route53_subdomain}"
+  subdomain = "${length(var.prefix_plb_subdomain) > 0 ? "plb-" : ""}${var.route53_subdomain}"
 }
 
 module "vpc" {

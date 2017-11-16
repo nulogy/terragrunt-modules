@@ -6,50 +6,43 @@ Note: Make sure you're using the right credentials profile by setting this varia
 export AWS_PROFILE=profilename
 ```
 
-## Creating a new personal environment
+## Creating a new personal environment in us-east-2 region
+
+### Create a Terraform configuration file based on an existing one:
+
+```
+./develop_deployer.sh
+environment=<your-environment-name>
+mkdir apps/go/us-east-2/"$environment"/
+sed -e "s:go-arturopie:go-"$environment":g" apps/go/us-east-2/arturopie/terraform.tfvars > apps/go/us-east-2/"$environment"/terraform.tfvars
+```
+
+Commit and push the new `.tfvars` file.
+
+### Create initial infrastructure resources
+
+```
+cd apps/go/us-east-2/"$environment"/
+terragrunt apply -target module.setup
+```
+
 
 ### Creating a personal notification system
 
-1. Open [AWS SNS](https://us-east-2.console.aws.amazon.com/sns/v2/home#/topics) to create a personal topic
-1. Make sure you are on the same region your environment will be hosted.
-1. Create a new topic with name 'go-\`whoami\`' (for example `go-arturopie`)
-1. Open the new topic
+1. Open the url returned by this command: `echo https://us-east-2.console.aws.amazon.com/sns/v2/home?region=us-east-2#/topics/"$(terragrunt output topic_arn 2> /dev/null)"`
 1. Create a subscription using `email` protocol and your nulogy email address
 1. Open your email inbox and confirm subscription.
 
-### Setting Up a KMS Master Key
+### Storing your credentials in parameter store for GO
 
-Each environment will need its own KMS key. To create one run:
+Our infrastructure stack uses [AWS Parameter Store](http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) to securely store our account credentials (ie, database password, credentials for 3rd party services like Airbrake). For security reasons this step needs to be done manually. **NOTE:** Setting the Administrators for the environment KMS key does not prevent other admin users on the AWS account from being able to decrypt using that key.
 
-```bash
-
-region=<your region>
-environment="go-$(whoami)"
-
-kms_key_id=$(aws kms create-key --origin AWS_KMS --region $region --query "KeyMetadata.KeyId" --output text)
-
-aws kms create-alias --alias-name "alias/$environment" \
-  --target-key-id $kms_key_id \
-  --region $region
-```
-
-**NOTE:** Setting the Administrators for a KMS key does not prevent other admin users on the AWS account from being able to decrypt using that key.
-
-Set your key ID for your environment:
-
-1. Open your `vars.<your environment>.tfvars` file.
-1. Add a `kms_key_id` with `$kms_key_id` as the value.
-
-### Setting up a new parameter store for GO
-
-Our infrastructure stack uses [AWS Parameter Store](http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) to securely store our account credentials (ie, database password, credentials for 3rd party services like Airbrake). For security reasons this step needs to be done manually.
 
 ```
-aws ssm put-parameter --name "/${environment}/RDS/db-password" --value "th1sIsS3cure" --type "SecureString" --key-id "${kms_key_id}" --region $region
-aws ssm put-parameter --name "/${environment}/GO/admin-password" --value "th1sIsS3cure" --type "SecureString" --key-id "${kms_key_id}" --region $region
+../../generate_credentials.sh  # run this from your environment's directory
 ```
 
-### Upload certificate for load balancers
+### If this is the first environment on the region: upload certificate for load balancers
 
 Get the certificate for `nulogy-dev.net` from infrastructure 1Password:
 
@@ -57,40 +50,21 @@ Get the certificate for `nulogy-dev.net` from infrastructure 1Password:
 aws acm import-certificate --certificate file://cert.pem --certificate-chain file://chain.pem --private-key file://key.pem --region $region
 ```
 
-### Setting up infrastructure
-
-Create a Terraform configuration file based on an existing one:
+### Deploying infrastructure
 
 ```
-sed -e "s:go-arturopie:go-`whoami`:g" deployer/apps/go/vars.arturopie.tfvars > deployer/apps/go/vars.`whoami`.tfvars
-```
-
-Commit and push the new `.tfvars` file to our git repo.
-
-Currently we don't have a way to create a set of parameter store variables for every new environment, so save time by using an existing one:
-
-```
-param_store_namespace = "go-arturopie"
-```
-
-And inside the nulogy-deployer container, run prepare to create the new environment:
-
-```
-cd ./apps/go/<region>/<mypersonal>
 terragrunt apply
 ```
 
-## Deploy a new service
-
-And inside the nulogy-deployer container, run deploy to deploy a new service:
+## Deploy assets
 
 ```
-./apps/go/deploy.sh <region>/<mypersonal>
+../../deploy.sh us-east-2/"$environment"
 ```
 
 ## Check the service URL
 
-Visit: https://`<environment>`.nulogy-dev.net
+Visit: https://"$environment".nulogy-dev.net
 
 ## Testing local terraform changes
 

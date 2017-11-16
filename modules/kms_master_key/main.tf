@@ -1,4 +1,8 @@
-resource "aws_kms_key" "kms_key" {}
+resource "aws_kms_key" "kms_key" {
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
 resource "aws_kms_alias" "kms_alias" {
   name          = "alias/${var.environment_name}"

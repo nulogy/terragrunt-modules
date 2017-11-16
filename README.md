@@ -71,6 +71,13 @@ Find the parameter with the name /go-"$environment"/GO/admin-password
 Get the password by copying the value of that parameter
 As the user, use `admin@nulogy.com`
 
+
+## To destroy an environment, run
+
+```
+apps/go/destroy.sh <region>/<environment>
+```
+
 ## Testing local terraform changes
 
 Run nulogy-deployer container:

@@ -66,6 +66,11 @@ terragrunt apply
 
 Visit: https://"$environment".nulogy-dev.net
 
+Find the password by going to AWS Param Store (in EC2)
+Find the parameter with the name /go-"$environment"/GO/admin-password
+Get the password by copying the value of that parameter
+As the user, use `admin@nulogy.com`
+
 ## Testing local terraform changes
 
 Run nulogy-deployer container:

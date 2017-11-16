@@ -25,6 +25,7 @@ resource "aws_db_instance" "db" {
   storage_type = "gp2"
   username = "${var.db_username}"
   vpc_security_group_ids = ["${aws_security_group.db_security_group.id}"]
+  snapshot_identifier = "${var.db_snapshot_identifier}"
 
   tags {
     resource_group = "${var.environment_name}"

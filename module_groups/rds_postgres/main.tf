@@ -15,6 +15,7 @@ module "postgres_rds" {
   allocated_storage = "${var.allocated_storage}"
   db_name = "${var.db_name}"
   db_password = "${var.db_password}"
+  db_snapshot_identifier = "${var.db_snapshot_identifier}"
   db_username = "${var.db_username}"
   engine_version = "${var.engine_version}"
   environment_name = "${var.environment_name}"

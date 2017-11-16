@@ -76,7 +76,8 @@ param_store_namespace = "go-arturopie"
 And inside the nulogy-deployer container, run prepare to create the new environment:
 
 ```
-./apps/go/prepare.sh mypersonal
+cd ./apps/go/<region>/<mypersonal>
+terragrunt apply
 ```
 
 ## Deploy a new service

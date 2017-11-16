@@ -85,7 +85,7 @@ terragrunt apply
 And inside the nulogy-deployer container, run deploy to deploy a new service:
 
 ```
-./apps/go/deploy.sh mypersonal
+./apps/go/deploy.sh <region>/<mypersonal>
 ```
 
 ## Check the service URL

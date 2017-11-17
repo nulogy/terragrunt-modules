@@ -8,7 +8,7 @@ locals {
 resource "aws_db_instance" "db" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
-  allocated_storage = "${var.allocated_storage}"
+  allocated_storage = "${var.db_allocated_storage}"
   auto_minor_version_upgrade = true
   db_subnet_group_name = "${aws_db_subnet_group.rds_subnet_group.name}"
   engine = "postgres"

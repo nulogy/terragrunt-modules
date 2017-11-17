@@ -12,7 +12,7 @@ module "postgres_rds" {
   source = "../../modules/postgres_rds"
   skip = "${var.skip}"
 
-  allocated_storage = "${var.allocated_storage}"
+  db_allocated_storage = "${var.db_allocated_storage}"
   db_name = "${var.db_name}"
   db_password = "${var.db_password}"
   db_snapshot_identifier = "${var.db_snapshot_identifier}"

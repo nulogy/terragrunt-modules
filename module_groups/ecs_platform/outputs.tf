@@ -6,10 +6,6 @@ output "ecs_cluster_name" {
   value = "${module.ecs_cluster.ecs_cluster_name}"
 }
 
-output "ecs_service_name" {
-  value = "${module.ecs_service.ecs_service_name}"
-}
-
 output "log_group_name" {
   value = "${module.log_group.log_group_name}"
 }

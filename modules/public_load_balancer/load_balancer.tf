@@ -19,6 +19,7 @@ resource "aws_alb_target_group" "target_group" {
   port = 80
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
+  deregistration_delay = 120
 
   tags {
     Name = "${var.environment_name} public load balancer target group"

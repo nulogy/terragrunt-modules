@@ -1,4 +1,4 @@
-resource "aws_route53_record" "plb_route53_record" {
+resource "aws_route53_record" "route53_record" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
   name = "${var.subdomain}"

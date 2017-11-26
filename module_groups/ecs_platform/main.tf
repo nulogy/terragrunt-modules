@@ -29,13 +29,6 @@ module "ecs_cluster" {
   name = "${var.environment_name}-cluster"
 }
 
-module "ecr" {
-  source = "../../modules/ecr"
-  skip = "${var.skip}"
-
-  name = "${var.environment_name}"
-}
-
 module "ecs_auto_scaling_group" {
   source = "../../modules/ecs_auto_scaling_group"
   skip = "${var.skip}"

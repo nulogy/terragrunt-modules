@@ -1,7 +1,9 @@
 output "rds_address" {
-  value = "${aws_db_instance.db.address}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_db_instance.db.*.address, list("")), 0)}"
 }
 
 output "rds_port" {
-  value = "${aws_db_instance.db.port}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_db_instance.db.*.port, list("")), 0)}"
 }

@@ -20,7 +20,7 @@ module "cloudfront" {
 
 module "route53_for_cloudfront" {
   source = "../../modules/route53_alias_record"
-  skip = "${(length(var.skip_route53) > 0 || length(var.skip) > 0) ? "true" : ""}"
+  skip = "${var.skip}"
 
   domain = "${var.route53_domain}"
   subdomain = "${var.route53_subdomain}"

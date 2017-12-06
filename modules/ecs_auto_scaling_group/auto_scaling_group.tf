@@ -19,7 +19,7 @@ resource "aws_launch_configuration" "launch_conf" {
     "${aws_security_group.ecs_ec2_security_group.id}"
   ]
   key_name = "${aws_key_pair.ecs_key.key_name}"
-  iam_instance_profile = "ecsInstanceRole"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs_instance_profile.name}"
 
 
   lifecycle {

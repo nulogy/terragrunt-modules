@@ -1,3 +1,4 @@
 output "domain_name" {
-  value = "${aws_route53_record.route53_record.fqdn}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_route53_record.route53_record.*.fqdn, list("")), 0)}"
 }

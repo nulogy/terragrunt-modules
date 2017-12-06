@@ -1,7 +1,9 @@
 output "ecs_service_name" {
-  value = "${aws_ecs_service.ecs_service.name}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_ecs_service.ecs_service.*.name, list("")), 0)}"
 }
 
 output "task_arn" {
-  value = "${aws_ecs_task_definition.ecs_task.arn}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_ecs_task_definition.ecs_task.*.arn, list("")), 0)}"
 }

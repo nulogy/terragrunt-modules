@@ -1,7 +1,9 @@
 output "assets_bucket" {
-  value = "${aws_s3_bucket.static_assets.bucket}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_s3_bucket.static_assets.*.bucket, list("")), 0)}"
 }
 
 output "assets_bucket_domain" {
-  value = "${aws_s3_bucket.static_assets.bucket_domain_name}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_s3_bucket.static_assets.*.bucket_domain_name, list("")), 0)}"
 }

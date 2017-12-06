@@ -1,3 +1,4 @@
 output "log_group_name" {
-  value = "${aws_cloudwatch_log_group.log_group.name}"
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = "${element(concat(aws_cloudwatch_log_group.log_group.*.name, list("")), 0)}"
 }

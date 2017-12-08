@@ -1,6 +1,6 @@
 resource "aws_kms_key" "kms_key" {
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 

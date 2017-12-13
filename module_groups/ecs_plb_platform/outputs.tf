@@ -11,7 +11,7 @@ output "log_group_name" {
 }
 
 output "public_load_balancer_fqdn" {
-  value = "${local.subdomain}.${var.route53_domain}"
+  value = "${var.route53_subdomain}.${var.route53_domain}"
 }
 
 output "target_group_arn" {

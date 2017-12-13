@@ -1,7 +1,3 @@
-locals {
-  subdomain = "${length(var.route53_subdomain) > 0 ? "plb-${var.route53_subdomain}" : "plb"}"
-}
-
 module "ecs_core_platform" {
   source = "../ecs_core_platform"
   skip = "${var.skip}"
@@ -36,7 +32,7 @@ module "route53_for_load_balancer" {
   skip = "${var.skip}"
 
   domain = "${var.route53_domain}"
-  subdomain = "${local.subdomain}"
+  subdomain = "${var.route53_subdomain}"
   target_domain = "${module.public_load_balancer.dns_name}"
   target_zone_id = "${module.public_load_balancer.zone_id}"
 }

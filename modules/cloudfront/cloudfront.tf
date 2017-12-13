@@ -1,3 +1,7 @@
+locals {
+  distribution_alias = "${length(var.route53_subdomain) > 0 ? "${var.route53_subdomain}.${var.route53_domain}" : "${var.route53_domain}"}"
+}
+
 resource "aws_cloudfront_distribution" "cf_distribution" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
@@ -7,7 +11,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   }
 
   enabled = true
-  aliases = ["${var.route53_subdomain}.${var.route53_domain}"]
+  aliases = ["${local.distribution_alias}"]
 
   origin {
     domain_name = "${var.app_fqdn}"

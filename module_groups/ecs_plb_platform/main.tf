@@ -1,5 +1,5 @@
 locals {
-  subdomain = "${length(var.prefix_plb_subdomain) > 0 ? "plb-" : ""}${var.route53_subdomain}"
+  subdomain = "${length(var.route53_subdomain) > 0 ? "plb-${var.route53_subdomain}" : "plb"}"
 }
 
 module "ecs_core_platform" {

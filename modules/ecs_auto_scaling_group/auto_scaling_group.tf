@@ -28,7 +28,16 @@ resource "aws_launch_configuration" "launch_conf" {
 
   user_data = <<EOF
 #!/bin/bash
+
 echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
+
+# Re-create the docker0 bridge and setup a different CIDR so it does not conflict with legacy VPCs
+DOCKER_INTERFACE_CIDR="192.168.100.0/24"
+
+sudo ip link add docker0 type bridge
+sudo ip addr add "$DOCKER_INTERFACE_CIDR" dev docker0
+sudo ip link set dev docker0 up
+
 EOF
 }
 

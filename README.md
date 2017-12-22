@@ -5,7 +5,7 @@
 Run nulogy-deployer container:
 
 ```
-./develop_deployer.sh
+./develop_deployer.sh <docker-image-used-for-testing-deployments>
 ```
 
 ## Release a new Image version

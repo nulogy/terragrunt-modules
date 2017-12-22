@@ -9,6 +9,35 @@ data "aws_ami" "ecs_ami" {
   owners = ["591542846629"]
 }
 
+data "template_cloudinit_config" "user_data" {
+  gzip          = true
+  base64_encode = true
+
+  part {
+    content_type = "text/cloud-boothook"
+    content      = <<EOF
+      #!/bin/bash
+      # Re-create the docker0 bridge and setup a different CIDR so it does not conflict with legacy VPCs
+      DOCKER_INTERFACE_CIDR="192.168.100.1/24"
+
+      cloud-init-per once docker_options \
+        echo "OPTIONS=\"\$OPTIONS --bip=$DOCKER_INTERFACE_CIDR\"" | sudo tee -a /etc/sysconfig/docker
+    EOF
+
+  }
+
+  part {
+    content_type = "text/x-shellscript"
+
+    content = <<EOF
+      #!/bin/bash
+      echo 'Creating ECS_CLUSTER' > /tmp/user_data.log
+
+      echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
+    EOF
+  }
+}
+
 resource "aws_launch_configuration" "launch_conf" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
@@ -26,19 +55,7 @@ resource "aws_launch_configuration" "launch_conf" {
     create_before_destroy = true
   }
 
-  user_data = <<EOF
-#!/bin/bash
-
-echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
-
-# Re-create the docker0 bridge and setup a different CIDR so it does not conflict with legacy VPCs
-DOCKER_INTERFACE_CIDR="192.168.100.0/24"
-
-sudo ip link add docker0 type bridge
-sudo ip addr add "$DOCKER_INTERFACE_CIDR" dev docker0
-sudo ip link set dev docker0 up
-
-EOF
+  user_data = "${data.template_cloudinit_config.user_data.rendered}"
 }
 
 resource "aws_autoscaling_group" "asg" {

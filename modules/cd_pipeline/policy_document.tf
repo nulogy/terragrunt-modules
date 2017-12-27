@@ -11,10 +11,16 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "cloudhsm:ListAvailableZones",
       "cloudwatch:DescribeAlarms",
       "ec2:Describe*",
+      "ecr:BatchGetImage",
       "ecr:DescribeRepositories",
+      "ecr:GetAuthorizationToken",
+      "ecr:GetDownloadUrlForLayer",
+      "ecs:DeregisterTaskDefinition",
       "ecs:DescribeClusters",
       "ecs:DescribeServices",
       "ecs:DescribeTaskDefinition",
+      "ecs:RegisterTaskDefinition",
+      "ecs:UpdateService",
       "elasticloadbalancing:DescribeTags",
       "elasticloadbalancing:DescribeTargetGroupAttributes",
       "elasticloadbalancing:DescribeTargetGroups",
@@ -30,10 +36,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "logs:DescribeLogGroups",
       "logs:ListTagsLogGroup",
       "SNS:GetTopicAttributes",
-      "ssm:GetParameters",
-      "ecs:DeregisterTaskDefinition",
-      "ecs:RegisterTaskDefinition",
-      "ecs:UpdateService"
+      "ssm:GetParameters"
     ]
 
     resources = [
@@ -52,7 +55,20 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = ["events:PutTargets"]
     resources = [
-      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${var.environment_name}_order_tracking_process_scheduled_task_event_rule"
+      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${var.environment_name}_*_scheduled_task_event_rule"
+    ]
+  }
+
+  statement {
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart"
+    ]
+    resources = [
+      "arn:aws:ecr:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:repository/${var.environment_name}"
     ]
   }
 }

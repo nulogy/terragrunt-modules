@@ -35,7 +35,6 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "logs:DescribeLogGroups",
       "logs:ListTagsLogGroup",
       "SNS:GetTopicAttributes",
-      "ssm:GetParameters"
     ]
 
     resources = [

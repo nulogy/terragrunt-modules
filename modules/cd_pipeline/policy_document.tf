@@ -8,7 +8,6 @@ data "aws_iam_policy_document" "deployer_policy_document" {
     sid = "1"
 
     actions = [
-      "cloudhsm:ListAvailableZones",
       "cloudwatch:DescribeAlarms",
       "ec2:Describe*",
       "ecr:BatchGetImage",

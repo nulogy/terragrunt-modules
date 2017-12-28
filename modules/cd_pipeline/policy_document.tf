@@ -7,8 +7,6 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   count = "${var.skip == true ? 0 : 1}"
 
   statement {
-    sid = "1"
-
     actions = [
       "cloudwatch:DescribeAlarms",
       "ec2:Describe*",

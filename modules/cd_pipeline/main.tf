@@ -2,6 +2,7 @@ resource "aws_iam_user" "user" {
   name = "${var.environment_name}-env-deployer"
 }
 
+// This group should only be able to deploy GO (no access to prepare)
 resource "aws_iam_group" "group" {
   name = "${var.environment_name}-env-deployer"
 }

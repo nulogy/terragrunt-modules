@@ -44,6 +44,45 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   }
 
   statement {
+
+    actions = [
+      "s3:Get*",
+      "s3:List*",
+      "s3:PutObject"
+    ]
+
+    resources = [
+      "arn:aws:s3:::${var.environment_name}-terraform-state",
+      "arn:aws:s3:::${var.environment_name}-terraform-state/*"
+    ]
+  }
+
+//  statement {
+//    actions = [
+//      "s3:Get*",
+//      "s3:List*",
+//      "s3:PutObject"
+//    ]
+//
+//    resources = [
+//      "arn:aws:s3:::${var.environment_name}-static-assets"
+//    ]
+//  }
+
+  statement {
+    actions = [
+      "dynamodb:DescribeTable",
+      "dynamodb:PutItem",
+      "dynamodb:GetItem",
+      "dynamodb:DeleteItem"
+    ]
+
+    resources = [
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.environment_name}-lock-table"
+    ]
+  }
+
+  statement {
     actions = ["iam:PassRole"]
     resources = [
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecs-task-${var.environment_name}-*",
@@ -61,6 +100,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = [
       "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
       "ecr:CompleteLayerUpload",
       "ecr:InitiateLayerUpload",
       "ecr:PutImage",

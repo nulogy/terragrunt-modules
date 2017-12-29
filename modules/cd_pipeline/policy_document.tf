@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
     ]
 
     resources = [
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.environment_name}-lock-table"
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.terraform_state_lock_dynamodb_table}"
     ]
   }
 

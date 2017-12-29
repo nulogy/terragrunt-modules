@@ -51,8 +51,8 @@ data "aws_iam_policy_document" "deployer_policy_document" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.environment_name}-terraform-state",
-      "arn:aws:s3:::${var.environment_name}-terraform-state/*"
+      "arn:aws:s3:::${var.terraform_state_bucket}",
+      "arn:aws:s3:::${var.terraform_state_bucket}/*"
     ]
   }
 

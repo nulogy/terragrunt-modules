@@ -1,5 +1,13 @@
 # Nulogy Deployer
 
+## Login to nulgoy-deployer ECR
+
+```
+aws ecr get-login --no-include-email --region us-east-2
+```
+
+Copy and run the above command output to log in.
+
 ## Testing local terraform changes
 
 Run nulogy-deployer container:

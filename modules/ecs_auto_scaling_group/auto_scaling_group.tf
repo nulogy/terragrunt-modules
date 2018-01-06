@@ -65,7 +65,7 @@ resource "aws_autoscaling_group" "asg" {
   max_size = "${var.max_size}"
   min_size = "${var.min_size}"
   min_elb_capacity = "${var.min_size}"
-  health_check_type = "ELB"
+  health_check_type = "${var.health_check_type}"
   desired_capacity = "${var.desired_capacity}"
   launch_configuration = "${aws_launch_configuration.launch_conf.name}"
   vpc_zone_identifier = ["${var.ec2_subnet_ids}"]

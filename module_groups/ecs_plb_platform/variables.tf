@@ -6,6 +6,7 @@ variable "environment_name" {}
 variable "lc_instance_type" {}
 variable "max_size" { default = "" }
 variable "min_size" { default = "" }
+variable "health_check_type" { default = "ELB" }
 variable "peer_account_id" { default = "" }
 variable "peer_vpc_id" { default = "" }
 variable "peer_vpc_cidr" { default = "" }

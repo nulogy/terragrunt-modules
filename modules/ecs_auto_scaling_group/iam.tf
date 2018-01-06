@@ -8,7 +8,7 @@ resource "aws_iam_instance_profile" "ecs_instance_profile" {
 resource "aws_iam_role" "ecs_instance_role" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
-  name_prefix = "ecsInstanceRole-${var.environment_name}-"
+  name_prefix = "ecs-service-${substr("${var.environment_name}", 0, min(length(var.environment_name), 15))}-"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",

@@ -23,8 +23,6 @@ module "ecs_subnets" {
   public_subnets = "${var.public_subnets}"
   subnet_adjective = "ECS"
   vpc_id = "${module.vpc.vpc_id}"
-  peer_vpc_cidr = "${var.peer_vpc_cidr}"
-  vpc_peering_connection_id = "${module.vpc_peering_connection.vpc_peering_connection_id}"
 }
 
 module "ecs_cluster" {
@@ -64,9 +62,11 @@ module "vpc_peering_connection" {
   source = "../../modules/vpc_peering_connection"
   skip = "${length(var.peer_account_id) == 0 ? "true" : ""}"
 
+  auto_accept = "${var.peer_auto_accept}"
   environment_name = "${var.environment_name}"
   peer_account_id = "${var.peer_account_id}"
   peer_vpc_id = "${var.peer_vpc_id}"
+  peer_vpc_cidr = "${var.peer_vpc_cidr}"
+  routing_tables = ["${module.ecs_subnets.private_routing_table_ids}"]
   vpc_id = "${module.vpc.vpc_id}"
-  auto_accept = "${var.peer_auto_accept}"
 }

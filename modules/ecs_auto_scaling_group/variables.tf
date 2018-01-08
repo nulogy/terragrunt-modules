@@ -6,6 +6,7 @@ variable "lc_instance_type" {}
 variable "environment_name" {}
 variable "max_size" {}
 variable "min_size" {}
+variable "health_check_type" {}
 variable "public_key" {}
 variable "skip" { default = "" }
 variable "vpc_cidr" {}

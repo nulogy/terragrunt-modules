@@ -41,6 +41,7 @@ module "ecs_auto_scaling_group" {
   desired_capacity = "${local.desired_capacity}"
   max_size = "${local.max_size}"
   min_size = "${local.min_size}"
+  health_check_type = "${var.health_check_type}"
 
   ec2_subnet_ids = "${module.ecs_subnets.private_subnet_ids}"
   ecs_ami_version = "${local.ecs_ami_version}"
@@ -67,4 +68,5 @@ module "vpc_peering_connection" {
   peer_account_id = "${var.peer_account_id}"
   peer_vpc_id = "${var.peer_vpc_id}"
   vpc_id = "${module.vpc.vpc_id}"
+  auto_accept = "${var.peer_auto_accept}"
 }

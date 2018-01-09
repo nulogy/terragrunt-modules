@@ -3,7 +3,7 @@
 ## Login to nulgoy-deployer ECR
 
 ```
-aws ecr get-login --no-include-email --region us-east-2
+$(aws ecr get-login --no-include-email --region us-east-2 --profile nulogy-aws-test)
 ```
 
 Copy and run the above command output to log in.

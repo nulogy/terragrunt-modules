@@ -51,7 +51,7 @@ EOF
 resource "aws_iam_role" "ecs_taskrole" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
-  name_prefix = "ecs-service-${substr("${var.environment_name}", 0, min(length(var.environment_name), 22))}-"
+  name_prefix = "ecs-service-${substr("${var.environment_name}", 0, min(length(var.environment_name), 19))}-"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",

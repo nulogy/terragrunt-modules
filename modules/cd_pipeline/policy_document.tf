@@ -82,8 +82,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = ["iam:PassRole"]
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecs-task-${var.environment_name}-*",
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/schedule-task-${var.environment_name}-*"
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecs-service-${substr("${var.environment_name}", 0, min(length(var.environment_name), 19))}-*",
     ]
   }
 

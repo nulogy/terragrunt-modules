@@ -4,12 +4,12 @@
 
 We treat this project as an internal "open source" project. Everyone at Nulogy is welcome to submit Merge Requests.
 
-### Login to nulgoy-deployer ECR
+### Login to nulogy-deployer ECR
 
 Copy and run this command output to log in to ECR to download the latest build
 
 ```
-$(aws ecr get-login --no-include-email --region us-east-2 --profile nulogy-aws-test)
+$(aws ecr get-login --no-include-email --region us-east-2 --profile nulogy-test)
 ```
 
 ### Testing local terraform changes

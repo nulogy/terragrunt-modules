@@ -1,5 +1,5 @@
 locals {
-  ecs_role_name_prefix = "ecs-service-${substr("${var.environment_name}", 0, min(length(var.environment_name), 22))}-"
+  ecs_role_name_prefix = "ecs-${substr("${var.environment_name}", 0, min(length(var.environment_name), 22))}-"
 }
 
 resource "aws_iam_role" "ecs_servicerole" {

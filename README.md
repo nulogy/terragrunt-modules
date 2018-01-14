@@ -9,7 +9,7 @@ We treat this project as an internal "open source" project. Everyone at Nulogy i
 Copy and run this command output to log in to ECR to download the latest build
 
 ```
-$(aws ecr get-login --no-include-email --region us-east-2 --profile nulogy-test)
+$(aws ecr get-login --no-include-email --region us-east-2 --profile nulogy-aws-test)
 ```
 
 ### Testing local terraform changes

@@ -52,7 +52,9 @@ data "aws_iam_policy_document" "deployer_policy_document" {
 
     resources = [
       "arn:aws:s3:::${var.terraform_state_bucket}",
-      "arn:aws:s3:::${var.terraform_state_bucket}/*"
+      "arn:aws:s3:::${var.terraform_state_bucket}/*",
+      "arn:aws:s3:::${var.pet_terraform_state_bucket}",
+      "arn:aws:s3:::${var.pet_terraform_state_bucket}/*"
     ]
   }
 
@@ -75,7 +77,8 @@ data "aws_iam_policy_document" "deployer_policy_document" {
     ]
 
     resources = [
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.terraform_state_lock_dynamodb_table}"
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.terraform_state_lock_dynamodb_table}",
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.pet_terraform_state_lock_dynamodb_table}"
     ]
   }
 

@@ -7,7 +7,10 @@ variable "engine_version" {}
 variable "environment_name" {}
 variable "instance_class" {}
 variable "parameter_group_name" {}
-variable "private_rds_subnets" { type = "list" }
+variable "private_rds_subnets" {
+  type = "list"
+  default = []
+}
 variable "production_mode" {}
 variable "skip" { default = "" }
 variable "vpc_cidr" {}

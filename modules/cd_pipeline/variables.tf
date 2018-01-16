@@ -12,4 +12,7 @@ variable "pet_terraform_state_bucket" {
 variable "pet_terraform_state_lock_dynamodb_table" {
   description = "Used to setup permission to Read/Write terraform state lock table for pet resources"
 }
+variable "pet_static_assets" {
+  description = "Used to setup permission to put objects on pet's static assets"
+}
 

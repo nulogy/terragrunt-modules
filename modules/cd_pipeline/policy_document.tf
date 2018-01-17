@@ -93,7 +93,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = ["events:PutTargets"]
     resources = [
-      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${var.environment_name}_*_scheduled_task_event_rule"
+      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${var.environment_name}_*"
     ]
   }
 

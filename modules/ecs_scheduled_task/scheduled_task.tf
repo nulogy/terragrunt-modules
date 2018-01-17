@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "scheduled_task_event_rule" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
-  name = "${var.environment_name}_${var.task_name}_scheduled_task_event_rule"
+  name = "${var.environment_name}_${var.task_name}"
   description = "This event rule runs the ${var.task_name} scheduled task"
 
   schedule_expression = "${var.schedule_expression}"

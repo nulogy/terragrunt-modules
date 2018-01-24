@@ -1,6 +1,6 @@
 locals {
   desired_capacity = "${length(var.desired_capacity) > 0 ? var.desired_capacity : "2"}"
-  ecs_ami_version = "${length(var.ecs_ami_version) > 0 ? var.ecs_ami_version : "2017.09.f"}"
+  ecs_ami_version = "${length(var.ecs_ami_version) > 0 ? var.ecs_ami_version : "2017.09.g"}"
   max_size = "${length(var.max_size) > 0 ? var.max_size : "4"}"
   min_size = "${length(var.min_size) > 0 ? var.min_size : "2"}"
 }

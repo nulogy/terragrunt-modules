@@ -7,4 +7,5 @@ variable "envvars" {}
 variable "kms_key_id" { default = "" }
 variable "log_group_name" {}
 variable "memory_reservation" {}
+variable "param_store_namespace" {}
 variable "redis_memory_reservation" {}

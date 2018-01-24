@@ -24,8 +24,9 @@ resource "aws_db_instance" "db" {
   kms_key_id = "${var.db_kms_key_id}"
   license_model = ""
   maintenance_window = "${var.db_maintenance_window}"
-  monitoring_interval = "${var.db_monitoring_interval}"
-  monitoring_role_arn = "${aws_iam_role.monitoring.arn}"
+  # broken: InvalidParameterValue: IAM role ARN value is invalid or does not include the required permissions for: ENHANCED_MONITORING
+  # monitoring_interval = "${var.db_monitoring_interval}"
+  # monitoring_role_arn = "${aws_iam_role.monitoring.arn}"
   multi_az = true
   name = "${local.name}"
   option_group_name = ""

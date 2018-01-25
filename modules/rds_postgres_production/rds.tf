@@ -7,6 +7,8 @@ locals {
 }
 
 resource "aws_db_instance" "db" {
+  depends_on = ["aws_iam_policy_attachment.monitoring"]
+
   allocated_storage = "${var.db_allocated_storage}"
   apply_immediately = "${var.db_apply_immediatelly}"
   auto_minor_version_upgrade = "${var.db_auto_minor_version_upgrade}"

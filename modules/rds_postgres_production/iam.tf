@@ -1,5 +1,5 @@
 resource "aws_iam_role" "monitoring" {
-  name = "monitoring-${var.environment_name}-role"
+  name = "${var.environment_name}-db-monitoring-role"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -17,9 +17,8 @@ EOF
 }
 
 # arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole
-resource "aws_iam_role_policy" "monitoring" {
-  name = "monitoring-${var.environment_name}-policy"
-  role = "${aws_iam_role.monitoring.id}"
+resource "aws_iam_policy" "monitoring" {
+  name = "${var.environment_name}-db-monitoring-policy"
   policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -49,4 +48,11 @@ resource "aws_iam_role_policy" "monitoring" {
     ]
 }
 EOF
+}
+
+# Workaround for InvalidParameterValue: IAM role ARN value is invalid or does not include the required permissions for: ENHANCED_MONITORING
+# https://github.com/hashicorp/terraform/issues/5455
+resource "aws_iam_role_policy_attachment" "monitoring" {
+  role       = "${aws_iam_role.monitoring.name}"
+  policy_arn = "${aws_iam_policy.monitoring.arn}"
 }

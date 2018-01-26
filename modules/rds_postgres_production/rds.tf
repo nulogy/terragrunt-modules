@@ -46,6 +46,10 @@ resource "aws_db_instance" "db" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes = [
+      "kms_key_id",
+      "storage_encrypted",
+    ]
   }
 
   tags {

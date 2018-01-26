@@ -14,7 +14,7 @@ variable "db_backup_retention_period" { default = 7 }
 variable "db_backup_window" { default = "06:00-07:00" }
 # latest version
 # ref: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
-variable "db_engine_version" { default = "9.4.14" }
+variable "db_engine_version" { default = "9.4.15" }
 variable "db_iam_database_authentication_enabled" { default = false }
 # Current Generation Burstable Performance Instance Classes
 # ref: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html

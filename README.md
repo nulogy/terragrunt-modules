@@ -20,6 +20,8 @@ Run nulogy-deployer container:
 ./develop_deployer.sh <docker-image-used-for-testing-deployments>
 ```
 
+**NOTE: Never run `tg.sh apply` on any production environment since it will change the terraform state. If you want to see changes your new code will make, run `tg.sh plan`**
+
 ### Merging changes to master
 
 The Directly Responsible Individual (DRI) for this project is Cameron Ross.

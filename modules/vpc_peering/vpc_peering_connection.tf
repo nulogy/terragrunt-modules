@@ -18,20 +18,6 @@ resource "aws_vpc_peering_connection" "vpc_peering_connection" {
 
   tags {
     Name = "VPC Peering Connection ${var.environment_name}"
-    Side = "Requester"
-    resource_group = "${var.environment_name}"
-  }
-}
-
-resource "aws_vpc_peering_connection_accepter" "vpc_peering_connection_accepter" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
-
-  vpc_peering_connection_id = "${aws_vpc_peering_connection.vpc_peering_connection.id}"
-  auto_accept               = true
-
-  tags {
-    Name = "VPC Peering Connection ${var.environment_name}"
-    Side = "Accepter"
     resource_group = "${var.environment_name}"
   }
 }

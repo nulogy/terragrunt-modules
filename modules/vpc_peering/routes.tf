@@ -1,3 +1,7 @@
+data "aws_vpc" "accepter_vpc" {
+  id = "${var.peer_vpc_id}"
+}
+
 data "aws_subnet_ids" "subnet_ids" {
   vpc_id = "${var.vpc_id}"
 }
@@ -12,14 +16,10 @@ data "aws_route_table" "route_tables" {
   subnet_id = "${element(data.aws_subnet.subnets.*.id, count.index)}"
 }
 
-output "route_table_ids" {
-  value = ["${data.aws_route_table.route_tables.*.route_table_id}"]
-}
-
-resource "aws_route" "route" {
+resource "aws_route" "routes" {
   count = "${length(data.aws_route_table.route_tables.*.id)}"
 
   route_table_id = "${element(data.aws_route_table.route_tables.*.id, count.index)}"
-  destination_cidr_block = "${var.peer_vpc_cidr}"
+  destination_cidr_block = "${data.aws_vpc.accepter_vpc.cidr_block}"
   vpc_peering_connection_id = "${aws_vpc_peering_connection.vpc_peering_connection.id}"
 }

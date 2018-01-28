@@ -17,7 +17,7 @@ resource "aws_vpc_peering_connection" "vpc_peering_connection" {
   }
 
   tags {
-    Name = "VPC Peering Connection ${var.environment_name}"
+    Name = "VPC Peering ${var.environment_name} with ${var.peer_vpc_id}"
     resource_group = "${var.environment_name}"
   }
 }

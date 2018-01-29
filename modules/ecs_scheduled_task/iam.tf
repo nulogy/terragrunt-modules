@@ -19,7 +19,7 @@ resource "aws_iam_role" "ecs_eventrole" {
 EOF
 }
 
-resource "aws_iam_role_policy" "test_schedule_policy" {
+resource "aws_iam_role_policy" "task_schedule_policy" {
   name = "${var.environment_name}-${var.task_name}-schedule-task"
   role = "${aws_iam_role.ecs_eventrole.id}"
   policy = <<EOF

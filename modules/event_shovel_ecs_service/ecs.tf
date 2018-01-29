@@ -6,17 +6,11 @@ resource "aws_ecs_task_definition" "ecs_task" {
   container_definitions = <<DEFINITION
 [
   {
+    "environment": ${var.envvars},
     "essential": true,
-    "image": "redis:3",
-    "memoryReservation": ${var.redis_memory_reservation},
-    "name": "redis",
-    "portMappings": [
-      {
-        "hostPort": 6379,
-        "containerPort": 6379,
-        "protocol": "tcp"
-      }
-    ],
+    "image": "${var.docker_image_name}",
+    "memoryReservation": ${var.memory_reservation},
+    "name": "${var.environment_name}-event-shovel",
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -31,9 +25,9 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "essential": true,
     "image": "${var.docker_image_name}",
     "memoryReservation": ${var.memory_reservation},
-    "name": "${var.environment_name}-event-shovel",
+    "name": "${var.environment_name}-event-shovel-check",
     "links": [
-      "redis"
+      "${var.environment_name}-event-shovel"
     ],
     "logConfiguration": {
       "logDriver": "awslogs",
@@ -42,7 +36,8 @@ resource "aws_ecs_task_definition" "ecs_task" {
           "awslogs-region": "${var.aws_region}",
           "awslogs-stream-prefix": "${var.environment_name}-event-shovel"
       }
-    }
+    },
+    "command": ["./run_check_queue_size.sh"]
   }
 ]
 DEFINITION

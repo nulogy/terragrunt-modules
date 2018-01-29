@@ -1,3 +1,4 @@
+variable "alert_topic_arn" {}
 variable "aws_account" {}
 variable "aws_region" {}
 variable "docker_image_name" {}

@@ -21,6 +21,10 @@ resource "aws_alb_target_group" "target_group" {
   vpc_id = "${var.vpc_id}"
   deregistration_delay = 120
 
+  health_check {
+    path = "${var.health_check_path}"
+  }
+
   tags {
     Name = "${var.environment_name} public load balancer target group"
     resource_group = "${var.environment_name}"

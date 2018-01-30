@@ -25,6 +25,7 @@ module "public_load_balancer" {
   alb_subnets = "${module.ecs_core_platform.public_subnet_ids}"
   cert_domain = "${var.cert_domain}"
   environment_name = "${var.environment_name}"
+  health_check_path = "${var.health_check_path}"
   vpc_id = "${module.ecs_core_platform.vpc_id}"
 }
 

@@ -12,7 +12,7 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_internet_gateway" "gw" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = "${(length(var.skip) > 0 || length(var.skip_gw) > 0) ? 0 : 1}"
 
   vpc_id = "${aws_vpc.vpc.id}"
 

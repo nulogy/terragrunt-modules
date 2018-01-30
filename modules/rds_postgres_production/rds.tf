@@ -1,6 +1,5 @@
 locals {
   engine_version = "${length(var.db_snapshot_identifier) > 0 ? "${var.db_engine_version}" : ""}"
-  # iops = "${var.db_storage_type == "io1" ? var.db_iops : 0}"
   name = "${length(var.db_snapshot_identifier) > 0 ? "${var.db_name}" : ""}"
   password = "${length(var.db_snapshot_identifier) > 0 ? "${var.db_password}" : ""}"
   username = "${length(var.db_snapshot_identifier) > 0 ? "${var.db_username}" : ""}"
@@ -22,7 +21,6 @@ resource "aws_db_instance" "db" {
   iam_database_authentication_enabled = "${var.db_iam_database_authentication_enabled}"
   identifier_prefix = "${var.environment_name}-db-"
   instance_class = "${var.db_instance_class}"
-  # iops = "${local.iops}"
   kms_key_id = "${var.db_kms_key_id}"
   license_model = ""
   maintenance_window = "${var.db_maintenance_window}"

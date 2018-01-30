@@ -4,7 +4,7 @@
 
 We treat this project as an internal "open source" project. Everyone at Nulogy is welcome to submit Merge Requests.
 
-### Login to nulgoy-deployer ECR
+### Login to nulogy-deployer ECR
 
 Copy and run this command output to log in to ECR to download the latest build
 
@@ -19,6 +19,8 @@ Run nulogy-deployer container:
 ```
 ./develop_deployer.sh <docker-image-used-for-testing-deployments>
 ```
+
+**NOTE: Never run `tg.sh apply` on any production environment since it will change the terraform state. If you want to see changes your new code will make, run `tg.sh plan`**
 
 ### Merging changes to master
 

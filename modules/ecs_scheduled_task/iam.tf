@@ -1,7 +1,7 @@
 resource "aws_iam_role" "ecs_eventrole" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
-  name = "${var.environment_name}-schedule-task"
+  name = "${var.environment_name}-${var.task_name}-schedule-task"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -19,8 +19,8 @@ resource "aws_iam_role" "ecs_eventrole" {
 EOF
 }
 
-resource "aws_iam_role_policy" "test_schedule_policy" {
-  name = "${var.environment_name}-schedule-task"
+resource "aws_iam_role_policy" "task_schedule_policy" {
+  name = "${var.environment_name}-${var.task_name}-schedule-task"
   role = "${aws_iam_role.ecs_eventrole.id}"
   policy = <<EOF
 {

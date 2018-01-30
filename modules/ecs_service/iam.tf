@@ -81,6 +81,13 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
     {
       "Effect": "Allow",
       "Action": [
+        "ssm:DescribeParameters"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "ssm:GetParameter"
       ],
       "Resource": [

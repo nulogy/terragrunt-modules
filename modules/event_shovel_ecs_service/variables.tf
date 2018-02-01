@@ -1,6 +1,7 @@
 variable "alert_topic_arn" {}
 variable "aws_account" {}
 variable "aws_region" {}
+variable "desired_count" {}
 variable "docker_image_name" {}
 variable "ecs_cluster_name" {}
 variable "environment_name" {}

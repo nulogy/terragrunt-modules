@@ -30,6 +30,6 @@ resource "aws_ecs_service" "ecs_service" {
 
   name = "${var.environment_name}_event_shovel_service"
   cluster = "${var.ecs_cluster_name}"
-  desired_count = "1"
+  desired_count = "${var.desired_count}"
   task_definition = "${aws_ecs_task_definition.ecs_task.arn}"
 }

@@ -16,15 +16,18 @@ resource "aws_route_table" "public_routing_tables" {
 
   vpc_id = "${var.vpc_id}"
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${var.internet_gw_id}"
-  }
-
   tags {
     Name = "${var.environment_name} public ${var.subnet_adjective} subnets routing table ${count.index + 1}"
     resource_group = "${var.environment_name}"
   }
+}
+
+resource "aws_route" "public_routing_tables_gateway" {
+  count = "${length(var.skip) > 0 ? 0 : length(var.public_subnets)}"
+
+  route_table_id = "${element(aws_route_table.public_routing_tables.*.id, count.index)}"
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = "${var.internet_gw_id}"
 }
 
 resource "aws_route_table_association" "public_associations" {

@@ -6,7 +6,7 @@ locals {
 }
 
 resource "aws_db_instance" "db" {
-  depends_on = ["aws_iam_policy_attachment.monitoring"]
+  depends_on = ["aws_iam_role_policy_attachment.monitoring"]
 
   allocated_storage = "${var.db_allocated_storage}"
   apply_immediately = "${var.db_apply_immediatelly}"

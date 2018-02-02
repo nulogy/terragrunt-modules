@@ -9,6 +9,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = [
       "cloudwatch:DescribeAlarms",
+      "logs:DescribeMetricFilters",
       "ec2:Describe*",
       "ecr:BatchGetImage",
       "ecr:DescribeRepositories",

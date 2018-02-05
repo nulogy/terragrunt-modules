@@ -23,5 +23,5 @@ resource "aws_cloudwatch_metric_alarm" "queue_size" {
   treat_missing_data        = "breaching"
   alarm_actions             = ["${var.alert_topic_arn}"]
   insufficient_data_actions = ["${var.alert_topic_arn}"]
-  ok_actions = ["${var.alert_topic_arn}"]
+  ok_actions                = ["${var.alert_topic_arn}"]
 }

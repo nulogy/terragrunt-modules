@@ -11,6 +11,7 @@ resource "aws_cloudwatch_metric_alarm" "scheduled_task_failed_invocation_alarm" 
   treat_missing_data = "notBreaching"
   alarm_actions = ["${var.alert_topic_arn}"]
   insufficient_data_actions = ["${var.alert_topic_arn}"]
+  ok_actions = ["${var.alert_topic_arn}"]
 
   dimensions {
     RuleName = "${aws_cloudwatch_event_rule.scheduled_task_event_rule.name}"
@@ -30,6 +31,7 @@ resource "aws_cloudwatch_metric_alarm" "scheduled_task_invocations_alarm" {
   treat_missing_data = "breaching"
   alarm_actions = ["${var.alert_topic_arn}"]
   insufficient_data_actions = ["${var.alert_topic_arn}"]
+  ok_actions = ["${var.alert_topic_arn}"]
 
   dimensions {
     RuleName = "${aws_cloudwatch_event_rule.scheduled_task_event_rule.name}"

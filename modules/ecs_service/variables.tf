@@ -9,7 +9,8 @@ variable "envars" {}
 variable "environment_name" {}
 variable "kms_key_id" { default = ""}
 variable "log_group_name" {}
-variable "memoryReservation" {}
+variable "max_memory" {}
+variable "memory_reservation" {}
 variable "param_store_namespace" { default = "" }
 variable "skip" { default = "" }
 variable "target_group_arn" {}

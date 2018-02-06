@@ -8,6 +8,6 @@ variable "environment_name" {}
 variable "envvars" {}
 variable "kms_key_id" { default = "" }
 variable "log_group_name" {}
-variable "memory_reservation" {}
+variable "memory_reservation" { default = "500" }
 variable "param_store_namespace" {}
 variable "skip" { default = "" }

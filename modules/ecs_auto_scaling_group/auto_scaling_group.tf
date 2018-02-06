@@ -34,6 +34,7 @@ data "template_cloudinit_config" "user_data" {
       echo 'Creating ECS_CLUSTER' > /tmp/user_data.log
 
       echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
+      echo ECS_RESERVED_MEMORY=256 >> /etc/ecs/ecs.config
     EOF
   }
 }

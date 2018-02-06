@@ -10,6 +10,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "essential": true,
     "image": "${var.docker_image_name}",
     "memoryReservation": ${var.memory_reservation},
+    "memory": 1024,
     "name": "${var.environment_name}-event-shovel",
     "logConfiguration": {
       "logDriver": "awslogs",

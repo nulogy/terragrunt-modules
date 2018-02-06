@@ -11,6 +11,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "essential": true,
     "image": "${var.docker_image_name}",
     "memoryReservation": ${var.memory_reservation},
+    "memory": ${var.max_memory},
     "name": "${var.environment_name}",
     "portMappings": [{
       "hostPort": 0,

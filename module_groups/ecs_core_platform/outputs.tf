@@ -1,3 +1,7 @@
+output "bastion_asg_name" {
+  value = "${module.bastion_auto_scaling_group.bastion_asg_name}"
+}
+
 output "ecs_cluster_id" {
   value = "${module.ecs_cluster.ecs_cluster_id}"
 }

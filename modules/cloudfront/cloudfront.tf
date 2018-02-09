@@ -123,7 +123,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   }
 
   viewer_certificate {
-    minimum_protocol_version = "TLSv1.1_2016"
+    minimum_protocol_version = "TLSv1_2016"
     acm_certificate_arn = "${data.aws_acm_certificate.acm_cf_cert.arn}"
     ssl_support_method = "sni-only"
   }

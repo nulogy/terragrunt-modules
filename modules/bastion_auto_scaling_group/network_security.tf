@@ -9,7 +9,7 @@ resource "aws_security_group" "ecs_ec2_security_group" {
 
   vpc_id = "${var.vpc_id}"
 
-  # Only allow connections from within the VPC
+  # Allow connections from within the VPC
   ingress {
     cidr_blocks = ["${var.vpc_cidr}"]
     from_port = 0
@@ -25,7 +25,7 @@ resource "aws_security_group" "ecs_ec2_security_group" {
     protocol = "tcp"
   }
 
-  # Outbound connections need to be opened for third-party services (ie, New Relic)
+  # Outbound connections are open
   egress {
     cidr_blocks = ["0.0.0.0/0"]
     from_port = 0

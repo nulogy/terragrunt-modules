@@ -70,3 +70,14 @@ module "vpc_peering_connection" {
   vpc_id = "${module.vpc.vpc_id}"
   auto_accept = "${var.peer_auto_accept}"
 }
+
+module "bastion_auto_scaling_group" {
+  source = "../../modules/bastion_auto_scaling_group"
+
+  ec2_subnet_ids = "${module.ecs_subnets.public_subnet_ids}"
+  ecs_ami_version = "${local.ecs_ami_version}"
+  environment_name = "${var.environment_name}"
+  public_key = "${var.ec2_public_key}"
+  vpc_cidr = "${var.vpc_cidr}"
+  vpc_id = "${module.vpc.vpc_id}"
+}

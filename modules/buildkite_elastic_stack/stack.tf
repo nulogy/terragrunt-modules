@@ -11,13 +11,13 @@ resource "aws_cloudformation_stack" "stack" {
     BuildkiteQueue = "${var.stack_name}"
     ECRAccessPolicy = "poweruser"
     ImageId = ""
-    InstanceType = "c5.large"
+    InstanceType = "${var.instance_type}"
     KeyName = "${var.key_name}"
-    MaxSize = "64"
-    ScaleDownAdjustment = "-32"
+    MaxSize = "${var.max_size}"
+    ScaleDownAdjustment = "-${var.scale_adjustment}"
     ScaleDownPeriod = "3600"
-    ScaleUpAdjustment = "32"
-    SpotPrice = "0.085"
+    ScaleUpAdjustment = "${var.scale_adjustment}"
+    SpotPrice = "${var.spot_price}"
   }
 
   lifecycle {

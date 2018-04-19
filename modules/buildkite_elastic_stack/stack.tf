@@ -6,14 +6,13 @@ resource "aws_cloudformation_stack" "stack" {
   parameters {
     AgentsPerInstance = "1"
     BuildkiteAgentToken = "${var.buildkite_agent_token}"
-    BuildkiteApiAccessToken = "${var.buildkite_api_access_token}"
-    BuildkiteOrgSlug = "nulogy-corp"
     BuildkiteQueue = "${var.stack_name}"
     ECRAccessPolicy = "poweruser"
     ImageId = ""
     InstanceType = "${var.instance_type}"
     KeyName = "${var.key_name}"
     MaxSize = "${var.max_size}"
+    MinSize = "${var.min_size}"
     ScaleDownAdjustment = "-${var.scale_adjustment}"
     ScaleDownPeriod = "3600"
     ScaleUpAdjustment = "${var.scale_adjustment}"
@@ -21,7 +20,7 @@ resource "aws_cloudformation_stack" "stack" {
   }
 
   lifecycle {
-    ignore_changes = ["parameters.BuildkiteAgentToken", "parameters.BuildkiteApiAccessToken"]
+    ignore_changes = ["parameters.BuildkiteAgentToken"]
   }
 }
 

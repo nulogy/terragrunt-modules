@@ -1,5 +1,5 @@
 output "builder_stack_managed_secrets_bucket" {
-  value = "${aws_cloudformation_stack.builders.outputs["ManagedSecretsBucket"]}"
+  value = "${module.builders_stack.stack_managed_secrets_bucket}"
 }
 
 output "runner_stack_managed_secrets_bucket" {

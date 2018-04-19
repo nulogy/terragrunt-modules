@@ -2,7 +2,6 @@ module "runners_stack" {
   source = "../../modules/buildkite_elastic_stack"
 
   buildkite_agent_token = "${var.buildkite_agent_token}"
-  buildkite_api_access_token = "${var.buildkite_api_access_token}"
   instance_type = "c5.large"
   key_name = "${aws_key_pair.key_pair.key_name}"
   max_size = "64"

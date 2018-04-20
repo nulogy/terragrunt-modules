@@ -38,16 +38,18 @@ Only the DRI is allowed to release new versions.
 1. Bump the version in `versions.env`. We use [Semantic versions](https://semver.org/).
 1. Open the [CHANGELOG](./CHANGELOG.md) file.
 1. Change `## [Unreleased]` to version number and date (e.g. `## [0.11.0] - 2018-04-20`)
+1. Remove the headers with no content (e.g. Added, Changed, etc)
 1. Copy the following 'Unreleased' block to the top of the list.
 
   ```
   ## [Unreleased]
 
   ### Added
-
   ### Changed
-
+  ### Deprecated
   ### Removed
+  ### Fixed
+  ### Security
   ```
 
 1. Run `./build_and_release.sh`.

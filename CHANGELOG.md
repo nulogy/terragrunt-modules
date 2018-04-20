@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.11.2] - 2018-04-20
+
+### Fixed
+
+* Make stack_ami_version an optional variable in elastic_ci_stack module group
+
 ## [0.11.1] - 2018-04-20
 
 ### Added

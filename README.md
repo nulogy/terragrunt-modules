@@ -24,7 +24,7 @@ The Directly Responsible Individual (DRI) for this project is Cameron Ross.
 
 When you are happy with your changes:
 
-1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file.
+1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file, under the `## [Unreleased]` section.
 1. Create a Merge Request.
 1. Notify #nulogy-deployer Slack channel to get the DRI review and merge your changes.
 1. If there are changes affecting files in `deployer/apps/<product>`. A member of the team owning `<product>` should also review the MR.
@@ -36,5 +36,20 @@ NOTE: Only the nulogy-deployer core team is allowed to merge changes to master
 Only the DRI is allowed to release new versions.
 
 1. Bump the version in `versions.env`. We use [Semantic versions](https://semver.org/).
-1. Add version header to [CHANGELOG](./CHANGELOG.md) file.
+1. Open the [CHANGELOG](./CHANGELOG.md) file.
+1. Change `## [Unreleased]` to version number and date (e.g. `## [0.11.0] - 2018-04-20`)
+1. Remove the headers with no content (e.g. Added, Changed, etc)
+1. Copy the following 'Unreleased' block to the top of the list.
+
+  ```
+  ## [Unreleased]
+
+  ### Added
+  ### Changed
+  ### Deprecated
+  ### Removed
+  ### Fixed
+  ### Security
+  ```
+
 1. Run `./build_and_release.sh`.

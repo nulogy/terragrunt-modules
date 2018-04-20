@@ -8,16 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* A `stack_ami_version` variable for the buildkite stack
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
 
-## [0.11.0] - 2018-04-20
+## [0.11.1] - 2018-04-20
+
+### Added
+
+* A `stack_ami_version` variable for the buildkite stack
+
+## [0.11.0] - 2018-04-21
 
 ### Added
 

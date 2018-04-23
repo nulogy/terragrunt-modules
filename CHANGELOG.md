@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.11.4] - 2018-04-20
+
+### Changed
+
+* tg_deploy.sh, tg_prepare.sh, tg_setup.sh and tg_teardown.sh are updated to properly handle resources and 
+not just modules
+
 ## [0.11.3] - 2018-04-20
 
 ### Removed

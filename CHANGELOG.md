@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.11.3] - 2018-04-20
+
+### Removed
+
+* buildkite elastic ci stack: Move ECR build repo out of the module group
+
 ## [0.11.2] - 2018-04-20
 
 ### Fixed
@@ -26,7 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * A `stack_ami_version` variable for the buildkite stack
 
-## [0.11.0] - 2018-04-21
+## [0.11.0] - 2018-04-19
 
 ### Added
 

@@ -3,3 +3,29 @@ resource "aws_ecr_repository" "ecr_repo" {
 
   name = "${var.name}"
 }
+
+resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
+  repository = "${aws_ecr_repository.ecr_repo.name}"
+
+  policy = <<EOF
+{
+  "rules": [
+    {
+      "rulePriority": 1,
+      "description": "Only maintain the newest 100 images",
+      "selection": {
+        "tagStatus": "tagged",
+        "countType": "imageCountMoreThan",
+        "tagPrefixList": [
+          "${var.count_cap_tag_prefix}"
+        ],
+        "countNumber": 100
+      },
+      "action": {
+        "type": "expire"
+      }
+    }
+  ]
+}
+EOF
+}

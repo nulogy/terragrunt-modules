@@ -27,7 +27,6 @@ When you are happy with your changes:
 1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file, under the `## [Unreleased]` section.
 1. Create a Merge Request.
 1. Notify #nulogy-deployer Slack channel to get the DRI review and merge your changes.
-1. If there are changes affecting files in `deployer/apps/<product>`. A member of the team owning `<product>` should also review the MR.
 
 NOTE: Only the nulogy-deployer core team is allowed to merge changes to master
 

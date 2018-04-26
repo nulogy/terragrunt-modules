@@ -9,15 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
-
-* Adds ECR Lifecycle policy to ECR module that keeps newest 100 images only
-
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
 
-## [0.11.4] - 2018-04-20
+## [0.12.0] - 2018-04-26
+
+### Changed
+
+* Adds ECR Lifecycle policy to ECR module that keeps newest 100 images only
+
+## [0.11.4] - 2018-04-23
 
 ### Changed
 

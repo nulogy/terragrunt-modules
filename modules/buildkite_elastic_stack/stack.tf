@@ -26,6 +26,7 @@ resource "aws_cloudformation_stack" "stack" {
     KeyName = "${var.key_name}"
     MaxSize = "${var.max_size}"
     MinSize = "${var.min_size}"
+    SecretsBucket = "${var.secrets_bucket}"
     ScaleDownAdjustment = "-${var.scale_adjustment}"
     ScaleDownPeriod = "3600"
     ScaleUpAdjustment = "${var.scale_adjustment}"
@@ -35,11 +36,4 @@ resource "aws_cloudformation_stack" "stack" {
   lifecycle {
     ignore_changes = ["parameters.BuildkiteAgentToken"]
   }
-}
-
-resource "aws_s3_bucket_object" "stack_global_env" {
-  bucket = "${aws_cloudformation_stack.stack.outputs["ManagedSecretsBucket"]}"
-  key    = "/env"
-  source = "${var.stack_config_env}"
-  server_side_encryption = "aws:kms"
 }

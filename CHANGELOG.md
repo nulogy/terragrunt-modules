@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [0.13.0] - 2018-04-26
+
+### Added
+
+* Adds tg_aws.sh utility to make it easier to run aws commands with the right profile and region
+
 ## [0.12.0] - 2018-04-26
 
 ### Changed

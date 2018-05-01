@@ -32,7 +32,7 @@ NOTE: Only the nulogy-deployer core team is allowed to merge changes to master
 
 ### Release a new Image version
 
-Only the DRI is allowed to release new versions.
+Only the nulogy-deployer core team is allowed to release new versions.
 
 1. Bump the version in `versions.env`. We use [Semantic versions](https://semver.org/).
 1. Open the [CHANGELOG](./CHANGELOG.md) file.
@@ -52,3 +52,8 @@ Only the DRI is allowed to release new versions.
   ```
 
 1. Run `./build_and_release.sh`.
+
+### Nulogy-Deployer Core Team
+
+* Cameron Ross - DRI
+* Arturo Pie

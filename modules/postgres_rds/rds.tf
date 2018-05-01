@@ -2,7 +2,6 @@ locals {
   skip_final_snapshot = "${!var.production_mode}"
   encrypted_storage = "${var.production_mode}"
   multi_az = "${var.production_mode}"
-  prevent_destroy = "${var.production_mode}"
 }
 
 resource "aws_db_instance" "db" {

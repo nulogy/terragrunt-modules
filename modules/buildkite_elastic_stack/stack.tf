@@ -16,7 +16,7 @@ resource "aws_cloudformation_stack" "stack" {
   capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
 
   parameters {
-    AgentsPerInstance = "1"
+    AgentsPerInstance = "${var.agents_per_instance}"
     BuildkiteAgentToken = "${var.buildkite_agent_token}"
     BuildkiteQueue = "${var.stack_name}"
     ECRAccessPolicy = "poweruser"

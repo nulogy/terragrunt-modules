@@ -1,3 +1,4 @@
+variable "agents_per_instance" { default = 1 }
 variable "buildkite_agent_token" { }
 variable "instance_type" { }
 variable "key_name" { }

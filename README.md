@@ -41,14 +41,14 @@ Only the nulogy-deployer core team is allowed to release new versions.
 1. Copy the following 'Unreleased' block to the top of the list.
 
   ```
-  ## [Unreleased]
+## [Unreleased]
 
-  ### Added
-  ### Changed
-  ### Deprecated
-  ### Removed
-  ### Fixed
-  ### Security
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
   ```
 
 1. Run `./build_and_release.sh`.

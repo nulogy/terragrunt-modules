@@ -20,6 +20,16 @@ module "vpc" {
   vpc_cidr = "10.0.0.0/16"
 }
 
+module "public_subnets" {
+  source = "../../modules/public_private_subnets"
+  environment_name = "buildkite-runner-spotfleet"
+  internet_gw_id = "${module.vpc.internet_gw_id}"
+  public_subnets = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
+  private_subnets = []
+  subnet_adjective = "spotfleet"
+  vpc_id = "${module.vpc.vpc_id}"
+}
+
 resource "aws_security_group" "stack_security_group" {
   name_prefix = "${var.stack_name}-SecurityGroup-"
 
@@ -70,6 +80,7 @@ resource "aws_cloudformation_stack" "stack" {
     ScaleDownPeriod = "3600"
     ScaleUpAdjustment = "${var.scale_adjustment}"
     SpotPrice = "${var.spot_price}"
+    Subnets = "${join(",", module.public_subnets.public_subnet_ids)}"
     VpcId = "${module.vpc.vpc_id}"
   }
 

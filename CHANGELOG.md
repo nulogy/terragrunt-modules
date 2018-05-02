@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [1.0.2] - 2018-05-02
+
+### Added
+
+* Add a security group to buildkite stack so only office ip can SSH to it
+* Add output for runners_vpc_id, runners_public_subnet_ids and runners_security_group_id for the Buildkite stack
+
 ## [1.0.1] - 2018-05-02
 
 ### Added

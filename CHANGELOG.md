@@ -8,14 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Bootstrap script url for buildkite runners
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [1.0.1] - 2018-05-02
+
+### Added
+
+* Bootstrap script url for buildkite runners
 
 ## [1.0.0] - 2018-05-01
 
@@ -27,7 +30,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Move creation of secret bucket outside of nulogy deployer [#49](https://gitlab.hq.nulogy.com/Nulogy/nulogy-deployer/merge_requests/49)
 
-### Deprecated
 ### Removed
 
 * Remove `tg_aws.sh` utility script [#49](https://gitlab.hq.nulogy.com/Nulogy/nulogy-deployer/merge_requests/49)

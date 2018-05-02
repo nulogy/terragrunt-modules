@@ -2,6 +2,7 @@ module "runners_stack" {
   source = "../../modules/buildkite_elastic_stack"
 
   agents_per_instance = "${var.runner_agents_per_instance}"
+  bootstrap_script_url = "${var.runner_bootstrap_script_url}"
   buildkite_agent_token = "${var.buildkite_agent_token}"
   instance_type = "${var.runner_instance_type}"
   key_name = "${aws_key_pair.key_pair.key_name}"

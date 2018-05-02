@@ -1,4 +1,4 @@
-data "aws_ami" "ecs_ami" {
+data "aws_ami" "buildkite_ami" {
   count = "${length(var.stack_ami_version) > 0 ? 1 : 0}"
 
   filter {
@@ -17,11 +17,12 @@ resource "aws_cloudformation_stack" "stack" {
 
   parameters {
     AgentsPerInstance = "${var.agents_per_instance}"
+    BootstrapScriptUrl = "${var.bootstrap_script_url}"
     BuildkiteAgentToken = "${var.buildkite_agent_token}"
     BuildkiteQueue = "${var.stack_name}"
     ECRAccessPolicy = "poweruser"
     # https://github.com/hashicorp/terraform/issues/16726
-    ImageId = "${element(concat(data.aws_ami.ecs_ami.*.id, list("")), 0)}"
+    ImageId = "${element(concat(data.aws_ami.buildkite_ami.*.id, list("")), 0)}"
     InstanceType = "${var.instance_type}"
     KeyName = "${var.key_name}"
     MaxSize = "${var.max_size}"

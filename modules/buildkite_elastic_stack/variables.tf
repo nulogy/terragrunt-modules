@@ -1,4 +1,5 @@
 variable "agents_per_instance" { default = 1 }
+variable "bootstrap_script_url" { default = "" }
 variable "buildkite_agent_token" { }
 variable "instance_type" { }
 variable "key_name" { }

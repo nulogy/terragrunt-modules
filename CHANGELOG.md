@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Bootstrap script url for buildkite runners
+
 ### Changed
 ### Deprecated
 ### Removed

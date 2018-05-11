@@ -51,7 +51,8 @@ Only the nulogy-deployer core team is allowed to release new versions.
 ### Security
   ```
 
-1. Run `./build_and_release.sh`.
+1. Login your shell to Docker Hub: `docker login`
+1. Run `./build_and_release.sh`
 
 ### Nulogy-Deployer Core Team
 

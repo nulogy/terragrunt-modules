@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+* Switches Docker repository from ECR to Docker Hub (Evan Brodie) [#52](https://gitlab.hq.nulogy.com/Nulogy/nulogy-deployer/merge_requests/52)
+
 ### Deprecated
 ### Removed
 ### Fixed

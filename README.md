@@ -40,16 +40,16 @@ Only the nulogy-deployer core team is allowed to release new versions.
 1. Remove the headers with no content (e.g. Added, Changed, etc)
 1. Copy the following 'Unreleased' block to the top of the list.
 
-  ```
-## [Unreleased]
-
-### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
-  ```
+    ``` 
+    ## [Unreleased]
+    
+    ### Added
+    ### Changed
+    ### Deprecated
+    ### Removed
+    ### Fixed
+    ### Security
+    ```
 
 1. Login your shell to Docker Hub: `docker login`
 1. Run `./build_and_release.sh`

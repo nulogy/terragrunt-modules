@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [1.0.3] - 2018-05-14
+
+### Changed
+
+Moves the docker repository from ECR to our publicly hosted Docker Hub repo.
+
 ## [1.0.2] - 2018-05-02
 
 ### Added

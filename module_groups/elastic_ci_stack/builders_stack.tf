@@ -1,6 +1,7 @@
 module "builders_stack" {
   source = "../../modules/buildkite_elastic_stack"
 
+  bootstrap_script_url = "${var.builder_bootstrap_script_url}"
   buildkite_agent_token = "${var.buildkite_agent_token}"
   instance_type = "c5.large"
   key_name = "${aws_key_pair.key_pair.key_name}"

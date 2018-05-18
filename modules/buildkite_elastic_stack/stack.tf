@@ -68,6 +68,7 @@ resource "aws_cloudformation_stack" "stack" {
     BuildkiteAgentToken = "${var.buildkite_agent_token}"
     BuildkiteQueue = "${var.stack_name}"
     ECRAccessPolicy = "poweruser"
+    EnableDockerUserNamespaceRemap = "false"
     # https://github.com/hashicorp/terraform/issues/16726
     ImageId = "${element(concat(data.aws_ami.buildkite_ami.*.id, list("")), 0)}"
     InstanceType = "${var.instance_type}"

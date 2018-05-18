@@ -8,17 +8,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [1.1.0] - 2018-05-18
+
+### Added
 
 * Add a builder_bootstrap_script_url to the elastic_ci_stack module
 
 ### Changed
 
 * Add support for v3.2 of the buildkite AWS stack
-
-### Deprecated
-### Removed
-### Fixed
-### Security
 
 ## [1.0.3] - 2018-05-14
 

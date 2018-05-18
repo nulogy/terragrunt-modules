@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Add a builder_bootstrap_script_url to the elastic_ci_stack module
+
 ### Changed
 ### Deprecated
 ### Removed

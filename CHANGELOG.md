@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [1.2.0] - 2018-05-24
+
+### Added
+
+* Add an optional profile parameter to the cloudfront module. Backwards compatible.
+
 ## [1.1.0] - 2018-05-18
 
 ### Added

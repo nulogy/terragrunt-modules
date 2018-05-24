@@ -1,4 +1,5 @@
 variable "assets_bucket_domain" {}
+variable "aws_profile" { default = "" }
 variable "cert_domain" {}
 variable "environment_name" {}
 variable "app_fqdn" {}

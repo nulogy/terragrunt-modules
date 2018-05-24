@@ -10,6 +10,7 @@ module "cloudfront" {
   skip = "${var.skip}"
 
   app_fqdn = "${var.app_fqdn}"
+  aws_profile = "${var.aws_profile}"
   assets_bucket_domain = "${module.s3_assets_bucket.assets_bucket_domain}"
   cert_domain = "${var.cert_domain}"
   environment_name = "${var.environment_name}"

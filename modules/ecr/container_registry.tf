@@ -6,6 +6,7 @@ resource "aws_ecr_repository" "ecr_repo" {
 
 resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
   repository = "${aws_ecr_repository.ecr_repo.name}"
+  count = "${length(var.count_cap_tag_prefix) > 0 ? 1 : 0}"
 
   policy = <<EOF
 {

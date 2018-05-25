@@ -66,7 +66,7 @@ resource "aws_cloudformation_stack" "stack" {
     AgentsPerInstance = "${var.agents_per_instance}"
     BootstrapScriptUrl = "${var.bootstrap_script_url}"
     BuildkiteAgentToken = "${var.buildkite_agent_token}"
-    BuildkiteQueue = "${var.stack_name}"
+    BuildkiteQueue = "${var.buildkite_queue}"
     ECRAccessPolicy = "poweruser"
     EnableDockerUserNamespaceRemap = "false"
     # https://github.com/hashicorp/terraform/issues/16726

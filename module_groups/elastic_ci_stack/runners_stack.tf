@@ -4,6 +4,7 @@ module "runners_stack" {
   agents_per_instance = "${var.runner_agents_per_instance}"
   bootstrap_script_url = "${var.runner_bootstrap_script_url}"
   buildkite_agent_token = "${var.buildkite_agent_token}"
+  buildkite_queue = "${var.buildkite_queue_prefix}-runners"
   instance_type = "${var.runner_instance_type}"
   key_name = "${aws_key_pair.key_pair.key_name}"
   max_size = "${var.runner_max_size}"

@@ -8,7 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Make the creation of `aws_ecr_lifecycle_policy` optional
+
 ### Changed
+
+* Decouple `buildkite_queue` from `buildkite_env_name` so we can support blue/green deployments of buildkite stack
+
 ### Deprecated
 ### Removed
 ### Fixed

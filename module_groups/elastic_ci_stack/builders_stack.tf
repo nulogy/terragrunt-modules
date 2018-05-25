@@ -3,6 +3,7 @@ module "builders_stack" {
 
   bootstrap_script_url = "${var.builder_bootstrap_script_url}"
   buildkite_agent_token = "${var.buildkite_agent_token}"
+  buildkite_queue = "${var.buildkite_queue_prefix}-builders"
   instance_type = "c5.large"
   key_name = "${aws_key_pair.key_pair.key_name}"
   max_size = "1"

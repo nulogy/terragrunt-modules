@@ -46,4 +46,9 @@ resource "aws_ecs_service" "ecs_service" {
     container_name = "${var.environment_name}"
     container_port = "${var.container_port}"
   }
+
+  ordered_placement_strategy {
+    type = "spread"
+    field = "attribute:ecs.availability-zone"
+  }
 }

@@ -4,6 +4,7 @@ variable "buildkite_agent_token" { }
 variable "buildkite_queue" { }
 variable "instance_type" { }
 variable "key_name" { }
+variable "managed_policy_arn" { default = "" }
 variable "max_size" { }
 variable "min_size" { default = 0 }
 variable "office_ip" { default = "" }

@@ -73,6 +73,7 @@ resource "aws_cloudformation_stack" "stack" {
     ImageId = "${element(concat(data.aws_ami.buildkite_ami.*.id, list("")), 0)}"
     InstanceType = "${var.instance_type}"
     KeyName = "${var.key_name}"
+    ManagedPolicyARN = "${var.managed_policy_arn}"
     MaxSize = "${var.max_size}"
     MinSize = "${var.min_size}"
     SecretsBucket = "${var.secrets_bucket}"

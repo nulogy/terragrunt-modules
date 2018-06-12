@@ -1,5 +1,5 @@
 module "builders_stack" {
-  source = "../../modules/buildkite_elastic_stack"
+  source = "/deployer/modules/buildkite_elastic_stack"
 
   bootstrap_script_url = "${var.builder_bootstrap_script_url}"
   buildkite_agent_token = "${var.buildkite_agent_token}"

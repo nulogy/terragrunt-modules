@@ -1,12 +1,12 @@
 module "s3_assets_bucket" {
-  source = "../../modules/s3_assets_bucket"
+  source = "/deployer/modules/s3_assets_bucket"
   skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
 }
 
 module "cloudfront" {
-  source = "../../modules/cloudfront"
+  source = "/deployer/modules/cloudfront"
   skip = "${var.skip}"
 
   app_fqdn = "${var.app_fqdn}"
@@ -20,7 +20,7 @@ module "cloudfront" {
 }
 
 module "route53_for_cloudfront" {
-  source = "../../modules/route53_alias_record"
+  source = "/deployer/modules/route53_alias_record"
   skip = "${var.skip}"
 
   domain = "${var.route53_domain}"

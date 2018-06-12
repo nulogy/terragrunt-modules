@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [1.5.0] - 2018-06-12
+
+### Changed
+
+* Allow using buildkite_elastic_stack with a bootstrap script policy.
+* Change the pathing for modules to allow apps to use subfolders in their directory structure.
+
 ## [1.4.0] - 2018-05-28
 
 ### Changed

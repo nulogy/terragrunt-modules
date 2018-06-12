@@ -6,7 +6,7 @@ locals {
 }
 
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "/deployer/modules/vpc"
   skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
@@ -14,7 +14,7 @@ module "vpc" {
 }
 
 module "ecs_subnets" {
-  source = "../../modules/public_private_subnets"
+  source = "/deployer/modules/public_private_subnets"
   skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
@@ -28,14 +28,14 @@ module "ecs_subnets" {
 }
 
 module "ecs_cluster" {
-  source = "../../modules/ecs_cluster"
+  source = "/deployer/modules/ecs_cluster"
   skip = "${var.skip}"
 
   name = "${var.environment_name}-cluster"
 }
 
 module "ecs_auto_scaling_group" {
-  source = "../../modules/ecs_auto_scaling_group"
+  source = "/deployer/modules/ecs_auto_scaling_group"
   skip = "${var.skip}"
 
   desired_capacity = "${local.desired_capacity}"
@@ -54,14 +54,14 @@ module "ecs_auto_scaling_group" {
 }
 
 module "log_group" {
-  source = "../../modules/log_group"
+  source = "/deployer/modules/log_group"
   skip = "${var.skip}"
 
   name = "${var.environment_name}-log"
 }
 
 module "vpc_peering_connection" {
-  source = "../../modules/vpc_peering_connection"
+  source = "/deployer/modules/vpc_peering_connection"
   skip = "${length(var.peer_account_id) == 0 ? "true" : ""}"
 
   environment_name = "${var.environment_name}"
@@ -72,7 +72,7 @@ module "vpc_peering_connection" {
 }
 
 module "bastion_auto_scaling_group" {
-  source = "../../modules/bastion_auto_scaling_group"
+  source = "/deployer/modules/bastion_auto_scaling_group"
 
   ec2_subnet_ids = "${module.ecs_subnets.public_subnet_ids}"
   ecs_ami_version = "${local.ecs_ami_version}"

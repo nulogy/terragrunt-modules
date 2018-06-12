@@ -54,6 +54,14 @@ Only the nulogy-deployer core team is allowed to release new versions.
 1. Login your shell to Docker Hub: `docker login`
 1. Run `./build_and_release.sh`
 
+### RubyMine
+
+If you want module autocomplete in RubyMine:
+
+    ln -s ~/src/nulogy-deployer /deployer
+
+We recommend installing the `HashiCorp Terraform / HCL language Support` plugin
+
 ### Nulogy-Deployer Core Team
 
 * Cameron Ross - DRI

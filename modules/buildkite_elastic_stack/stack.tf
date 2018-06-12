@@ -21,7 +21,7 @@ module "vpc" {
 }
 
 module "public_subnets" {
-  source = "/deployer/modules//public_private_subnets"
+  source = "/deployer/modules/public_private_subnets"
   environment_name = "buildkite-runner-spotfleet"
   internet_gw_id = "${module.vpc.internet_gw_id}"
   public_subnets = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]

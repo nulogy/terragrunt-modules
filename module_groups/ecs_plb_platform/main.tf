@@ -19,7 +19,7 @@ module "ecs_core_platform" {
 }
 
 module "public_load_balancer" {
-  source = "/deployer/modules//public_load_balancer"
+  source = "/deployer/modules/public_load_balancer"
   skip = "${var.skip}"
 
   alb_subnets = "${module.ecs_core_platform.public_subnet_ids}"
@@ -30,7 +30,7 @@ module "public_load_balancer" {
 }
 
 module "route53_for_load_balancer" {
-  source = "/deployer/modules//route53_alias_record"
+  source = "/deployer/modules/route53_alias_record"
   skip = "${var.skip}"
 
   domain = "${var.route53_domain}"

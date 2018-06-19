@@ -63,6 +63,7 @@ resource "aws_autoscaling_group" "asg" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
   name_prefix = "${var.environment_name}-${aws_launch_configuration.launch_conf.name}-autoscaling-group"
+  default_cooldown = "${var.default_cooldown}"
   max_size = "${var.max_size}"
   min_size = "${var.min_size}"
   min_elb_capacity = "${var.min_size}"
@@ -73,6 +74,7 @@ resource "aws_autoscaling_group" "asg" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = ["desired_capacity"] // Preserve desired capacity when autoscaled.
   }
 
   tag {

@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [1.6.0] - 2018-06-19
+
+### Changed
+
+* Output ECS autoscaling group name to make autoscaling easier.
+* Allow overriding default_cooldown for autoscaling rules.
+* Ignore changes on the desired_capacity, so it doesn't revert after autoscaling.
+
 ## [1.5.0] - 2018-06-12
 
 ### Changed

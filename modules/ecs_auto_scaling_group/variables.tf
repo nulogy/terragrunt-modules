@@ -1,4 +1,5 @@
 variable "desired_capacity" {}
+variable "default_cooldown" { default = 300 }
 variable "ecs_ami_version" {}
 variable "ecs_cluster_name" {}
 variable "ec2_subnet_ids" { type = "list" }

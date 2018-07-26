@@ -8,5 +8,5 @@ To generate the AMI from which the cluster will be built:
 * `cd ~/src/nulogy_rabbitmq_2`
 * Use the `build_ami` script: `AWS_PROFILE=your_aws_profile_name build_ami`
 
-These servers are intended to be immutable. If changes are required, the cluster should be terminated 
-and rebuilt from a new AMI rather than updated in-place.
+These servers are intended to be immutable. If changes are required, a new AMI should be applied. 
+The rules will do this in a rolling fashion.

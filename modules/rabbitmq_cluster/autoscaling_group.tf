@@ -89,4 +89,3 @@ resource "aws_cloudformation_stack" "rabbitmq" {
 }
 EOF
 }
-

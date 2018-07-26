@@ -19,7 +19,7 @@ variable "domain" {
 }
 
 variable "environment_name" {
-    description = "Used for tagging, and naming."
+  description = "Used for tagging, and naming."
 }
 
 variable "instance_type" {
@@ -37,16 +37,16 @@ variable "private_subnet_ids" {
 }
 
 variable "public_key" {
-    description = "The public key for SSH access to the RabbitMQ servers. Share the private keys in 1Password."
+  description = "The public key for SSH access to the RabbitMQ servers. Share the private keys in 1Password."
 }
 
 variable "public_subnet_ids" {
-    description = "Public subnets for RabbitMQ Load Balancers. Defines the range of public IPs that the ELB can take."
-    type = "list"
+  description = "Public subnets for RabbitMQ Load Balancers. Defines the range of public IPs that the ELB can take."
+  type = "list"
 }
 
 variable "subdomain" {
-    description = "The subdomain for accessing RabbitMQ. Eg. rabbitmq-qa"
+  description = "The subdomain for accessing RabbitMQ. Eg. rabbitmq-qa"
 }
 
 variable "vpc_id" {

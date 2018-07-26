@@ -1,10 +1,10 @@
 data "aws_ami" "ami" {
-    owners = ["self"]
+  owners = ["self"]
 
-    most_recent = true
+  most_recent = true
 
-    filter {
-        name   = "name"
-        values = ["nulogy-rabbitmq-*"]
-    }
+  filter {
+    name   = "name"
+    values = ["nulogy-rabbitmq-*"]
+  }
 }

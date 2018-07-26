@@ -1,14 +1,5 @@
 data "aws_vpc" "vpc" {
-    id = "${var.vpc_id}"
-}
-
-data "template_file" "RabbitMQ_User_data" {
-    template = "${file("${path.module}/files/user_data.sh.tpl")}"
-
-    vars {
-        environment_name = "${var.environment_name}"
-        aws_region = "${var.aws_region}"
-    }
+  id = "${var.vpc_id}"
 }
 
 resource "aws_launch_configuration" "rabbitmq" {
@@ -19,7 +10,6 @@ resource "aws_launch_configuration" "rabbitmq" {
     security_groups      = [
         "${aws_security_group.rabbitmq.id}"
     ]
-    user_data = "${data.template_file.RabbitMQ_User_data.rendered}"
     iam_instance_profile = "${aws_iam_instance_profile.rabbitmq_profile.id}"
 
     lifecycle {

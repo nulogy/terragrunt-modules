@@ -3,46 +3,78 @@ data "aws_vpc" "vpc" {
 }
 
 resource "aws_launch_configuration" "rabbitmq" {
-    name_prefix          = "${var.environment_name} RabbitMQ Launch configuration"
-    image_id             = "${data.aws_ami.ami.id}"
-    instance_type        = "${var.instance_type}"
-    key_name             = "${aws_key_pair.key_pair.key_name}"
-    security_groups      = [
-        "${aws_security_group.rabbitmq.id}"
-    ]
-    iam_instance_profile = "${aws_iam_instance_profile.rabbitmq_profile.id}"
+  name_prefix          = "${var.environment_name} RabbitMQ Launch configuration"
+  image_id             = "${data.aws_ami.ami.id}"
+  instance_type        = "${var.instance_type}"
+  key_name             = "${aws_key_pair.key_pair.key_name}"
+  security_groups      = [
+    "${aws_security_group.rabbitmq.id}"
+  ]
+  iam_instance_profile = "${aws_iam_instance_profile.rabbitmq_profile.id}"
 
-    lifecycle {
-      create_before_destroy = true
-    }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
-resource "aws_autoscaling_group" "rabbitmq" {
-    name_prefix               = "${var.environment_name}-${aws_launch_configuration.rabbitmq.name}-RabbitMQ"
-    max_size                  = "${var.count * 2}"
-    min_size                  = "${var.count}"
-    desired_capacity          = "${var.count}"
-    health_check_grace_period = 300
-    health_check_type         = "ELB"
-    force_delete              = true
-    launch_configuration      = "${aws_launch_configuration.rabbitmq.name}"
-    load_balancers            = ["${aws_elb.elb.name}"]
-    vpc_zone_identifier       = ["${var.private_subnet_ids}"]
+resource "aws_cloudformation_stack" "rabbitmq" {
+  name = "${var.environment_name}-RabbitMQ-autoscaling"
 
-    tag  = [
-        {
-            key = "Name"
-            value = "${var.environment_name} RabbitMQ"
-            propagate_at_launch = true
-        },
-        {
-            key = "resource_group"
-            value = "${var.environment_name}"
-            propagate_at_launch = true
+  # CloudFormation provides us with AutoScalingRollingUpdate (AWS does not provide this feature to Terraform directly).
+  template_body = <<EOF
+{
+  "Resources": {
+    "RabbitMQAsg": {
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "Properties": {
+        "VPCZoneIdentifier": ["${join("\",\"", var.private_subnet_ids)}"],
+        "LaunchConfigurationName": "${aws_launch_configuration.rabbitmq.name}",
+        "MaxSize": "${var.count + 1}",
+        "DesiredCapacity": "${var.count}",
+        "MinSize": "${var.count}",
+        "MetricsCollection": [{
+            "Granularity": "1Minute",
+            "Metrics": [ "GroupMinSize", "GroupMaxSize", "GroupInServiceInstances", "GroupTotalInstances" ]
+        }],
+        "LoadBalancerNames": ["${aws_elb.elb.name}"],
+        "TerminationPolicies": ["OldestLaunchConfiguration", "OldestInstance"],
+        "HealthCheckType": "ELB",
+        "HealthCheckGracePeriod": 300,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "${var.environment_name} RabbitMQ",
+            "PropagateAtLaunch": "true"
+          },
+          {
+            "Key": "resource_group",
+            "Value": "${var.environment_name}",
+            "PropagateAtLaunch": "true"
+          },
+          {
+            "Key": "server_type",
+            "Value": "rabbitmq",
+            "PropagateAtLaunch": "true"
+          }
+        ]
+      },
+      "UpdatePolicy": {
+        "AutoScalingRollingUpdate": {
+          "MinInstancesInService": "${var.count}",
+          "MaxBatchSize": "1",
+          "PauseTime": "PT10M",
+          "WaitOnResourceSignals": true
         }
-    ]
-
-    lifecycle {
-        create_before_destroy = true
+      }
     }
+  },
+  "Outputs": {
+    "AsgName": {
+      "Description": "The name of the auto scaling group",
+       "Value": {"Ref": "RabbitMQAsg"}
+    }
+  }
 }
+EOF
+}
+

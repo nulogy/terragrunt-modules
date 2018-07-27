@@ -5,8 +5,8 @@ resource "aws_route53_record" "route53_record" {
 
   alias {
     evaluate_target_health = false
-    name = "${lower(aws_elb.elb.dns_name)}"
-    zone_id = "${aws_elb.elb.zone_id}"
+    name = "${lower(module.amqp_load_balancer.aws_elb_dns_name)}"
+    zone_id = "${module.amqp_load_balancer.aws_elb_zone_id}"
   }
 }
 

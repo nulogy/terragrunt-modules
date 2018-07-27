@@ -48,7 +48,7 @@ resource "aws_cloudformation_stack" "rabbitmq" {
             "Granularity": "1Minute",
             "Metrics": [ "GroupMinSize", "GroupMaxSize", "GroupInServiceInstances", "GroupTotalInstances" ]
         }],
-        "LoadBalancerNames": ["${aws_elb.elb.name}"],
+        "LoadBalancerNames": ["${module.amqp_load_balancer.aws_elb_name}"],
         "TerminationPolicies": ["OldestLaunchConfiguration", "OldestInstance"],
         "HealthCheckType": "ELB",
         "HealthCheckGracePeriod": 300,

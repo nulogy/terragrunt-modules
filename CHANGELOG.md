@@ -8,13 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-* Add module for building and deploying a RabbitMQ cluster
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [1.7.0] - 2018-07-30
+
+### Added
+* Add module for building and deploying a RabbitMQ cluster
+* Additional configuration for elastic ci stack builders
 
 ## [1.6.0] - 2018-06-19
 

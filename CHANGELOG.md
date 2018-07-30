@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+* Add module for building and deploying a RabbitMQ cluster
+
 ### Changed
 ### Deprecated
 ### Removed

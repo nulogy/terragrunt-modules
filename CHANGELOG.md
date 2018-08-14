@@ -8,15 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Added builder_min_size, builder_scale_up_adjustment and builder_scale_down_adjustment optional variables to elastic_ci_stack module group
-* Added scaled_down_adjustment and scale_up_adjustment to buildkite_elastic_stack module
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [1.8.0] - 2018-08-14
+
+### Added
+
+* Added builder_min_size, builder_scale_up_adjustment and builder_scale_down_adjustment optional variables to elastic_ci_stack module group
+* Added scaled_down_adjustment and scale_up_adjustment to buildkite_elastic_stack module
 
 ## [1.7.0] - 2018-07-30
 

@@ -1,5 +1,7 @@
 locals {
   office_ip = "${length(var.office_ip) > 0 ? var.office_ip : "64.215.160.242"}"
+  scale_up_adjustment = "${var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_up_adjustment}"
+  scale_down_adjustment = "${var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_down_adjustment}"
 }
 
 data "aws_ami" "buildkite_ami" {
@@ -78,9 +80,9 @@ resource "aws_cloudformation_stack" "stack" {
     MinSize = "${var.min_size}"
     SecretsBucket = "${var.secrets_bucket}"
     SecurityGroupId = "${aws_security_group.stack_security_group.id}"
-    ScaleDownAdjustment = "-${var.scale_adjustment}"
+    ScaleDownAdjustment = "-${local.scale_down_adjustment}"
     ScaleDownPeriod = "3600"
-    ScaleUpAdjustment = "${var.scale_adjustment}"
+    ScaleUpAdjustment = "${local.scale_up_adjustment}"
     SpotPrice = "${var.spot_price}"
     Subnets = "${join(",", module.public_subnets.public_subnet_ids)}"
     VpcId = "${module.vpc.vpc_id}"

@@ -2,6 +2,9 @@ variable "builder_bootstrap_script_url" { default = "" }
 variable "builder_agents_per_instance" { default = "1" }
 variable "builder_instance_type" { default = "c5.large" }
 variable "builder_max_size" { default = "1" }
+variable "builder_min_size" { default = "1" }
+variable "builder_scale_up_adjustment" { default = "0" }
+variable "builder_scale_down_adjustment" { default = "0" }
 variable "buildkite_agent_token" { }
 variable "buildkite_env_name" { description = "Use to prefix resource names and buildkite queue names" }
 variable "buildkite_queue_prefix" { description = "Use to prefix buildkite queue names" }

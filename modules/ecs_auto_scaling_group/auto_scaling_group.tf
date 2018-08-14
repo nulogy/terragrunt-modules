@@ -35,6 +35,8 @@ data "template_cloudinit_config" "user_data" {
 
       echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
       echo ECS_RESERVED_MEMORY=256 >> /etc/ecs/ecs.config
+      echo ECS_ENABLE_CONTAINER_METADATA=true >> /etc/ecs/ecs.config
+      echo ECS_HOST_DATA_DIR=/var/lib/ecs >> /etc/ecs/ecs.config
     EOF
   }
 }

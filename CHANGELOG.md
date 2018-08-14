@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [1.9.0] - 2018-08-14
+
+### Added
+
+* Added ECS environment variables to support ECS metadata access from within the container
+
 ## [1.8.0] - 2018-08-14
 
 ### Added

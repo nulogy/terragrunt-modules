@@ -28,14 +28,7 @@ module "ecs_subnets" {
 }
 
 module "ecs_cluster" {
-  source = "/deployer/modules/ecs_cluster"
-  skip = "${var.skip}"
-
-  name = "${var.environment_name}-cluster"
-}
-
-module "ecs_auto_scaling_group" {
-  source = "/deployer/modules/ecs_auto_scaling_group"
+  source = "/deployer/module_groups/ecs_cluster"
   skip = "${var.skip}"
 
   desired_capacity = "${local.desired_capacity}"
@@ -43,12 +36,12 @@ module "ecs_auto_scaling_group" {
   min_size = "${local.min_size}"
   health_check_type = "${var.health_check_type}"
 
-  ec2_subnet_ids = "${module.ecs_subnets.private_subnet_ids}"
+  cluster_name = "${var.environment_name}-cluster"
   ecs_ami_version = "${local.ecs_ami_version}"
-  ecs_cluster_name = "${module.ecs_cluster.ecs_cluster_name}"
+  ec2_public_key = "${var.ec2_public_key}"
   environment_name = "${var.environment_name}"
   lc_instance_type = "${var.lc_instance_type}"
-  public_key = "${var.ec2_public_key}"
+  private_subnet_ids = "${module.ecs_subnets.private_subnet_ids}"
   vpc_cidr = "${var.vpc_cidr}"
   vpc_id = "${module.vpc.vpc_id}"
 }

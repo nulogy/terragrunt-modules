@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.0.0] - 2018-08-21
+
+### Changed
+
+* Changed how ecs_auto_scaling_group works, to handle AMI / Launch Configuration changes gracefully without container downtime.
+
 ## [1.9.0] - 2018-08-14
 
 ### Added

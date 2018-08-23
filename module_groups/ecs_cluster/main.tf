@@ -36,4 +36,6 @@ module "ecs_cluster" {
 module "ecs_update_lambdas" {
   source = "git::https://github.com/xero-oss/ecs-cluster-update-lambda.git//src?ref=9bb8ca972378c5194d8252dd895b6ccc9baedf4f"
   region = "${data.aws_region.current.name}"
+  drain_lambda_name = "${var.cluster_name}-drain"
+  tag_lambda_name = "${var.cluster_name}-tag"
 }

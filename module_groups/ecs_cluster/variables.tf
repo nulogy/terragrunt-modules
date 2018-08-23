@@ -44,11 +44,6 @@ variable "private_subnet_ids" {
   type = "list"
 }
 
-variable "skip" {
-  description = "Skip everything inside this module."
-  default = ""
-}
-
 variable "vpc_cidr" {
   description = "CIDR block for the VPC. This is used for security group access to the EC2 instances. Eg. '172.17.0.0/16'."
 }

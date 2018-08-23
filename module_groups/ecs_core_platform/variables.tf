@@ -12,5 +12,4 @@ variable "peer_vpc_cidr" { default = "" }
 variable "peer_auto_accept" { default = "" }
 variable "private_ecs_subnets" { type = "list" }
 variable "public_subnets" { type = "list" }
-variable "skip" { default = "" }
 variable "vpc_cidr" {}

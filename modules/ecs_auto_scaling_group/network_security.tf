@@ -1,6 +1,4 @@
 resource "aws_security_group" "ecs_ec2_security_group" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
-
   name_prefix = "${var.environment_name}-ecs-ec2-security-group-"
 
   vpc_id = "${var.vpc_id}"

@@ -1,6 +1,5 @@
 module "ecs_core_platform" {
   source = "../ecs_core_platform"
-  skip = "${var.skip}"
 
   desired_capacity = "${var.desired_capacity}"
   ec2_public_key = "${var.ec2_public_key}"
@@ -20,7 +19,6 @@ module "ecs_core_platform" {
 
 module "public_load_balancer" {
   source = "/deployer/modules/public_load_balancer"
-  skip = "${var.skip}"
 
   alb_subnets = "${module.ecs_core_platform.public_subnet_ids}"
   cert_domain = "${var.cert_domain}"
@@ -31,7 +29,6 @@ module "public_load_balancer" {
 
 module "route53_for_load_balancer" {
   source = "/deployer/modules/route53_alias_record"
-  skip = "${var.skip}"
 
   domain = "${var.route53_domain}"
   subdomain = "${var.route53_subdomain}"

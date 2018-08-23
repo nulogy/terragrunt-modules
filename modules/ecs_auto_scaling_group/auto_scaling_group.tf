@@ -1,6 +1,4 @@
 data "aws_ami" "ecs_ami" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
-
   filter {
     name = "name"
     values = ["amzn-ami-${var.ecs_ami_version}-amazon-ecs-optimized"]
@@ -58,8 +56,6 @@ data "template_cloudinit_config" "user_data" {
 }
 
 resource "aws_launch_configuration" "launch_conf" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
-
   name_prefix = "${var.environment_name}-ecs"
   image_id = "${data.aws_ami.ecs_ami.id}"
   instance_type = "${var.lc_instance_type}"
@@ -78,8 +74,6 @@ resource "aws_launch_configuration" "launch_conf" {
 }
 
 resource "aws_cloudformation_stack" "asg" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
-
   name = "${var.ecs_cluster_name}-Autoscaling-Group"
 
   lifecycle {

@@ -15,5 +15,4 @@ variable "private_ecs_subnets" { type = "list" }
 variable "public_subnets" { type = "list" }
 variable "route53_domain" { default = "" }
 variable "route53_subdomain" { default = "" }
-variable "skip" { default = "" }
 variable "vpc_cidr" {}

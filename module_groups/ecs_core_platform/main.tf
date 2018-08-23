@@ -7,7 +7,6 @@ locals {
 
 module "vpc" {
   source = "/deployer/modules/vpc"
-  skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
   vpc_cidr = "${var.vpc_cidr}"
@@ -15,7 +14,6 @@ module "vpc" {
 
 module "ecs_subnets" {
   source = "/deployer/modules/public_private_subnets"
-  skip = "${var.skip}"
 
   environment_name = "${var.environment_name}"
   internet_gw_id = "${module.vpc.internet_gw_id}"
@@ -29,7 +27,6 @@ module "ecs_subnets" {
 
 module "ecs_cluster" {
   source = "/deployer/module_groups/ecs_cluster"
-  skip = "${var.skip}"
 
   desired_capacity = "${local.desired_capacity}"
   max_size = "${local.max_size}"
@@ -48,7 +45,6 @@ module "ecs_cluster" {
 
 module "log_group" {
   source = "/deployer/modules/log_group"
-  skip = "${var.skip}"
 
   name = "${var.environment_name}-log"
 }

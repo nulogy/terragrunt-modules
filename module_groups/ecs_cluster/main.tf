@@ -9,7 +9,6 @@ data "aws_region" "current" {}
 
 module "ecs_auto_scaling_group" {
   source = "/deployer/modules/ecs_auto_scaling_group"
-  skip = "${var.skip}"
 
   desired_capacity = "${local.desired_capacity}"
   health_check_type = "${var.health_check_type}"
@@ -30,7 +29,6 @@ module "ecs_auto_scaling_group" {
 
 module "ecs_cluster" {
   source = "/deployer/modules/ecs_cluster"
-  skip = "${var.skip}"
 
   name = "${var.cluster_name}"
 }

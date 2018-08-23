@@ -14,6 +14,5 @@ variable "max_size" {}
 variable "min_size" {}
 variable "health_check_type" {}
 variable "public_key" {}
-variable "skip" { default = "" }
 variable "vpc_cidr" {}
 variable "vpc_id" {}

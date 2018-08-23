@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.1.0] - 2018-08-23
+
+### Added
+
+* Added the event_shovel module group
+
+### Changed
+
+* ECS modules & module groups no longer support the `skip` variable. It was causing issues with terraform interpolation and wasn't actually used anywhere.
+
 ## [2.0.0] - 2018-08-21
 
 ### Changed

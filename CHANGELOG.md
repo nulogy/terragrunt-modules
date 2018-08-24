@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.1.1] - 2018-08-23
+
+### Fixed
+
+* Fixed an issue where lambdas and iam roles for ECS clusters were colliding since they weren't namespaced
+
 ## [2.1.0] - 2018-08-23
 
 ### Added

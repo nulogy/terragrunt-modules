@@ -78,6 +78,7 @@ resource "aws_cloudformation_stack" "stack" {
     ManagedPolicyARN = "${var.managed_policy_arn}"
     MaxSize = "${var.max_size}"
     MinSize = "${var.min_size}"
+    RootVolumeSize = "${var.root_volume_size}"
     SecretsBucket = "${var.secrets_bucket}"
     SecurityGroupId = "${aws_security_group.stack_security_group.id}"
     ScaleDownAdjustment = "-${local.scale_down_adjustment}"

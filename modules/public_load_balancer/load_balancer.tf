@@ -25,6 +25,12 @@ resource "aws_alb_target_group" "target_group" {
     path = "${var.health_check_path}"
   }
 
+  stickiness {
+    enabled = "${var.stickiness_enabled}"
+    type = "lb_cookie"
+    cookie_duration = "${var.stickiness_duration}"
+  }
+
   tags {
     Name = "${var.environment_name} public load balancer target group"
     resource_group = "${var.environment_name}"

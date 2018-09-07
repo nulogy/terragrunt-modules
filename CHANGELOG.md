@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.1.2] - 2018-09-07
+
+### Added
+
+* Add optional stickiness header for CSS/JS.
+
 ## [2.2.0] - 2018-09-07
 
 ### Changed

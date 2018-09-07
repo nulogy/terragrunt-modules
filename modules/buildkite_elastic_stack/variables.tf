@@ -10,7 +10,7 @@ variable "min_size" { default = 0 }
 variable "office_ip" { default = "" }
 variable "root_volume_size" {
   description = "Size of each instance's root EBS volume (in GB)"
-  default = 10
+  default = 250
 }
 variable "scale_adjustment" { default = 0 }
 variable "scale_down_adjustment" { default = 0 }

@@ -14,17 +14,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.1.3] - 2018-09-07
+
+### Added
+
+* Add optional Buildkite server size parameter to allow cutting the size for cost savings.
+
 ## [2.1.2] - 2018-09-07
 
 ### Added
 
 * Add optional stickiness header for CSS/JS.
-
-## [2.2.0] - 2018-09-07
-
-### Changed
-
-* Cut Buildkite server size from 250G -> 10G for cost savings.
 
 ## [2.1.1] - 2018-08-23
 

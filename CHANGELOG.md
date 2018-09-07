@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.2.0] - 2018-09-07
+
+### Changed
+
+* Cut Buildkite server size from 250G -> 10G for cost savings.
+
 ## [2.1.1] - 2018-08-23
 
 ### Fixed

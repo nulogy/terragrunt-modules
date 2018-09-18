@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+* Change event_shovel module group and event_shovel_ecs_service module to allow evaluation_periods to be variable
+
 ### Deprecated
 ### Removed
 ### Fixed

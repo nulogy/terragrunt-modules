@@ -12,6 +12,11 @@ variable "alert_endpoint" {
   default = ""
 }
 
+variable "alert_evaluation_periods" {
+  description = "Number of evaluation periods to check before alarming the queue size"
+  default = "1"
+}
+
 variable "amqp_host" {
   description = "The RabbitMQ host. Cluster lives in the CPI Project."
 }

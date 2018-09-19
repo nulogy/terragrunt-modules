@@ -19,6 +19,7 @@ module "event_shovel" {
   source = "/deployer/modules/event_shovel_ecs_service"
 
   alert_topic_arn = "${var.notification_topic_arn}"
+  alert_evaluation_periods = "${var.alert_evaluation_periods}"
   aws_account = "${data.aws_caller_identity.current.account_id}"
   aws_region = "${var.aws_region}"
   kms_key_id = "${var.kms_key_id}"

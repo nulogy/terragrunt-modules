@@ -13,7 +13,7 @@ resource "aws_cloudwatch_log_metric_filter" "queue_size" {
 resource "aws_cloudwatch_metric_alarm" "queue_size" {
   alarm_name                = "${var.environment_name}-events-queue-size"
   comparison_operator       = "GreaterThanThreshold"
-  evaluation_periods        = "1"
+  evaluation_periods        = "${var.alert_evaluation_periods}"
   metric_name               = "${aws_cloudwatch_log_metric_filter.queue_size.name}"
   namespace                 = "${var.environment_name}"
   period                    = "60"

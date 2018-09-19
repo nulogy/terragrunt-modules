@@ -14,6 +14,7 @@ variable "alert_endpoint" {
 
 variable "alert_evaluation_periods" {
   description = "Number of evaluation periods to check before alarming the queue size"
+  default = "1"
 }
 
 variable "amqp_host" {

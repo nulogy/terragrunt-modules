@@ -1,5 +1,5 @@
 variable "alert_topic_arn" {}
-variable "alert_evaluation_periods" {}
+variable "alert_evaluation_periods" { default = "1" }
 variable "aws_account" {}
 variable "aws_region" {}
 variable "desired_count" {}

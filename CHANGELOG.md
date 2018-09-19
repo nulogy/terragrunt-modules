@@ -8,14 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Moved hardcoded evaluation_periods to be a variable on event_shovel module group and event_shovel_ecs_service module
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [2.1.4] - 2018-09-19
+
+### Added
+
+* Moved hardcoded evaluation_periods to be a variable on event_shovel module group and event_shovel_ecs_service module
 
 ## [2.1.3] - 2018-09-07
 

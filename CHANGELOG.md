@@ -8,14 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Added a variable to customize root volume size of buildkite builders
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [2.1.5] - 2018-09-20
+
+### Added
+
+* Added a variable to customize root volume size of buildkite builders
 
 ## [2.1.4] - 2018-09-19
 

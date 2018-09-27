@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [2.2.0] - 2018-09-27
+
+### Fixed
+
+* Fix conflict between autoscaling cluster and rollingupdate cluster.
+
 ## [2.1.5] - 2018-09-20
 
 ### Added

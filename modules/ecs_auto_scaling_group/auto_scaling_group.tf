@@ -124,8 +124,9 @@ resource "aws_cloudformation_stack" "asg" {
         "AutoScalingRollingUpdate": {
           "MinInstancesInService": "${var.min_size}",
           "MaxBatchSize": "2",
-          "PauseTime": "PT10M",
-          "WaitOnResourceSignals": "true"
+          "PauseTime": "PT15M",
+          "WaitOnResourceSignals": "true",
+          "SuspendProcesses": [ "HealthCheck", "ReplaceUnhealthy", "AZRebalance", "AlarmNotification", "ScheduledActions" ]
         }
       }
     },

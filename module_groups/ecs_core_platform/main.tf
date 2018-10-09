@@ -1,6 +1,5 @@
 locals {
   desired_capacity = "${length(var.desired_capacity) > 0 ? var.desired_capacity : "2"}"
-  ecs_ami_version = "${length(var.ecs_ami_version) > 0 ? var.ecs_ami_version : "2017.09.g"}"
   max_size = "${length(var.max_size) > 0 ? var.max_size : "4"}"
   min_size = "${length(var.min_size) > 0 ? var.min_size : "2"}"
 }
@@ -34,7 +33,8 @@ module "ecs_cluster" {
   health_check_type = "${var.health_check_type}"
 
   cluster_name = "${var.environment_name}-cluster"
-  ecs_ami_version = "${local.ecs_ami_version}"
+  ecs_ami = "${var.ecs_ami}"
+  ecs_ami_owner = "${var.ecs_ami_owner}"
   ec2_public_key = "${var.ec2_public_key}"
   environment_name = "${var.environment_name}"
   lc_instance_type = "${var.lc_instance_type}"
@@ -64,7 +64,8 @@ module "bastion_auto_scaling_group" {
   source = "/deployer/modules/bastion_auto_scaling_group"
 
   ec2_subnet_ids = "${module.ecs_subnets.public_subnet_ids}"
-  ecs_ami_version = "${local.ecs_ami_version}"
+  ecs_ami = "${var.ecs_ami}"
+  ecs_ami_owner = "${var.ecs_ami_owner}"
   environment_name = "${var.environment_name}"
   public_key = "${var.ec2_public_key}"
   vpc_cidr = "${var.vpc_cidr}"

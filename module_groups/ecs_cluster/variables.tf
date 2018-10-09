@@ -21,9 +21,16 @@ variable "ec2_public_key" {
   description = "Public key for this instance. The corresponding private key is usually shared with 1Pass."
 }
 
-variable "ecs_ami_version" {
-  description = "AMI version to launch as an EC2 Instance and register with ECS."
-  default = "2017.09.g"
+variable "ecs_ami" {
+  type = "string"
+  description = "The AMI to use. Defaults to Amazon Linux AMI designed for ECS. Override me to use a newer AMI."
+  default = "amzn-ami-2018.03.g-amazon-ecs-optimized"
+}
+
+variable "ecs_ami_owner" {
+  type = "string"
+  description = "The AWS account ID which provides the AMI we intend to use. Defaults to Amazon."
+  default = "591542846629"
 }
 
 variable "environment_name" {

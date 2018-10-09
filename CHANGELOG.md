@@ -14,6 +14,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.0.0] - 2018-10-09
+
+### Changed
+
+* Must pass in full string for AMI lookup now.
+* For example, "2018.03.g" -> "amzn-ami-2018.03.g-amazon-ecs-optimized"
+
+### Added
+
+* Allow different owner for AMI lookup. Defaults to Amazon.
+
 ## [2.2.0] - 2018-09-27
 
 ### Fixed

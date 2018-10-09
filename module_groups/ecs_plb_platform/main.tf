@@ -3,7 +3,8 @@ module "ecs_core_platform" {
 
   desired_capacity = "${var.desired_capacity}"
   ec2_public_key = "${var.ec2_public_key}"
-  ecs_ami_version = "${var.ecs_ami_version}"
+  ecs_ami = "${var.ecs_ami}"
+  ecs_ami_owner = "${var.ecs_ami_owner}"
   environment_name = "${var.environment_name}"
   lc_instance_type = "${var.lc_instance_type}"
   max_size = "${var.max_size}"

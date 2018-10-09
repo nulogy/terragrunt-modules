@@ -1,6 +1,5 @@
 locals {
   desired_capacity = "${length(var.desired_capacity) > 0 ? var.desired_capacity : "2"}"
-  ecs_ami_version = "${length(var.ecs_ami_version) > 0 ? var.ecs_ami_version : "2017.09.g"}"
   max_size = "${length(var.max_size) > 0 ? var.max_size : "4"}"
   min_size = "${length(var.min_size) > 0 ? var.min_size : "2"}"
 }
@@ -18,7 +17,8 @@ module "ecs_auto_scaling_group" {
   drain_lambda_sns_arn = "${module.ecs_update_lambdas.sns_arn}"
 
   ec2_subnet_ids = "${var.private_subnet_ids}"
-  ecs_ami_version = "${local.ecs_ami_version}"
+  ecs_ami = "${var.ecs_ami}"
+  ecs_ami_owner = "${var.ecs_ami_owner}"
   ecs_cluster_name = "${module.ecs_cluster.ecs_cluster_name}"
   environment_name = "${var.environment_name}"
   lc_instance_type = "${var.lc_instance_type}"

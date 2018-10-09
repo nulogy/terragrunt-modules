@@ -1,10 +1,10 @@
 data "aws_ami" "ecs_ami" {
   filter {
     name = "name"
-    values = ["amzn-ami-${var.ecs_ami_version}-amazon-ecs-optimized"]
+    values = ["${var.ecs_ami}"]
   }
 
-  owners = ["591542846629"]
+  owners = ["${var.ecs_ami_owner}"]
 }
 
 data "aws_region" "current" {}

@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.0.1] - 2018-10-11
+
+### Added
+
+* ECR module outputs name now.
+
 ## [3.0.0] - 2018-10-09
 
 ### Changed

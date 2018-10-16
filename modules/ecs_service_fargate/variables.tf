@@ -1,5 +1,3 @@
-variable "container_port" {}
-
 variable "cpu" {
   description = "CPU per Fargate container. Units are 1024 = 1 vCPU."
 }

@@ -16,11 +16,6 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "memoryReservation": ${var.memory},
     "memory": ${var.memory},
     "name": "${var.environment_name}",
-    "portMappings": [{
-      "hostPort": ${var.container_port},
-      "containerPort": ${var.container_port},
-      "protocol": "tcp"
-    }],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

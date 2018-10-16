@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.1.0] - 2018-10-15
+
+* Fargate support.
+* Support for Fargate ECS Service with no load balancer (e.g. Background workers).
+
 ## [3.0.1] - 2018-10-11
 
 ### Added

@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.1.2] - 2018-10-16
+
+* Uses cluster name instead of environment name to avoid name collision between ECS clusters on the same environment
+
 ## [3.1.1] - 2018-10-16
 
 * Fix bug with passing in Security Groups to Fargate module.

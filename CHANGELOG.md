@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.1.1] - 2018-10-16
+
+* Fix bug with passing in Security Groups to Fargate module.
+
 ## [3.1.0] - 2018-10-15
 
 * Fargate support.

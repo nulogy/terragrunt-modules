@@ -43,6 +43,6 @@ resource "aws_ecs_service" "ecs_service" {
 
   network_configuration {
     subnets = ["${var.subnets}"]
-    security_groups = "${var.security_groups}"
+    security_groups = ["${var.security_groups}"]
   }
 }

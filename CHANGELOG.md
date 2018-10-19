@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-* Added command variable to Fargate ECS module
+* Added command variable to Fargate ECS module in order to allow the same container to be used for multiple purposes
 
 ### Changed
 ### Deprecated

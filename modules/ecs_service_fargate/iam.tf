@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 resource "aws_iam_role" "ecs_taskrole" {
-  name = "${var.environment_name}-ecs-task${var.service_name}"
+  name = "${var.environment_name}-ecs-${var.service_name}-task"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -21,7 +21,7 @@ EOF
 }
 
 resource "aws_iam_role" "ecs_executionrole" {
-  name = "${var.environment_name}-ecs-execution-role${var.service_name}"
+  name = "${var.environment_name}-ecs-${var.service_name}-execution-role"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -40,7 +40,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
-  name = "${var.environment_name}-fargate-ecs-task-execution${var.service_name}"
+  name = "${var.environment_name}-fargate-ecs-${var.service_name}-task-execution"
   role = "${aws_iam_role.ecs_executionrole.id}"
   policy = <<EOF
 {
@@ -66,7 +66,7 @@ EOF
 resource "aws_iam_role_policy" "parameter_store_policy" {
   count = "${length(var.kms_key_id) > 0 ? 1 : 0}"
 
-  name = "${var.environment_name}-parameter-store${var.service_name}"
+  name = "${var.environment_name}-${var.service_name}-parameter-store"
   role = "${aws_iam_role.ecs_taskrole.id}"
   policy = <<EOF
 {

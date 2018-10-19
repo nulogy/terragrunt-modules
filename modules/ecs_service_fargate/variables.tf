@@ -21,6 +21,11 @@ variable "envars" {
 variable "environment_name" {
   description = "Environment name. Used for tagging."
 }
+
+variable "service_name" {
+  description = "Service name. Used for tagging."
+}
+
 variable "kms_key_id" {
   description = "KMS Key to retrieve secrets with. Goes with param store namespace."
   default = ""

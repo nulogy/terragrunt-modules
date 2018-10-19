@@ -21,6 +21,11 @@ variable "envars" {
 variable "environment_name" {
   description = "Environment name. Used for tagging."
 }
+
+variable "service_name" {
+  description = "Service name. Used for tagging."
+}
+
 variable "kms_key_id" {
   description = "KMS Key to retrieve secrets with. Goes with param store namespace."
   default = ""
@@ -44,5 +49,17 @@ variable "security_groups" {
 
 variable "subnets" {
   description = "Determines the AZ for the containers. Usually put all subnets from the VPC."
+  type = "list"
+}
+
+variable "command" {
+  description = "Commands to execute after entrypoint"
+  default = ["/bin/echo", "Start command not supplied, just exiting"]
+  type = "list"
+}
+
+variable "health_check" {
+  description = "Commands to execute a container health check"
+  default = ["CMD-SHELL", "echo OK || exit 1"]
   type = "list"
 }

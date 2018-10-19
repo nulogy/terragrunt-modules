@@ -1,7 +1,7 @@
 resource "aws_ecs_task_definition" "ecs_task" {
   cpu = "${var.cpu}"
   memory = "${var.memory}"
-  family = "${var.environment_name}_td"
+  family = "${var.environment_name}_${var.service_name}_td"
   task_role_arn = "${aws_iam_role.ecs_taskrole.arn}"
   execution_role_arn = "${aws_iam_role.ecs_executionrole.arn}"
   requires_compatibilities = ["FARGATE"]
@@ -9,13 +9,21 @@ resource "aws_ecs_task_definition" "ecs_task" {
   container_definitions = <<DEFINITION
 [
   {
+    "command": ["${join("\",\"", var.command)}"],
     "cpu": ${var.cpu},
     "environment": ${var.envars},
     "essential": true,
     "image": "${var.docker_image_name}",
     "memoryReservation": ${var.memory},
     "memory": ${var.memory},
-    "name": "${var.environment_name}",
+    "name": "${var.environment_name}_${var.service_name}",
+    "healthCheck": {
+      "command": ["${join("\",\"", var.health_check)}"],
+      "interval": 30,
+      "timeout": 5,
+      "retries": 3,
+      "startPeriod": null
+    },
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -31,7 +39,7 @@ DEFINITION
 }
 
 resource "aws_ecs_service" "ecs_service" {
-  name = "${var.environment_name}_service"
+  name = "${var.environment_name}_${var.service_name}_service"
   cluster = "${var.ecs_cluster_name}"
   task_definition = "${aws_ecs_task_definition.ecs_task.arn}"
   launch_type = "FARGATE"

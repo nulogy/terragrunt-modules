@@ -49,5 +49,6 @@ variable "subnets" {
 
 variable "command" {
   description = "Command to execute after entrypoint"
-  default = "/bin/echo Start command not supplied, just exiting"
+  default = ["/bin/echo", "Start command not supplied, just exiting"]
+  type = "list"
 }

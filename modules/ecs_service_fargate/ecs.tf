@@ -9,6 +9,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
   container_definitions = <<DEFINITION
 [
   {
+    "command": ["/bin/bash", "-c", "${var.command}"],
     "cpu": ${var.cpu},
     "environment": ${var.envars},
     "essential": true,

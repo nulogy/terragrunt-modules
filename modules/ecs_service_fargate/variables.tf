@@ -46,3 +46,8 @@ variable "subnets" {
   description = "Determines the AZ for the containers. Usually put all subnets from the VPC."
   type = "list"
 }
+
+variable "command" {
+  description = "Command to execute after entrypoint"
+  default = "/bin/echo Start command not supplied, just exitting"
+}

@@ -53,7 +53,13 @@ variable "subnets" {
 }
 
 variable "command" {
-  description = "Command to execute after entrypoint"
+  description = "Commands to execute after entrypoint"
   default = ["/bin/echo", "Start command not supplied, just exiting"]
+  type = "list"
+}
+
+variable "health_check" {
+  description = "Commands to execute a container health check"
+  default = ["CMD-SHELL", "echo OK || exit 1"]
   type = "list"
 }

@@ -17,6 +17,13 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "memoryReservation": ${var.memory},
     "memory": ${var.memory},
     "name": "${var.environment_name}_${var.service_name}",
+    "healthCheck": {
+      "command": ["${join("\",\"", var.health_check)}"],
+      "interval": 30,
+      "timeout": 5,
+      "retries": 3,
+      "startPeriod": null
+    },
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

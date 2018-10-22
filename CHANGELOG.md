@@ -8,14 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-* Added command variable to Fargate ECS module in order to allow the same container to be used for multiple purposes
-* Added health_check variable to Fargate ECS module
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [3.2.0] - 2018-10-22
+
+### Added
+
+* Added command variable to Fargate ECS module in order to allow the same container to be used for multiple purposes
+* Added health_check variable to Fargate ECS module
 
 ## [3.1.2] - 2018-10-16
 

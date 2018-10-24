@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.3.0] - 2018-10-24
+
+### Added
+
+* Elastic_ci_stack builders can now specify a spot price.
+
 ## [3.2.0] - 2018-10-22
 
 ### Added

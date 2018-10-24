@@ -6,6 +6,7 @@ variable "builder_min_size" { default = "1" }
 variable "builder_root_volume_size" { default = 250 }
 variable "builder_scale_down_adjustment" { default = "0" }
 variable "builder_scale_up_adjustment" { default = "0" }
+variable "builder_spot_price" { default = 0 }
 variable "buildkite_agent_token" { }
 variable "buildkite_env_name" { description = "Use to prefix resource names and buildkite queue names" }
 variable "buildkite_queue_prefix" { description = "Use to prefix buildkite queue names" }

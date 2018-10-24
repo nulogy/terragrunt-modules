@@ -13,6 +13,7 @@ module "builders_stack" {
   scale_down_adjustment = "${var.builder_scale_down_adjustment}"
   scale_up_adjustment = "${var.builder_scale_up_adjustment}"
   secrets_bucket = "${var.secrets_bucket}"
+  spot_price = "${var.builder_spot_price}"
   stack_ami_version = "${var.stack_ami_version}"
   stack_name = "${var.buildkite_env_name}-builders"
   stack_template_url = "${var.stack_template_url}"

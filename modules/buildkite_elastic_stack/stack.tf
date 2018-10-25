@@ -16,26 +16,10 @@ data "aws_ami" "buildkite_ami" {
   most_recent = true
 }
 
-module "vpc" {
-  source = "../vpc"
-  environment_name = "${var.stack_name}"
-  vpc_cidr = "10.0.0.0/16"
-}
-
-module "public_subnets" {
-  source = "/deployer/modules/public_private_subnets"
-  environment_name = "buildkite-runner-spotfleet"
-  internet_gw_id = "${module.vpc.internet_gw_id}"
-  public_subnets = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
-  private_subnets = []
-  subnet_adjective = "spotfleet"
-  vpc_id = "${module.vpc.vpc_id}"
-}
-
 resource "aws_security_group" "stack_security_group" {
   name_prefix = "${var.stack_name}-SecurityGroup-"
 
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = "${var.vpc_id}"
 
   # Allow SSH connections from the office
   ingress {
@@ -85,8 +69,8 @@ resource "aws_cloudformation_stack" "stack" {
     ScaleDownPeriod = "3600"
     ScaleUpAdjustment = "${local.scale_up_adjustment}"
     SpotPrice = "${var.spot_price}"
-    Subnets = "${join(",", module.public_subnets.public_subnet_ids)}"
-    VpcId = "${module.vpc.vpc_id}"
+    Subnets = "${join(",", var.subnet_ids)}"
+    VpcId = "${var.vpc_id}"
   }
 
   lifecycle {

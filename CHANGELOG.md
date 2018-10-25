@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [4.0.0] - 2018-10-25
+
+### Removed
+
+* Module group "elastic_ci_stack" has been deleted as it made too many assumptions and is no longer used
+
+### Changed
+
+* Module "buildkite_elastic_stack" has been modified to take a vpc and subnet to allow more flexibility
+
 ## [3.4.0] - 2018-10-25
 
 ### Added

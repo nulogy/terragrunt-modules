@@ -20,3 +20,5 @@ variable "spot_price" { default = 0 }
 variable "stack_ami_version" { default = "" }
 variable "stack_name" { }
 variable "stack_template_url" { }
+variable "subnet_ids" { type = "list" }
+variable "vpc_id" {}

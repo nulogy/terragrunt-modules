@@ -5,3 +5,7 @@ output "ecs_service_name" {
 output "task_arn" {
   value = "${aws_ecs_task_definition.ecs_task.arn}"
 }
+
+output "iam_id" {
+  value = "${aws_iam_role.ecs_taskrole.id}"
+}

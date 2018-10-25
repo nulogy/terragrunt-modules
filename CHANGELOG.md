@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [3.4.0] - 2018-10-25
+
+### Added
+
+* Allow adding more to ECS service IAM role via output.
+
 ## [3.3.0] - 2018-10-24
 
 ### Added

@@ -9,13 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
-
-* Upgrade terragrunt from 0.14.7 to 0.17.1
-
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [4.1.0] - 2018-11-06
+
+### Changed
+
+* Upgrade terragrunt from 0.14.7 to 0.17.1
 
 ## [4.0.0] - 2018-10-25
 

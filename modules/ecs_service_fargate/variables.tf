@@ -69,3 +69,8 @@ variable "task_definition_json" {
   default = "/deployer/modules/ecs_service_fargate/task_definition/default.json"
   type = "string"
 }
+
+variable "containers_per_task" {
+  description = "Number of container to run per task. Used to specify the amount of memory for each container if running multiple per task."
+  default = 1
+}

@@ -9,8 +9,8 @@ data "template_file" "template" {
     TPL_LOG_GROUP_NAME = "${var.log_group_name}"
     TPL_REGION = "${data.aws_region.current.name}"
     TPL_ENVVARS = "${var.envars}"
-    TPL_MEM_RESERVATION = "${var.containers_per_task > 1 ? var.memory / var.containers_per_task : var.memory}"
-    TPL_MEM = "${var.containers_per_task > 1 ? var.memory / var.containers_per_task : var.memory}"
+    TPL_MEM_RESERVATION = "${var.memory / var.containers_per_task}"
+    TPL_MEM = "${var.memory / var.containers_per_task}"
     TPL_COMMAND = "${join("\",\"", var.command)}"
     TPL_HEALTH_CHECK = "${join("\",\"", var.health_check)}"
   }

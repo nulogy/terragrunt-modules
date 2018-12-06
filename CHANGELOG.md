@@ -14,9 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [4.1.2] - 2018-12-06
+
+* Bug fix
+
 ## [4.1.1] - 2018-12-06
 
-* PM-3286: changing ecs_service_fargate to use a json file, allowing multiple configurations
+* Changes ecs_service_fargate to use a json file, allowing multiple configurations
 
 ## [4.1.0] - 2018-11-06
 

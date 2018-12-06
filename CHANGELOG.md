@@ -8,14 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* PM-3286: changing ecs_service_fargate to use a json file, allowing multiple configurations
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [4.1.1] - 2018-12-06
+
+* PM-3286: changing ecs_service_fargate to use a json file, allowing multiple configurations
 
 ## [4.1.0] - 2018-11-06
 

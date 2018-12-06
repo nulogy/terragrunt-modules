@@ -1,3 +1,21 @@
+data "template_file" "template" {
+  template = "${file(var.task_definition_json)}"
+
+  vars {
+    TPL_CPU = "${var.cpu}"
+    TPL_DOCKER_IMAGE = "${var.docker_image_name}"
+    TPL_ENV_NAME = "${var.environment_name}"
+    TPL_SERVICE_NAME = "${var.service_name}"
+    TPL_LOG_GROUP_NAME = "${var.log_group_name}"
+    TPL_REGION = "${data.aws_region.current.name}"
+    TPL_ENVVARS = "${var.envars}"
+    TPL_MEM_RESERVATION = "${var.memory}"
+    TPL_MEM = "${var.memory}"
+    TPL_COMMAND = "${join("\",\"", var.command)}"
+    TPL_HEALTH_CHECK = "${join("\",\"", var.health_check)}"
+  }
+}
+
 resource "aws_ecs_task_definition" "ecs_task" {
   cpu = "${var.cpu}"
   memory = "${var.memory}"
@@ -6,36 +24,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
   execution_role_arn = "${aws_iam_role.ecs_executionrole.arn}"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
-  container_definitions = <<DEFINITION
-[
-  {
-    "command": ["${join("\",\"", var.command)}"],
-    "cpu": ${var.cpu},
-    "environment": ${var.envars},
-    "essential": true,
-    "image": "${var.docker_image_name}",
-    "memoryReservation": ${var.memory},
-    "memory": ${var.memory},
-    "name": "${var.environment_name}_${var.service_name}",
-    "healthCheck": {
-      "command": ["${join("\",\"", var.health_check)}"],
-      "interval": 30,
-      "timeout": 5,
-      "retries": 3,
-      "startPeriod": null
-    },
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-          "awslogs-group": "${var.log_group_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-stream-prefix": "${var.environment_name}"
-      }
-    }
-  }
-]
-DEFINITION
-
+  container_definitions = "${data.template_file.template.rendered}"
 }
 
 resource "aws_ecs_service" "ecs_service" {

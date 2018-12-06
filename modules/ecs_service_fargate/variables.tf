@@ -63,3 +63,9 @@ variable "health_check" {
   default = ["CMD-SHELL", "echo OK || exit 1"]
   type = "list"
 }
+
+variable "task_definition_json" {
+  description = "allows specifying a different JSON task definition, if none default (1 container per task) will be used"
+  default = "/deployer/modules/ecs_service_fargate/task_definition/default.json"
+  type = "string"
+}

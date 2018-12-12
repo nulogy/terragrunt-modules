@@ -1,4 +1,4 @@
-resource "aws_alb" "public_load_balancer" {
+resource "aws_lb" "public_load_balancer" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
   name = "${var.environment_name}-PLB"
@@ -12,14 +12,15 @@ resource "aws_alb" "public_load_balancer" {
   }
 }
 
-resource "aws_alb_target_group" "target_group" {
+resource "aws_lb_target_group" "target_group" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
   name = "${var.environment_name}-tg"
-  port = 80
+  port = "${var.port}"
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
   deregistration_delay = 120
+  target_type = "${var.target_type}"
 
   health_check {
     path = "${var.health_check_path}"
@@ -37,17 +38,17 @@ resource "aws_alb_target_group" "target_group" {
   }
 }
 
-resource "aws_alb_listener" "public_lb_listener" {
+resource "aws_lb_listener" "public_lb_listener" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
-  load_balancer_arn = "${aws_alb.public_load_balancer.arn}"
+  load_balancer_arn = "${aws_lb.public_load_balancer.arn}"
   port = "443"
   protocol = "HTTPS"
   ssl_policy = "ELBSecurityPolicy-2016-08"
   certificate_arn = "${data.aws_acm_certificate.acm_region_cert.arn}"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.target_group.arn}"
+    target_group_arn = "${aws_lb_target_group.target_group.arn}"
     type = "forward"
   }
 }

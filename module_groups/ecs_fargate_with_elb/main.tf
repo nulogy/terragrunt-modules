@@ -12,6 +12,8 @@ module "public_load_balancer" {
   environment_name = "${var.environment_name}"
   health_check_path = "${var.health_check_path}"
   vpc_id = "${var.vpc_id}"
+  target_type = "ip" # Hardcoded because `ip` is the only mode supported by fargate
+  port = "${var.container_port}"
 }
 
 module "ecs_service_fargate_elb" {

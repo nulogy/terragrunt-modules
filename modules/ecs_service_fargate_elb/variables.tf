@@ -34,10 +34,18 @@ variable "environment_name" {
 
 variable "kms_key_id" {
   description = "KMS Key to retrieve secrets with. Goes with param store namespace."
-  default = ""
 }
+
 variable "log_group_name" {
   description = "The place to send Cloudwatch logs for the container's process. Base this on environment name."
+}
+
+variable "vpc_cidr" {
+  description = "The VPC IP range. Used for ingress rules."
+}
+
+variable "vpc_id" {
+  description = "The VPC that this task should live in."
 }
 
 variable "memory" {
@@ -46,11 +54,6 @@ variable "memory" {
 
 variable "param_store_namespace" {
   default = "Path for SSM secret parameters that the container needs permission to access."
-}
-
-variable "security_groups" {
-  description = "Security groups for the container. Determines inbound and outbound connections / ports."
-  type = "list"
 }
 
 variable "subnets" {
@@ -62,8 +65,6 @@ variable "service_name" {
   description = "Service name. Used for tagging."
 }
 
-variable "health_check" {
-  description = "Commands to execute a container health check"
-  default = ["CMD-SHELL", "echo OK || exit 1"]
-  type = "list"
+variable "target_group_arn" {
+  description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
 }

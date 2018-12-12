@@ -28,8 +28,8 @@ variable "service_name" {
 
 variable "kms_key_id" {
   description = "KMS Key to retrieve secrets with. Goes with param store namespace."
-  default = ""
 }
+
 variable "log_group_name" {
   description = "The place to send Cloudwatch logs for the container's process. Base this on environment name."
 }

@@ -64,8 +64,6 @@ EOF
 }
 
 resource "aws_iam_role_policy" "parameter_store_policy" {
-  count = "${length(var.kms_key_id) > 0 ? 1 : 0}"
-
   name = "${var.environment_name}-${var.service_name}-parameter-store"
   role = "${aws_iam_role.ecs_taskrole.id}"
   policy = <<EOF

@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "essential": true,
     "image": "${var.docker_image_name}",
     "portMappings": [{
-      "hostPort": 0,
+      "hostPort": ${var.container_port},
       "containerPort": ${var.container_port},
       "protocol": "tcp"
     }],
@@ -60,6 +60,6 @@ resource "aws_ecs_service" "ecs_service" {
 
   network_configuration {
     subnets = ["${var.subnets}"]
-    security_groups = ["${var.security_groups}"]
+    security_groups = ["${aws_security_group.app_worker.id}"]
   }
 }

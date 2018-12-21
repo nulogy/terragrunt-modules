@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Removed
 ### Fixed
+
+* Adds missing permissions to the CI Pipeline Policy Document: `ecr:ListTagsForResource`
+
 ### Security
 
 ## [4.1.2] - 2018-12-06

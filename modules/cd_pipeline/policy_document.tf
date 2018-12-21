@@ -15,6 +15,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "ecr:DescribeRepositories",
       "ecr:GetAuthorizationToken",
       "ecr:GetDownloadUrlForLayer",
+      "ecr:ListTagsForResource",
       "ecs:DeregisterTaskDefinition",
       "ecs:DescribeClusters",
       "ecs:DescribeServices",

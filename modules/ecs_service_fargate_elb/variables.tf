@@ -32,6 +32,12 @@ variable "environment_name" {
   description = "Environment name. Used for tagging."
 }
 
+variable "depends_on" {
+  description = "Workaround for terraform modules lacking `depends_on`. Used in a module_group to ensure a load balancer is up before we try to attach containers to it."
+  default = ""
+  type = "string"
+}
+
 variable "kms_key_id" {
   description = "KMS Key to retrieve secrets with. Goes with param store namespace."
 }

@@ -14,3 +14,13 @@ variable "stickiness_duration" {
   description = "The time period, in seconds, to use sticky Cookie. Does nothing unless stickiness_enabled = true."
   default = "600"
 }
+
+variable "target_type" {
+  description = "Set this to `ip` for Fargate or other exceptional cases, otherwise leave it as the default"
+  default = "instance"
+}
+
+variable "port" {
+  description = "The port on which targets receive traffic"
+  default = "80"
+}

@@ -2,6 +2,16 @@ variable "cpu" {
   description = "CPU per Fargate container. Units are 1024 = 1 vCPU."
 }
 
+variable "command" {
+  description = "Commands to execute after entrypoint"
+  default = ["/bin/echo", "Start command not supplied, just exiting"]
+  type = "list"
+}
+
+variable "container_port" {
+  description = "The port that is exposed by the container"
+}
+
 variable "desired_count" {
   description = "How many Fargate containers to run initially."
 }
@@ -22,8 +32,10 @@ variable "environment_name" {
   description = "Environment name. Used for tagging."
 }
 
-variable "service_name" {
-  description = "Service name. Used for tagging."
+variable "depends_on" {
+  description = "Workaround for terraform modules lacking `depends_on`. Used in a module_group to ensure a load balancer is up before we try to attach containers to it."
+  default = ""
+  type = "string"
 }
 
 variable "kms_key_id" {
@@ -34,6 +46,14 @@ variable "log_group_name" {
   description = "The place to send Cloudwatch logs for the container's process. Base this on environment name."
 }
 
+variable "vpc_cidr" {
+  description = "The VPC IP range. Used for ingress rules."
+}
+
+variable "vpc_id" {
+  description = "The VPC that this task should live in."
+}
+
 variable "memory" {
   description = "Memory per Fargate container."
 }
@@ -42,35 +62,15 @@ variable "param_store_namespace" {
   default = "Path for SSM secret parameters that the container needs permission to access."
 }
 
-variable "security_groups" {
-  description = "Security groups for the container. Determines inbound and outbound connections / ports."
-  type = "list"
-}
-
 variable "subnets" {
   description = "Determines the AZ for the containers. Usually put all subnets from the VPC."
   type = "list"
 }
 
-variable "command" {
-  description = "Commands to execute after entrypoint"
-  default = ["/bin/echo", "Start command not supplied, just exiting"]
-  type = "list"
+variable "service_name" {
+  description = "Service name. Used for tagging."
 }
 
-variable "health_check" {
-  description = "Commands to execute a container health check"
-  default = ["CMD-SHELL", "echo OK || exit 1"]
-  type = "list"
-}
-
-variable "task_definition_json" {
-  description = "allows specifying a different JSON task definition, if none default (1 container per task) will be used"
-  default = "/deployer/modules/ecs_service_fargate/task_definition/default.json"
-  type = "string"
-}
-
-variable "containers_per_task" {
-  description = "Number of container to run per task. Used to specify the amount of memory for each container if running multiple per task."
-  default = 1
+variable "target_group_arn" {
+  description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
 }

@@ -6,16 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
-### Added
-
-* Added log_group output to Fargate with ECS and a load balancer Module to allow shipping logs from Cloudwatch.
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [4.2.1] - 2019-01-09
+
+### Added
+
+* Added log_group output to Fargate with ECS and a load balancer Module to allow shipping logs from Cloudwatch.
 
 ## [4.2.0] - 2019-01-02
 

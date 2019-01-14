@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [4.3.0] - 2019-01-14
+
+### Added
+
+* Added log_group_arn output to Fargate.
+
 ## [4.2.1] - 2019-01-09
 
 ### Added

@@ -9,3 +9,7 @@ output "target_group_arn" {
 output "log_group_name" {
   value = "${module.log_group.log_group_name}"
 }
+
+output "log_group_arn" {
+  value = "${module.log_group.log_group_arn}"
+}

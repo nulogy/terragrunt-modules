@@ -6,14 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
-* Added ssm:PutParameter permission to Fargate clusters
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [4.3.1] - 2019-01-15
+
+### Added
+
+* Added ssm:PutParameter permission to Fargate clusters
 
 ## [4.3.0] - 2019-01-14
 

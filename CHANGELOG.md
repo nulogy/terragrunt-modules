@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [4.3.2] - 2019-01-22
+
+### Added
+
+* Added slow_start option.
+
 ## [4.3.1] - 2019-01-15
 
 ### Added

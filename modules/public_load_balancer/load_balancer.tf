@@ -21,6 +21,7 @@ resource "aws_lb_target_group" "target_group" {
   vpc_id = "${var.vpc_id}"
   deregistration_delay = 120
   target_type = "${var.target_type}"
+  slow_start = "${var.slow_start}"
 
   health_check {
     path = "${var.health_check_path}"

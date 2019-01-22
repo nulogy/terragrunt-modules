@@ -57,6 +57,11 @@ variable "private_subnets" {
 
 variable "service_name" {}
 
+variable "slow_start" {
+  description = "Number of seconds to bleed traffic to the app. Useful for slow Rails startup time apps (like Packmanager)."
+  default = 0
+}
+
 variable "vpc_cidr" {}
 
 variable "vpc_id" {}

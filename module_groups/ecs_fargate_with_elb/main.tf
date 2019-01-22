@@ -11,6 +11,7 @@ module "public_load_balancer" {
   cert_domain = "${var.cert_domain}"
   environment_name = "${var.environment_name}"
   health_check_path = "${var.health_check_path}"
+  slow_start = "${var.slow_start}"
   vpc_id = "${var.vpc_id}"
   target_type = "ip" # Hardcoded because `ip` is the only mode supported by fargate
   port = "${var.container_port}"

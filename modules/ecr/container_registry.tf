@@ -6,21 +6,17 @@ resource "aws_ecr_repository" "ecr_repo" {
 
 resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
   repository = "${aws_ecr_repository.ecr_repo.name}"
-  count = "${length(var.count_cap_tag_prefix) > 0 ? 1 : 0}"
 
   policy = <<EOF
 {
   "rules": [
     {
       "rulePriority": 1,
-      "description": "Only maintain the newest 100 images",
+      "description": "Only maintain the newest 500 images",
       "selection": {
-        "tagStatus": "tagged",
+        "tagStatus": "any",
         "countType": "imageCountMoreThan",
-        "tagPrefixList": [
-          "${var.count_cap_tag_prefix}"
-        ],
-        "countNumber": 100
+        "countNumber": 500
       },
       "action": {
         "type": "expire"

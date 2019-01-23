@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [4.3.3] - 2019-01-23
+
+### Updated
+
+* ECR now has better default rules.
+* ECR No longer relies on prefix tag to apply lifecycle policy.
+* ECR variable `count_cap_tag_prefix` is now deprecated.
+
 ## [4.3.2] - 2019-01-22
 
 ### Added

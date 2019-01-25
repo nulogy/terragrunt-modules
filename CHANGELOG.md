@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [5.0.0] - 2019-01-25
+
+### Changed
+
+* Moved Event Shovel from EC2 servers to Fargate.
+
+* Required variables: "private_subnet_ids", "vpc_cidr", "vpc_id" for Fargate support.
+
 ## [4.3.3] - 2019-01-23
 
 ### Updated

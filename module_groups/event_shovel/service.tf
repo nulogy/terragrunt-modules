@@ -65,6 +65,5 @@ ENVVARS
   log_group_name = "${aws_cloudwatch_log_group.log_group.name}"
   param_store_namespace = "${var.environment_name}"
   private_subnet_ids = "${var.private_subnet_ids}"
-  vpc_cidr = "${var.vpc_cidr}"
   vpc_id = "${var.vpc_id}"
 }

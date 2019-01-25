@@ -66,10 +66,6 @@ variable "private_subnet_ids" {
   type = "list"
 }
 
-variable "vpc_cidr" {
-  description = "The VPC IP range. Used for ingress rules."
-}
-
 variable "vpc_id" {
   description = "The VPC that this task should live in."
 }

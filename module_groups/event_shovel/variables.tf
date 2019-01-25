@@ -60,3 +60,12 @@ variable "overridden_db_name" {
   description = "Set this to a non-empty string to force event shovel to connect to this database name instead of discovering the database address from remote state"
   # default = ""
 }
+
+variable "private_subnet_ids" {
+  description = "Determines the AZ for the containers."
+  type = "list"
+}
+
+variable "vpc_id" {
+  description = "The VPC that this task should live in."
+}

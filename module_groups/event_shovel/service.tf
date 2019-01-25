@@ -5,16 +5,6 @@ resource "aws_cloudwatch_log_group" "log_group" {
   retention_in_days = "30"
 }
 
-# Waiting for terraform 0.12 or for all Packmanager environments to be on RDS
-# https://www.hashicorp.com/blog/terraform-0-12-conditional-operator-improvements We need the feature where it will
-# short-circuit. Otherwise it tries to look up data from terraform remote state that deliberately doesn't exist.
-
-# locals {
-#   db_host = "${length(var.overridden_db_hostname) > 0 ? var.overridden_db_hostname : data.terraform_remote_state.database.database_address}"
-#   db_user = "${length(var.overridden_db_user) > 0 ? var.overridden_db_user : data.terraform_remote_state.database.database_user}"
-#   db_name = "${length(var.overridden_db_name) > 0 ? var.overridden_db_name : data.terraform_remote_state.database.database_name}"
-# }
-
 module "event_shovel" {
   source = "/deployer/modules/event_shovel_ecs_service"
 
@@ -74,4 +64,6 @@ ENVVARS
 
   log_group_name = "${aws_cloudwatch_log_group.log_group.name}"
   param_store_namespace = "${var.environment_name}"
+  private_subnet_ids = "${var.private_subnet_ids}"
+  vpc_id = "${var.vpc_id}"
 }

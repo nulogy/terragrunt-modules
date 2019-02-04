@@ -1,9 +1,9 @@
 resource "aws_security_group" "app_worker" {
-  name = "${var.environment_name} PackManager App Workers"
+  name = "${var.environment_name} ${var.security_group_name == "" ? var.service_name : var.security_group_name}"
   vpc_id = "${var.vpc_id}"
 
   tags {
-    Name = "${var.environment_name} PackManager App Workers"
+    Name = "${var.environment_name} ${var.security_group_name == "" ? var.service_name : var.security_group_name}"
     resource_group = "${var.environment_name}"
   }
 }

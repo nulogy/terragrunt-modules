@@ -32,7 +32,7 @@ module "ecs_service_fargate_elb" {
   log_group_name = "${module.log_group.log_group_name}"
   memory = "${var.memory}"
   param_store_namespace = "${var.param_store_namespace}"
-  subnets = "${var.private_subnets}"
+  security_group_name = "${var.security_group_name}"
   service_name = "${var.service_name}"
   subnets = "${var.private_subnets}"
   target_group_arn = "${module.public_load_balancer.target_group_arn}"

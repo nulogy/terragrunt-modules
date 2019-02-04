@@ -67,6 +67,11 @@ variable "subnets" {
   type = "list"
 }
 
+variable "security_group_name" {
+  description = "Manually set the security group name. This exists as a bridge to work around a value that was unfortunately hardcoded in versions <= 5.0.0. When writing new code, you can probably ignore this and use the default blank string."
+  default = ""
+}
+
 variable "service_name" {
   description = "Service name. Used for tagging."
 }

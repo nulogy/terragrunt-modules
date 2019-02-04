@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.0.0] - 2019-02-04
+
+### Changed
+
+* ECS fargate with elb module no longer hardcodes the security group name to "PackManager App Workers".
+  * Existing users of this module can set `security_group_name = "PackManager App Workers"` to avoid downtime changes
+
 ## [5.0.0] - 2019-01-25
 
 ### Changed

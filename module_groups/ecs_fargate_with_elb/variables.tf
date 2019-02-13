@@ -67,6 +67,11 @@ variable "slow_start" {
   default = 0
 }
 
+variable "stickiness_enabled" {
+  description = "Boolean to turn on stickiness for the ALB Target Group. Turn on to allow CSS/JS to go to the same server as the request."
+  default = false
+}
+
 variable "vpc_cidr" {}
 
 variable "vpc_id" {}

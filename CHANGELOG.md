@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.2.0] - 2019-02-13
+
+### Changed
+
+* Allow passing in stickiness header to Fargate with Load Balancer.
+
 ## [6.1.0] - 2019-02-08
 
 ### Changed

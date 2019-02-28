@@ -18,7 +18,7 @@ resource "aws_cloudwatch_metric_alarm" "queue_size" {
   namespace                 = "${var.environment_name}"
   period                    = "60"
   statistic                 = "Average"
-  threshold                 = "100"
+  threshold                 = "${var.queue_threshold}"
   alarm_description         = "This alarm monitors when the events queue size in the app's DB is to high. Root cause could be that the event shovel is down."
   treat_missing_data        = "breaching"
   alarm_actions             = ["${var.alert_topic_arn}"]

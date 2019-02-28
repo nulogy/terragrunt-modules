@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.3.0] - 2019-02-28
+
+### Changed
+
+* Allow configuring alerting threshold for event_shovel.
+
 ## [6.2.0] - 2019-02-13
 
 ### Changed

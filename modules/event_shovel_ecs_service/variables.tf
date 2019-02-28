@@ -29,6 +29,11 @@ variable "private_subnet_ids" {
   type = "list"
 }
 
+variable "queue_threshold" {
+  description = "How many events are queued before an alert goes out."
+  default = 100
+}
+
 variable "vpc_id" {
   description = "The VPC that this task should live in."
 }

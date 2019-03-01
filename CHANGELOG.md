@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.3.1] - 2019-03-01
+
+### Changed
+
+* Adds ssm:GetParameters permission to every role that was using ssm:GetParameter.  Shockingly, these are two 
+permissions different.
+
 ## [6.3.0] - 2019-02-28
 
 ### Changed

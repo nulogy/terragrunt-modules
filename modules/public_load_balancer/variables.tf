@@ -29,3 +29,8 @@ variable "port" {
   description = "The port on which targets receive traffic"
   default = "80"
 }
+
+variable "lb_maintenance_mode" {
+  description = "Sets to true if we are in our maintenance window, so the LB can serve a static page to our customers."
+  default = false
+}

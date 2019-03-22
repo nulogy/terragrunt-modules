@@ -75,3 +75,8 @@ variable "stickiness_enabled" {
 variable "vpc_cidr" {}
 
 variable "vpc_id" {}
+
+variable "lb_maintenance_mode" {
+  description = "Sets to true if we are in our maintenance window, so the LB can serve a static page to our customers."
+  default = false
+}

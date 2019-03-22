@@ -53,3 +53,38 @@ resource "aws_lb_listener" "public_lb_listener" {
     type = "forward"
   }
 }
+
+resource "aws_lb_listener_rule" "default_routing" {
+  listener_arn = "${aws_lb_listener.public_lb_listener.arn}"
+  priority     = "${var.lb_maintenance_mode ? 50000 : 1}"
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.target_group.arn}"
+  }
+
+  condition {
+    field  = "path-pattern"
+    values = ["*"]
+  }
+}
+
+resource "aws_lb_listener_rule" "maintenance_routing" {
+  listener_arn = "${aws_lb_listener.public_lb_listener.arn}"
+  priority     = "${var.lb_maintenance_mode ? 1 : 50000}"
+
+  action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Sorry: We are under maintenance. Please come back later."
+      status_code  = "200"
+    }
+  }
+
+  condition {
+    field  = "path-pattern"
+    values = ["*"]
+  }
+}

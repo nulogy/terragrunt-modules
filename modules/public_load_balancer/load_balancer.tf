@@ -77,9 +77,9 @@ resource "aws_lb_listener_rule" "maintenance_routing" {
     type = "fixed-response"
 
     fixed_response {
-      content_type = "text/plain"
-      message_body = "Sorry: We are under maintenance. Please come back later."
-      status_code  = "200"
+      content_type = "${var.lb_maintenance_mode_content_type}"
+      message_body = "${var.lb_maintenance_mode_page_content}"
+      status_code  = "${var.lb_maintenance_mode_status_code}"
     }
   }
 

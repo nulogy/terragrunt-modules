@@ -80,3 +80,18 @@ variable "lb_maintenance_mode" {
   description = "Sets to true if we are in our maintenance window, so the LB can serve a static page to our customers."
   default = false
 }
+
+variable "lb_maintenance_mode_content_type" {
+  description = "Maintenance page content type."
+  default = "text/plain"
+}
+
+variable "lb_maintenance_mode_page_content" {
+  description = "Maintenance page content. The most common scenario is to specify some HTML code here."
+  default = "Sorry: We are under maintenance. Please come back later."
+}
+
+variable "lb_maintenance_mode_status_code" {
+  description = "Maintenance page HTTP status code."
+  default = 200
+}

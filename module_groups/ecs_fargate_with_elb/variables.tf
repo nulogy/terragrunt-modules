@@ -93,5 +93,5 @@ variable "lb_maintenance_mode_page_content" {
 
 variable "lb_maintenance_mode_status_code" {
   description = "Maintenance page HTTP status code."
-  default = 200
+  default = 503
 }

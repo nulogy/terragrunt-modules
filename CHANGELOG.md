@@ -12,11 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.4.1] - 2019-03-27
+
+### Fixed
+
+* Fixes the default status code (503) for maintenance pages managed by AWS Load Balancer.
+
 ## [6.4.0] - 2019-03-26
 
 ### Changed
 
-* Adds support to maintenance pages on Load Balancer level by means of 'aws_lb_listener_rule'. It can serve static content (Plain Text/HTML) content up to 1024 bytes.
+* Adds support to maintenance pages on AWS Load Balancer level by means of 'aws_lb_listener_rule'. It can serve static content (Plain Text/HTML) content up to 1024 bytes.
 
 ## [6.3.1] - 2019-03-01
 

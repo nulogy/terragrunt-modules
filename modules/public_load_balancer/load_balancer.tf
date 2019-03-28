@@ -56,7 +56,7 @@ resource "aws_lb_listener" "public_lb_listener" {
 
 resource "aws_lb_listener_rule" "default_routing" {
   listener_arn = "${aws_lb_listener.public_lb_listener.arn}"
-  priority     = "${var.lb_maintenance_mode ? 50000 : 1}"
+  priority     = "${var.lb_maintenance_mode ? 49999 : 1}"
 
   action {
     type             = "forward"
@@ -71,7 +71,7 @@ resource "aws_lb_listener_rule" "default_routing" {
 
 resource "aws_lb_listener_rule" "maintenance_routing" {
   listener_arn = "${aws_lb_listener.public_lb_listener.arn}"
-  priority     = "${var.lb_maintenance_mode ? 1 : 50000}"
+  priority     = "${var.lb_maintenance_mode ? 2 : 50000}"
 
   action {
     type = "fixed-response"

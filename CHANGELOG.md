@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.4.2] - 2019-03-28
+
+### Fixed
+
+* Fixes the priority values in order to avoid collisions on LBs routing rules during the terraform deployment.
+
 ## [6.4.1] - 2019-03-27
 
 ### Fixed

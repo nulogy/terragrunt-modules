@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [6.4.3] - 2019-04-10
+
+### Changed
+
+* Sets the TERRAGRUNT_DOWNLOAD environment variable to /root/.terragrunt. This prevents the host's filesystem from getting cluttered with .terragrunt-cache directories.
+
 ## [6.4.2] - 2019-03-28
 
 ### Fixed

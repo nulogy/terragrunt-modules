@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [7.0.0] - 2019-05-06
+
+### Changed
+
+* Updates terraform, terragrunt and landscape.  Avoids re-downloading the aws provider.
+
 ## [6.4.3] - 2019-04-10
 
 ### Changed

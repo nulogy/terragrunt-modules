@@ -25,6 +25,7 @@ resource "aws_lb_target_group" "target_group" {
 
   health_check {
     path = "${var.health_check_path}"
+    matcher = "200,301"
   }
 
   stickiness {

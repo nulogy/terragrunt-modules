@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [7.0.1] - 2019-05-24
+
+### Changed
+
+* Public load balancer target group considers HTTP 301 (redirect) as a healthy response. This allows `config.force_ssl` to be set as true in Rails.
+
 ## [7.0.0] - 2019-05-06
 
 ### Changed

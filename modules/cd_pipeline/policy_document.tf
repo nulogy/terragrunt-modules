@@ -1,6 +1,5 @@
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {
-  current = true
 }
 
 data "aws_iam_policy_document" "deployer_policy_document" {

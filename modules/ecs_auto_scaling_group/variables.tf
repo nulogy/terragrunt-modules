@@ -1,10 +1,6 @@
 variable "desired_capacity" {}
 variable "default_cooldown" { default = 300 }
 
-variable "drain_lambda_sns_arn" {
-  description = "SNS endpoint for a topic which drain-lambda can subscribe to to perform graceful server termination."
-}
-
 variable "ecs_ami" {
   type = "string"
   description = "The AMI to use. Defaults to Amazon Linux AMI designed for ECS. Override me to get a newer AMI."

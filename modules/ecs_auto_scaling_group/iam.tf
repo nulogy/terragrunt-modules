@@ -52,28 +52,3 @@ resource "aws_iam_role_policy" "ecs_instance_role_policy" {
 }
 EOF
 }
-
-# Permissions for the Autoscaling Group to send notifications to SNS.
-resource "aws_iam_role" "asg" {
-  name               = "${var.ecs_cluster_name}-asg"
-  assume_role_policy = "${data.aws_iam_policy_document.asg.json}"
-}
-
-data "aws_iam_policy_document" "asg" {
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type = "Service"
-
-      identifiers = [
-        "autoscaling.amazonaws.com",
-      ]
-    }
-  }
-}
-
-resource "aws_iam_role_policy_attachment" "asg" {
-  role       = "${aws_iam_role.asg.name}"
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AutoScalingNotificationAccessRole"
-}

@@ -7,8 +7,6 @@ data "aws_ami" "ecs_ami" {
   owners = ["${var.ecs_ami_owner}"]
 }
 
-data "aws_region" "current" {}
-
 data "template_cloudinit_config" "user_data" {
   gzip          = true
   base64_encode = true
@@ -39,20 +37,6 @@ data "template_cloudinit_config" "user_data" {
       echo ECS_HOST_DATA_DIR=/var/lib/ecs >> /etc/ecs/ecs.config
     EOF
   }
-
-  part {
-    content_type = "text/x-shellscript"
-
-    content = <<EOF
-      #!/bin/bash
-
-      # TODO Move me to the AMI for immutability purposes
-      yum install -y aws-cfn-bootstrap
-
-      # Tell the Cloudformation policy we're done launching.
-      /opt/aws/bin/cfn-signal --stack "${var.ecs_cluster_name}-Autoscaling-Group" --resource "Asg" --region "${data.aws_region.current.name}"
-    EOF
-  }
 }
 
 resource "aws_launch_configuration" "launch_conf" {
@@ -73,81 +57,31 @@ resource "aws_launch_configuration" "launch_conf" {
   user_data = "${data.template_cloudinit_config.user_data.rendered}"
 }
 
-resource "aws_cloudformation_stack" "asg" {
-  name = "${var.ecs_cluster_name}-Autoscaling-Group"
+resource "aws_autoscaling_group" "asg" {
+  name_prefix = "${var.environment_name}-${aws_launch_configuration.launch_conf.name}-autoscaling-group"
+  default_cooldown = "${var.default_cooldown}"
+  max_size = "${var.max_size}"
+  min_size = "${var.min_size}"
+  min_elb_capacity = "${var.min_size}"
+  health_check_type = "${var.health_check_type}"
+  desired_capacity = "${var.desired_capacity}"
+  launch_configuration = "${aws_launch_configuration.launch_conf.name}"
+  vpc_zone_identifier = ["${var.ec2_subnet_ids}"]
 
   lifecycle {
     create_before_destroy = true
     ignore_changes = ["desired_capacity"] // Preserve desired capacity when autoscaled.
   }
 
-  # CloudFormation provides us with AutoScalingRollingUpdate (AWS does not provide this feature to Terraform directly).
-  template_body = <<EOF
-{
-  "Resources": {
-    "Asg": {
-      "Type": "AWS::AutoScaling::AutoScalingGroup",
-      "Properties": {
-        "VPCZoneIdentifier": ["${join("\",\"", var.ec2_subnet_ids)}"],
-        "LaunchConfigurationName": "${aws_launch_configuration.launch_conf.name}",
-        "MaxSize": "${var.max_size}",
-        "DesiredCapacity": "${var.desired_capacity}",
-        "Cooldown": "${var.default_cooldown}",
-        "MinSize": "${var.min_size}",
-        "TerminationPolicies": ["OldestLaunchConfiguration", "OldestInstance"],
-        "HealthCheckType": "${var.health_check_type}",
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "${var.environment_name}-ecs-ec2",
-            "PropagateAtLaunch": "true"
-          },
-          {
-            "Key": "resource_group",
-            "Value": "${var.environment_name}",
-            "PropagateAtLaunch": "true"
-          }
-        ],
-        "NotificationConfigurations": [
-          {
-            "TopicARN": "${var.drain_lambda_sns_arn}",
-            "NotificationTypes": [
-              "autoscaling:EC2_INSTANCE_LAUNCH",
-              "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
-              "autoscaling:EC2_INSTANCE_TERMINATE",
-              "autoscaling:EC2_INSTANCE_TERMINATE_ERROR"
-            ]
-          }
-        ]
-      },
-      "UpdatePolicy": {
-        "AutoScalingRollingUpdate": {
-          "MinInstancesInService": "${var.min_size}",
-          "MaxBatchSize": "2",
-          "PauseTime": "PT15M",
-          "WaitOnResourceSignals": "true",
-          "SuspendProcesses": [ "HealthCheck", "ReplaceUnhealthy", "AZRebalance", "AlarmNotification", "ScheduledActions" ]
-        }
-      }
-    },
-    "ASGTerminateHook": {
-      "Type": "AWS::AutoScaling::LifecycleHook",
-      "Properties": {
-        "AutoScalingGroupName": {"Ref": "Asg"},
-        "DefaultResult": "ABANDON",
-        "HeartbeatTimeout": "900",
-        "LifecycleTransition": "autoscaling:EC2_INSTANCE_TERMINATING",
-        "NotificationTargetARN": "${var.drain_lambda_sns_arn}",
-        "RoleARN": "${aws_iam_role.asg.arn}"
-      }
-    }
-  },
-  "Outputs": {
-    "AsgName": {
-      "Description": "The name of the auto scaling group",
-      "Value": {"Ref": "Asg"}
-    }
+  tag {
+    key = "Name"
+    value = "${var.environment_name}-ecs-ec2"
+    propagate_at_launch = "true"
   }
-}
-EOF
+
+  tag {
+    key = "resource_group"
+    value = "${var.environment_name}"
+    propagate_at_launch = true
+  }
 }

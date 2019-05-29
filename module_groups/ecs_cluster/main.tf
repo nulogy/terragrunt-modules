@@ -14,8 +14,6 @@ module "ecs_auto_scaling_group" {
   max_size = "${var.max_size}"
   min_size = "${var.min_size}"
 
-  drain_lambda_sns_arn = "${module.ecs_update_lambdas.sns_arn}"
-
   ec2_subnet_ids = "${var.private_subnet_ids}"
   ecs_ami = "${var.ecs_ami}"
   ecs_ami_owner = "${var.ecs_ami_owner}"
@@ -31,11 +29,4 @@ module "ecs_cluster" {
   source = "/deployer/modules/ecs_cluster"
 
   name = "${var.cluster_name}"
-}
-
-module "ecs_update_lambdas" {
-  source = "git::https://github.com/xero-oss/ecs-cluster-update-lambda.git//src?ref=9bb8ca972378c5194d8252dd895b6ccc9baedf4f"
-  region = "${data.aws_region.current.name}"
-  drain_lambda_name = "${var.cluster_name}-drain"
-  tag_lambda_name = "${var.cluster_name}-tag"
 }

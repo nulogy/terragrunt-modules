@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+* Outputs ecs private subnets for fargate event shovel
+
 ### Deprecated
 ### Removed
 ### Fixed

@@ -21,3 +21,7 @@ output "target_group_arn" {
 output "vpc_id" {
   value = "${module.ecs_core_platform.vpc_id}"
 }
+
+output "private_subnet_ids" {
+  value = "${module.ecs_core_platform.private_subnet_ids}"
+}

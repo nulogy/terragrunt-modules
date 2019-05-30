@@ -51,7 +51,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
-  cache_behavior {
+  ordered_cache_behavior {
     allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods = ["GET", "HEAD"]
     target_origin_id = "${var.environment_name}-staticAssets"
@@ -72,7 +72,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
     max_ttl = 86400
   }
 
-  cache_behavior {
+  ordered_cache_behavior {
     allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods = ["GET", "HEAD"]
     target_origin_id = "${var.environment_name}-staticAssets"
@@ -93,7 +93,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
     max_ttl = 0
   }
 
-  cache_behavior {
+  ordered_cache_behavior {
     allowed_methods = ["GET", "HEAD", "OPTIONS"]
     cached_methods = ["GET", "HEAD"]
     target_origin_id = "${var.environment_name}-staticAssets"

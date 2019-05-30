@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
+
+* Changes cache_behaviour to ordered_cache_behaviour as cache_behaviour was removed in AWS provider version 2
+* Uses skip variable for ecr lifecycle policy
+
 ### Deprecated
 ### Removed
+
+* Removes code for rolling upgrades of ECS AMIs
+
 ### Fixed
 ### Security
 

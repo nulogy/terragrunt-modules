@@ -6,16 +6,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+    
 ### Added
 ### Changed
-
-* Outputs ecs private subnets for fargate event shovel
-
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+    
+## [7.1.1] - 2019-05-30
+
+### Added
+
+* Outputs ecs private subnets for fargate event shovel
     
 ## [7.1.0] - 2019-05-30
 

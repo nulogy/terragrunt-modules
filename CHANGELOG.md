@@ -6,18 +6,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+    
+## [7.1.0] - 2019-05-30
+
 ### Changed
 
-* Changes cache_behaviour to ordered_cache_behaviour as cache_behaviour was removed in AWS provider version 2
 * Uses skip variable for ecr lifecycle policy
 
-### Deprecated
 ### Removed
 
 * Removes code for rolling upgrades of ECS AMIs
 
 ### Fixed
-### Security
+
+* Changes cache_behaviour to ordered_cache_behaviour as cache_behaviour was removed in AWS provider version 2
 
 ## [7.0.1] - 2019-05-24
 

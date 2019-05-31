@@ -9,13 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     
 ### Added
 ### Changed
-
-* Adds missing deployer permissions
-
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+    
+## [7.1.2] - 2019-05-31
+    
+### Added
+
+* Adds missing deployer permissions
     
 ## [7.1.1] - 2019-05-30
 

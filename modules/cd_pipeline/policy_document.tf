@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = [
       "cloudwatch:DescribeAlarms",
-      "logs:DescribeMetricFilters",
+      "cloudwatch:ListTagsForResource",
       "ec2:Describe*",
       "ecr:BatchGetImage",
       "ecr:DescribeRepositories",
@@ -25,6 +25,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "elasticloadbalancing:DescribeTargetGroupAttributes",
       "elasticloadbalancing:DescribeTargetGroups",
       "events:DescribeRule",
+      "events:ListTagsForResource",
       "events:ListTargetsByRule",
       "iam:GetRole",
       "iam:GetRolePolicy",
@@ -34,6 +35,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "kms:GetKeyRotationStatus",
       "kms:ListResourceTags",
       "logs:DescribeLogGroups",
+      "logs:DescribeMetricFilters",
       "logs:ListTagsLogGroup",
       "SNS:GetTopicAttributes",
     ]

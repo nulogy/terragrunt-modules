@@ -8,9 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
     
 ### Added
+
+Added Buildkite Agent Timestamp Lines (BuildkiteAgentTimestampLines)
+
 ### Changed
 ### Deprecated
 ### Removed
+
+Removed `stack_ami_version` variable for buildkite_elastic_stack module since it's not used
+
 ### Fixed
 ### Security
     

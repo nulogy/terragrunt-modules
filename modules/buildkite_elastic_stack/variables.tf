@@ -17,7 +17,6 @@ variable "scale_down_adjustment" { default = 0 }
 variable "scale_up_adjustment" { default = 0 }
 variable "secrets_bucket" { }
 variable "spot_price" { default = 0 }
-variable "stack_ami_version" { default = "" }
 variable "stack_name" { }
 variable "stack_template_url" { }
 variable "subnet_ids" { type = "list" }

@@ -4,18 +4,6 @@ locals {
   scale_down_adjustment = "${var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_down_adjustment}"
 }
 
-data "aws_ami" "buildkite_ami" {
-  count = "${length(var.stack_ami_version) > 0 ? 1 : 0}"
-
-  filter {
-    name = "name"
-    values = ["buildkite-stack-${var.stack_ami_version}-*"]
-  }
-
-  owners = ["172840064832"]
-  most_recent = true
-}
-
 resource "aws_security_group" "stack_security_group" {
   name_prefix = "${var.stack_name}-SecurityGroup-"
 
@@ -52,11 +40,10 @@ resource "aws_cloudformation_stack" "stack" {
     AgentsPerInstance = "${var.agents_per_instance}"
     BootstrapScriptUrl = "${var.bootstrap_script_url}"
     BuildkiteAgentToken = "${var.buildkite_agent_token}"
+    BuildkiteAgentTimestampLines = "true"
     BuildkiteQueue = "${var.buildkite_queue}"
     ECRAccessPolicy = "poweruser"
     EnableDockerUserNamespaceRemap = "false"
-    # https://github.com/hashicorp/terraform/issues/16726
-    ImageId = "${element(concat(data.aws_ami.buildkite_ami.*.id, list("")), 0)}"
     InstanceType = "${var.instance_type}"
     KeyName = "${var.key_name}"
     ManagedPolicyARN = "${var.managed_policy_arn}"

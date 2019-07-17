@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+
+## [7.3.0] - 2019-07-17
+    
+### Added
+
+* Adds NAT Gateway public IPs as an output
+
 ## [7.2.0] - 2019-07-16
     
 ### Added

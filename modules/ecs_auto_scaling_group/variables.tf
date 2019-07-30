@@ -23,3 +23,19 @@ variable "health_check_type" {}
 variable "public_key" {}
 variable "vpc_cidr" {}
 variable "vpc_id" {}
+
+variable "sg_ingress_cidr" {
+  default = "127.0.0.0/8"
+}
+
+variable "sg_ingress_from_port" {
+  default = "65535"
+}
+
+variable "sg_ingress_to_port" {
+  default = "65535"
+}
+
+variable "sg_ingress_protocol" {
+  default = "udp"
+}

@@ -23,6 +23,10 @@ module "ecs_auto_scaling_group" {
   public_key = "${var.ec2_public_key}"
   vpc_cidr = "${var.vpc_cidr}"
   vpc_id = "${var.vpc_id}"
+  sg_ingress_cidr = "${var.sg_ingress_cidr}"
+  sg_ingress_from_port = "${var.sg_ingress_from_port}"
+  sg_ingress_to_port = "${var.sg_ingress_to_port}"
+  sg_ingress_protocol = "${var.sg_ingress_protocol}"
 }
 
 module "ecs_cluster" {

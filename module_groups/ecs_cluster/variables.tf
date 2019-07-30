@@ -58,3 +58,19 @@ variable "vpc_cidr" {
 variable "vpc_id" {
   description = "VPC Id. This is used for security groups for the EC2 instances."
 }
+
+variable "sg_ingress_cidr" {
+  default = "127.0.0.0/8"
+}
+
+variable "sg_ingress_from_port" {
+  default = "65535"
+}
+
+variable "sg_ingress_to_port" {
+  default = "65535"
+}
+
+variable "sg_ingress_protocol" {
+  default = "udp"
+}

@@ -11,6 +11,13 @@ resource "aws_security_group" "ecs_ec2_security_group" {
     protocol = "tcp"
   }
 
+  ingress {
+    cidr_blocks = ["${var.sg_ingress_cidr}"]
+    from_port = "${var.sg_ingress_from_port}"
+    to_port = "${var.sg_ingress_to_port}"
+    protocol = "${var.sg_ingress_protocol}"
+  }
+
   # Outbound connections need to be opened for third-party services (ie, New Relic)
   egress {
     cidr_blocks = ["0.0.0.0/0"]

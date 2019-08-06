@@ -1,2 +1,7 @@
-variable "https_subscription_endpoint" { default = "" }
-variable "topic_name" {}
+variable "https_subscription_endpoint" {
+  default = ""
+}
+
+variable "topic_name" {
+}
+

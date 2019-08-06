@@ -1,10 +1,10 @@
 data "aws_ami" "ecs_ami" {
   filter {
-    name = "name"
-    values = ["${var.ecs_ami}"]
+    name   = "name"
+    values = [var.ecs_ami]
   }
 
-  owners = ["${var.ecs_ami_owner}"]
+  owners = [var.ecs_ami_owner]
 }
 
 data "template_cloudinit_config" "user_data" {
@@ -20,7 +20,8 @@ data "template_cloudinit_config" "user_data" {
 
       cloud-init-per once docker_options \
         echo "OPTIONS=\"\$OPTIONS --bip=$DOCKER_INTERFACE_CIDR\"" | sudo tee -a /etc/sysconfig/docker
-    EOF
+    
+EOF
 
   }
 
@@ -35,53 +36,55 @@ data "template_cloudinit_config" "user_data" {
       echo ECS_RESERVED_MEMORY=256 >> /etc/ecs/ecs.config
       echo ECS_ENABLE_CONTAINER_METADATA=true >> /etc/ecs/ecs.config
       echo ECS_HOST_DATA_DIR=/var/lib/ecs >> /etc/ecs/ecs.config
-    EOF
+    
+EOF
+
   }
 }
 
 resource "aws_launch_configuration" "launch_conf" {
-  name_prefix = "${var.environment_name}-ecs"
-  image_id = "${data.aws_ami.ecs_ami.id}"
-  instance_type = "${var.lc_instance_type}"
+  name_prefix   = "${var.environment_name}-ecs"
+  image_id      = data.aws_ami.ecs_ami.id
+  instance_type = var.lc_instance_type
   security_groups = [
-    "${aws_security_group.ecs_ec2_security_group.id}"
+    aws_security_group.ecs_ec2_security_group.id,
   ]
-  key_name = "${aws_key_pair.ecs_key.key_name}"
-  iam_instance_profile = "${aws_iam_instance_profile.ecs_instance_profile.name}"
-
+  key_name             = aws_key_pair.ecs_key.key_name
+  iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.name
 
   lifecycle {
     create_before_destroy = true
   }
 
-  user_data = "${data.template_cloudinit_config.user_data.rendered}"
+  user_data = data.template_cloudinit_config.user_data.rendered
 }
 
 resource "aws_autoscaling_group" "asg" {
-  name_prefix = "${var.environment_name}-${aws_launch_configuration.launch_conf.name}-autoscaling-group"
-  default_cooldown = "${var.default_cooldown}"
-  max_size = "${var.max_size}"
-  min_size = "${var.min_size}"
-  min_elb_capacity = "${var.min_size}"
-  health_check_type = "${var.health_check_type}"
-  desired_capacity = "${var.desired_capacity}"
-  launch_configuration = "${aws_launch_configuration.launch_conf.name}"
-  vpc_zone_identifier = ["${var.ec2_subnet_ids}"]
+  name_prefix          = "${var.environment_name}-${aws_launch_configuration.launch_conf.name}-autoscaling-group"
+  default_cooldown     = var.default_cooldown
+  max_size             = var.max_size
+  min_size             = var.min_size
+  min_elb_capacity     = var.min_size
+  health_check_type    = var.health_check_type
+  desired_capacity     = var.desired_capacity
+  launch_configuration = aws_launch_configuration.launch_conf.name
+  vpc_zone_identifier  = var.ec2_subnet_ids
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes = ["desired_capacity"] // Preserve desired capacity when autoscaled.
+    ignore_changes        = [desired_capacity] // Preserve desired capacity when autoscaled.
   }
 
   tag {
-    key = "Name"
-    value = "${var.environment_name}-ecs-ec2"
+    key                 = "Name"
+    value               = "${var.environment_name}-ecs-ec2"
     propagate_at_launch = "true"
   }
 
   tag {
-    key = "resource_group"
-    value = "${var.environment_name}"
+    key                 = "resource_group"
+    value               = var.environment_name
     propagate_at_launch = true
   }
 }
+

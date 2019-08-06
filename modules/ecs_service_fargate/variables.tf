@@ -44,33 +44,34 @@ variable "param_store_namespace" {
 
 variable "security_groups" {
   description = "Security groups for the container. Determines inbound and outbound connections / ports."
-  type = "list"
+  type        = list(string)
 }
 
 variable "subnets" {
   description = "Determines the AZ for the containers. Usually put all subnets from the VPC."
-  type = "list"
+  type        = list(string)
 }
 
 variable "command" {
   description = "Commands to execute after entrypoint"
-  default = ["/bin/echo", "Start command not supplied, just exiting"]
-  type = "list"
+  default     = ["/bin/echo", "Start command not supplied, just exiting"]
+  type        = list(string)
 }
 
 variable "health_check" {
   description = "Commands to execute a container health check"
-  default = ["CMD-SHELL", "echo OK || exit 1"]
-  type = "list"
+  default     = ["CMD-SHELL", "echo OK || exit 1"]
+  type        = list(string)
 }
 
 variable "task_definition_json" {
   description = "allows specifying a different JSON task definition, if none default (1 container per task) will be used"
-  default = "/deployer/modules/ecs_service_fargate/task_definition/default.json"
-  type = "string"
+  default     = "/deployer/modules/ecs_service_fargate/task_definition/default.json"
+  type        = string
 }
 
 variable "containers_per_task" {
   description = "Number of container to run per task. Used to specify the amount of memory for each container if running multiple per task."
-  default = 1
+  default     = 1
 }
+

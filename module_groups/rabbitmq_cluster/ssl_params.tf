@@ -11,3 +11,4 @@ data "aws_ssm_parameter" "rabbitmq_ssl_cacert" {
 data "aws_ssm_parameter" "rabbitmq_ssl_key" {
   name = "/${var.environment_name}/rabbitmq/ssl-key-base64"
 }
+

@@ -12,17 +12,17 @@ variable "cpu" {
 
 variable "command" {
   description = "The entrypoint command for the Fargate containers. Should run a web server."
-  type = "list"
+  type        = list(string)
 }
 
 variable "container_port" {
   description = "Set the container port for access to the container via the ELB. This should match the port that the web server listens to."
-  default = 3000
+  default     = 3000
 }
 
 variable "desired_count" {
   description = "How many docker containers to run. Should be 2+"
-  default = 2
+  default     = 2
 }
 
 variable "docker_image_name" {
@@ -41,57 +41,64 @@ variable "health_check_path" {
   description = "The path that the Load Balancer will check. If it does not have a 200 OK response, then the container is killed."
 }
 
-variable "kms_key_id" {}
+variable "kms_key_id" {
+}
 
-variable "memory" {}
+variable "memory" {
+}
 
-variable "param_store_namespace" {}
+variable "param_store_namespace" {
+}
 
 variable "public_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "private_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "security_group_name" {
   description = "Manually set the security group name. This exists as a bridge to work around a value that was unfortunately hardcoded in versions <= 5.0.0. When writing new code, you can probably ignore this and use the default blank string."
-  default = ""
+  default     = ""
 }
 
-variable "service_name" {}
+variable "service_name" {
+}
 
 variable "slow_start" {
   description = "Number of seconds to bleed traffic to the app. Useful for slow Rails startup time apps (like Packmanager)."
-  default = 0
+  default     = 0
 }
 
 variable "stickiness_enabled" {
   description = "Boolean to turn on stickiness for the ALB Target Group. Turn on to allow CSS/JS to go to the same server as the request."
-  default = false
+  default     = false
 }
 
-variable "vpc_cidr" {}
+variable "vpc_cidr" {
+}
 
-variable "vpc_id" {}
+variable "vpc_id" {
+}
 
 variable "lb_maintenance_mode" {
   description = "Sets to true if we are in our maintenance window, so the LB can serve a static page to our customers."
-  default = false
+  default     = false
 }
 
 variable "lb_maintenance_mode_content_type" {
   description = "Maintenance page content type."
-  default = "text/plain"
+  default     = "text/plain"
 }
 
 variable "lb_maintenance_mode_page_content" {
   description = "Maintenance page content. The most common scenario is to specify some HTML code here."
-  default = "Sorry: We are under maintenance. Please come back later."
+  default     = "Sorry: We are under maintenance. Please come back later."
 }
 
 variable "lb_maintenance_mode_status_code" {
   description = "Maintenance page HTTP status code."
-  default = 503
+  default     = 503
 }
+

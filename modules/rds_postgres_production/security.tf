@@ -1,7 +1,7 @@
 resource "aws_security_group" "db_security_group" {
   name_prefix = "${var.environment_name}-rds-security-group-"
 
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
 
   # allow this vpc and any peering vpc within a private network
   ingress {
@@ -17,8 +17,9 @@ resource "aws_security_group" "db_security_group" {
     cidr_blocks = ["10.0.0.0/8"]
   }
 
-  tags {
-    Name = "${var.environment_name} RDS security group"
-    resource_group = "${var.environment_name}"
+  tags = {
+    Name           = "${var.environment_name} RDS security group"
+    resource_group = var.environment_name
   }
 }
+

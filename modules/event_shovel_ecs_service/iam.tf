@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ecs_taskrole" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
   name = "${var.environment_name}-event-shovel-ecs-task"
 
@@ -18,10 +18,11 @@ resource "aws_iam_role" "ecs_taskrole" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role" "ecs_executionrole" {
-  name = "${var.environment_name}-ecs-event-shovel-execution-role"
+  name               = "${var.environment_name}-ecs-event-shovel-execution-role"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -37,11 +38,12 @@ resource "aws_iam_role" "ecs_executionrole" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
-  name = "${var.environment_name}-fargate-ecs-event-shovel-task-execution"
-  role = "${aws_iam_role.ecs_executionrole.id}"
+  name   = "${var.environment_name}-fargate-ecs-event-shovel-task-execution"
+  role   = aws_iam_role.ecs_executionrole.id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -61,13 +63,14 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "parameter_store_policy" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
-  name = "${var.environment_name}-event-shovel-parameter-store"
-  role = "${aws_iam_role.ecs_taskrole.id}"
+  name   = "${var.environment_name}-event-shovel-parameter-store"
+  role   = aws_iam_role.ecs_taskrole[0].id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -101,4 +104,6 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
   ]
 }
 EOF
+
 }
+

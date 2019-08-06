@@ -1,7 +1,7 @@
 resource "aws_iam_role" "ecs_servicerole" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
-  name = "${var.environment_name}-ecs-service"
+  name               = "${var.environment_name}-ecs-service"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -17,13 +17,14 @@ resource "aws_iam_role" "ecs_servicerole" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "ecs_servicerole_policy" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
-  name = "${var.environment_name}-ecs-service"
-  role = "${aws_iam_role.ecs_servicerole.id}"
+  name   = "${var.environment_name}-ecs-service"
+  role   = aws_iam_role.ecs_servicerole[0].id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -46,12 +47,13 @@ resource "aws_iam_role_policy" "ecs_servicerole_policy" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role" "ecs_taskrole" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
-  name = "${var.environment_name}-ecs-task"
+  name               = "${var.environment_name}-ecs-task"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -67,13 +69,14 @@ resource "aws_iam_role" "ecs_taskrole" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "parameter_store_policy" {
-  count = "${length(var.skip) > 0 ? 0 : (length(var.kms_key_id) > 0 ? 1 : 0)}"
+  count = length(var.skip) > 0 ? 0 : length(var.kms_key_id) > 0 ? 1 : 0
 
-  name = "${var.environment_name}-parameter-store"
-  role = "${aws_iam_role.ecs_taskrole.id}"
+  name   = "${var.environment_name}-parameter-store"
+  role   = aws_iam_role.ecs_taskrole[0].id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -107,4 +110,6 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
   ]
 }
 EOF
+
 }
+

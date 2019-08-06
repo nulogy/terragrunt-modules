@@ -1,9 +1,11 @@
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
+
 data "aws_region" "current" {
 }
 
 data "aws_iam_policy_document" "deployer_policy_document" {
-  count = "${var.skip == true ? 0 : 1}"
+  count = var.skip == true ? 0 : 1
 
   statement {
     actions = [
@@ -41,34 +43,33 @@ data "aws_iam_policy_document" "deployer_policy_document" {
     ]
 
     resources = [
-      "*"
+      "*",
     ]
   }
 
   statement {
-
     actions = [
       "s3:Get*",
       "s3:List*",
-      "s3:PutObject"
+      "s3:PutObject",
     ]
 
     resources = [
       "arn:aws:s3:::${var.terraform_state_bucket}",
       "arn:aws:s3:::${var.terraform_state_bucket}/*",
       "arn:aws:s3:::${var.pet_terraform_state_bucket}",
-      "arn:aws:s3:::${var.pet_terraform_state_bucket}/*"
+      "arn:aws:s3:::${var.pet_terraform_state_bucket}/*",
     ]
   }
 
   statement {
     actions = [
-      "s3:PutObject"
+      "s3:PutObject",
     ]
 
     resources = [
       "arn:aws:s3:::${var.pet_static_assets}/*",
-      "arn:aws:s3:::${var.environment_name}-static-assets/*"
+      "arn:aws:s3:::${var.environment_name}-static-assets/*",
     ]
   }
 
@@ -77,12 +78,12 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "dynamodb:DescribeTable",
       "dynamodb:PutItem",
       "dynamodb:GetItem",
-      "dynamodb:DeleteItem"
+      "dynamodb:DeleteItem",
     ]
 
     resources = [
       "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.terraform_state_lock_dynamodb_table}",
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.pet_terraform_state_lock_dynamodb_table}"
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${var.pet_terraform_state_lock_dynamodb_table}",
     ]
   }
 
@@ -96,7 +97,7 @@ data "aws_iam_policy_document" "deployer_policy_document" {
   statement {
     actions = ["events:PutTargets"]
     resources = [
-      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${var.environment_name}_*"
+      "arn:aws:events:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:rule/${var.environment_name}_*",
     ]
   }
 
@@ -106,10 +107,11 @@ data "aws_iam_policy_document" "deployer_policy_document" {
       "ecr:CompleteLayerUpload",
       "ecr:InitiateLayerUpload",
       "ecr:PutImage",
-      "ecr:UploadLayerPart"
+      "ecr:UploadLayerPart",
     ]
     resources = [
-      "arn:aws:ecr:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:repository/${var.environment_name}"
+      "arn:aws:ecr:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:repository/${var.environment_name}",
     ]
   }
 }
+

@@ -1,8 +1,9 @@
-variable "aws_region" {}
+variable "aws_region" {
+}
 
 variable "allowed_ssh_cidr_block" {
   description = "Where SSH access is allowed from, in CIDR block format. For example, 172.17.158.146/32 to allow access to one IP"
-  type = "string"
+  type        = string
 }
 
 variable "certificate_domain" {
@@ -11,7 +12,7 @@ variable "certificate_domain" {
 
 variable "count" {
   description = "Number of RabbitMQ servers."
-  default = 3
+  default     = 3
 }
 
 variable "domain" {
@@ -24,7 +25,7 @@ variable "environment_name" {
 
 variable "instance_type" {
   description = "Size of the RabbitMQ instances in AWS. Larger on production."
-  default = "t2.small"
+  default     = "t2.small"
 }
 
 variable "kms_key_id" {
@@ -33,7 +34,7 @@ variable "kms_key_id" {
 
 variable "private_subnet_ids" {
   description = "Subnets for RabbitMQ servers. Defines the range of private IPs that servers can take."
-  type = "list"
+  type        = list(string)
 }
 
 variable "public_key" {
@@ -42,7 +43,7 @@ variable "public_key" {
 
 variable "public_subnet_ids" {
   description = "Public subnets for RabbitMQ Load Balancers. Defines the range of public IPs that the ELB can take."
-  type = "list"
+  type        = list(string)
 }
 
 variable "subdomain" {
@@ -52,3 +53,4 @@ variable "subdomain" {
 variable "vpc_id" {
   description = "Determines where the RabbitMQ servers live."
 }
+

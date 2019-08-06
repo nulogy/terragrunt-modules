@@ -1,2 +1,7 @@
-variable "environment_name" {}
-variable "skip" { default = "" }
+variable "environment_name" {
+}
+
+variable "skip" {
+  default = ""
+}
+

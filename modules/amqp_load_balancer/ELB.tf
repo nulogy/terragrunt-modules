@@ -6,10 +6,10 @@ resource "aws_elb" "elb" {
   name = "${var.environment_name}-RabbitMQ-ELB"
 
   listener {
-    instance_port      = 5671
-    instance_protocol  = "tcp"
-    lb_port            = 5671
-    lb_protocol        = "tcp"
+    instance_port     = 5671
+    instance_protocol = "tcp"
+    lb_port           = 5671
+    lb_protocol       = "tcp"
   }
 
   listener {
@@ -17,7 +17,7 @@ resource "aws_elb" "elb" {
     instance_protocol  = "http"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = "${data.aws_acm_certificate.acm_region_cert.arn}"
+    ssl_certificate_id = data.aws_acm_certificate.acm_region_cert.arn
   }
 
   health_check {
@@ -28,15 +28,16 @@ resource "aws_elb" "elb" {
     target              = "TCP:5671"
   }
 
-  subnets               = ["${var.public_subnet_ids}"]
-  idle_timeout          = 3600
-  internal              = false
-  security_groups       = [
-    "${aws_security_group.rabbitmq_elb.id}"
+  subnets      = var.public_subnet_ids
+  idle_timeout = 3600
+  internal     = false
+  security_groups = [
+    aws_security_group.rabbitmq_elb.id,
   ]
 
-  tags {
-    Name = "${var.environment_name} RabbitMQ ELB"
-    resource_group = "${var.environment_name}"
+  tags = {
+    Name           = "${var.environment_name} RabbitMQ ELB"
+    resource_group = var.environment_name
   }
 }
+

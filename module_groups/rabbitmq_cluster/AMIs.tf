@@ -8,3 +8,4 @@ data "aws_ami" "ami" {
     values = ["nulogy-rabbitmq-*"]
   }
 }
+

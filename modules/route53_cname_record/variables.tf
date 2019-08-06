@@ -1,4 +1,13 @@
-variable "target_domain" {}
-variable "domain" {}
-variable "subdomain" {}
-variable "skip" { default = "" }
+variable "target_domain" {
+}
+
+variable "domain" {
+}
+
+variable "subdomain" {
+}
+
+variable "skip" {
+  default = ""
+}
+

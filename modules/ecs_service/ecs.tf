@@ -1,8 +1,8 @@
 resource "aws_ecs_task_definition" "ecs_task" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
-  family = "${var.environment_name}_td"
-  task_role_arn = "${aws_iam_role.ecs_taskrole.arn}"
+  family                = "${var.environment_name}_td"
+  task_role_arn         = aws_iam_role.ecs_taskrole[0].arn
   container_definitions = <<DEFINITION
 [
   {
@@ -33,22 +33,23 @@ DEFINITION
 }
 
 resource "aws_ecs_service" "ecs_service" {
-  count = "${length(var.skip) > 0 ? 0 : 1}"
+  count = length(var.skip) > 0 ? 0 : 1
 
-  name = "${var.environment_name}_service"
-  cluster = "${var.ecs_cluster_name}"
-  task_definition = "${aws_ecs_task_definition.ecs_task.arn}"
-  desired_count = "${var.desired_count}"
-  iam_role = "${aws_iam_role.ecs_servicerole.arn}"
+  name            = "${var.environment_name}_service"
+  cluster         = var.ecs_cluster_name
+  task_definition = aws_ecs_task_definition.ecs_task[0].arn
+  desired_count   = var.desired_count
+  iam_role        = aws_iam_role.ecs_servicerole[0].arn
 
   load_balancer {
-    target_group_arn = "${var.target_group_arn}"
-    container_name = "${var.environment_name}"
-    container_port = "${var.container_port}"
+    target_group_arn = var.target_group_arn
+    container_name   = var.environment_name
+    container_port   = var.container_port
   }
 
   ordered_placement_strategy {
-    type = "spread"
+    type  = "spread"
     field = "attribute:ecs.availability-zone"
   }
 }
+

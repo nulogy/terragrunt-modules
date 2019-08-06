@@ -1,23 +1,24 @@
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
 
 resource "aws_cloudwatch_log_group" "log_group" {
-  name = "/event_shovel/${var.environment_name}"
+  name              = "/event_shovel/${var.environment_name}"
   retention_in_days = "30"
 }
 
 module "event_shovel" {
   source = "/deployer/modules/event_shovel_ecs_service"
 
-  alert_topic_arn = "${var.notification_topic_arn}"
-  alert_evaluation_periods = "${var.alert_evaluation_periods}"
-  aws_account = "${data.aws_caller_identity.current.account_id}"
-  aws_region = "${var.aws_region}"
-  kms_key_id = "${var.kms_key_id}"
-  desired_count = 1
-  docker_image_name = "${module.ecr.ecr_url}:${var.docker_build_tag}"
-  ecs_cluster_name = "${var.ecs_cluster_name}"
-  environment_name = "${var.environment_name}"
-  envvars = <<ENVVARS
+  alert_topic_arn          = var.notification_topic_arn
+  alert_evaluation_periods = var.alert_evaluation_periods
+  aws_account              = data.aws_caller_identity.current.account_id
+  aws_region               = var.aws_region
+  kms_key_id               = var.kms_key_id
+  desired_count            = 1
+  docker_image_name        = "${module.ecr.ecr_url}:${var.docker_build_tag}"
+  ecs_cluster_name         = var.ecs_cluster_name
+  environment_name         = var.environment_name
+  envvars                  = <<ENVVARS
 [
   {
     "name": "AWS_DEFAULT_REGION",
@@ -62,8 +63,10 @@ module "event_shovel" {
 ]
 ENVVARS
 
-  log_group_name = "${aws_cloudwatch_log_group.log_group.name}"
-  param_store_namespace = "${var.environment_name}"
-  private_subnet_ids = "${var.private_subnet_ids}"
-  vpc_id = "${var.vpc_id}"
+
+  log_group_name        = aws_cloudwatch_log_group.log_group.name
+  param_store_namespace = var.environment_name
+  private_subnet_ids    = var.private_subnet_ids
+  vpc_id                = var.vpc_id
 }
+

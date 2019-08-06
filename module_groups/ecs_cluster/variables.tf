@@ -4,17 +4,17 @@ variable "cluster_name" {
 
 variable "desired_capacity" {
   description = "Number of EC2 servers to launch. There are no scaling rules to go higher in response to traffic."
-  default = ""
+  default     = ""
 }
 
 variable "max_size" {
   description = "Max EC2 servers to have running."
-  default = ""
+  default     = ""
 }
 
 variable "min_size" {
   description = "Min EC2 servers to have running."
-  default = ""
+  default     = ""
 }
 
 variable "ec2_public_key" {
@@ -22,15 +22,15 @@ variable "ec2_public_key" {
 }
 
 variable "ecs_ami" {
-  type = "string"
+  type        = string
   description = "The AMI to use. Defaults to Amazon Linux AMI designed for ECS. Override me to use a newer AMI."
-  default = "amzn-ami-2018.03.g-amazon-ecs-optimized"
+  default     = "amzn-ami-2018.03.g-amazon-ecs-optimized"
 }
 
 variable "ecs_ami_owner" {
-  type = "string"
+  type        = string
   description = "The AWS account ID which provides the AMI we intend to use. Defaults to Amazon."
-  default = "591542846629"
+  default     = "591542846629"
 }
 
 variable "environment_name" {
@@ -39,7 +39,7 @@ variable "environment_name" {
 
 variable "health_check_type" {
   description = "Health Check for the Autoscaling Group. 'EC2' or 'ELB'"
-  default = "EC2"
+  default     = "EC2"
 }
 
 variable "lc_instance_type" {
@@ -48,7 +48,7 @@ variable "lc_instance_type" {
 
 variable "private_subnet_ids" {
   description = "Subnets for the EC2 instances to be launched into."
-  type = "list"
+  type        = list(string)
 }
 
 variable "vpc_cidr" {
@@ -74,3 +74,4 @@ variable "sg_ingress_to_port" {
 variable "sg_ingress_protocol" {
   default = "udp"
 }
+

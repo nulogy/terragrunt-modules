@@ -8,9 +8,10 @@ variable "environment_name" {
 
 variable "public_subnet_ids" {
   description = "Public subnets for RabbitMQ Load Balancers. Defines the range of public IPs that the ELB can take."
-  type = "list"
+  type        = list(string)
 }
 
 variable "vpc_id" {
   description = "Determines where the RabbitMQ servers live."
 }
+

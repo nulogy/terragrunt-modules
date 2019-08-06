@@ -1,8 +1,9 @@
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
 
 resource "aws_iam_instance_profile" "rabbitmq_profile" {
   name = "${var.environment_name}-rabbitmq-profile"
-  role = "${aws_iam_role.rabbitmq_role.name}"
+  role = aws_iam_role.rabbitmq_role.name
 }
 
 resource "aws_iam_role" "rabbitmq_role" {
@@ -27,11 +28,12 @@ resource "aws_iam_role" "rabbitmq_role" {
     ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "parameter_store_policy" {
-  name = "${var.environment_name}-rabbitmq-parameter-store"
-  role = "${aws_iam_role.rabbitmq_role.id}"
+  name   = "${var.environment_name}-rabbitmq-parameter-store"
+  role   = aws_iam_role.rabbitmq_role.id
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -64,11 +66,12 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "describe_instances_policy" {
-  name = "${var.environment_name}-rabbitmq-describe-instances"
-  role = "${aws_iam_role.rabbitmq_role.id}"
+  name   = "${var.environment_name}-rabbitmq-describe-instances"
+  role   = aws_iam_role.rabbitmq_role.id
   policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -84,4 +87,6 @@ resource "aws_iam_role_policy" "describe_instances_policy" {
     ]
 }
 EOF
+
 }
+

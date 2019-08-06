@@ -4,8 +4,8 @@ variable "cpu" {
 
 variable "command" {
   description = "Commands to execute after entrypoint"
-  default = ["/bin/echo", "Start command not supplied, just exiting"]
-  type = "list"
+  default     = ["/bin/echo", "Start command not supplied, just exiting"]
+  type        = list(string)
 }
 
 variable "container_port" {
@@ -34,8 +34,8 @@ variable "environment_name" {
 
 variable "depends_on" {
   description = "Workaround for terraform modules lacking `depends_on`. Used in a module_group to ensure a load balancer is up before we try to attach containers to it."
-  default = ""
-  type = "string"
+  default     = ""
+  type        = string
 }
 
 variable "kms_key_id" {
@@ -64,12 +64,12 @@ variable "param_store_namespace" {
 
 variable "subnets" {
   description = "Determines the AZ for the containers. Usually put all subnets from the VPC."
-  type = "list"
+  type        = list(string)
 }
 
 variable "security_group_name" {
   description = "Manually set the security group name. This exists as a bridge to work around a value that was unfortunately hardcoded in versions <= 5.0.0. When writing new code, you can probably ignore this and use the default blank string."
-  default = ""
+  default     = ""
 }
 
 variable "service_name" {
@@ -79,3 +79,4 @@ variable "service_name" {
 variable "target_group_arn" {
   description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
 }
+

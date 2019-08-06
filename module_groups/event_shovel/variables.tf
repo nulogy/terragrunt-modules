@@ -1,6 +1,6 @@
 variable "aws_region" {
   description = "The AWS Region you want to send everything to. Pick something close to the customer."
-  default = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "environment_name" {
@@ -9,12 +9,12 @@ variable "environment_name" {
 
 variable "alert_endpoint" {
   description = "A POST endpoint to send alerts to. Put Pagerduty here. Leave blank for nowhere."
-  default = ""
+  default     = ""
 }
 
 variable "alert_evaluation_periods" {
   description = "Number of evaluation periods to check before alarming the queue size"
-  default = "1"
+  default     = "1"
 }
 
 variable "amqp_host" {
@@ -63,9 +63,10 @@ variable "overridden_db_name" {
 
 variable "private_subnet_ids" {
   description = "Determines the AZ for the containers."
-  type = "list"
+  type        = list(string)
 }
 
 variable "vpc_id" {
   description = "The VPC that this task should live in."
 }
+

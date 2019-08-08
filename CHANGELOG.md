@@ -15,8 +15,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 
 
-## [7.3.0] - 2019-07-17
+## [7.4.0] - 2019-07-30
     
+### Added
+
+* Adds support for an extra security ingress to ECS Cluster. Defaults to 127.0.0.0/8 CIDR, port 65535 and UDP protocol.
+
+## [7.3.0] - 2019-07-17
+
 ### Added
 
 * Adds NAT Gateway public IPs as an output

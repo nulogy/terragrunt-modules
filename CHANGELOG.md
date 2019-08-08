@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [7.5.0] - 2019-08-08
+    
+### Added
+
+* Adds additional terraform providers.
+
 
 ## [7.4.0] - 2019-07-30
     

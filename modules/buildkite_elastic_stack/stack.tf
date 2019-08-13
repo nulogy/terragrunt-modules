@@ -53,7 +53,7 @@ resource "aws_cloudformation_stack" "stack" {
     SecretsBucket = "${var.secrets_bucket}"
     SecurityGroupId = "${aws_security_group.stack_security_group.id}"
     ScaleDownAdjustment = "-${local.scale_down_adjustment}"
-    ScaleDownPeriod = "3600"
+    ScaleDownPeriod = "${var.scale_down_period}"
     ScaleUpAdjustment = "${local.scale_up_adjustment}"
     SpotPrice = "${var.spot_price}"
     Subnets = "${join(",", var.subnet_ids)}"

@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+
+* Adds variable for `command` for ecs_service module container task definitions
+
 ### Changed
+
+* Uses a template file to configure ecs_service module container task definitions
+
 ### Deprecated
 ### Removed
 ### Fixed

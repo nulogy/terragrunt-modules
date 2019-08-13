@@ -1,35 +1,26 @@
+data "template_file" "template" {
+  template = "${file(var.task_definition_json)}"
+
+  vars {
+    TPL_COMMAND = "${join("\",\"", var.command)}"
+    TPL_CONTAINER_PORT = "${var.container_port}"
+    TPL_CPU = "${var.cpuReservation}"
+    TPL_DOCKER_IMAGE = "${var.docker_image_name}"
+    TPL_ENV_NAME = "${var.environment_name}"
+    TPL_ENVVARS = "${var.envars}"
+    TPL_LOG_GROUP_NAME = "${var.log_group_name}"
+    TPL_MEM = "${var.max_memory}"
+    TPL_MEM_RESERVATION = "${var.memory_reservation}"
+    TPL_REGION = "${var.aws_region}"
+  }
+}
+
 resource "aws_ecs_task_definition" "ecs_task" {
   count = "${length(var.skip) > 0 ? 0 : 1}"
 
   family = "${var.environment_name}_td"
   task_role_arn = "${aws_iam_role.ecs_taskrole.arn}"
-  container_definitions = <<DEFINITION
-[
-  {
-    "cpu": ${var.cpuReservation},
-    "environment": ${var.envars},
-    "essential": true,
-    "image": "${var.docker_image_name}",
-    "memoryReservation": ${var.memory_reservation},
-    "memory": ${var.max_memory},
-    "name": "${var.environment_name}",
-    "portMappings": [{
-      "hostPort": 0,
-      "containerPort": ${var.container_port},
-      "protocol": "tcp"
-    }],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-          "awslogs-group": "${var.log_group_name}",
-          "awslogs-region": "${var.aws_region}",
-          "awslogs-stream-prefix": "${var.environment_name}"
-      }
-    }
-  }
-]
-DEFINITION
-
+  container_definitions = "${data.template_file.template.rendered}"
 }
 
 resource "aws_ecs_service" "ecs_service" {

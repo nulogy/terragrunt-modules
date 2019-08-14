@@ -14,6 +14,7 @@ variable "root_volume_size" {
 }
 variable "scale_adjustment" { default = 0 }
 variable "scale_down_adjustment" { default = 0 }
+variable "scale_down_period" { default = 3600 }
 variable "scale_up_adjustment" { default = 0 }
 variable "secrets_bucket" { }
 variable "spot_price" { default = 0 }

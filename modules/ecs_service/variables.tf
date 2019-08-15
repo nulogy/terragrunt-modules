@@ -14,3 +14,14 @@ variable "memory_reservation" {}
 variable "param_store_namespace" { default = "" }
 variable "skip" { default = "" }
 variable "target_group_arn" {}
+variable "command" {
+  description = "Commands to execute after entrypoint"
+  default = ["/bin/echo", "Start command not supplied, just exiting"]
+  type = "list"
+}
+
+variable "task_definition_json" {
+  description = "allows specifying a different JSON task definition, if none default (1 container per task) will be used"
+  default = "/deployer/modules/ecs_service/task_definition/default.json"
+  type = "string"
+}

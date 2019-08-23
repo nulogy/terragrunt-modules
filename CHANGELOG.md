@@ -29,12 +29,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Adds parameter `scale_down_period` to the "buildkite_elastic_stack" module
 
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
-
 ## [7.5.0] - 2019-08-08
     
 ### Added

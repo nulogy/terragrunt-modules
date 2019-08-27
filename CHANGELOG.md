@@ -14,6 +14,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [7.7.0] - 2019-08-15
+### Added
+
+* Adds variable for `command` for ecs_service module container task definitions
+
+### Changed
+
+* Uses a template file to configure ecs_service module container task definitions (no API change)
+
+## [7.6.0] - 2019-08-14
+
+### Added
+
+* Adds parameter `scale_down_period` to the "buildkite_elastic_stack" module
+
 ## [7.5.0] - 2019-08-08
     
 ### Added

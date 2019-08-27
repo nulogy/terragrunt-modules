@@ -1,0 +1,25 @@
+[
+  {
+    "command": ["${TPL_COMMAND}"],
+    "environment": ${TPL_ENVVARS},
+    "essential": true,
+    "image": "${TPL_DOCKER_IMAGE}",
+    "cpu": ${TPL_CPU},
+    "memoryReservation": ${TPL_MEM_RESERVATION},
+    "memory": ${TPL_MEM},
+    "name": "${TPL_ENV_NAME}",
+    "portMappings": [{
+      "hostPort": 0,
+      "containerPort": ${TPL_CONTAINER_PORT},
+      "protocol": "tcp"
+    }],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+          "awslogs-group": "${TPL_LOG_GROUP_NAME}",
+          "awslogs-region": "${TPL_REGION}",
+          "awslogs-stream-prefix": "${TPL_ENV_NAME}"
+      }
+    }
+  }
+]

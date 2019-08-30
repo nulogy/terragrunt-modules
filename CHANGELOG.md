@@ -14,7 +14,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.0] - 2019-08-30
+
+### Changed
+
+* Upgrades to Terraform 0.12.7 and Terragrunt 0.19.21.
+* Updates modules to Terrafrom 0.12 format
+
+### Removed
+
+* Removes Terraform Landscape as it's no longer needed with Terraform 0.12
+
 ## [7.7.0] - 2019-08-15
+
 ### Added
 
 * Adds variable for `command` for ecs_service module container task definitions

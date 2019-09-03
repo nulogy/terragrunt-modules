@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.1] - 2019-09-03
+
+### Changed
+
+* Bug fix for modules/ecs_service_fargate.  Depends_on is a reserved name in terraform 0.12.
+
 ## [8.0.0] - 2019-08-30
 
 ### Changed

@@ -44,6 +44,6 @@ module "ecs_service_fargate_elb" {
   vpc_cidr              = var.vpc_cidr
   vpc_id                = var.vpc_id
 
-  depends_on = module.public_load_balancer.aws_lb_listener
+  depends_on_hack = module.public_load_balancer.aws_lb_listener
 }
 

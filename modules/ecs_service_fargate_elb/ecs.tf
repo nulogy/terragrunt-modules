@@ -68,7 +68,7 @@ resource "aws_ecs_service" "ecs_service" {
 
 resource "null_resource" "alb_exists" {
   triggers = {
-    alb_name = var.depends_on
+    alb_name = var.depends_on_hack
   }
 }
 

@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 * Upgrades to Terraform 0.12.7 and Terragrunt 0.19.21.
-* Updates modules to Terrafrom 0.12 format
+* Updates modules to Terraform 0.12 format
 
 ### Removed
 

@@ -5,12 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [7-stable Unreleased]
 
 ### Added
+
+* Added health_check_timeout variable to the ecs_fargate_with_elb and to the public_load_balancer modules
+* Added deregistration_delay variable to the ecs_fargate_with_elb and to the public_load_balancer modules to speed up deployments on some environments
+
 ### Changed
 ### Deprecated
 ### Removed
+
+* Removed HTTP 301 (redirect) as a healthy response for the load balancer target group.
+
 ### Fixed
 ### Security
 

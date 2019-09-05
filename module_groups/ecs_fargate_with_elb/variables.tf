@@ -41,6 +41,11 @@ variable "health_check_path" {
   description = "The path that the Load Balancer will check. If it does not have a 200 OK response, then the container is killed."
 }
 
+variable "health_check_timeout" {
+  description = "The amount of time, in seconds, during which no response from a worker means a failed health check."
+  default = 5
+}
+
 variable "kms_key_id" {}
 
 variable "memory" {}
@@ -61,6 +66,11 @@ variable "security_group_name" {
 }
 
 variable "service_name" {}
+
+variable "deregistration_delay" {
+  description = "The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering task from draining to unused. The range is 0-3600 seconds."
+  default = 120
+}
 
 variable "slow_start" {
   description = "Number of seconds to bleed traffic to the app. Useful for slow Rails startup time apps (like Packmanager)."

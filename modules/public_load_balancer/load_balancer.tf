@@ -19,13 +19,14 @@ resource "aws_lb_target_group" "target_group" {
   port = "${var.port}"
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
-  deregistration_delay = 120
+  deregistration_delay = "${var.deregistration_delay}"
   target_type = "${var.target_type}"
   slow_start = "${var.slow_start}"
 
   health_check {
     path = "${var.health_check_path}"
-    matcher = "200,301"
+    timeout = "${var.health_check_timeout}"
+    matcher = "200"
   }
 
   stickiness {

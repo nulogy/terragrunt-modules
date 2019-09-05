@@ -2,6 +2,10 @@ variable "alb_subnets" { type = "list" }
 variable "cert_domain" {}
 variable "environment_name" {}
 variable "health_check_path" { default = "/" }
+variable "health_check_timeout" {
+  description = "The amount of time, in seconds, during which no response from a target means a failed health check."
+  default = 5
+}
 variable "skip" { default = "" }
 variable "vpc_id" {}
 

@@ -41,6 +41,11 @@ variable "health_check_path" {
   description = "The path that the Load Balancer will check. If it does not have a 200 OK response, then the container is killed."
 }
 
+variable "health_check_timeout" {
+  description = "The amount of time, in seconds, during which no response from a worker means a failed health check."
+  default = 5
+}
+
 variable "kms_key_id" {}
 
 variable "memory" {}

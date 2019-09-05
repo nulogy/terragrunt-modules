@@ -67,6 +67,11 @@ variable "security_group_name" {
 
 variable "service_name" {}
 
+variable "deregistration_delay" {
+  description = "The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering task from draining to unused. The range is 0-3600 seconds."
+  default = 120
+}
+
 variable "slow_start" {
   description = "Number of seconds to bleed traffic to the app. Useful for slow Rails startup time apps (like Packmanager)."
   default = 0

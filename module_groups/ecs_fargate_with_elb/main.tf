@@ -12,6 +12,7 @@ module "public_load_balancer" {
   environment_name = "${var.environment_name}"
   health_check_path = "${var.health_check_path}"
   health_check_timeout = "${var.health_check_timeout}"
+  deregistration_delay = "${var.deregistration_delay}"
   slow_start = "${var.slow_start}"
   stickiness_enabled = "${var.stickiness_enabled}"
   vpc_id = "${var.vpc_id}"

@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.2] - 2019-09-05
+
+### Changed
+
+* Adds local provider to Dockerfile
+* Fixes bug in modules/public_private_subnets/outputs.tf and modules/private_subnets/outputs.tf
+
 ## [8.0.1] - 2019-09-03
 
 ### Changed
@@ -26,6 +33,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Upgrades to Terraform 0.12.7 and Terragrunt 0.19.21.
 * Updates modules to Terraform 0.12 format
+
+To migrate a project's modules, run: `find ./* -type d -maxdepth 0 -exec terraform 0.12upgrade -yes {} \;`
+Convert terragrunt `terraform.tfvars` files in the environment root and module directories to `terragrunt.hcl`
 
 ### Removed
 

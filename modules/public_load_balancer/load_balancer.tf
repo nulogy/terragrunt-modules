@@ -26,7 +26,7 @@ resource "aws_lb_target_group" "target_group" {
   health_check {
     path = "${var.health_check_path}"
     timeout = "${var.health_check_timeout}"
-    matcher = "200,301"
+    matcher = "200"
   }
 
   stickiness {

@@ -14,6 +14,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [7.8.0] - 2018-09-05
+
+### Added
+
+* Added health_check_timeout variable to the ecs_fargate_with_elb and to the public_load_balancer modules
+* Added deregistration_delay variable to the ecs_fargate_with_elb and to the public_load_balancer modules to speed up deployments on some environments
+
+### Removed
+
+* Removed HTTP 301 (redirect) as a healthy response for the load balancer target group.
+
 ## [8.0.2] - 2019-09-05
 
 ### Changed

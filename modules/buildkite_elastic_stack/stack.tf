@@ -44,6 +44,7 @@ resource "aws_cloudformation_stack" "stack" {
     BuildkiteQueue                 = var.buildkite_queue
     ECRAccessPolicy                = "poweruser"
     EnableDockerUserNamespaceRemap = "false"
+    EnableExperimentalLambdaBasedAutoscaling = var.enable_experimental_lambda_based_autoscaling
     InstanceType                   = var.instance_type
     KeyName                        = var.key_name
     ManagedPolicyARN               = var.managed_policy_arn

@@ -61,7 +61,7 @@ resource "aws_cloudformation_stack" "stack" {
   }
 
   lifecycle {
-    ignore_changes = [parameters.BuildkiteAgentToken]
+    ignore_changes = [parameters["BuildkiteAgentToken"]]
   }
 }
 

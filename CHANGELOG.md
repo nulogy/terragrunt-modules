@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.3] - 2019-09-05
+
+### Changed
+
+* Bump Terraform and Terragrunt versions
+
 ## [7.8.0] - 2018-09-05
 
 ### Added

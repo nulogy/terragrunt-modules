@@ -8,10 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Added variable to set mutability behaviour on ECRs
+* Added experimental lambda based autoscaling variable to buildkite stack
+
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+
+* Fixed lifecycle syntax for buildkite stack after upgrading to terraform 0.12
+
 ### Security
 
 ## [8.0.3] - 2019-09-05

@@ -12,6 +12,11 @@ variable "buildkite_agent_token" {
 variable "buildkite_queue" {
 }
 
+variable "enable_experimental_lambda_based_autoscaling" {
+  description = "Uses a custom lambda for autoscaling vs the standard AWS AutoScaling"
+  default = false
+}
+
 variable "instance_type" {
 }
 

@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.6] - 2019-10-03
+
+### Changed
+
+* Public load balancer now supports ip_address_type "dualstack" for ipv6 support
+
 ## [8.0.5] - 2019-09-17
 
 ### Changed

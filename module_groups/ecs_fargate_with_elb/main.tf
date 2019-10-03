@@ -13,6 +13,7 @@ module "public_load_balancer" {
   health_check_path                = var.health_check_path
   health_check_timeout             = var.health_check_timeout
   deregistration_delay             = var.deregistration_delay
+  ip_address_type                  = var.lb_ip_address_type
   slow_start                       = var.slow_start
   stickiness_enabled               = var.stickiness_enabled
   vpc_id                           = var.vpc_id

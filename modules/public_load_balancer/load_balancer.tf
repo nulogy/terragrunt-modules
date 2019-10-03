@@ -5,6 +5,7 @@ resource "aws_lb" "public_load_balancer" {
   internal        = false
   security_groups = [aws_security_group.ecs_lb_security_group[0].id]
   subnets         = var.alb_subnets
+  ip_address_type = var.ip_address_type
 
   tags = {
     Name           = "${var.environment_name} public load balancer"

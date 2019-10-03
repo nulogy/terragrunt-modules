@@ -74,3 +74,7 @@ variable "lb_maintenance_mode_status_code" {
   default     = 503
 }
 
+variable "ip_address_type" {
+  description = "ipv4 or dualstack for ipv6 support"
+  default = "ipv4"
+}

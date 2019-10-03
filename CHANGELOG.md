@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.7] - 2019-10-03
+
+### Changed
+
+* Fixes security group for Public Load Balancer ipv6 support
+
 ## [8.0.6] - 2019-10-03
 
 ### Changed

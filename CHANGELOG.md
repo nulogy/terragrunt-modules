@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.0.8] - 2019-10-10
+
+* Updates default Nulogy office IP address
+
 ## [8.0.7] - 2019-10-03
 
 ### Changed

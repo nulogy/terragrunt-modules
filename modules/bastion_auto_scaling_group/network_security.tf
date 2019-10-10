@@ -1,5 +1,5 @@
 locals {
-  office_ip = length(var.office_ip) > 0 ? var.office_ip : "64.215.160.242"
+  office_ip = length(var.office_ip) > 0 ? var.office_ip : "76.9.199.30"
 }
 
 resource "aws_security_group" "ecs_ec2_security_group" {

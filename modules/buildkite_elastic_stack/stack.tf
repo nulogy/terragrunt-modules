@@ -1,5 +1,5 @@
 locals {
-  office_ip             = length(var.office_ip) > 0 ? var.office_ip : "64.215.160.242"
+  office_ip             = length(var.office_ip) > 0 ? var.office_ip : "76.9.199.30"
   scale_up_adjustment   = var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_up_adjustment
   scale_down_adjustment = var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_down_adjustment
 }

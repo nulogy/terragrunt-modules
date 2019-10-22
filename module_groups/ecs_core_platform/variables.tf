@@ -31,6 +31,10 @@ variable "min_size" {
   default = ""
 }
 
+variable "office_ip" {
+  default = ""
+}
+
 variable "health_check_type" {
   default = "EC2"
 }
@@ -61,4 +65,3 @@ variable "public_subnets" {
 
 variable "vpc_cidr" {
 }
-

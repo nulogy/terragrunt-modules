@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Office IP var to the ecs_plb_platform module group
+
 ### Changed
 ### Deprecated
 ### Removed

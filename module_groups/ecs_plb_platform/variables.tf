@@ -34,6 +34,10 @@ variable "min_size" {
   default = ""
 }
 
+variable "office_ip" {
+  default = ""
+}
+
 variable "health_check_type" {
   default = "ELB"
 }
@@ -72,4 +76,3 @@ variable "route53_subdomain" {
 
 variable "vpc_cidr" {
 }
-

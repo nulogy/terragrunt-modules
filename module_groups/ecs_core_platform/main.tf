@@ -64,6 +64,7 @@ module "bastion_auto_scaling_group" {
   source = "/deployer/modules/bastion_auto_scaling_group"
 
   ec2_subnet_ids   = module.ecs_subnets.public_subnet_ids
+  office_ip        = var.office_ip
   ecs_ami          = var.ecs_ami
   ecs_ami_owner    = var.ecs_ami_owner
   environment_name = var.environment_name

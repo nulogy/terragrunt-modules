@@ -8,14 +8,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Office IP var to the ecs_plb_platform module group
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [8.1.0] - 2019-11-27
+
+### Added
+
+* Office IP var to the ecs_plb_platform module group
+* Adds aliases for Terragrunt `tg=terragrunt`, `tgp=terragrunt plan`, `tgpa=terragrunt plan-all`, etc...
+
+### Changed
+
+* Bump Terraform and Terragrunt versions
 
 ## [8.0.8] - 2019-10-10
 

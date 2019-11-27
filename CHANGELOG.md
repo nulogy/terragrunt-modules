@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 * Office IP var to the ecs_plb_platform module group
-* Adds aliases for Terragrunt `tg=terragrunt`, `tgp=terragrunt plan`, `tgpa=terragrunt plan-all`, etc...
+* Adds aliases for Terragrunt `tg=terragrunt`, `tga=terragrunt apply`, `tgpa=terragrunt plan-all`, etc...
 
 ### Changed
 

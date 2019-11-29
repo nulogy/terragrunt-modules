@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.2.0] - 2019-11-29
+
+### Added
+
+* Adds optional `security_group_ids` to `public_load_balancer` module
+
 ## [8.1.0] - 2019-11-27
 
 ### Added

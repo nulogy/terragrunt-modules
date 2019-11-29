@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs_lb_security_group" {
-  count = length(var.skip) > 0 ? 0 : 1
+  count = length(var.skip) > 0 ? 0 : (length(var.security_group_ids) > 0 ? 0 : 1)
 
   name_prefix = "${var.environment_name}-lb-sg-"
 

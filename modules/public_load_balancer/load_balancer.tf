@@ -1,9 +1,13 @@
+locals {
+  security_group_ids = length(var.security_group_ids) > 0 ? var.security_group_ids : [aws_security_group.ecs_lb_security_group[0].id]
+}
+
 resource "aws_lb" "public_load_balancer" {
   count = length(var.skip) > 0 ? 0 : 1
 
   name            = "${var.environment_name}-PLB"
   internal        = false
-  security_groups = [aws_security_group.ecs_lb_security_group[0].id]
+  security_groups = local.security_group_ids
   subnets         = var.alb_subnets
   ip_address_type = var.ip_address_type
 

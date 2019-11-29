@@ -23,6 +23,7 @@ module "public_load_balancer" {
   lb_maintenance_mode_content_type = var.lb_maintenance_mode_content_type
   lb_maintenance_mode_page_content = var.lb_maintenance_mode_page_content
   lb_maintenance_mode_status_code  = var.lb_maintenance_mode_status_code
+  security_group_ids               = var.lb_security_group_ids
 }
 
 module "ecs_service_fargate_elb" {

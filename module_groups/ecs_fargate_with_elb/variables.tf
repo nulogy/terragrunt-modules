@@ -116,3 +116,8 @@ variable "lb_ip_address_type" {
   description = "ipv4 or dualstack for ipv6 support"
   default = "ipv4"
 }
+
+variable "lb_security_group_ids" {
+  type = list(string)
+  default = []
+}

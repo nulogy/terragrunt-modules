@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.3.0] - 2019-12-09
+
+### Added
+
+* `/deployer/utils/empty.hcl` placeholder for Terragrunt when you with to optionally include a file.
+* `/deployer/utils/replace_terragrunt_hcl_with_symlinks.sh` Replaces regular environment hcl files with symlinks.
+
 ## [8.2.0] - 2019-11-29
 
 ### Added

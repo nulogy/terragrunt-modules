@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.4.0] - 2019-12-11
+
+### Added
+
+* yq (https://yq.readthedocs.io/en/latest/)
+
 ## [8.3.0] - 2019-12-09
 
 ### Added

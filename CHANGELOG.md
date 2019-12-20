@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.6.0] - 2019-12-20
+
+### Added
+
+* auth.sh and setup_auth.sh scripts which make it easy for users to login to the nulogy-auth account.
+
+## [8.5.0] - 2019-12-12
+
+### Added
+
+* `ecs_fargate_with_elb` now outputs `ecs_service_name`
+
 ## [8.4.0] - 2019-12-11
 
 ### Added

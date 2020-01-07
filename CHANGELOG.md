@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.7.0] - 2020-01-07
+
+### Added
+
+* auth.sh now automatically checks if you are in an aws account directory and uses that if the command line parameter hasn't been set.
+
 ## [8.6.0] - 2019-12-20
 
 ### Added

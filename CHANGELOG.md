@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.8.0] - 2020-01-10
+
+### Added
+
+* auth.sh now uses the nulogy-anchor account to discover account names.
+
 ## [8.7.0] - 2020-01-07
 
 ### Added

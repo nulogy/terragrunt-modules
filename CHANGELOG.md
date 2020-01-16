@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.8.3] - 2020-01-16
+
+### Changed
+
+* setup_auth.sh now shows your values as you paste them.
+
 ## [8.8.2] - 2020-01-15
 
 ### Changed

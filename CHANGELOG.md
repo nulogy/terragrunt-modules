@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.9.1] - 2020-01-16
+
+### Changed
+
+* Bugfix for tgprep
+
 ## [8.9.0] - 2020-01-16
 
 ### Changed

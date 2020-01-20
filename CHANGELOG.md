@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.11.0] - 2020-01-20
+
+### Added
+
+* empty_s3_bucket.sh script to help delete versioned s3 buckets
+
 ## [8.10.0] - 2020-01-20
 
 ### Changed

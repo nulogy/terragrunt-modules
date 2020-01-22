@@ -1,5 +1,6 @@
 locals {
   container_name = "${var.environment_name}_${var.service_name}"
+  health_check_object = length(var.health_check_command) > 0 ? jsonencode({command: var.health_check_command}) : "null"
 }
 
 resource "aws_ecs_task_definition" "ecs_task" {
@@ -18,6 +19,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "cpu": ${var.cpu},
     "environment": ${var.envars},
     "essential": true,
+    "healthCheck": ${local.health_check_object},
     "image": "${var.docker_image_name}",
     "portMappings": [{
       "hostPort": ${var.container_port},
@@ -71,4 +73,3 @@ resource "null_resource" "alb_exists" {
     alb_name = var.depends_on_hack
   }
 }
-

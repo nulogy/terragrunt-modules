@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.12.0] - 2020-01-22
+
+### Added
+
+* Adds the `health_check_command` variable to the "ecs_service_fargate_elb" module
+
 ## [8.11.0] - 2020-01-20
 
 ### Added

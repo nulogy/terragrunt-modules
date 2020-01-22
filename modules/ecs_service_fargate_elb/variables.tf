@@ -38,6 +38,12 @@ variable "depends_on_hack" {
   type        = string
 }
 
+variable "health_check_command" {
+  description = "A test to perform to check that the container is healthy."
+  type = list(string)
+  default = []
+}
+
 variable "kms_key_id" {
   description = "KMS Key to retrieve secrets with. Goes with param store namespace."
 }

@@ -83,3 +83,7 @@ variable "security_group_ids" {
   type = list(string)
   default = []
 }
+
+variable "lb_cert_arn" {
+  default = ""
+}

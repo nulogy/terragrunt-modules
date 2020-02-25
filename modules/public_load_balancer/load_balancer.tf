@@ -53,7 +53,7 @@ resource "aws_lb_listener" "public_lb_listener" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = data.aws_acm_certificate.acm_region_cert[0].arn
+  certificate_arn   = length(var.lb_cert_arn) > 0 ? var.lb_cert_arn : data.aws_acm_certificate.acm_region_cert[0].arn
 
   default_action {
     target_group_arn = aws_lb_target_group.target_group[0].arn

@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.15.0] - 2020-02-28
+
+### Changed
+
+* Adds the `lb_listener_arns` output to the `ecs-fargate-with-elb` module
+
 ## [8.14.0] - 2020-02-25
 
 ### Changed

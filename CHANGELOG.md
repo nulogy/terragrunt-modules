@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.16.0] - 2020-03-30
+
+### Changed
+
+* Bumps Terraform and Terragrunt versions.  Uses AWS Terraform provider 2.55.0 which fixes bug with restoring snapshots in shared VPCs.
+
 ## [8.15.0] - 2020-02-28
 
 ### Changed

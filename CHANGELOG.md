@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.17.0] - 2020-03-30
+
+### Added
+
+* ecs_incoming_allowed_cidr variable to ecs_fargate_with_elb.  Useful for VPC Tunnels.
+
 ## [8.16.0] - 2020-03-30
 
 ### Changed

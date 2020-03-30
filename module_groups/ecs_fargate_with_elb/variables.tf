@@ -125,3 +125,8 @@ variable "lb_security_group_ids" {
 variable "lb_cert_arn" {
   default = ""
 }
+
+variable "ecs_incoming_allowed_cidr" {
+  description = "The CIDR to allow incoming traffic to the ECS tasks.  Overrides the default of the VPC"
+  default     = ""
+}

@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.18.0] - 2020-04-03
+
+### Changed
+
+* The auth script now looks for the first occurrence of 'nulogy-account-name' in your path rather than the last.
+
 ## [8.17.0] - 2020-03-30
 
 ### Added

@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.19.0] - 2020-04-06
+
+### Changed
+
+* Updates the AWS terraform provider to fix a bug with creating RDS read replicas in shared VPCs
+* Moves the Dockerfile to the root dir for more flexibility
+
 ## [8.18.0] - 2020-04-03
 
 ### Changed

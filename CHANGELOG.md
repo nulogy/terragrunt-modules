@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.20.0] - 2020-04-13
+
+### Changed
+
+* Removes custom terraform-provider-aws because the bugfix from 8.19.0 got merged into the mainline
+* Bumps terragrunt
+
 ## [8.19.0] - 2020-04-06
 
 ### Changed

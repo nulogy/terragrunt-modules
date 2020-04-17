@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [8.21.0] - 2020-04-17
+
+### Changed
+
+* Bumps terragrunt
+
 ## [8.20.0] - 2020-04-13
 
 ### Changed

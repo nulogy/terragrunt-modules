@@ -2,14 +2,9 @@ data "aws_subnet_ids" "subnet_ids" {
   vpc_id = var.vpc_id
 }
 
-data "aws_subnet" "subnets" {
-  count = length(data.aws_subnet_ids.subnet_ids.ids)
-  id    = data.aws_subnet_ids.subnet_ids.ids[count.index]
-}
-
 data "aws_route_table" "route_tables" {
-  count     = length(data.aws_subnet.subnets.*.id)
-  subnet_id = element(data.aws_subnet.subnets.*.id, count.index)
+  count     = length(data.aws_subnet_ids.subnet_ids.ids)
+  subnet_id = sort(data.aws_subnet_ids.subnet_ids.ids)[count.index]
 }
 
 resource "aws_route" "routes" {

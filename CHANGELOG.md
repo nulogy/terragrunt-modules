@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Removed
 ### Fixed
+
+* Moves dockerignore file to docker build context root
+* Fixes routes in vpc peering after upgrading to Terraform 0.12
+* Fixes deprecation warning for `aws_lb_listener_rule.conditions` usage after upgrading aws provider to v2.59.0
+
 ### Security
 
 ## [8.21.0] - 2020-04-17

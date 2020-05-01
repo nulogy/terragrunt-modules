@@ -16,6 +16,12 @@ We treat this project as an internal "open source" project. Everyone at Nulogy i
 ./develop_deployer.sh <docker-image-used-for-testing-deployments>
 ```
 
+1. Change into the app directory you linked above. For example:
+
+```
+cd apps/go
+```
+
 **NOTE: Never run `tg.sh apply` on any production environment since it will change the terraform state. If you want to see changes your new code will make, run `tg.sh plan`**
 
 ### Merging changes to master

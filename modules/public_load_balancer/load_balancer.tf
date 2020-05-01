@@ -71,8 +71,9 @@ resource "aws_lb_listener_rule" "default_routing" {
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["*"]
+    path_pattern {
+      values = ["*"]
+    }
   }
 }
 
@@ -91,8 +92,8 @@ resource "aws_lb_listener_rule" "maintenance_routing" {
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["*"]
+    path_pattern {
+      values = ["*"]
+    }
   }
 }
-

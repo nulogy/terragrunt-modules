@@ -19,6 +19,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Security
 
+## [8.22.0] - 2020-05-01
+
+### Changed
+
+* Migrates `aws_lb_listener_rule.conditions` in `public_load_balancer` to new syntax since the old one was deprecated on v2.42.0 of the AWS provider
+
+### Fixed
+
+* Moves dockerignore file to docker build context root
+* Fixes routes in vpc peering after upgrading to Terraform 0.12
+
 ## [8.21.0] - 2020-04-17
 
 ### Changed

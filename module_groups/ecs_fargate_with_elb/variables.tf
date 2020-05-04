@@ -43,7 +43,7 @@ variable "health_check_path" {
 
 variable "health_check_timeout" {
   description = "The amount of time, in seconds, during which no response from a worker means a failed health check."
-  default = 5
+  default     = 5
 }
 
 variable "kms_key_id" {
@@ -73,7 +73,7 @@ variable "service_name" {
 
 variable "deregistration_delay" {
   description = "The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering task from draining to unused. The range is 0-3600 seconds."
-  default = 120
+  default     = 120
 }
 
 variable "slow_start" {
@@ -114,11 +114,11 @@ variable "lb_maintenance_mode_status_code" {
 
 variable "lb_ip_address_type" {
   description = "ipv4 or dualstack for ipv6 support"
-  default = "ipv4"
+  default     = "ipv4"
 }
 
 variable "lb_security_group_ids" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 

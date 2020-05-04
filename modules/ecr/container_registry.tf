@@ -1,7 +1,7 @@
 resource "aws_ecr_repository" "ecr_repo" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name = var.name
+  name                 = var.name
   image_tag_mutability = var.image_tag_mutability
 }
 

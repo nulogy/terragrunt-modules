@@ -40,8 +40,8 @@ variable "depends_on_hack" {
 
 variable "health_check_command" {
   description = "A test to perform to check that the container is healthy."
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "kms_key_id" {

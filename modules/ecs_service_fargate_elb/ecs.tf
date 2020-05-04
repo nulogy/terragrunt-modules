@@ -1,6 +1,6 @@
 locals {
-  container_name = "${var.environment_name}_${var.service_name}"
-  health_check_object = length(var.health_check_command) > 0 ? jsonencode({command: var.health_check_command}) : "null"
+  container_name      = "${var.environment_name}_${var.service_name}"
+  health_check_object = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
 }
 
 resource "aws_ecs_task_definition" "ecs_task" {

@@ -16,9 +16,9 @@ resource "aws_security_group" "ecs_lb_security_group" {
   # Accept all public HTTPS traffic
   ingress {
     ipv6_cidr_blocks = ["::/0"]
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
   }
 
   # Allows all outbound traffic
@@ -31,9 +31,9 @@ resource "aws_security_group" "ecs_lb_security_group" {
 
   egress {
     ipv6_cidr_blocks = ["::/0"]
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
+    from_port        = 0
+    to_port          = 65535
+    protocol         = "tcp"
   }
 
   tags = {

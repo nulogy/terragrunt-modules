@@ -1,5 +1,4 @@
 locals {
-  office_ip             = length(var.office_ip) > 0 ? var.office_ip : "76.9.199.30"
   scale_up_adjustment   = var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_up_adjustment
   scale_down_adjustment = var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_down_adjustment
 }
@@ -11,7 +10,7 @@ resource "aws_security_group" "stack_security_group" {
 
   # Allow SSH connections from the office
   ingress {
-    cidr_blocks = ["${local.office_ip}/32"]
+    cidr_blocks = ["${var.office_ip}/32"]
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"

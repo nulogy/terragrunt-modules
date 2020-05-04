@@ -35,7 +35,6 @@ variable "min_size" {
 }
 
 variable "office_ip" {
-  default = ""
 }
 
 variable "health_check_type" {

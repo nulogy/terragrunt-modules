@@ -20,7 +20,7 @@ module "ecs_core_platform" {
 }
 
 module "public_load_balancer" {
-  source = "/deployer/modules/public_load_balancer"
+  source = "../../modules/public_load_balancer"
 
   alb_subnets       = module.ecs_core_platform.public_subnet_ids
   cert_domain       = var.cert_domain
@@ -30,7 +30,7 @@ module "public_load_balancer" {
 }
 
 module "route53_for_load_balancer" {
-  source = "/deployer/modules/route53_alias_record"
+  source = "../../modules/route53_alias_record"
 
   domain         = var.route53_domain
   subdomain      = var.route53_subdomain

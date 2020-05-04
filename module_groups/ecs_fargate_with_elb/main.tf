@@ -1,11 +1,11 @@
 module "log_group" {
-  source = "/deployer/modules/log_group"
+  source = "../../modules/log_group"
 
   name = "${var.environment_name}-${var.service_name}"
 }
 
 module "public_load_balancer" {
-  source = "/deployer/modules/public_load_balancer"
+  source = "../../modules/public_load_balancer"
 
   alb_subnets                      = var.public_subnets
   cert_domain                      = var.cert_domain
@@ -28,7 +28,7 @@ module "public_load_balancer" {
 }
 
 module "ecs_service_fargate_elb" {
-  source = "/deployer/modules/ecs_service_fargate_elb"
+  source = "../../modules/ecs_service_fargate_elb"
 
   command               = var.command
   container_port        = var.container_port

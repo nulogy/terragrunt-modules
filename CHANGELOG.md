@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+* Extracted the terragrunt modules to their own repo
+
 ### Deprecated
 ### Removed
 
@@ -16,7 +19,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-* Moves dockerignore file to docker build context root
 * Fixes routes in vpc peering after upgrading to Terraform 0.12
 * Fixes deprecation warning for `aws_lb_listener_rule.conditions` usage after upgrading aws provider to v2.59.0
 

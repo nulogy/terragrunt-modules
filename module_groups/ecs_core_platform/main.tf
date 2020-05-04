@@ -5,14 +5,14 @@ locals {
 }
 
 module "vpc" {
-  source = "/deployer/modules/vpc"
+  source = "../../modules/vpc"
 
   environment_name = var.environment_name
   vpc_cidr         = var.vpc_cidr
 }
 
 module "ecs_subnets" {
-  source = "/deployer/modules/public_private_subnets"
+  source = "../../modules/public_private_subnets"
 
   environment_name          = var.environment_name
   internet_gw_id            = module.vpc.internet_gw_id
@@ -25,7 +25,7 @@ module "ecs_subnets" {
 }
 
 module "ecs_cluster" {
-  source = "/deployer/module_groups/ecs_cluster"
+  source = "../../module_groups/ecs_cluster"
 
   desired_capacity  = local.desired_capacity
   max_size          = local.max_size
@@ -44,13 +44,13 @@ module "ecs_cluster" {
 }
 
 module "log_group" {
-  source = "/deployer/modules/log_group"
+  source = "../../modules/log_group"
 
   name = "${var.environment_name}-log"
 }
 
 module "vpc_peering_connection" {
-  source = "/deployer/modules/vpc_peering_connection"
+  source = "../../modules/vpc_peering_connection"
   skip   = length(var.peer_account_id) == 0 ? "true" : ""
 
   environment_name = var.environment_name
@@ -61,7 +61,7 @@ module "vpc_peering_connection" {
 }
 
 module "bastion_auto_scaling_group" {
-  source = "/deployer/modules/bastion_auto_scaling_group"
+  source = "../../modules/bastion_auto_scaling_group"
 
   ec2_subnet_ids   = module.ecs_subnets.public_subnet_ids
   office_ip        = var.office_ip

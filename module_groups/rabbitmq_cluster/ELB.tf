@@ -1,5 +1,5 @@
 module "amqp_load_balancer" {
-  source = "/deployer/modules/amqp_load_balancer"
+  source = "../../modules/amqp_load_balancer"
 
   certificate_domain = var.certificate_domain
   environment_name   = var.environment_name

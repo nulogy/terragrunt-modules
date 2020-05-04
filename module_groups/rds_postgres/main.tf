@@ -1,5 +1,5 @@
 module "rds_subnets" {
-  source = "/deployer/modules/private_subnets"
+  source = "../../modules/private_subnets"
   skip   = var.skip
 
   environment_name         = var.environment_name
@@ -9,7 +9,7 @@ module "rds_subnets" {
 }
 
 module "postgres_rds" {
-  source = "/deployer/modules/postgres_rds"
+  source = "../../modules/postgres_rds"
   skip   = var.skip
 
   db_allocated_storage   = var.db_allocated_storage

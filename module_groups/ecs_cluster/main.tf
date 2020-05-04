@@ -8,7 +8,7 @@ data "aws_region" "current" {
 }
 
 module "ecs_auto_scaling_group" {
-  source = "/deployer/modules/ecs_auto_scaling_group"
+  source = "../../modules/ecs_auto_scaling_group"
 
   desired_capacity  = local.desired_capacity
   health_check_type = var.health_check_type
@@ -31,7 +31,7 @@ module "ecs_auto_scaling_group" {
 }
 
 module "ecs_cluster" {
-  source = "/deployer/modules/ecs_cluster"
+  source = "../../modules/ecs_cluster"
 
   name = var.cluster_name
 }

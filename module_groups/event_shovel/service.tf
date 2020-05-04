@@ -7,7 +7,7 @@ resource "aws_cloudwatch_log_group" "log_group" {
 }
 
 module "event_shovel" {
-  source = "/deployer/modules/event_shovel_ecs_service"
+  source = "../../modules/event_shovel_ecs_service"
 
   alert_topic_arn          = var.notification_topic_arn
   alert_evaluation_periods = var.alert_evaluation_periods

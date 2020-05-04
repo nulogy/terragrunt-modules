@@ -6,11 +6,11 @@ module "ecs_core_platform" {
   ecs_ami             = var.ecs_ami
   ecs_ami_owner       = var.ecs_ami_owner
   environment_name    = var.environment_name
+  health_check_type   = var.health_check_type
   lc_instance_type    = var.lc_instance_type
   max_size            = var.max_size
   min_size            = var.min_size
   office_ip           = var.office_ip
-  health_check_type   = var.health_check_type
   peer_account_id     = var.peer_account_id
   peer_vpc_cidr       = var.peer_vpc_cidr
   peer_vpc_id         = var.peer_vpc_id

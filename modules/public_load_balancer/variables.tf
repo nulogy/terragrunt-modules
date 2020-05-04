@@ -74,6 +74,11 @@ variable "lb_maintenance_mode_status_code" {
   default     = 503
 }
 
+variable "internal" {
+  description = "An Internet-facing load balancer routes requests from clients over the Internet to targets. An internal load balancer routes requests from clients to targets using private IP addresses."
+  default     = false
+}
+
 variable "ip_address_type" {
   description = "ipv4 or dualstack for ipv6 support"
   default     = "ipv4"

@@ -46,6 +46,11 @@ variable "health_check_timeout" {
   default     = 5
 }
 
+variable "internal" {
+  description = "An Internet-facing load balancer routes requests from clients over the Internet to targets. An internal load balancer routes requests from clients to targets using private IP addresses."
+  default     = false
+}
+
 variable "kms_key_id" {
 }
 

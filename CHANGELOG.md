@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Added an internal option for load balancers
+ 
 ### Changed
 
 * Extracted the terragrunt modules to their own repo

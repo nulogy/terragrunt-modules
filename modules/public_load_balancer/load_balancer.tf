@@ -6,7 +6,7 @@ resource "aws_lb" "public_load_balancer" {
   count = length(var.skip) > 0 ? 0 : 1
 
   name            = "${var.environment_name}-PLB"
-  internal        = false
+  internal        = var.internal
   security_groups = local.security_group_ids
   subnets         = var.alb_subnets
   ip_address_type = var.ip_address_type

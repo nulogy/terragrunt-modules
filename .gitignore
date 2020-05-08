@@ -1,0 +1,4 @@
+.idea
+.terraform
+.DS_Store
+*.svg

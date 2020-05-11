@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [10.0.0] - 2020-05-11
+
+### Changed
+
+* Remove ignore_changes from the ecs_fargate modules. This was used for autoscaling, though blocks non-autoscaling usage. Autoscaled support will need to be added properly in the future.
+
 ## [9.0.0] - 2020-05-04
 
 ### Added

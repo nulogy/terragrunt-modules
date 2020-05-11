@@ -34,10 +34,6 @@ resource "aws_ecs_service" "ecs_service" {
   launch_type     = "FARGATE"
   desired_count   = var.desired_count
 
-  lifecycle {
-    ignore_changes = [desired_count]
-  }
-
   network_configuration {
     subnets         = var.subnets
     security_groups = var.security_groups

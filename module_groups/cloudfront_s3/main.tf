@@ -9,14 +9,16 @@ module "cloudfront" {
   source = "../../modules/cloudfront"
   skip   = var.skip
 
-  app_fqdn             = var.app_fqdn
-  aws_profile          = var.aws_profile
-  assets_bucket_domain = module.s3_assets_bucket.assets_bucket_domain
-  cert_domain          = var.cert_domain
-  environment_name     = var.environment_name
-  route53_domain       = var.route53_domain
-  route53_subdomain    = var.route53_subdomain
-  static_assets_path   = var.static_assets_path
+  app_fqdn                 = var.app_fqdn
+  app_origin_ssl_protocols = var.app_origin_ssl_protocols
+  aws_profile              = var.aws_profile
+  assets_bucket_domain     = module.s3_assets_bucket.assets_bucket_domain
+  cert_domain              = var.cert_domain
+  environment_name         = var.environment_name
+  minimum_protocol_version = var.minimum_protocol_version
+  route53_domain           = var.route53_domain
+  route53_subdomain        = var.route53_subdomain
+  static_assets_path       = var.static_assets_path
 }
 
 module "route53_for_cloudfront" {

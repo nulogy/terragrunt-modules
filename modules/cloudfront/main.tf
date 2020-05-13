@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
       origin_read_timeout      = 30
       origin_keepalive_timeout = 5
       origin_protocol_policy   = "https-only"
-      origin_ssl_protocols     = ["TLSv1.1", "TLSv1.2"]
+      origin_ssl_protocols     = var.app_origin_ssl_protocols
     }
   }
 
@@ -123,7 +123,7 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   }
 
   viewer_certificate {
-    minimum_protocol_version = "TLSv1.1_2016"
+    minimum_protocol_version = var.minimum_protocol_version
     acm_certificate_arn      = data.aws_acm_certificate.acm_cf_cert.arn
     ssl_support_method       = "sni-only"
   }

@@ -14,6 +14,14 @@ variable "environment_name" {
 variable "app_fqdn" {
 }
 
+variable "app_origin_ssl_protocols" {
+  type = list(string)
+}
+
+variable "minimum_protocol_version" {
+  type = string
+}
+
 variable "route53_domain" {
 }
 

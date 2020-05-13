@@ -10,9 +10,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 ### Changed
 ### Deprecated
+
 ### Removed
+* Removed `cloudfront_s3` module group, `cloudfront` module, and `ecs_service` module
+  * these were copied to the GO project repository (the only project that was using it) for easier maintainability
+
 ### Fixed
 ### Security
+* Updated the `ssl_policy` of the `public_load_balancer` to use only TLSv1.2
 
 ## [10.0.0] - 2020-05-11
 

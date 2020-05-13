@@ -52,7 +52,7 @@ resource "aws_lb_listener" "public_lb_listener" {
   load_balancer_arn = aws_lb.public_load_balancer[0].arn
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
   certificate_arn   = length(var.lb_cert_arn) > 0 ? var.lb_cert_arn : data.aws_acm_certificate.acm_region_cert[0].arn
 
   default_action {

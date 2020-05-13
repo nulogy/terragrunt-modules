@@ -4,26 +4,6 @@
 
 We treat this project as an internal "open source" project. Everyone at Nulogy is welcome to submit Merge Requests.
 
-### Testing local terraform changes
-
-1. Create a symbolic link from one of your apps to deployer/app_source. For example:
-
-    ln -s ~/src/go/infrastructure/terraform deployer/apps_source/go
-
-1. Run nulogy-deployer container:
-
-```
-./develop_deployer.sh <docker-image-used-for-testing-deployments>
-```
-
-1. Change into the app directory you linked above. For example:
-
-```
-cd apps/go
-```
-
-**NOTE: Never run `tg.sh apply` on any production environment since it will change the terraform state. If you want to see changes your new code will make, run `tg.sh plan`**
-
 ### Merging changes to master
 
 The Directly Responsible Individual (DRI) for this project is Cameron Ross.
@@ -31,7 +11,7 @@ The Directly Responsible Individual (DRI) for this project is Cameron Ross.
 When you are happy with your changes:
 
 1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file, under the `## [Unreleased]` section.
-1. Create a Merge Request.
+1. Create a Pull Request.
 1. Notify #nulogy-deployer Slack channel to get the DRI review and merge your changes.
 
 NOTE: Only the nulogy-deployer core team is allowed to merge changes to master
@@ -57,14 +37,9 @@ Only the nulogy-deployer core team is allowed to release new versions.
     ### Security
     ```
 
-1. Login your shell to Docker Hub: `docker login`
 1. Run `./build_and_release.sh`
 
 ### RubyMine
-
-If you want module autocomplete in RubyMine:
-
-    ln -s ~/src/nulogy-deployer /deployer
 
 We recommend installing the `HashiCorp Terraform / HCL language Support` plugin
 

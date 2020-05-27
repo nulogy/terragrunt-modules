@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+* Add option to enable `containerInsights` for the `ecs_cluster` module
+
 ### Added
 ### Changed
 ### Deprecated
@@ -309,14 +311,14 @@ Convert terragrunt `terraform.tfvars` files in the environment root and module d
 * Adds parameter `scale_down_period` to the "buildkite_elastic_stack" module
 
 ## [7.5.0] - 2019-08-08
-    
+
 ### Added
 
 * Adds additional terraform providers.
 
 
 ## [7.4.0] - 2019-07-30
-    
+
 ### Added
 
 * Adds support for an extra security ingress to ECS Cluster. Defaults to 127.0.0.0/8 CIDR, port 65535 and UDP protocol.
@@ -328,7 +330,7 @@ Convert terragrunt `terraform.tfvars` files in the environment root and module d
 * Adds NAT Gateway public IPs as an output
 
 ## [7.2.0] - 2019-07-16
-    
+
 ### Added
 
 Added Buildkite Agent Timestamp Lines (BuildkiteAgentTimestampLines)
@@ -338,17 +340,17 @@ Added Buildkite Agent Timestamp Lines (BuildkiteAgentTimestampLines)
 Removed `stack_ami_version` variable for buildkite_elastic_stack module since it's not used
 
 ## [7.1.2] - 2019-05-31
-    
+
 ### Added
 
 * Adds missing deployer permissions
-    
+
 ## [7.1.1] - 2019-05-30
 
 ### Added
 
 * Outputs ecs private subnets for fargate event shovel
-    
+
 ## [7.1.0] - 2019-05-30
 
 ### Changed
@@ -403,7 +405,7 @@ Removed `stack_ami_version` variable for buildkite_elastic_stack module since it
 
 ### Changed
 
-* Adds ssm:GetParameters permission to every role that was using ssm:GetParameter.  Shockingly, these are two 
+* Adds ssm:GetParameters permission to every role that was using ssm:GetParameter.  Shockingly, these are two
 permissions different.
 
 ## [6.3.0] - 2019-02-28
@@ -708,7 +710,7 @@ Moves the docker repository from ECR to our publicly hosted Docker Hub repo.
 ### Fixed
 
  * Clean up postgres config (Evan Brodie) [#47](https://gitlab.hq.nulogy.com/Nulogy/nulogy-deployer/merge_requests/47)
- 
+
 ### Security
 
 ## [0.13.0] - 2018-04-26
@@ -727,7 +729,7 @@ Moves the docker repository from ECR to our publicly hosted Docker Hub repo.
 
 ### Changed
 
-* tg_deploy.sh, tg_prepare.sh, tg_setup.sh and tg_teardown.sh are updated to properly handle resources and 
+* tg_deploy.sh, tg_prepare.sh, tg_setup.sh and tg_teardown.sh are updated to properly handle resources and
 not just modules
 
 ## [0.11.3] - 2018-04-20

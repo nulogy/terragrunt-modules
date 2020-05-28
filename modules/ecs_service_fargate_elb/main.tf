@@ -1,6 +1,38 @@
 locals {
-  container_name      = "${var.environment_name}_${var.service_name}"
-  health_check_object = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
+  container_name              = "${var.environment_name}_${var.service_name}"
+
+  ## datadog will subtract from allocated cpu and memory, make sure to increase the values to accommodate additional load with datadog agent enabled
+  container_cpu               = var.cpu - (var.datadog_agent_cpu * local.datadog_enabled)
+  container_memory            = var.memory - (var.datadog_agent_memoryReservation * local.datadog_enabled)
+  container_memoryReservation = var.memory - (var.datadog_agent_memory * local.datadog_enabled)
+
+  health_check_object         = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
+
+  datadog_enabled             = length(var.datadog_api_key) > 0 ? 1 : 0
+  datadog_envars = <<EOF
+  [
+    {
+      "name": "DD_API_KEY",
+      "value": "${var.datadog_api_key}"
+    },
+    {
+      "name": "DD_APM_ENABLED",
+      "value": "true"
+    },
+    {
+      "name": "DD_APM_NON_LOCAL_TRAFFIC",
+      "value": "true"
+    },
+    {
+      "name": "ECS_FARGATE",
+      "value": "true"
+    },
+    {
+      "name": "DD_DOCKER_LABELS_AS_TAGS",
+      "value": "{\"com.docker.compose.service\":\"service_name\"}"
+    }
+  ]
+EOF
 }
 
 resource "aws_ecs_task_definition" "ecs_task" {
@@ -16,7 +48,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
 [
   {
     "command": ["${join("\",\"", var.command)}"],
-    "cpu": ${var.cpu},
+    "cpu": ${local.container_cpu},
     "environment": ${var.envars},
     "essential": true,
     "healthCheck": ${local.health_check_object},
@@ -26,8 +58,8 @@ resource "aws_ecs_task_definition" "ecs_task" {
       "containerPort": ${var.container_port},
       "protocol": "tcp"
     }],
-    "memoryReservation": ${var.memory},
-    "memory": ${var.memory},
+    "memoryReservation": ${local.container_memoryReservation},
+    "memory": ${local.container_memory},
     "name": "${local.container_name}",
     "logConfiguration": {
       "logDriver": "awslogs",
@@ -38,9 +70,32 @@ resource "aws_ecs_task_definition" "ecs_task" {
       }
     }
   }
+  %{ if local.datadog_enabled > 0 }
+  ,{
+    "cpu": ${var.datadog_agent_cpu},
+    "environment": ${local.datadog_envars},
+    "essential": true,
+    "image": "datadog/agent:${var.datadog_agent_version}",
+    "portMappings": [{
+      "hostPort": 8126,
+      "containerPort": 8126,
+      "protocol": "tcp"
+    }],
+    "memoryReservation": ${var.datadog_agent_memoryReservation},
+    "memory": ${var.datadog_agent_memory},
+    "name": "${local.container_name}-datadog",
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+          "awslogs-group": "${var.log_group_name}",
+          "awslogs-region": "${data.aws_region.current.name}",
+          "awslogs-stream-prefix": "${var.environment_name}"
+      }
+    }
+  }
+  %{ endif }
 ]
 DEFINITION
-
 }
 
 resource "aws_ecs_service" "ecs_service" {

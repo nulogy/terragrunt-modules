@@ -1,5 +1,6 @@
 variable "cpu" {
-  description = "CPU per Fargate container. Units are 1024 = 1 vCPU."
+  description = "CPU per Fargate task. Units are 1024 = 1 vCPU."
+  type        = number
 }
 
 variable "command" {
@@ -61,7 +62,8 @@ variable "vpc_id" {
 }
 
 variable "memory" {
-  description = "Memory per Fargate container."
+  description = "Memory per Fargate task."
+  type        = number
 }
 
 variable "param_store_namespace" {
@@ -86,3 +88,32 @@ variable "target_group_arn" {
   description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
 }
 
+variable "datadog_api_key" {
+  description = "Datadog API key. This will activate the Datadog agent sidecar/replica container. To accommodate additional load, please increase var.cpu to an additional 512. Similarly, increase var.memory to an additional 1024."
+  default     = ""
+  type        = string
+}
+
+variable "datadog_agent_version" {
+  description = "Datadog agent container version."
+  default     = "latest"
+  type        = string
+}
+
+variable "datadog_agent_cpu" {
+  description = "Datadog agent container cpu. Units are 1024 = 1 vCPU."
+  default     = 256
+  type        = number
+}
+
+variable "datadog_agent_memoryReservation" {
+  description = "Datadog agent container memory soft limit. Units are in MB."
+  default     = 512
+  type        = number
+}
+
+variable "datadog_agent_memory" {
+  description = "Datadog agent container memory hard limit. Units are in MB."
+  default     = 1024
+  type        = number
+}

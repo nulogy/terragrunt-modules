@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+* Added datadog agent api key and version variables to
+  `module_groups/ecs_fargate_with_elb`.
+* Added datadog agent container task definition to
+  `modules/ecs_service_fargate_elb`.
+* Added additional permission to fargate task role policy to allow datadog
+  agent perform autodiscovery.
+
 ### Added
 ### Changed
 ### Deprecated

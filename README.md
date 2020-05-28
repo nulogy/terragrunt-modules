@@ -1,4 +1,4 @@
-# Nulogy Deployer
+# Terragrunt Modules
 
 ## Contributing
 
@@ -6,19 +6,13 @@ We treat this project as an internal "open source" project. Everyone at Nulogy i
 
 ### Merging changes to master
 
-The Directly Responsible Individual (DRI) for this project is Cameron Ross.
-
 When you are happy with your changes:
 
 1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file, under the `## [Unreleased]` section.
 1. Create a Pull Request.
-1. Notify #nulogy-deployer Slack channel to get the DRI review and merge your changes.
+1. Notify #nulogy-deployer Slack channel for a review.
 
-NOTE: Only the nulogy-deployer core team is allowed to merge changes to master
-
-### Release a new Image version
-
-Only the nulogy-deployer core team is allowed to release new versions.
+### Release a new version
 
 1. Bump the version in `versions.env`. We use [Semantic versions](https://semver.org/).
 1. Open the [CHANGELOG](./CHANGELOG.md) file.
@@ -26,9 +20,9 @@ Only the nulogy-deployer core team is allowed to release new versions.
 1. Remove the headers with no content (e.g. Added, Changed, etc)
 1. Copy the following 'Unreleased' block to the top of the list.
 
-    ``` 
+    ```
     ## [Unreleased]
-    
+
     ### Added
     ### Changed
     ### Deprecated

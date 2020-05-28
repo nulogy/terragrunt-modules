@@ -7,14 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-* Add option to enable `containerInsights` for the `ecs_cluster` module
-
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.1.0] - 2020-05-28
+
+### Added
+
+* Add option to enable `containerInsights` for the `ecs_cluster` module
 
 ## [11.0.0] - 2020-05-13
 

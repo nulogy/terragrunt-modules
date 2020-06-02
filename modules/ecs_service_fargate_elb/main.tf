@@ -1,15 +1,20 @@
 locals {
   container_name              = "${var.environment_name}_${var.service_name}"
-
-  ## datadog will subtract from allocated cpu and memory, make sure to increase the values to accommodate additional load with datadog agent enabled
-  container_cpu               = var.cpu - (var.datadog_agent_cpu * local.datadog_enabled)
-  container_memory            = var.memory - (var.datadog_agent_memoryReservation * local.datadog_enabled)
-  container_memoryReservation = var.memory - (var.datadog_agent_memory * local.datadog_enabled)
-
   health_check_object         = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
 
-  datadog_enabled             = length(var.datadog_api_key) > 0 ? 1 : 0
-  datadog_envars = <<EOF
+  ## datadog will subtract from task allocated cpu and memory, please adjust var.cpu and/or var.memory to accommodate if necessary
+  container_cpu               = var.cpu    - (local.datadog_agent_cpu)
+  container_memory            = var.memory - (local.datadog_agent_memoryReservation)
+  container_memoryReservation = var.memory - (local.datadog_agent_memory)
+
+  ## cpu/memory values based on:
+  ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
+  ## https://aws.amazon.com/fargate/pricing/
+  datadog_enabled                 = length(var.datadog_api_key) > 0 ? 1 : 0
+  datadog_agent_cpu               = local.datadog_enabled * ((log((var.cpu/256),2)*16) + 64) ## [64..128]
+  datadog_agent_memoryReservation = local.datadog_enabled * 128
+  datadog_agent_memory            = local.datadog_enabled * ((log((var.cpu/256),2)*32) + 128) ## [128..256]
+  datadog_envars                  = <<EOF
   [
     {
       "name": "DD_API_KEY",
@@ -72,7 +77,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
   }
   %{ if local.datadog_enabled > 0 }
   ,{
-    "cpu": ${var.datadog_agent_cpu},
+    "cpu": ${local.datadog_agent_cpu},
     "environment": ${local.datadog_envars},
     "essential": true,
     "image": "datadog/agent:${var.datadog_agent_version}",
@@ -81,8 +86,8 @@ resource "aws_ecs_task_definition" "ecs_task" {
       "containerPort": 8126,
       "protocol": "tcp"
     }],
-    "memoryReservation": ${var.datadog_agent_memoryReservation},
-    "memory": ${var.datadog_agent_memory},
+    "memoryReservation": ${local.datadog_agent_memoryReservation},
+    "memory": ${local.datadog_agent_memory},
     "name": "${local.container_name}-datadog",
     "logConfiguration": {
       "logDriver": "awslogs",

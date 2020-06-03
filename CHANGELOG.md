@@ -7,21 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-* Added datadog agent api key and version variables to `module_groups/ecs_fargate_with_elb`.
-* Added datadog agent container task definition to `modules/ecs_service_fargate_elb`.
-* Added additional permission to fargate task role policy to allow datadog agent perform autodiscovery. When upgrading, please apply these changes using nulogy-deployer locally before doing a deploy because Buildkite role does not have permissions to change task role policy:
-
-```
-cd app_worker
-terragrunt plan -var docker_image=<YOUR_CURRENT_DEPLOYED_GIT_HASH>
-```
-
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.2.0] - 2020-06-03
+
+### Added
+
+* Add option to enable Datadog agent sidecar/replica container for the `ecs_fargate_with_elb` module group
+* Added Datadog agent container task definition to `ecs_service_fargate_elb` module
+* Added additional permission to Fargate task role policy to allow Datadog agent to perform autodiscovery.
+* When upgrading your application, please apply these changes using nulogy-deployer locally before doing a deploy because Buildkite role does not have permissions to change task role policy:
+
+```
+cd app_worker
+terragrunt plan -var docker_image=<YOUR_CURRENT_DEPLOYED_GIT_HASH>
+```
 
 ## [11.1.0] - 2020-05-28
 

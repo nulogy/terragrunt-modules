@@ -135,3 +135,15 @@ variable "ecs_incoming_allowed_cidr" {
   description = "The CIDR to allow incoming traffic to the ECS tasks.  Overrides the default of the VPC"
   default     = ""
 }
+
+variable "datadog_api_key" {
+  description = "Datadog API key. This will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."
+  default     = ""
+  type        = string
+}
+
+variable "datadog_agent_version" {
+  description = "Datadog agent container version."
+  default     = "latest"
+  type        = string
+}

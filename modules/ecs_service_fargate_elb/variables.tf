@@ -1,5 +1,6 @@
 variable "cpu" {
-  description = "CPU per Fargate container. Units are 1024 = 1 vCPU."
+  description = "CPU per Fargate task. Units are 1024 = 1 vCPU."
+  type        = number
 }
 
 variable "command" {
@@ -61,7 +62,8 @@ variable "vpc_id" {
 }
 
 variable "memory" {
-  description = "Memory per Fargate container."
+  description = "Memory per Fargate task."
+  type        = number
 }
 
 variable "param_store_namespace" {
@@ -86,3 +88,14 @@ variable "target_group_arn" {
   description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
 }
 
+variable "datadog_api_key" {
+  description = "Datadog API key. This will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."
+  default     = ""
+  type        = string
+}
+
+variable "datadog_agent_version" {
+  description = "Datadog agent container version."
+  default     = "latest"
+  type        = string
+}

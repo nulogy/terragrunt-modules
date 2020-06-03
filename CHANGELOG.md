@@ -8,14 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Added `account_data` module
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.3.0] - 2020-06-03
+
+### Added
+
+* Added `account_data` module
 
 ## [11.2.0] - 2020-06-03
 

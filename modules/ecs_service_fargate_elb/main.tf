@@ -33,8 +33,8 @@ locals {
       "value": "true"
     },
     {
-      "name": "DD_DOCKER_LABELS_AS_TAGS",
-      "value": "{\"com.docker.compose.service\":\"service_name\"}"
+      "name": "DD_TAGS",
+      "value": "env:${var.environment_name}:${var.service_name}"
     }
   ]
 EOF

@@ -7,14 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-* Improves Datadog agent tagging of ECS Fargate task
-
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.3.1] - 2020-06-05
+
+### Fixed
+
+* Improves Datadog agent tagging of ECS Fargate task
 
 ## [11.3.0] - 2020-06-03
 

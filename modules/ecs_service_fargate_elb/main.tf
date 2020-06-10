@@ -10,6 +10,7 @@ locals {
   ## cpu/memory values based on:
   ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
   ## https://aws.amazon.com/fargate/pricing/
+  datadog_service                 = "${var.environment_name}/${var.service_name}"
   datadog_enabled                 = length(var.datadog_api_key) > 0 ? 1 : 0
   datadog_agent_cpu               = local.datadog_enabled * ((log((var.cpu/256),2)*16) + 64) ## [64..128]
   datadog_agent_memoryReservation = local.datadog_enabled * 128
@@ -33,8 +34,8 @@ locals {
       "value": "true"
     },
     {
-      "name": "DD_TAGS",
-      "value": "env:${var.environment_name}:${var.service_name}"
+      "name": "DD_SERVICE",
+      "value": "${local.datadog_service}"
     }
   ]
 EOF

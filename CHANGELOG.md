@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+* Injects `DATADOG_SERVICE` env var into the app (feature flag for initializer)
+
 ### Added
 ### Changed
 ### Deprecated
@@ -14,7 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [11.3.1] - 2020-06-05
+## [11.3.2] - 2020-06-10
 
 ### Fixed
 

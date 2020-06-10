@@ -7,14 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-* Add service name to Datadog agent tagging of a ECS Fargate task
-
 ### Added
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.3.1] - 2020-06-05
+
+### Fixed
+
+* Add service name to Datadog agent tagging of a ECS Fargate task
 
 ## [11.3.1] - 2020-06-05
 

@@ -8,9 +8,9 @@ locals {
   container_memoryReservation = var.memory - (local.datadog_agent_memory)
 
   ## injects datadog service name env var in the app
-  container_datadog_envars = local.datadog_enabled > 0 ? [
+  container_datadog_envars    = local.datadog_enabled > 0 ? [
     {
-      "name": "DATADOG_SERVICE",
+      "name": "DD_SERVICE",
       "value": "${local.datadog_service}"
     }
   ] : []
@@ -26,11 +26,16 @@ locals {
   datadog_agent_cpu               = local.datadog_enabled * ((log((var.cpu/256),2)*16) + 64) ## [64..128]
   datadog_agent_memoryReservation = local.datadog_enabled * 128
   datadog_agent_memory            = local.datadog_enabled * ((log((var.cpu/256),2)*32) + 128) ## [128..256]
-  datadog_envars                  = <<EOF
+  ## https://docs.datadoghq.com/agent/docker/?tab=standard#global-options
+  datadog_agent_envars            = <<EOF
   [
     {
       "name": "DD_API_KEY",
       "value": "${var.datadog_api_key}"
+    },
+    {
+      "name": "DD_LOG_LEVEL",
+      "value": "warn"
     },
     {
       "name": "DD_APM_ENABLED",
@@ -41,16 +46,12 @@ locals {
       "value": "true"
     },
     {
-      "name": "DD_TRACE_ANALYTICS_ENABLED",
-      "value": "true"
-    },
-    {
-      "name": "DD_LOG_LEVEL",
-      "value": "warn"
-    },
-    {
       "name": "DD_SERVICE",
       "value": "${local.datadog_service}"
+    },
+    {
+      "name": "DD_VERSION",
+      "value": "${var.docker_image_name}"
     },
     {
       "name": "ECS_FARGATE",
@@ -98,7 +99,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
   %{ if local.datadog_enabled > 0 }
   ,{
     "cpu": ${local.datadog_agent_cpu},
-    "environment": ${local.datadog_envars},
+    "environment": ${local.datadog_agent_envars},
     "essential": true,
     "image": "datadog/agent:${var.datadog_agent_version}",
     "portMappings": [{

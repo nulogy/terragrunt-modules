@@ -41,12 +41,20 @@ locals {
       "value": "true"
     },
     {
-      "name": "ECS_FARGATE",
+      "name": "DD_TRACE_ANALYTICS_ENABLED",
       "value": "true"
+    },
+    {
+      "name": "DD_LOG_LEVEL",
+      "value": "warn"
     },
     {
       "name": "DD_SERVICE",
       "value": "${local.datadog_service}"
+    },
+    {
+      "name": "ECS_FARGATE",
+      "value": "true"
     }
   ]
 EOF

@@ -10,8 +10,16 @@ locals {
   ## injects datadog service name env var in the app
   container_datadog_envars    = local.datadog_enabled > 0 ? [
     {
+      "name": "DD_ENV",
+      "value": "${var.datadog_env}"
+    },
+    {
       "name": "DD_SERVICE",
       "value": "${local.datadog_service}"
+    },
+    {
+      "name": "DD_VERSION",
+      "value": "${var.docker_image_name}"
     }
   ] : []
   container_envars            = jsonencode(concat(jsondecode(var.envars),

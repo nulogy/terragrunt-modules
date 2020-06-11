@@ -89,7 +89,7 @@ variable "target_group_arn" {
 }
 
 variable "datadog_api_key" {
-  description = "Datadog API key. This will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."
+  description = "Datadog API key (DD_API_KEY). This will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."
   default     = ""
   type        = string
 }
@@ -97,5 +97,11 @@ variable "datadog_api_key" {
 variable "datadog_agent_version" {
   description = "Datadog agent container version."
   default     = "latest"
+  type        = string
+}
+
+variable "datadog_env" {
+  description = "Datadog environment (DD_ENV)."
+  default     = "production"
   type        = string
 }

@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Output for instance_role_name of buildkite stack
+
 ### Changed
 ### Deprecated
 ### Removed

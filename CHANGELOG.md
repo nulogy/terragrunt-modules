@@ -8,14 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Output for instance_role_name of buildkite stack
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.4.0] - 2020-06-15
+
+### Added
+
+* Output for instance_role_name of buildkite stack
 
 ## [11.3.3] - 2020-06-10
 

@@ -36,6 +36,7 @@ module "ecs_service_fargate_elb" {
   cpu                   = var.cpu
   datadog_api_key       = var.datadog_api_key
   datadog_agent_version = var.datadog_agent_version
+  datadog_env           = var.datadog_env
   desired_count         = var.desired_count
   docker_image_name     = var.docker_image_name
   ecs_cluster_name      = var.ecs_cluster_name

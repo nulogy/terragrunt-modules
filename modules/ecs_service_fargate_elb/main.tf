@@ -8,7 +8,7 @@ locals {
   container_memoryReservation = var.memory - (local.datadog_agent_memory)
 
   ## injects datadog service name env var in the app
-  container_datadog_envars    = local.datadog_enabled > 0 ? [
+  container_datadog_envars = local.datadog_enabled > 0 ? [
     {
       "name": "DD_ENV",
       "value": "${var.datadog_env}"
@@ -52,6 +52,14 @@ locals {
     {
       "name": "DD_APM_NON_LOCAL_TRAFFIC",
       "value": "true"
+    },
+    {
+      "name": "DD_DOGSTATSD_NON_LOCAL_TRAFFIC",
+      "value": "true"
+    },
+    {
+      "name": "DD_ENV",
+      "value": "${var.datadog_env}"
     },
     {
       "name": "DD_SERVICE",
@@ -102,6 +110,13 @@ resource "aws_ecs_task_definition" "ecs_task" {
           "awslogs-region": "${data.aws_region.current.name}",
           "awslogs-stream-prefix": "${var.environment_name}"
       }
+    },
+    "dockerLabels": {
+      %{ if local.datadog_enabled > 0 }
+      "com.datadoghq.tags.env": "${var.datadog_env}",
+      "com.datadoghq.tags.service": "${local.datadog_service}",
+      "com.datadoghq.tags.version": "${var.docker_image_name}"
+      %{ endif }
     }
   }
   %{ if local.datadog_enabled > 0 }

@@ -147,3 +147,9 @@ variable "datadog_agent_version" {
   default     = "latest"
   type        = string
 }
+
+variable "datadog_env" {
+  description = "Datadog environment (DD_ENV)."
+  default     = "development"
+  type        = string
+}

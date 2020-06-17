@@ -102,6 +102,6 @@ variable "datadog_agent_version" {
 
 variable "datadog_env" {
   description = "Datadog environment (DD_ENV)."
-  default     = "production"
+  default     = "development"
   type        = string
 }

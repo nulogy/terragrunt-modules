@@ -72,6 +72,10 @@ locals {
     {
       "name": "ECS_FARGATE",
       "value": "true"
+    },
+    {
+      "name": "DD_CONTAINER_EXCLUDE",
+      "value": "image:fg-proxy"
     }
   ]
 EOF

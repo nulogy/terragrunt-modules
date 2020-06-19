@@ -46,7 +46,6 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "ECS",
       "Effect": "Allow",
       "Action": [
         "ecr:GetAuthorizationToken",
@@ -57,8 +56,9 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
         "logs:PutLogEvents"
       ],
       "Resource": "*"
-    },
-    {
+    }
+    %{ if var.datadog_enabled }
+    ,{
       "Sid": "Datadog",
       "Effect": "Allow",
       "Action": [
@@ -81,6 +81,7 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
         "arn:aws:kms:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:key/${var.kms_key_id}"
       ]
     }
+    %{ endif }
   ]
 }
 EOF

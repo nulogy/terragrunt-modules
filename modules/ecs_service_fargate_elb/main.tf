@@ -8,7 +8,7 @@ locals {
   container_memoryReservation = var.memory - (local.datadog_agent_memory)
 
   ## injects datadog service name env var in the app
-  container_datadog_envars = local.datadog_enabled > 0 ? [
+  container_datadog_envars = var.datadog_enabled ? [
     {
       "name": "DD_ENV",
       "value": "${var.datadog_env}"
@@ -30,10 +30,9 @@ locals {
   ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
   ## https://aws.amazon.com/fargate/pricing/
   datadog_service                 = "${var.environment_name}/${var.service_name}"
-  datadog_enabled                 = var.datadog_enabled ? 1 : 0
-  datadog_agent_cpu               = local.datadog_enabled * ((log((var.cpu/256),2)*16) + 64) ## [64..128]
-  datadog_agent_memoryReservation = local.datadog_enabled * 128
-  datadog_agent_memory            = local.datadog_enabled * ((log((var.cpu/256),2)*32) + 128) ## [128..256]
+  datadog_agent_cpu               = var.datadog_enabled ? ((log((var.cpu/256),2)*16) + 64) : 0 ## [64..128]
+  datadog_agent_memoryReservation = var.datadog_enabled ? 128 : 0
+  datadog_agent_memory            = var.datadog_enabled ? ((log((var.cpu/256),2)*32) + 128) : 0 ## [128..256]
   ## https://docs.datadoghq.com/agent/docker/?tab=standard#global-options
   datadog_agent_envars            = <<EOF
   [
@@ -112,7 +111,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
       }
     }
   }
-  %{ if local.datadog_enabled > 0 }
+  %{ if var.datadog_enabled }
   ,{
     "cpu": ${local.datadog_agent_cpu},
     "environment": ${local.datadog_agent_envars},

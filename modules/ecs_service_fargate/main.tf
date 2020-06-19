@@ -1,5 +1,9 @@
+locals {
+  task_def_json = length(var.task_definition_json) > 0 ? var.task_definition_json : "${path.module}/task_definition/default.json"
+}
+
 data "template_file" "template" {
-  template = file(var.task_definition_json)
+  template = file(local.task_def_json)
 
   vars = {
     TPL_CPU             = var.cpu

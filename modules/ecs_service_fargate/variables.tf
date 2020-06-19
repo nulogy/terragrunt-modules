@@ -66,7 +66,7 @@ variable "health_check" {
 
 variable "task_definition_json" {
   description = "allows specifying a different JSON task definition, if none default (1 container per task) will be used"
-  default     = "/deployer/modules/ecs_service_fargate/task_definition/default.json"
+  default     = ""
   type        = string
 }
 

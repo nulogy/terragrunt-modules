@@ -52,6 +52,7 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
+      "Sid": "ECS",
       "Effect": "Allow",
       "Action": [
         "ecr:GetAuthorizationToken",
@@ -59,12 +60,32 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
         "ecr:GetDownloadUrlForLayer",
         "ecr:BatchGetImage",
         "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Datadog",
+      "Effect": "Allow",
+      "Action": [
         "logs:PutLogEvents",
         "ecs:ListClusters",
         "ecs:ListContainerInstances",
         "ecs:DescribeContainerInstances"
       ],
       "Resource": "*"
+    },
+    {
+      "Sid": "DatadogSecrets",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameters",
+        "kms:Decrypt"
+      ],
+      "Resource": [
+        "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.param_store_namespace}/datadog/*",
+        "arn:aws:kms:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:key/${var.kms_key_id}"
+      ]
     }
   ]
 }
@@ -111,4 +132,3 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
 EOF
 
 }
-

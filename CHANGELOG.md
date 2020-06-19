@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+* Load Dadadog api key from parameter store
+* Added Datadog env variable (DD_ENV)
+* Added Datadog version variable (DD_VERSION)
+
 ### Deprecated
 ### Removed
 ### Fixed

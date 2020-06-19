@@ -30,17 +30,13 @@ locals {
   ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
   ## https://aws.amazon.com/fargate/pricing/
   datadog_service                 = "${var.environment_name}/${var.service_name}"
-  datadog_enabled                 = length(var.datadog_api_key) > 0 ? 1 : 0
+  datadog_enabled                 = var.datadog_enabled ? 1 : 0
   datadog_agent_cpu               = local.datadog_enabled * ((log((var.cpu/256),2)*16) + 64) ## [64..128]
   datadog_agent_memoryReservation = local.datadog_enabled * 128
   datadog_agent_memory            = local.datadog_enabled * ((log((var.cpu/256),2)*32) + 128) ## [128..256]
   ## https://docs.datadoghq.com/agent/docker/?tab=standard#global-options
   datadog_agent_envars            = <<EOF
   [
-    {
-      "name": "DD_API_KEY",
-      "value": "${var.datadog_api_key}"
-    },
     {
       "name": "DD_LOG_LEVEL",
       "value": "warn"
@@ -110,17 +106,10 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-          "awslogs-group": "${var.log_group_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-stream-prefix": "${var.environment_name}"
+        "awslogs-group": "${var.log_group_name}",
+        "awslogs-region": "${data.aws_region.current.name}",
+        "awslogs-stream-prefix": "${var.environment_name}"
       }
-    },
-    "dockerLabels": {
-      %{ if local.datadog_enabled > 0 }
-      "com.datadoghq.tags.env": "${var.datadog_env}",
-      "com.datadoghq.tags.service": "${local.datadog_service}",
-      "com.datadoghq.tags.version": "${var.docker_image_name}"
-      %{ endif }
     }
   }
   %{ if local.datadog_enabled > 0 }
@@ -140,11 +129,17 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-          "awslogs-group": "${var.log_group_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-stream-prefix": "${var.environment_name}"
+        "awslogs-group": "${var.log_group_name}",
+        "awslogs-region": "${data.aws_region.current.name}",
+        "awslogs-stream-prefix": "${var.environment_name}"
       }
-    }
+    },
+    "secrets": [
+      {
+        "name": "DD_API_KEY",
+        "valueFrom": "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.param_store_namespace}/datadog/api-key"
+      }
+    ]
   }
   %{ endif }
 ]

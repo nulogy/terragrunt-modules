@@ -136,10 +136,10 @@ variable "ecs_incoming_allowed_cidr" {
   default     = ""
 }
 
-variable "datadog_api_key" {
-  description = "Datadog API key. This will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."
-  default     = ""
-  type        = string
+variable "datadog_enabled" {
+  description = "This option will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."
+  default     = false
+  type        = bool
 }
 
 variable "datadog_agent_version" {

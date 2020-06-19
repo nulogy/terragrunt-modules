@@ -1,9 +1,3 @@
-data "aws_caller_identity" "current" {
-}
-
-data "aws_region" "current" {
-}
-
 resource "aws_iam_role" "ecs_taskrole" {
   name               = "${var.environment_name}-ecs-${var.service_name}-task"
   assume_role_policy = <<EOF

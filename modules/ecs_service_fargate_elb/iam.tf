@@ -1,9 +1,3 @@
-data "aws_caller_identity" "current" {
-}
-
-data "aws_region" "current" {
-}
-
 resource "aws_iam_role" "ecs_taskrole" {
   name               = "${var.environment_name}-ecs-${var.service_name}-task"
   assume_role_policy = <<EOF
@@ -59,13 +53,35 @@ resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
         "ecr:GetDownloadUrlForLayer",
         "ecr:BatchGetImage",
         "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    }
+    %{ if var.datadog_enabled }
+    ,{
+      "Sid": "Datadog",
+      "Effect": "Allow",
+      "Action": [
         "logs:PutLogEvents",
         "ecs:ListClusters",
         "ecs:ListContainerInstances",
         "ecs:DescribeContainerInstances"
       ],
       "Resource": "*"
+    },
+    {
+      "Sid": "DatadogSecrets",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameters",
+        "kms:Decrypt"
+      ],
+      "Resource": [
+        "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.param_store_namespace}/datadog/*",
+        "arn:aws:kms:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:key/${var.kms_key_id}"
+      ]
     }
+    %{ endif }
   ]
 }
 EOF
@@ -111,4 +127,3 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
 EOF
 
 }
-

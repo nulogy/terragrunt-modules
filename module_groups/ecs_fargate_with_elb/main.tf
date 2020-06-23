@@ -34,8 +34,9 @@ module "ecs_service_fargate_elb" {
   command               = var.command
   container_port        = var.container_port
   cpu                   = var.cpu
-  datadog_api_key       = var.datadog_api_key
+  datadog_enabled       = var.datadog_enabled
   datadog_agent_version = var.datadog_agent_version
+  datadog_env           = var.datadog_env
   desired_count         = var.desired_count
   docker_image_name     = var.docker_image_name
   ecs_cluster_name      = var.ecs_cluster_name
@@ -54,4 +55,3 @@ module "ecs_service_fargate_elb" {
 
   depends_on_hack = module.public_load_balancer.aws_lb_listener
 }
-

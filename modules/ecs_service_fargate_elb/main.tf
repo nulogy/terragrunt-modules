@@ -8,10 +8,18 @@ locals {
   container_memoryReservation = var.memory - (local.datadog_agent_memory)
 
   ## injects datadog service name env var in the app
-  container_datadog_envars = local.datadog_enabled > 0 ? [
+  container_datadog_envars = var.datadog_enabled ? [
     {
-      "name": "DATADOG_SERVICE",
+      "name": "DD_ENV",
+      "value": "${var.datadog_env}"
+    },
+    {
+      "name": "DD_SERVICE",
       "value": "${local.datadog_service}"
+    },
+    {
+      "name": "DD_VERSION",
+      "value": "${var.docker_image_name}"
     }
   ] : []
   container_envars            = jsonencode(concat(jsondecode(var.envars),
@@ -22,15 +30,15 @@ locals {
   ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
   ## https://aws.amazon.com/fargate/pricing/
   datadog_service                 = "${var.environment_name}/${var.service_name}"
-  datadog_enabled                 = length(var.datadog_api_key) > 0 ? 1 : 0
-  datadog_agent_cpu               = local.datadog_enabled * ((log((var.cpu/256),2)*16) + 64) ## [64..128]
-  datadog_agent_memoryReservation = local.datadog_enabled * 128
-  datadog_agent_memory            = local.datadog_enabled * ((log((var.cpu/256),2)*32) + 128) ## [128..256]
-  datadog_envars                  = <<EOF
+  datadog_agent_cpu               = var.datadog_enabled ? ((log((var.cpu/256),2)*16) + 64) : 0 ## [64..128]
+  datadog_agent_memoryReservation = var.datadog_enabled ? 128 : 0
+  datadog_agent_memory            = var.datadog_enabled ? ((log((var.cpu/256),2)*32) + 128) : 0 ## [128..256]
+  ## https://docs.datadoghq.com/agent/docker/?tab=standard#global-options
+  datadog_agent_envars            = <<EOF
   [
     {
-      "name": "DD_API_KEY",
-      "value": "${var.datadog_api_key}"
+      "name": "DD_LOG_LEVEL",
+      "value": "warn"
     },
     {
       "name": "DD_APM_ENABLED",
@@ -41,12 +49,28 @@ locals {
       "value": "true"
     },
     {
-      "name": "ECS_FARGATE",
+      "name": "DD_DOGSTATSD_NON_LOCAL_TRAFFIC",
       "value": "true"
+    },
+    {
+      "name": "DD_ENV",
+      "value": "${var.datadog_env}"
     },
     {
       "name": "DD_SERVICE",
       "value": "${local.datadog_service}"
+    },
+    {
+      "name": "DD_VERSION",
+      "value": "${var.docker_image_name}"
+    },
+    {
+      "name": "ECS_FARGATE",
+      "value": "true"
+    },
+    {
+      "name": "DD_CONTAINER_EXCLUDE",
+      "value": "image:fg-proxy"
     }
   ]
 EOF
@@ -81,16 +105,16 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-          "awslogs-group": "${var.log_group_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-stream-prefix": "${var.environment_name}"
+        "awslogs-group": "${var.log_group_name}",
+        "awslogs-region": "${data.aws_region.current.name}",
+        "awslogs-stream-prefix": "${var.environment_name}"
       }
     }
   }
-  %{ if local.datadog_enabled > 0 }
+  %{ if var.datadog_enabled }
   ,{
     "cpu": ${local.datadog_agent_cpu},
-    "environment": ${local.datadog_envars},
+    "environment": ${local.datadog_agent_envars},
     "essential": true,
     "image": "datadog/agent:${var.datadog_agent_version}",
     "portMappings": [{
@@ -104,11 +128,17 @@ resource "aws_ecs_task_definition" "ecs_task" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-          "awslogs-group": "${var.log_group_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-stream-prefix": "${var.environment_name}"
+        "awslogs-group": "${var.log_group_name}",
+        "awslogs-region": "${data.aws_region.current.name}",
+        "awslogs-stream-prefix": "${var.environment_name}"
       }
-    }
+    },
+    "secrets": [
+      {
+        "name": "DD_API_KEY",
+        "valueFrom": "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.param_store_namespace}/datadog/api-key"
+      }
+    ]
   }
   %{ endif }
 ]

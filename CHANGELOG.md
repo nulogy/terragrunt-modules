@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [11.6.0] - 2020-06-24
+
+### Added
+
+* Added a data-only module for getting networking information about the Shared VPC 
+
 ## [11.5.0] - 2020-06-23
 
 ### Changed

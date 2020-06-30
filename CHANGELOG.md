@@ -12,10 +12,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Removed
 ### Fixed
+### Security
+
+## [11.7.1] - 2020-06-30
+
+### Fixed
 
 * Removed warning threshold as it has no difference in paging as the alert threshold.
-
-### Security
 
 ## [11.7.0] - 2020-06-30
 

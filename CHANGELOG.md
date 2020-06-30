@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [12.0.0] - 2020-06-30
+
+### Removed
+
+* buildkite_elastic_stack no longer takes the office ip and insteads allows traffic from the VPN
+
 ## [11.7.1] - 2020-06-30
 
 ### Fixed

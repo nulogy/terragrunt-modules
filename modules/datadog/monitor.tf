@@ -4,7 +4,6 @@ resource "datadog_monitor" "app_worker_apdex" {
 
   thresholds = {
     "critical" = "0.75"
-    "warning"  = "0.9"
   }
   require_full_window = false
 

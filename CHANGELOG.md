@@ -8,14 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-
-* Added datadog module capable of creating dashboards and monitors.
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [11.7.0] - 2020-06-30
+
+### Added
+
+* Added datadog module capable of creating dashboards and monitors.
 
 ## [11.6.0] - 2020-06-24
 

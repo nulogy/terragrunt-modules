@@ -33,6 +33,11 @@ resource "datadog_dashboard" "dashboard" {
       title_align = "left"
       title_size = "16"
 
+      event {
+        q              = "tags:service:${var.environment_name}"
+        tags_execution = "and"
+      }
+
       request {
         display_type = "area"
         q      = "avg:trace.rack.request.duration{service:${var.environment_name}/app_worker}"
@@ -919,24 +924,43 @@ resource "datadog_dashboard" "dashboard" {
       }
     }
   }
+
   widget {
     layout = {
-      "height" = "41"
-      "width" = "33"
-      "x"   = "103"
-      "y"   = "30"
+      "height" = "20"
+      "width"  = "33"
+      "x"      = "103"
+      "y"      = "30"
     }
 
     event_stream_definition {
-      event_size   = "s"
-      query     = "Airbrake"
+      event_size     = "s"
+      query          = "tags:service:${var.environment_name}"
       tags_execution = "and"
-      time      = {}
-      title     = "Airbrake"
-      title_align  = "left"
-      title_size   = "16"
+      title          = "Service Events"
+      title_align    = "left"
+      title_size     = "16"
     }
   }
+
+  widget {
+    layout = {
+      "height" = "20"
+      "width"  = "33"
+      "x"      = "103"
+      "y"      = "51"
+    }
+
+    event_stream_definition {
+      event_size     = "s"
+      query          = "Airbrake"
+      tags_execution = "and"
+      title          = "Airbrake"
+      title_align    = "left"
+      title_size     = "16"
+    }
+  }
+
   widget {
     layout = {
       "height" = "41"

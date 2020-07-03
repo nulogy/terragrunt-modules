@@ -33,6 +33,11 @@ resource "datadog_dashboard" "dashboard" {
       title_align = "left"
       title_size = "16"
 
+      event {
+        q              = "service:${var.environment_name}" -> null
+        tags_execution = "and" -> null
+      }
+
       request {
         display_type = "area"
         q      = "avg:trace.rack.request.duration{service:${var.environment_name}/app_worker}"

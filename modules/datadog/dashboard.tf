@@ -34,8 +34,8 @@ resource "datadog_dashboard" "dashboard" {
       title_size = "16"
 
       event {
-        q              = "service:${var.environment_name}" -> null
-        tags_execution = "and" -> null
+        q              = "service:${var.environment_name}"
+        tags_execution = "and"
       }
 
       request {

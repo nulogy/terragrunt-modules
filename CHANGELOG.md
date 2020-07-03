@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Marks the deployments using Datadog
+* Resizes Airbrake panel on Datadog
+* Adds the Service Events panel
+
 ### Changed
 ### Deprecated
 ### Removed

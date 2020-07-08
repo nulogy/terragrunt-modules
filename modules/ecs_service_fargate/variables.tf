@@ -39,7 +39,7 @@ variable "memory" {
 }
 
 variable "param_store_namespace" {
-  default = "Path for SSM secret parameters that the container needs permission to access."
+  description = "Path for SSM secret parameters that the container needs permission to access."
 }
 
 variable "security_groups" {

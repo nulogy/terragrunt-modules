@@ -9,8 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+* Renamed output in ecs_service_fargate from iam_id to task_role_id output
+
 ### Deprecated
+
+* ecs_service_fargate.iam_id output
+
 ### Removed
+
+* ecs_plb_platform module
+* write access to param store for ecs service
+
 ### Fixed
 ### Security
 

@@ -1,5 +1,6 @@
 data "aws_acm_certificate" "acm_region_cert" {
   domain = "*.${var.certificate_domain}"
+  most_recent = true
 }
 
 resource "aws_elb" "elb" {

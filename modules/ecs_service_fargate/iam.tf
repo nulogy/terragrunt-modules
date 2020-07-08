@@ -87,8 +87,7 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
       "Effect": "Allow",
       "Action": [
         "ssm:GetParameter",
-        "ssm:GetParameters",
-        "ssm:PutParameter"
+        "ssm:GetParameters"
       ],
       "Resource": [
         "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${var.param_store_namespace}/*"

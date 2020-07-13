@@ -1,17 +1,29 @@
-data "aws_subnet_ids" "subnet_ids" {
-  vpc_id = var.vpc_id
+data "aws_route_tables" "acceptor_routing_tables" {
+  provider = aws.acceptor
+  vpc_id = var.acceptor_vpc_id
 }
 
-data "aws_route_table" "route_tables" {
-  count     = length(data.aws_subnet_ids.subnet_ids.ids)
-  subnet_id = sort(data.aws_subnet_ids.subnet_ids.ids)[count.index]
+resource "aws_route" "routes_for_acceptor_vpc" {
+  provider = aws.acceptor
+
+  for_each = data.aws_route_tables.acceptor_routing_tables.ids
+
+  route_table_id            = each.value
+  destination_cidr_block    = data.aws_vpc.requester_vpc.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection_accepter.acceptor.vpc_peering_connection_id
 }
 
-resource "aws_route" "routes" {
-  count = length(var.skip) > 0 ? 0 : length(data.aws_route_table.route_tables.*.id)
-
-  route_table_id            = element(data.aws_route_table.route_tables.*.id, count.index)
-  destination_cidr_block    = var.peer_vpc_cidr
-  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering_connection[0].id
+data "aws_route_tables" "requester_routing_tables" {
+  provider = aws.requester
+  vpc_id = var.requester_vpc_id
 }
 
+resource "aws_route" "routes_for_requester_vpc" {
+  provider = aws.requester
+
+  for_each = data.aws_route_tables.requester_routing_tables.ids
+
+  route_table_id            = each.value
+  destination_cidr_block    = data.aws_vpc.requester_vpc.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.requester.id
+}

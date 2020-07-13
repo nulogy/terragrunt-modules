@@ -1,21 +1,15 @@
-variable "environment_name" {
+variable "aws_region" {
+  description = "The AWS Region you want to send everything to. Pick something close to the customer."
 }
 
-variable "peer_vpc_id" {
+variable "aws_profile" {
+  description = "The AWS account you want to use, as defined by your ~/.aws/credentials file."
 }
 
-variable "peer_vpc_cidr" {
-}
+variable "acceptor_account_id" {}
 
-variable "peer_vpc_subnets" {
-  type    = list(string)
-  default = []
-}
+variable "acceptor_vpc_id" {}
 
-variable "skip" {
-  default = ""
-}
+variable "requester_account_id" {}
 
-variable "vpc_id" {
-}
-
+variable "requester_vpc_id" {}

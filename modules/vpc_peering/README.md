@@ -1,0 +1,1 @@
+If you receive errors, ensure that you are authenticated with both the requester and acceptor AWS accounts.

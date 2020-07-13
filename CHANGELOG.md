@@ -8,13 +8,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-* Add container_name output to ecs_service_fargate module
 ### Changed
-* Migrated ecs_scheduled_task module to use fargate
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [14.0.0] - 2020-07-13
+
+### Added
+
+* Add container_name output to ecs_service_fargate module
+
+### Changed
+
+* Migrated ecs_scheduled_task module to use fargate
 
 ## [13.1.0] - 2020-07-09
 

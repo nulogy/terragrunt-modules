@@ -21,6 +21,8 @@ resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
     launch_type         = "FARGATE"
     network_configuration {
       subnets = var.subnets
+      assign_public_ip = false
+
     }
   }
 }

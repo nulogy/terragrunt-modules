@@ -1,5 +1,6 @@
 locals {
   task_def_json = length(var.task_definition_json) > 0 ? var.task_definition_json : "${path.module}/task_definition/default.json"
+  container_name = "${var.environment_name}_${var.service_name}"
 }
 
 data "template_file" "template" {
@@ -10,6 +11,7 @@ data "template_file" "template" {
     TPL_DOCKER_IMAGE    = var.docker_image_name
     TPL_ENV_NAME        = var.environment_name
     TPL_SERVICE_NAME    = var.service_name
+    TPL_CONTAINER_NAME  = local.container_name
     TPL_LOG_GROUP_NAME  = var.log_group_name
     TPL_REGION          = data.aws_region.current.name
     TPL_ENVVARS         = var.envars

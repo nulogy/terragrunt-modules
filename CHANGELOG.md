@@ -9,8 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+* Updates the VPC Peering to use the new version which updates the route tables.
+
 ### Deprecated
 ### Removed
+
+* Removes a second VPC peering module that appeared to be incomplete 
+
 ### Fixed
 ### Security
 

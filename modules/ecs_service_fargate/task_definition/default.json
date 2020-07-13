@@ -7,7 +7,7 @@
     "cpu": ${TPL_CPU},
     "memoryReservation": ${TPL_MEM_RESERVATION},
     "memory": ${TPL_MEM},
-    "name": "${TPL_ENV_NAME}_${TPL_SERVICE_NAME}",
+    "name": "${TPL_CONTAINER_NAME}",
     "healthCheck": {
       "command": ["${TPL_HEALTH_CHECK}"],
       "interval": 30,

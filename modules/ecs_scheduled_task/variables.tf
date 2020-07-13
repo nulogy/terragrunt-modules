@@ -20,6 +20,10 @@ variable "skip" {
   default = ""
 }
 
+variable "subnets" {
+  type = list(string)
+}
+
 variable "task_name" {
 }
 

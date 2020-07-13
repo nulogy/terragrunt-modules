@@ -30,7 +30,8 @@ resource "aws_iam_role_policy" "task_schedule_policy" {
         {
             "Effect": "Allow",
             "Action": [
-                "ecs:RunTask"
+                "ecs:RunTask",
+                "iam:PassRole"
             ],
             "Resource": [
                 "*"

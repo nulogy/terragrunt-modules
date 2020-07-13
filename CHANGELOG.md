@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+* Add container_name output to ecs_service_fargate module
 ### Changed
+* Migrated ecs_scheduled_task module to use fargate
 ### Deprecated
 ### Removed
 ### Fixed

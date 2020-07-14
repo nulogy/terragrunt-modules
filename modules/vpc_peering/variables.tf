@@ -1,21 +1,3 @@
-variable "environment_name" {
-}
+variable "acceptor_vpc_id" {}
 
-variable "peer_vpc_id" {
-}
-
-variable "peer_vpc_cidr" {
-}
-
-variable "peer_vpc_subnets" {
-  type    = list(string)
-  default = []
-}
-
-variable "skip" {
-  default = ""
-}
-
-variable "vpc_id" {
-}
-
+variable "requester_vpc_id" {}

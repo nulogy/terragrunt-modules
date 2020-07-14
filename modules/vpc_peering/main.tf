@@ -1,25 +1,65 @@
-data "aws_caller_identity" "peer" {
+data "aws_vpc" "requester_vpc" {
+  provider = aws.requester
+  id       = var.requester_vpc_id
 }
 
-resource "aws_vpc_peering_connection" "vpc_peering_connection" {
-  count = length(var.skip) > 0 ? 0 : 1
+data "aws_vpc" "acceptor_vpc" {
+  provider = aws.acceptor
+  id       = var.acceptor_vpc_id
+}
 
-  peer_owner_id = data.aws_caller_identity.peer.account_id
-  peer_vpc_id   = var.peer_vpc_id
-  vpc_id        = var.vpc_id
-  auto_accept   = true
+data "aws_region" "acceptor_region" {
+  provider = aws.acceptor
+}
 
-  accepter {
-    allow_remote_vpc_dns_resolution = true
-  }
+resource "aws_vpc_peering_connection" "requester" {
+  provider = aws.requester
 
-  requester {
-    allow_remote_vpc_dns_resolution = true
-  }
+  peer_owner_id = data.aws_vpc.acceptor_vpc.owner_id
+  peer_vpc_id   = data.aws_vpc.acceptor_vpc.id
+  peer_region   = data.aws_region.acceptor_region.name
+  vpc_id        = data.aws_vpc.requester_vpc.id
+  auto_accept   = false
 
   tags = {
-    Name           = "VPC Peering ${var.environment_name} with ${var.peer_vpc_id}"
-    resource_group = var.environment_name
+    Name = "Peer to ${data.aws_vpc.acceptor_vpc.tags["Name"]}"
   }
 }
 
+resource "aws_vpc_peering_connection_accepter" "acceptor" {
+  provider = aws.acceptor
+
+  vpc_peering_connection_id = aws_vpc_peering_connection.requester.id
+  auto_accept               = true
+
+  tags = {
+    Name = "Peer to ${data.aws_vpc.requester_vpc.tags["Name"]}"
+  }
+}
+
+
+resource "aws_vpc_peering_connection_options" "requester" {
+  provider = aws.requester
+
+  # As options can't be set until the connection has been accepted
+  # create an explicit dependency on the accepter.
+  vpc_peering_connection_id = aws_vpc_peering_connection_accepter.acceptor.id
+
+  requester {
+    allow_classic_link_to_remote_vpc = false
+    allow_remote_vpc_dns_resolution  = true
+    allow_vpc_to_remote_classic_link = false
+  }
+}
+
+resource "aws_vpc_peering_connection_options" "accepter" {
+  provider = aws.acceptor
+
+  vpc_peering_connection_id = aws_vpc_peering_connection_accepter.acceptor.id
+
+  accepter {
+    allow_classic_link_to_remote_vpc = false
+    allow_remote_vpc_dns_resolution  = true
+    allow_vpc_to_remote_classic_link = false
+  }
+}

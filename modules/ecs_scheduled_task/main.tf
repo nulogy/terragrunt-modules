@@ -26,4 +26,3 @@ resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
     }
   }
 }
-

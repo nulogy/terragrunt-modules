@@ -11,9 +11,9 @@ data "aws_vpc" "acceptor_vpc" {
 resource "aws_vpc_peering_connection" "requester" {
   provider = aws.requester
 
-  peer_owner_id = var.acceptor_account_id
-  peer_vpc_id   = var.acceptor_vpc_id
-  vpc_id        = var.requester_vpc_id
+  peer_owner_id = data.aws_vpc.acceptor_vpc.owner_id
+  peer_vpc_id   = data.aws_vpc.acceptor_vpc.id
+  vpc_id        = data.aws_vpc.requester_vpc.id
   auto_accept   = false
 
   tags = {

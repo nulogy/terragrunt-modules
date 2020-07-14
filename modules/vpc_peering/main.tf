@@ -8,11 +8,16 @@ data "aws_vpc" "acceptor_vpc" {
   id       = var.acceptor_vpc_id
 }
 
+data "aws_region" "acceptor_region" {
+  provider = aws.acceptor
+}
+
 resource "aws_vpc_peering_connection" "requester" {
   provider = aws.requester
 
   peer_owner_id = data.aws_vpc.acceptor_vpc.owner_id
   peer_vpc_id   = data.aws_vpc.acceptor_vpc.id
+  peer_region   = data.aws_region.acceptor_region.name
   vpc_id        = data.aws_vpc.requester_vpc.id
   auto_accept   = false
 

@@ -6,6 +6,10 @@ output "ecs_service_name" {
   value = module.ecs_service_fargate_elb.ecs_service_name
 }
 
+output "task_role_id" {
+  value = module.ecs_service_fargate_elb.task_role_id
+}
+
 output "target_group_arn" {
   value = module.public_load_balancer.target_group_arn
 }

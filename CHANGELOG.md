@@ -8,15 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-* Add task_role_id output to ecs_fargate_with_elb module
-
 ### Changed
-* Rename iam_id output to task_role_id in ecs_service_fargate_elb
-
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [15.0.0] - 2020-07-14
+
+### Added
+* Add task_role_id output to ecs_fargate_with_elb module
+
+### Changed
+* Rename iam_id output to task_role_id in ecs_service_fargate_elb
 
 ## [14.0.0] - 2020-07-13
 

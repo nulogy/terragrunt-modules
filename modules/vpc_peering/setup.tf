@@ -1,5 +1,4 @@
 provider "aws" {
-  region  = var.aws_region
   profile = "nulogy-anchor"
   alias   = "requester"
   version = "~> 2.0"
@@ -9,7 +8,6 @@ provider "aws" {
 }
 
 provider "aws" {
-  region  = var.aws_region
   profile = "nulogy-anchor"
   alias   = "acceptor"
   version = "~> 2.0"

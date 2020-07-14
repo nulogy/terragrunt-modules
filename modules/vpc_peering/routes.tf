@@ -24,6 +24,6 @@ resource "aws_route" "routes_for_requester_vpc" {
   for_each = data.aws_route_tables.requester_routing_tables.ids
 
   route_table_id            = each.value
-  destination_cidr_block    = data.aws_vpc.requester_vpc.cidr_block
+  destination_cidr_block    = data.aws_vpc.acceptor_vpc.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.requester.id
 }

@@ -14,6 +14,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [16.0.0] - 2020-07-14
+
+### Notes:
+This was initially released in a branch as part of a bad merge. The tag has since been corrected. AK.
+
+### Changed
+
+* Updates the VPC Peering to use the new version which updates the route tables and has a simpler API.
+
+### Removed
+
+* Removes a second VPC peering module that appeared to be incomplete 
+
 ## [15.1.0] - 2020-07-17
 
 ### Added

@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [15.1.0] - 2020-07-17
+
+### Added
 
 * Add `kafka_topics` module so that Message Bus consumers can setup topics
 
@@ -15,13 +24,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Updates the VPC Peering to use the new version which updates the route tables.
 
-### Deprecated
 ### Removed
 
 * Removes a second VPC peering module that appeared to be incomplete
-
-### Fixed
-### Security
 
 ## [15.0.0] - 2020-07-14
 

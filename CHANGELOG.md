@@ -8,9 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Added variable `ecr_url` on the event_shovel module group to control which repository to pull EventShovel from. Defaults to CPI's shared internal repo
+
 ### Changed
 ### Deprecated
 ### Removed
+
+* No longer creates an ECR repo for EventShovel.
+
 ### Fixed
 ### Security
 
@@ -25,7 +31,7 @@ This was initially released in a branch as part of a bad merge. The tag has sinc
 
 ### Removed
 
-* Removes a second VPC peering module that appeared to be incomplete 
+* Removes a second VPC peering module that appeared to be incomplete
 
 ## [15.1.0] - 2020-07-17
 

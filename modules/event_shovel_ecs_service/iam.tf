@@ -22,6 +22,10 @@ EOF
 }
 
 resource "aws_iam_role" "ecs_executionrole" {
+  # Warning: load bearing string!
+  # Role names matching this pattern are permitted to download the image from the shared event shovel docker repo
+  # hosted in CPI production's environment. If you want to change this role name, you'll need to coordinate with CPI's
+  # maintainers to ensure that the new name also is permitted.
   name               = "${var.environment_name}-ecs-event-shovel-execution-role"
   assume_role_policy = <<EOF
 {
@@ -106,4 +110,3 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
 EOF
 
 }
-

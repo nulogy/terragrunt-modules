@@ -15,7 +15,7 @@ module "event_shovel" {
   aws_region               = var.aws_region
   kms_key_id               = var.kms_key_id
   desired_count            = 1
-  docker_image_name        = "${module.ecr.ecr_url}:${var.docker_build_tag}"
+  docker_image_name        = "${var.ecr_url}:${var.docker_build_tag}"
   ecs_cluster_name         = var.ecs_cluster_name
   environment_name         = var.environment_name
   envvars                  = <<ENVVARS
@@ -69,4 +69,3 @@ ENVVARS
   private_subnet_ids    = var.private_subnet_ids
   vpc_id                = var.vpc_id
 }
-

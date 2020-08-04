@@ -2,7 +2,9 @@
 
 ## Contributing
 
-We treat this project as an internal "open source" project. Everyone at Nulogy is welcome to submit Merge Requests.
+We treat this project as an internal "open source" project. Everyone at Nulogy is welcome to submit Pull Requests.
+
+The TASS Team is the maintainer of this project.
 
 ### Merging changes to master
 
@@ -10,7 +12,7 @@ When you are happy with your changes:
 
 1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file, under the `## [Unreleased]` section.
 1. Create a Pull Request.
-1. Notify #nulogy-deployer Slack channel for a review.
+1. Notify #tass Slack channel for a review.
 
 ### Release a new version
 
@@ -36,8 +38,3 @@ When you are happy with your changes:
 ### RubyMine
 
 We recommend installing the `HashiCorp Terraform / HCL language Support` plugin
-
-### Nulogy-Deployer Core Team
-
-* Cameron Ross - DRI
-* Arturo Pie

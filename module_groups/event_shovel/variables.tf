@@ -33,6 +33,11 @@ variable "docker_build_tag" {
   description = "Docker Tag to use."
 }
 
+variable "ecr_url" {
+  description = "URL to ECR repo for Event Shovel. Default's to CPI's shared internal repo."
+  default = "441226071278.dkr.ecr.us-east-1.amazonaws.com/cpi-production-event-shovel"
+}
+
 variable "ecs_cluster_name" {
   description = "The name of the ECS cluster to run event shovel inside. (i.e. the `ecs_cluster_name` output of the `ecs_cluster` module)"
 }
@@ -69,4 +74,3 @@ variable "private_subnet_ids" {
 variable "vpc_id" {
   description = "The VPC that this task should live in."
 }
-

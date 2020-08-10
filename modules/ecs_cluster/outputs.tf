@@ -1,10 +1,12 @@
 output "ecs_cluster_name" {
-  #https://github.com/hashicorp/terraform/issues/16726
-  value = element(concat(aws_ecs_cluster.ecs_cluster.*.name, [""]), 0)
+  value = aws_ecs_cluster.ecs_cluster.name
 }
 
 output "ecs_cluster_id" {
-  #https://github.com/hashicorp/terraform/issues/16726
-  value = element(concat(aws_ecs_cluster.ecs_cluster.*.id, [""]), 0)
+  value = aws_ecs_cluster.ecs_cluster.id
+}
+
+output "ecs_cluster_arn" {
+  value = aws_ecs_cluster.ecs_cluster.arn
 }
 

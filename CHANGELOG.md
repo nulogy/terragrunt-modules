@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [16.1.1] - 2020-08-10
+
+### Added
+
+* Exposes the cluster ARN from the ecs_cluster module & module_group outputs
+
 ## [16.1.0] - 2020-08-04
 
 ### Added

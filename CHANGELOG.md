@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Adds security groups variable to ecs_scheduled_task module
+
 ### Changed
 ### Deprecated
 ### Removed

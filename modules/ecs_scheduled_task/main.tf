@@ -22,7 +22,7 @@ resource "aws_cloudwatch_event_target" "scheduled_task_event_target" {
     network_configuration {
       subnets = var.subnets
       assign_public_ip = false
-
+      security_groups = var.security_groups
     }
   }
 }

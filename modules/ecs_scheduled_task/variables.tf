@@ -16,6 +16,11 @@ variable "event_target_json" {
 variable "schedule_expression" {
 }
 
+variable "security_groups" {
+  default = []
+  type = list(string)
+}
+
 variable "skip" {
   default = ""
 }

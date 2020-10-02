@@ -6,7 +6,7 @@
   "database.hostname": "${database_address}",
   "database.password": "${database_password}",
   "database.port": "5432",
-  "database.server.name": "${environment_name}",
+  "database.server.name": "${connection_name}",
   "database.user": "${database_user}",
   "heartbeat.action.query": "${heartbeat_query}",
   "heartbeat.interval.ms": "30000",

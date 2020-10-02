@@ -18,22 +18,22 @@ locals {
       );
     EOF
   heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
-  heartbeat_topic_name    = "heartbeat-${var.environment_name}"
+  heartbeat_topic         = "heartbeat-${var.connection_name}"
 }
 
 data "template_file" "debezium_config" {
   template = file("${path.module}/debezium-db-config.tpl")
 
   vars = {
-    bootstrap_servers = var.debezium_config__bootstrap_servers
+    bootstrap_servers = var.kafka_bootstrap_servers
     database_address  = var.database_address
     database_name     = var.database_name
     database_password = var.database_password
     database_user     = var.database_username
-    environment_name  = var.environment_name
-    events_table      = var.debezium_config__events_table
+    connection_name   = var.connection_name
+    events_table      = var.debezium_events_table
     heartbeat_query   = local.heartbeat_query
-    slot_name         = "${replace(var.environment_name, "-", "_")}_debezium_slot"
+    slot_name         = "${replace(var.connection_name, "-", "_")}_debezium_slot"
   }
 }
 
@@ -45,15 +45,15 @@ resource "local_file" "json" {
 resource "null_resource" "upload_config" {
   depends_on = [null_resource.create_topic]
   triggers   = {
-    cluster_url      = var.debezium_config__cluster_url
-    environment_name = var.environment_name
+    cluster_url     = var.kafka_connect_url
+    connection_name = var.connection_name
   }
 
   provisioner "local-exec" {
     command = <<EOF
 curl -X PUT -H "Accept:application/json" -H "Content-Type:application/json" \
   -d "@${local_file.json.filename}" \
-  ${self.triggers.cluster_url}/connectors/${self.triggers.environment_name}/config
+  ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}/config
 EOF
   }
 
@@ -61,7 +61,7 @@ EOF
     when    = "destroy"
     command = <<EOF
 curl --output /dev/null --fail -X DELETE -H "Accept:application/json" -H "Content-Type:application/json" \
-  ${self.triggers.cluster_url}/connectors/${self.triggers.environment_name}
+  ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}
 # Try to wait until the resource is actually destroyed. This can cause problems when uploading a new config
 # and terraform does a destroy then a create. This should probably be replaced with some kind of API polling.
 sleep 2.0

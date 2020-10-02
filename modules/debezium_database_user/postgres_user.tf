@@ -1,6 +1,8 @@
 locals {
+  docker_image = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
+
   grant_command = <<EOF
-docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.docker_image} \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \
@@ -15,7 +17,7 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" p
 EOF
 
   revoke_command = <<EOF
-docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.docker_image} \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \

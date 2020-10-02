@@ -1,34 +1,33 @@
-resource "null_resource" "postgres_publication" {
-  triggers = {
-    database_address        = var.database_address
-    database_name           = var.database_name
-    database_port           = var.database_port
-    events_table            = var.events_table
-    database_admin_password = var.database_admin_password
-    database_admin_username = var.database_admin_username
-    postgres_version        = var.postgres_version
-    publication_name        = var.publication_name
-  }
+locals {
+  docker_image = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
 
-  provisioner "local-exec" {
-    command = <<EOF
-docker run -e PGPASSWORD="${self.triggers.database_admin_password}" --rm --entrypoint="" postgres:${self.triggers.postgres_version}-alpine \
+  idempotent_create_publication = <<EOF
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.docker_image} \
   psql \
-  --host ${self.triggers.database_address} \
-  --port ${self.triggers.database_port} \
-  --username ${self.triggers.database_admin_username} \
-  --dbname "${self.triggers.database_name}" \
+  --host ${var.database_address} \
+  --port ${var.database_port} \
+  --username ${var.database_admin_username} \
+  --dbname "${var.database_name}" \
   --command "
 CREATE PUBLICATION debezium_public_events FOR TABLE  WITH (publish = 'insert');
   DO $$BEGIN
-    IF NOT EXISTS(SELECT FROM pg_publication WHERE pubname = 'self.triggers.publication_name')
+    IF NOT EXISTS(SELECT FROM pg_publication WHERE pubname = '${var.publication_name}')
     THEN
       CREATE PUBLICATION debezium_public_events
-      FOR TABLE ${self.triggers.events_table}
+      FOR TABLE ${var.events_table}
       WITH (publish = 'insert');;
     END IF;;
   END$$;
 "
 EOF
+}
+
+resource "null_resource" "postgres_publication" {
+  triggers = {
+    idempotent_create_publication = local.idempotent_create_publication
+  }
+
+  provisioner "local-exec" {
+    command = self.triggers.idempotent_create_publication
   }
 }

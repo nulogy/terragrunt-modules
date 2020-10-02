@@ -30,3 +30,7 @@ variable "database_port" {
 }
 
 variable "database_user" {}
+
+variable "heartbeat_query" {
+  default = "use default"
+}

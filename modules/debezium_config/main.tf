@@ -1,12 +1,31 @@
 locals {
-  heartbeat_topic_name = "heartbeat-${var.environment_name}"
-  debezium_user_name   = "debezium"
+  heartbeat_topic_name    = "heartbeat-${var.environment_name}"
+  default_heartbeat_query = <<EOF
+      SET search_path TO public;
+
+      DELETE FROM public.${events_table}
+      WHERE created_at < now() - INTERVAL '3 days';
+
+      INSERT INTO public.${events_table}
+        (id, public_subscription_id, partition_key, topic_name, tenant_id, event_json, created_at)
+      VALUES (
+        uuid_generate_v4(),
+        '00000000-0000-0000-0000-000000000000',
+        '00000000-0000-0000-0000-000000000000',
+        '${heartbeat_topic_name}',
+        '00000000-0000-0000-0000-000000000000',
+        '{}',
+        now()
+      );
+    EOF
+  heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
+  db_debezium_user_name   = "debezium"
 }
 
 resource "null_resource" "create_topic" {
   triggers = {
     debezium_config__bootstrap_servers = var.debezium_config__bootstrap_servers
-    heartbeat_topic_name = local.heartbeat_topic_name
+    heartbeat_topic_name               = local.heartbeat_topic_name
   }
   provisioner "local-exec" {
     command = <<EOF
@@ -28,7 +47,7 @@ EOF
 resource "null_resource" "upload_config" {
   depends_on = [null_resource.create_topic, null_resource.create_debezium_user]
   triggers   = {
-    cluster_url = var.debezium_config__cluster_url
+    cluster_url      = var.debezium_config__cluster_url
     environment_name = var.environment_name
   }
 
@@ -61,14 +80,14 @@ data "template_file" "debezium_config" {
   template = file("${path.module}/debezium-db-config.tpl")
 
   vars = {
-    bootstrap_servers    = var.debezium_config__bootstrap_servers
-    database_address     = var.database_address
-    database_name        = var.database_name
-    database_password    = data.aws_ssm_parameter.debezium_db_password.value
-    database_user        = local.debezium_user_name
-    environment_name     = var.environment_name
-    events_table         = var.debezium_config__events_table
-    heartbeat_topic_name = local.heartbeat_topic_name
-    slot_name            = "${replace(var.environment_name, "-", "_")}_debezium_slot"
+    bootstrap_servers = var.debezium_config__bootstrap_servers
+    database_address  = var.database_address
+    database_name     = var.database_name
+    database_password = data.aws_ssm_parameter.debezium_db_password.value
+    database_user     = local.db_debezium_user_name
+    environment_name  = var.environment_name
+    events_table      = var.debezium_config__events_table
+    heartbeat_query   = local.heartbeat_query
+    slot_name         = "${replace(var.environment_name, "-", "_")}_debezium_slot"
   }
 }

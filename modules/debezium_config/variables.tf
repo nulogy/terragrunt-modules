@@ -10,8 +10,6 @@ variable "debezium_config__events_table" {
 
 variable "database_address" {}
 
-variable "database_engine_version" {}
-
 variable "database_name" {}
 
 variable "database_port" {

@@ -1,6 +1,6 @@
 variable "database_address" {}
 
-variable "database_engine_version" {}
+variable "postgres_version" {}
 
 variable "database_name" {}
 

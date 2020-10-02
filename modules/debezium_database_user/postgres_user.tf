@@ -1,6 +1,6 @@
 locals {
   grant_command = <<EOF
-docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres:${var.database_engine_version}-alpine \
+docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \
@@ -14,7 +14,7 @@ docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres
 EOF
 
   revoke_command = <<EOF
-docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres:${var.database_engine_version}-alpine \
+docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \

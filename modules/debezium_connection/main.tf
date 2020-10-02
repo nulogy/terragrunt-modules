@@ -1,4 +1,5 @@
 locals {
+  // This is exposed because PackManager will need to override it to change the Schema Search path
   default_heartbeat_query = <<EOF
       SET search_path TO public;
 

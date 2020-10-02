@@ -3,16 +3,16 @@ locals {
   default_heartbeat_query = <<EOF
       SET search_path TO public;
 
-      DELETE FROM public.${events_table}
+      DELETE FROM public.${var.events_table}
       WHERE created_at < now() - INTERVAL '3 days';
 
-      INSERT INTO public.${events_table}
+      INSERT INTO public.${var.events_table}
         (id, public_subscription_id, partition_key, topic_name, tenant_id, event_json, created_at)
       VALUES (
         uuid_generate_v4(),
         '00000000-0000-0000-0000-000000000000',
         '00000000-0000-0000-0000-000000000000',
-        '${heartbeat_topic_name}',
+        '${local.heartbeat_topic}',
         '00000000-0000-0000-0000-000000000000',
         '{}',
         now()
@@ -60,7 +60,7 @@ EOF
   }
 
   provisioner "local-exec" {
-    when    = "destroy"
+    when    = destroy
     command = <<EOF
 curl --output /dev/null --fail -X DELETE -H "Accept:application/json" -H "Content-Type:application/json" \
   ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}

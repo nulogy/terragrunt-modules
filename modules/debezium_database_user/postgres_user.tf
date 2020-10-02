@@ -42,7 +42,7 @@ resource "null_resource" "create_debezium_user" {
   }
 
   provisioner "local-exec" {
-    when    = "destroy"
+    when    = destroy
     command = self.triggers.revoke_command
   }
 }

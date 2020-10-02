@@ -9,11 +9,10 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
   --username ${var.database_admin_username} \
   --dbname "${var.database_name}" \
   --command "
-CREATE PUBLICATION debezium_public_events FOR TABLE  WITH (publish = 'insert');
   DO $$BEGIN
     IF NOT EXISTS(SELECT FROM pg_publication WHERE pubname = '${var.publication_name}')
     THEN
-      CREATE PUBLICATION debezium_public_events
+      CREATE PUBLICATION ${var.publication_name}
       FOR TABLE ${var.events_table}
       WITH (publish = 'insert');;
     END IF;;

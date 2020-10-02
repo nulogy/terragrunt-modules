@@ -9,14 +9,14 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
   --username ${var.database_admin_username} \
   --dbname "${var.database_name}" \
   --command "
-  DO $$BEGIN
+  DO \$\$BEGIN
     IF NOT EXISTS(SELECT FROM pg_publication WHERE pubname = '${var.publication_name}')
     THEN
       CREATE PUBLICATION ${var.publication_name}
       FOR TABLE ${var.events_table}
-      WITH (publish = 'insert');;
-    END IF;;
-  END$$;
+      WITH (publish = 'insert');
+    END IF;
+  END\$\$
 "
 EOF
 }

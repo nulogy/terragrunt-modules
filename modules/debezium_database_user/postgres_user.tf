@@ -1,29 +1,32 @@
 locals {
   grant_command = <<EOF
-docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \
-  --username ${var.granter_username} \
+  --username ${var.database_admin_username} \
   --dbname "${var.database_name}" \
-  --command "CREATE ROLE ${var.debezium_username} with LOGIN PASSWORD
+  --command "
+    CREATE ROLE ${var.debezium_username} with LOGIN PASSWORD
     '${var.debezium_password}' VALID UNTIL 'infinity' IN ROLE rds_replication;
     GRANT USAGE ON SCHEMA public TO debezium;
     GRANT SELECT, INSERT, DELETE ON TABLE ${var.debezium_events_table} TO ${var.debezium_username};
-    CREATE PUBLICATION debezium_public_events FOR TABLE ${var.debezium_events_table} WITH (publish = 'insert'); "
+  "
 EOF
 
   revoke_command = <<EOF
-docker run -e PGPASSWORD="${var.granter_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" postgres:${var.postgres_version}-alpine \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \
-  --username ${var.granter_username} \
+  --username ${var.database_admin_username} \
   --dbname "${var.database_name}" \
-  --command "REVOKE ALL PRIVILEGES ON TABLE ${var.debezium_events_table} FROM ${var.debezium_username};
+  --command "
+    REVOKE ALL PRIVILEGES ON TABLE ${var.debezium_events_table} FROM ${var.debezium_username};
     REVOKE USAGE ON SCHEMA public FROM debezium;
     REVOKE CREATE ON DATABASE ${var.database_name} FROM ${var.debezium_username};
-    DROP ROLE ${var.debezium_username};"
+    DROP ROLE ${var.debezium_username};
+  "
 EOF
 }
 

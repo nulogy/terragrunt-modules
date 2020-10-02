@@ -13,11 +13,10 @@
 
   "behavior.on.null.values": "delete",
   "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
-  "database.initial.statements": "DO $$BEGIN IF NOT EXISTS(SELECT FROM pg_publication WHERE pubname = 'debezium_public_events') THEN CREATE PUBLICATION debezium_public_events FOR TABLE ${events_table} WITH (publish = 'insert');; END IF;; END$$;",
   "errors.log.enable": "true",
   "errors.log.include.messages": "true",
   "plugin.name": "pgoutput",
-  "publication.name": "debezium_public_events",
+  "publication.name": "${publication_name}",
   "slot.name": "${slot_name}",
   "slot.drop.on.stop": "false",
   "snapshot.mode": "never",

@@ -1,6 +1,8 @@
 variable "database_address" {}
 
-variable "postgres_version" {}
+variable "postgres_version" {
+  default = "latest"
+}
 
 variable "database_name" {}
 
@@ -18,6 +20,6 @@ variable "debezium_username" {
   default = "debezium"
 }
 
-variable "granter_username" {}
+variable "database_admin_username" {}
 
-variable "granter_password" {}
+variable "database_admin_password" {}

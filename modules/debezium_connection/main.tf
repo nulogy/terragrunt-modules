@@ -27,13 +27,14 @@ data "template_file" "debezium_config" {
 
   vars = {
     bootstrap_servers = var.kafka_bootstrap_servers
+    connection_name   = var.connection_name
     database_address  = var.database_address
     database_name     = var.database_name
     database_password = var.database_password
     database_user     = var.database_username
-    connection_name   = var.connection_name
-    events_table      = var.debezium_events_table
+    events_table      = var.events_table
     heartbeat_query   = local.heartbeat_query
+    publication_name  = var.publication_name
     slot_name         = "${replace(var.connection_name, "-", "_")}_debezium_slot"
   }
 }
@@ -44,7 +45,7 @@ resource "local_file" "json" {
 }
 
 resource "null_resource" "upload_config" {
-  depends_on = [null_resource.create_topic]
+  depends_on = [null_resource.heartbeat_kafta_topic, null_resource.postgres_publication]
   triggers   = {
     cluster_url     = var.kafka_connect_url
     connection_name = var.connection_name

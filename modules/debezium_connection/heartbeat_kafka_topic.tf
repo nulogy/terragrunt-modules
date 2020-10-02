@@ -1,4 +1,4 @@
-resource "null_resource" "create_topic" {
+resource "null_resource" "heartbeat_kafta_topic" {
   triggers = {
     kafka_bootstrap_servers = var.kafka_bootstrap_servers
     heartbeat_topic_name    = local.heartbeat_topic

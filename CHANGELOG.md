@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [16.2.0] - 2020-10-06
+
+### Added
+
+* Added modules for apps to use to connect to the message bus as a producer. `debezium_connection` and `deebziucm_database_user`.
+
 ## [16.1.2] - 2020-08-31
 
 ### Added

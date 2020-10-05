@@ -2,6 +2,10 @@ variable "agents_per_instance" {
   default = 1
 }
 
+variable "associate_public_ip_address" {
+  default = true
+}
+
 variable "bootstrap_script_url" {
   default = ""
 }

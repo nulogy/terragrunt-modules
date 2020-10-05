@@ -37,6 +37,7 @@ resource "aws_cloudformation_stack" "stack" {
 
   parameters = {
     AgentsPerInstance                        = var.agents_per_instance
+    AssociatePublicIpAddress                 = var.associate_public_ip_address
     BootstrapScriptUrl                       = var.bootstrap_script_url
     BuildkiteAgentToken                      = var.buildkite_agent_token
     BuildkiteAgentTimestampLines             = "true"

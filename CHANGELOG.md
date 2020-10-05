@@ -14,13 +14,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
-## [17.0.0] - 2020-10-06
+## [17.0.1] - 2020-10-05
+
+### Added
+
+* Paramaterizes AssociatePublicIPAddress for the buildkite elastic stack module.
+
+## [17.0.0] - 2020-10-05
 
 ### Added
 
 * Changes the default heartbeat SQL to use the renamed database columns.
 
-## [16.2.0] - 2020-10-06
+## [16.2.0] - 2020-10-05
 
 ### Added
 

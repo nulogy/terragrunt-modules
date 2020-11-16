@@ -48,6 +48,7 @@ resource "aws_cloudformation_stack" "stack" {
     SecretsBucket                  = var.secrets_bucket
     SecurityGroupId                = aws_security_group.stack_security_group.id
     ScaleInIdlePeriod              = var.scale_in_idle_period
+    ScaleOutFactor                 = var.scale_out_factor
     SpotPrice                      = var.spot_price
     Subnets                        = join(",", var.subnet_ids)
     VpcId                          = var.vpc_id

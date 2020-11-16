@@ -39,7 +39,13 @@ variable "root_volume_size" {
 }
 
 variable "scale_in_idle_period" {
-  default = 3600
+  description = "Number of seconds an agent must be idle before terminating"
+  default     = 3600
+}
+
+variable "scale_out_factor" {
+  description = "A decimal factor to apply to scale out changes to speed up or slow down scale-out"
+  default     = 1.0
 }
 
 variable "secrets_bucket" {

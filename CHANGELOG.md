@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.0.0] - 2020-11-16
+
+### Changed
+
+* Updates `buildkite_elastic_stack` to be compatible with [elastic stack v5](https://github.com/buildkite/elastic-ci-stack-for-aws/releases/tag/v5.0.0)
+
 ## [17.2.0] - 2020-10-14
 
 ### Changed

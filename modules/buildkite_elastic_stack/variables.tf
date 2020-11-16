@@ -16,11 +16,6 @@ variable "buildkite_agent_token" {
 variable "buildkite_queue" {
 }
 
-variable "enable_experimental_lambda_based_autoscaling" {
-  description = "Uses a custom lambda for autoscaling vs the standard AWS AutoScaling"
-  default     = false
-}
-
 variable "instance_type" {
 }
 
@@ -43,20 +38,14 @@ variable "root_volume_size" {
   default     = 250
 }
 
-variable "scale_adjustment" {
-  default = 0
+variable "scale_in_idle_period" {
+  description = "Number of seconds an agent must be idle before terminating"
+  default     = 3600
 }
 
-variable "scale_down_adjustment" {
-  default = 0
-}
-
-variable "scale_down_period" {
-  default = 3600
-}
-
-variable "scale_up_adjustment" {
-  default = 0
+variable "scale_out_factor" {
+  description = "A decimal factor to apply to scale out changes to speed up or slow down scale-out"
+  default     = 1.0
 }
 
 variable "secrets_bucket" {
@@ -78,4 +67,3 @@ variable "subnet_ids" {
 
 variable "vpc_id" {
 }
-

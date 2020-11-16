@@ -16,11 +16,6 @@ variable "buildkite_agent_token" {
 variable "buildkite_queue" {
 }
 
-variable "enable_experimental_lambda_based_autoscaling" {
-  description = "Uses a custom lambda for autoscaling vs the standard AWS AutoScaling"
-  default     = false
-}
-
 variable "instance_type" {
 }
 
@@ -41,10 +36,6 @@ variable "min_size" {
 variable "root_volume_size" {
   description = "Size of each instance's root EBS volume (in GB)"
   default     = 250
-}
-
-variable "scale_adjustment" {
-  default = 0
 }
 
 variable "scale_in_idle_period" {

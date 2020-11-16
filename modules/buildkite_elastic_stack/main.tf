@@ -1,8 +1,3 @@
-locals {
-  scale_up_adjustment   = var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_up_adjustment
-  scale_down_adjustment = var.scale_adjustment > 0 ? var.scale_adjustment : var.scale_down_adjustment
-}
-
 resource "aws_security_group" "stack_security_group" {
   name_prefix = "${var.stack_name}-SecurityGroup-"
 
@@ -36,33 +31,30 @@ resource "aws_cloudformation_stack" "stack" {
   capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
 
   parameters = {
-    AgentsPerInstance                        = var.agents_per_instance
-    AssociatePublicIpAddress                 = var.associate_public_ip_address
-    BootstrapScriptUrl                       = var.bootstrap_script_url
-    BuildkiteAgentToken                      = var.buildkite_agent_token
-    BuildkiteAgentTimestampLines             = "true"
-    BuildkiteQueue                           = var.buildkite_queue
-    ECRAccessPolicy                          = "poweruser"
-    EnableDockerUserNamespaceRemap           = "false"
-    EnableExperimentalLambdaBasedAutoscaling = var.enable_experimental_lambda_based_autoscaling
-    InstanceType                             = var.instance_type
-    KeyName                                  = var.key_name
-    ManagedPolicyARN                         = var.managed_policy_arn
-    MaxSize                                  = var.max_size
-    MinSize                                  = var.min_size
-    RootVolumeSize                           = var.root_volume_size
-    SecretsBucket                            = var.secrets_bucket
-    SecurityGroupId                          = aws_security_group.stack_security_group.id
-    ScaleDownAdjustment                      = "-${local.scale_down_adjustment}"
-    ScaleDownPeriod                          = var.scale_down_period
-    ScaleUpAdjustment                        = local.scale_up_adjustment
-    SpotPrice                                = var.spot_price
-    Subnets                                  = join(",", var.subnet_ids)
-    VpcId                                    = var.vpc_id
+    AgentsPerInstance              = var.agents_per_instance
+    AssociatePublicIpAddress       = var.associate_public_ip_address
+    BootstrapScriptUrl             = var.bootstrap_script_url
+    BuildkiteAgentToken            = var.buildkite_agent_token
+    BuildkiteAgentTimestampLines   = "true"
+    BuildkiteQueue                 = var.buildkite_queue
+    ECRAccessPolicy                = "poweruser"
+    EnableDockerUserNamespaceRemap = "false"
+    InstanceType                   = var.instance_type
+    KeyName                        = var.key_name
+    ManagedPolicyARN               = var.managed_policy_arn
+    MaxSize                        = var.max_size
+    MinSize                        = var.min_size
+    RootVolumeSize                 = var.root_volume_size
+    SecretsBucket                  = var.secrets_bucket
+    SecurityGroupId                = aws_security_group.stack_security_group.id
+    ScaleInIdlePeriod              = var.scale_in_idle_period
+    ScaleOutFactor                 = var.scale_out_factor
+    SpotPrice                      = var.spot_price
+    Subnets                        = join(",", var.subnet_ids)
+    VpcId                          = var.vpc_id
   }
 
   lifecycle {
     ignore_changes = [parameters["BuildkiteAgentToken"]]
   }
 }
-

@@ -14,13 +14,13 @@ locals {
   EOF
   // This is exposed because PackManager will need to override it to change the Schema Search path
   default_heartbeat_query = <<EOF
-      SET search_path TO public;
+    SET search_path TO public;
 
-      DELETE FROM public.${var.events_table}
-      WHERE created_at < now() - INTERVAL '3 days';
+    DELETE FROM public.${var.events_table}
+    WHERE created_at < now() - INTERVAL '3 days';
 
-      ${local.heartbeat_insertion}
-    EOF
+    ${local.heartbeat_insertion}
+  EOF
   heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
   heartbeat_topic         = "heartbeat-${var.connection_name}"
 }

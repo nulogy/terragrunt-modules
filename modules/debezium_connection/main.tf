@@ -23,7 +23,7 @@ locals {
 }
 
 data "template_file" "debezium_config" {
-  template = file("${path.module}/debezium-db-config.tpl")
+  template = file("${path.module}/debezium-config.tpl")
 
   vars = {
     bootstrap_servers = var.kafka_bootstrap_servers
@@ -41,12 +41,12 @@ data "template_file" "debezium_config" {
 
 resource "local_file" "json" {
   sensitive_content = data.template_file.debezium_config.rendered
-  filename          = "${path.module}/debezium-db-config.json"
+  filename          = "${path.module}/debezium-config.json"
 }
 
 resource "null_resource" "upload_config" {
   depends_on = [null_resource.heartbeat_kafta_topic, null_resource.postgres_publication]
-  triggers   = {
+  triggers = {
     cluster_url     = var.kafka_connect_url
     connection_name = var.connection_name
   }

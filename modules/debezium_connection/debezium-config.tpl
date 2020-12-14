@@ -8,6 +8,7 @@
   "database.port": "5432",
   "database.server.name": "${connection_name}",
   "database.user": "${database_user}",
+  "database.initial​.statements": "${initial_statements}",
   "heartbeat.action.query": "${heartbeat_query}",
   "heartbeat.interval.ms": "30000",
 

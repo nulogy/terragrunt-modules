@@ -6,6 +6,9 @@ variable "aws_profile" {
 variable "environment_name" {
 }
 
+variable "environment_short_name" {
+}
+
 variable "logzio__api_url" {
   default = "https://listener.logz.io:8071"
 }

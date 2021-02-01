@@ -7,7 +7,7 @@ data "archive_file" "lambda_zip" {
 resource "aws_lambda_function" "lambda" {
   filename         = "lambda.zip"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  function_name    = "${replace(var.environment_name, "packmanager", "pm")}-${var.logzio__module_name}-ship-logzio"
+  function_name    = "${var.environment_short_name}-${var.logzio__module_name}-ship-logzio"
   role             = aws_iam_role.lambda_role.arn
   description      = "AWS Lambda Function that ingests CloudWatch logs into Logz.io. Environment: ${var.environment_name}. Terraform Module: ${var.logzio__module_name}."
   handler          = "lambda.lambda_handler"
@@ -24,9 +24,6 @@ resource "aws_lambda_function" "lambda" {
   }
 
   lifecycle {
-    # Ignore changes to environment variables values.
-    # @TODO: In order to get this done automatically, we need to improve the 'lambda.py'
-    #script so we can retrieve the values from Parameter Store programatically.
     ignore_changes = [environment]
   }
 }
@@ -40,26 +37,25 @@ resource "aws_cloudwatch_log_subscription_filter" "logfilter" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "${replace(var.environment_name, "packmanager", "pm")}-${var.logzio__module_name}-cloudwatch-to-logzio"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
+  name               = "${var.environment_short_name}-${var.logzio__module_name}-cloudwatch-to-logzio"
+  assume_role_policy = <<-EOF
     {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "lambda.amazonaws.com"
+          },
+          "Action": "sts:AssumeRole"
+        }
+      ]
     }
-  ]
-}
-EOF
-
+  EOF
 }
 
 resource "aws_lambda_permission" "allows_cloudwatch_execute_lambda" {
-  statement_id  = "${replace(var.environment_name, "packmanager", "pm")}-${var.logzio__module_name}-allows-cloudwatch-execute-lambda"
+  statement_id  = "${var.environment_short_name}-${var.logzio__module_name}-allows-cloudwatch-execute-lambda"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.arn
   principal     = "logs.${var.aws_region}.amazonaws.com"
@@ -67,25 +63,24 @@ resource "aws_lambda_permission" "allows_cloudwatch_execute_lambda" {
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name        = "${replace(var.environment_name, "packmanager", "pm")}-${var.logzio__module_name}-cloudwatch-to-logzio"
+  name        = "${var.environment_short_name}-${var.logzio__module_name}-cloudwatch-to-logzio"
   description = "Allows Lambda to write its execution logs into CloudWatch."
-  policy      = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
+  policy      = <<-EOF
     {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*"
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:*"
+        }
+      ]
     }
-  ]
-}
-EOF
-
+  EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {

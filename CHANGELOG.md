@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+### Added
+
+* `cloudwatch_logzio` module that can be used to send logs to Logz.io
+
 ## [18.0.0] - 2020-11-16
 
 ### Changed

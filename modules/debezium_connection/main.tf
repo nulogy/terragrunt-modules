@@ -23,6 +23,8 @@ locals {
   EOF
   heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
   heartbeat_topic         = "heartbeat-${var.connection_name}"
+  pg_docker_image         = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
+
 }
 
 data "template_file" "debezium_config" {

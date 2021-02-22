@@ -1,8 +1,6 @@
 locals {
-  docker_image = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
-
   idempotent_create_publication = <<EOF
-docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.docker_image} \
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.pg_docker_image} \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \

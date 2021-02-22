@@ -1,7 +1,7 @@
 locals {
   heartbeat_insertion = <<EOF
     INSERT INTO public.${var.events_table}
-      (id, public_subscription_id, partition_key, topic_name, tenant_id, event_json, created_at)
+      (id, subscription_id, partition_key, topic_name, company_uuid, event_json, created_at)
     VALUES (
       uuid_generate_v4(),
       '00000000-0000-0000-0000-000000000000',

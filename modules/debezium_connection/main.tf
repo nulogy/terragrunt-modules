@@ -39,7 +39,7 @@ data "template_file" "debezium_config" {
     database_user      = var.database_username
     events_table       = var.events_table
     heartbeat_query    = local.heartbeat_query
-    initial_statements = local.heartbeat_insertion
+    initial_statements = local.heartbeat_query
     publication_name   = var.publication_name
     slot_name          = "${replace(var.connection_name, "-", "_")}_debezium_slot"
   }

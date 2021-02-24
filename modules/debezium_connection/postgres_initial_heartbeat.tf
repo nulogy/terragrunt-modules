@@ -8,7 +8,7 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
   --dbname "${var.database_name}" \
   --command "
   DO \$\$BEGIN
-    ${local.heartbeat_insertion}
+    ${local.heartbeat_query}
   END\$\$
 "
 EOF

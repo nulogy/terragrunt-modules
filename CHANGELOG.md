@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.1.1] - 2021-02-25
+
+### Fixed
+
+* Updated `debezium_connection` to insert heartbeats when running TF and when connecting to a database.
+
+This should ensure heartbeats properly start for databases that have no traffic.
+
 ## [18.1.0] - 2021-02-01
 
 ### Added

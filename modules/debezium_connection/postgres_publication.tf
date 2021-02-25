@@ -1,8 +1,6 @@
 locals {
-  docker_image = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
-
   idempotent_create_publication = <<EOF
-docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.docker_image} \
+docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.pg_docker_image} \
   psql \
   --host ${var.database_address} \
   --port ${var.database_port} \
@@ -13,7 +11,7 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
     IF NOT EXISTS(SELECT FROM pg_publication WHERE pubname = '${var.publication_name}')
     THEN
       CREATE PUBLICATION ${var.publication_name}
-      FOR TABLE ${var.events_table}
+      FOR TABLE public.${var.events_table}
       WITH (publish = 'insert');
     END IF;
   END\$\$

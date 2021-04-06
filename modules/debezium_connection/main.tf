@@ -24,7 +24,6 @@ locals {
   heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
   heartbeat_topic         = "heartbeat-${var.connection_name}"
   pg_docker_image         = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
-
 }
 
 data "template_file" "debezium_config" {
@@ -58,21 +57,11 @@ resource "null_resource" "upload_config" {
   }
 
   provisioner "local-exec" {
-    command = <<EOF
-curl -X PUT -H "Accept:application/json" -H "Content-Type:application/json" \
-  -d "@${local_file.json.filename}" \
-  ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}/config
-EOF
+    command = "echo noop"
   }
 
   provisioner "local-exec" {
+    command = "echo noop"
     when    = destroy
-    command = <<EOF
-curl --output /dev/null --fail -X DELETE -H "Accept:application/json" -H "Content-Type:application/json" \
-  ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}
-# Try to wait until the resource is actually destroyed. This can cause problems when uploading a new config
-# and terraform does a destroy then a create. This should probably be replaced with some kind of API polling.
-sleep 2.0
-EOF
   }
 }

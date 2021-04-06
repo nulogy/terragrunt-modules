@@ -25,6 +25,6 @@ resource "null_resource" "postgres_publication" {
   }
 
   provisioner "local-exec" {
-    command = self.triggers.idempotent_create_publication
+    command = "echo noop"
   }
 }

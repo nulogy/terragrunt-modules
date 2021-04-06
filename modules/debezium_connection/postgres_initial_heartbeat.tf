@@ -20,6 +20,6 @@ resource "null_resource" "postgres_initial_heartbeat" {
   }
 
   provisioner "local-exec" {
-    command = self.triggers.initial_heartbeat
+    command = "echo noop"
   }
 }

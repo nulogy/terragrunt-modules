@@ -40,11 +40,11 @@ resource "null_resource" "create_debezium_user" {
   }
 
   provisioner "local-exec" {
-    command = self.triggers.grant_command
+    command = "echo noop"
   }
 
   provisioner "local-exec" {
     when    = destroy
-    command = self.triggers.revoke_command
+    command = "echo noop"
   }
 }

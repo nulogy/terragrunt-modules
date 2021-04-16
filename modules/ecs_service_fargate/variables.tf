@@ -14,6 +14,10 @@ variable "ecs_cluster_name" {
   description = "The name of the cluster to run this service in."
 }
 
+variable "enable_execute_command" {
+  default = false
+}
+
 variable "envars" {
   description = "JSON format environment variables to pass into the container task."
 }

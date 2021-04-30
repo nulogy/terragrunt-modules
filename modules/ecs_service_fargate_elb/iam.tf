@@ -116,6 +116,16 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
     {
       "Effect": "Allow",
       "Action": [
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:CreateDataChannel",
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:OpenDataChannel"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "kms:Decrypt"
       ],
       "Resource": [

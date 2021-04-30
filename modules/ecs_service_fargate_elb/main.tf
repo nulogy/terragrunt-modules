@@ -151,6 +151,7 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.ecs_task.arn
   launch_type     = "FARGATE"
   desired_count   = var.desired_count
+  enable_execute_command = true
 
   load_balancer {
     target_group_arn = var.target_group_arn

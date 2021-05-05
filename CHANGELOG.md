@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.2.0] - 2021-05-05
+
+### Added
+
+* `cloudwatch_logzio` module does not specify any providers or versions so that
+  it is compatible with TF 0.13
+* `cloudwatch_logzio` module takes the Logz.io API key as a parameter called:
+  `logzio__api_key`
+
 ## [18.1.1] - 2021-02-25
 
 ### Fixed

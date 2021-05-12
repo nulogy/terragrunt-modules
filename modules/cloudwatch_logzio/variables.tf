@@ -31,3 +31,4 @@ variable "logzio__log_group_name" {
 variable "logzio__log_group_arn" {
 }
 
+variable "logzio__api_key" {}

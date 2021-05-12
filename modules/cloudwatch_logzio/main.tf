@@ -1,6 +1,6 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir = "${path.module}/src"
+  source_dir  = "${path.module}/src"
   output_path = "lambda.zip"
 }
 
@@ -17,7 +17,7 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables = {
       FORMAT = var.logzio__logs_format
-      TOKEN  = data.aws_ssm_parameter.logzio__api_key.value
+      TOKEN  = var.logzio__api_key
       TYPE   = var.logzio__logs_type
       URL    = var.logzio__api_url
     }
@@ -87,4 +87,3 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
   policy_arn = aws_iam_policy.lambda_policy.arn
   role       = aws_iam_role.lambda_role.name
 }
-

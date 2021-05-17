@@ -17,7 +17,7 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables = {
       FORMAT = var.logzio__logs_format
-      TOKEN  = data.aws_ssm_parameter.logzio__api_key.value
+      TOKEN  = var.logzio__api_key
       TYPE   = var.logzio__logs_type
       URL    = var.logzio__api_url
     }

@@ -13,6 +13,9 @@ variable "logzio__api_url" {
   default = "https://listener.logz.io:8071"
 }
 
+variable "logzio__api_key" {
+}
+
 variable "logzio__logs_format" {
   default = "JSON"
 }

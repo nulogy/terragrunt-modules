@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.3.0] - 2021-05-18
+
+### Changed
+
+* `cloudwatch_logzio` module also considers environment variables of the log 
+  shipping lambda when determining if it needs to apply any changes
+
 ## [18.2.0] - 2021-05-05
 
 ### Added

@@ -22,10 +22,6 @@ resource "aws_lambda_function" "lambda" {
       URL    = var.logzio__api_url
     }
   }
-
-  lifecycle {
-    ignore_changes = [environment]
-  }
 }
 
 resource "aws_cloudwatch_log_subscription_filter" "logfilter" {

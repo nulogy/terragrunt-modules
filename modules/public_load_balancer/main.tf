@@ -17,10 +17,10 @@ resource "aws_lb" "public_load_balancer" {
   }
 }
 
-resource "aws_lb_target_group" "target_group" {
+resource "aws_lb_target_group" "target_group_green" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name                 = "${var.environment_name}-tg"
+  name                 = "${var.environment_name}-tg-green"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
@@ -41,7 +41,36 @@ resource "aws_lb_target_group" "target_group" {
   }
 
   tags = {
-    Name           = "${var.environment_name} public load balancer target group"
+    Name           = "${var.environment_name} public load balancer target group green"
+    resource_group = var.environment_name
+  }
+}
+
+resource "aws_lb_target_group" "target_group_blue" {
+  count = length(var.skip) > 0 ? 0 : 1
+
+  name                 = "${var.environment_name}-tg-blue"
+  port                 = var.port
+  protocol             = "HTTP"
+  vpc_id               = var.vpc_id
+  deregistration_delay = var.deregistration_delay
+  target_type          = var.target_type
+  slow_start           = var.slow_start
+
+  health_check {
+    path    = var.health_check_path
+    timeout = var.health_check_timeout
+    matcher = "200"
+  }
+
+  stickiness {
+    enabled         = var.stickiness_enabled
+    type            = "lb_cookie"
+    cookie_duration = var.stickiness_duration
+  }
+
+  tags = {
+    Name           = "${var.environment_name} public load balancer target group blue"
     resource_group = var.environment_name
   }
 }
@@ -56,8 +85,12 @@ resource "aws_lb_listener" "public_lb_listener" {
   certificate_arn   = length(var.lb_cert_arn) > 0 ? var.lb_cert_arn : data.aws_acm_certificate.acm_region_cert[0].arn
 
   default_action {
-    target_group_arn = aws_lb_target_group.target_group[0].arn
+    target_group_arn = aws_lb_target_group.target_group_green[0].arn
     type             = "forward"
+  }
+
+  lifecycle {
+    ignore_changes = [default_action]
   }
 }
 
@@ -67,13 +100,17 @@ resource "aws_lb_listener_rule" "default_routing" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.target_group[0].arn
+    target_group_arn = aws_lb_target_group.target_group_green[0].arn
   }
 
   condition {
     path_pattern {
       values = ["*"]
     }
+  }
+
+  lifecycle {
+    ignore_changes = [action]
   }
 }
 

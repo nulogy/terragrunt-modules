@@ -143,6 +143,10 @@ resource "aws_ecs_task_definition" "ecs_task" {
   %{ endif }
 ]
 DEFINITION
+
+  tags = {
+    resource_group = var.environment_name
+  }
 }
 
 resource "aws_ecs_service" "ecs_service" {
@@ -151,6 +155,10 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.ecs_task.arn
   launch_type     = "FARGATE"
   desired_count   = var.desired_count
+
+  deployment_controller {
+    type = "CODE_DEPLOY"
+  }
 
   load_balancer {
     target_group_arn = var.target_group_arn
@@ -161,6 +169,13 @@ resource "aws_ecs_service" "ecs_service" {
   network_configuration {
     subnets         = var.subnets
     security_groups = [aws_security_group.app_worker.id]
+  }
+
+  lifecycle {
+    ignore_changes = [
+      load_balancer,
+      task_definition
+    ]
   }
 
   depends_on = [null_resource.alb_exists]

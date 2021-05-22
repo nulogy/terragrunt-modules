@@ -1,6 +1,21 @@
-output "target_group_arn" {
+output "target_group_green_arn" {
   #https://github.com/hashicorp/terraform/issues/16726
-  value = element(concat(aws_lb_target_group.target_group.*.arn, [""]), 0)
+  value = element(concat(aws_lb_target_group.target_group_green.*.arn, [""]), 0)
+}
+
+output "target_group_green_name" {
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = element(concat(aws_lb_target_group.target_group_green.*.name, [""]), 0)
+}
+
+output "target_group_blue_arn" {
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = element(concat(aws_lb_target_group.target_group_blue.*.arn, [""]), 0)
+}
+
+output "target_group_blue_name" {
+  #https://github.com/hashicorp/terraform/issues/16726
+  value = element(concat(aws_lb_target_group.target_group_blue.*.name, [""]), 0)
 }
 
 output "aws_lb_listener" {

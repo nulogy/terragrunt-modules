@@ -49,7 +49,7 @@ module "ecs_service_fargate_elb" {
   security_group_name   = var.security_group_name
   service_name          = var.service_name
   subnets               = var.private_subnets
-  target_group_arn      = module.public_load_balancer.target_group_arn
+  target_group_arn      = module.public_load_balancer.target_group_green_arn
   vpc_cidr              = length(var.ecs_incoming_allowed_cidr) > 0 ? var.ecs_incoming_allowed_cidr : var.vpc_cidr
   vpc_id                = var.vpc_id
 

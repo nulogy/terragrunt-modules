@@ -29,7 +29,7 @@ module "public_load_balancer" {
 }
 
 module "ecs_service_fargate_elb" {
-  source = "../../modules/ecs_service_fargate_elb"
+  source = "../../modules/ecs_service_fargate_codedeploy"
 
   command               = var.command
   container_port        = var.container_port
@@ -56,80 +56,13 @@ module "ecs_service_fargate_elb" {
   depends_on_hack = module.public_load_balancer.aws_lb_listener
 }
 
-resource "aws_iam_role" "service_role" {
-  name = "${var.environment_name}-codedeploy-service-role"
+module "codedeploy" {
+  source = "../../modules/codedeploy"
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "codedeploy.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy_attachment" "AWSCodeDeployRoleForECS" {
-  policy_arn = "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS"
-  role       = aws_iam_role.service_role.name
-}
-
-resource "aws_codedeploy_app" "codedeploy_app" {
-  compute_platform = "ECS"
-  name             = "${var.environment_name}-app"
-}
-
-resource "aws_codedeploy_deployment_group" "deployment_group" {
-  app_name               = aws_codedeploy_app.codedeploy_app.name
-  deployment_group_name  = "${var.environment_name}-deployment-group"
-  deployment_config_name = "CodeDeployDefault.ECSAllAtOnce"
-  service_role_arn       = aws_iam_role.service_role.arn
-
-  auto_rollback_configuration {
-    enabled = true
-    events  = ["DEPLOYMENT_FAILURE"]
-  }
-
-  blue_green_deployment_config {
-    deployment_ready_option {
-      action_on_timeout = "CONTINUE_DEPLOYMENT"
-    }
-
-    terminate_blue_instances_on_deployment_success {
-      action                           = "TERMINATE"
-      termination_wait_time_in_minutes = 5
-    }
-  }
-
-  deployment_style {
-    deployment_option = "WITH_TRAFFIC_CONTROL"
-    deployment_type   = "BLUE_GREEN"
-  }
-
-  ecs_service {
-    cluster_name = var.ecs_cluster_name
-    service_name = module.ecs_service_fargate_elb.ecs_service_name
-  }
-
-  load_balancer_info {
-    target_group_pair_info {
-      prod_traffic_route {
-        listener_arns = [module.public_load_balancer.aws_lb_listener]
-      }
-
-      target_group {
-        name = module.public_load_balancer.target_group_blue_name
-      }
-
-      target_group {
-        name = module.public_load_balancer.target_group_green_name
-      }
-    }
-  }
+  aws_lb_listener = module.public_load_balancer.aws_lb_listener
+  ecs_cluster_name  = var.ecs_cluster_name
+  ecs_service_name  = module.ecs_service_fargate_elb.ecs_service_name
+  environment_name  = var.environment_name
+  target_group_blue_name  = module.public_load_balancer.target_group_blue_name
+  target_group_green_name = module.public_load_balancer.target_group_green_name
 }

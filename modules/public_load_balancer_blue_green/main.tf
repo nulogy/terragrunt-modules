@@ -20,7 +20,7 @@ resource "aws_lb" "public_load_balancer" {
 resource "aws_lb_target_group" "target_group_green" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name                 = "${var.environment_name}-tg-green"
+  name                 = "${replace(var.environment_name, "opscore", "oc")}-tg-green"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
@@ -49,7 +49,7 @@ resource "aws_lb_target_group" "target_group_green" {
 resource "aws_lb_target_group" "target_group_blue" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name                 = "${var.environment_name}-tg-blue"
+  name                 = "${replace(var.environment_name, "opscore", "oc")}-tg-blue"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
@@ -110,6 +110,9 @@ resource "aws_lb_listener_rule" "default_routing" {
   }
 
   lifecycle {
+    # The target group will be changing as CodeDeploy creates deployments,
+    # so we want to ignore changes to the target group after this routing
+    # rule has been created for the first time.
     ignore_changes = [action]
   }
 }

@@ -33,12 +33,6 @@ variable "environment_name" {
   description = "Environment name. Used for tagging."
 }
 
-variable "depends_on_hack" {
-  description = "Workaround for terraform modules lacking `depends_on`. Used in a module_group to ensure a load balancer is up before we try to attach containers to it."
-  default     = ""
-  type        = string
-}
-
 variable "health_check_command" {
   description = "A test to perform to check that the container is healthy."
   type        = list(string)

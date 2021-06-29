@@ -162,12 +162,4 @@ resource "aws_ecs_service" "ecs_service" {
     subnets         = var.subnets
     security_groups = [aws_security_group.app_worker.id]
   }
-
-  depends_on = [null_resource.alb_exists]
-}
-
-resource "null_resource" "alb_exists" {
-  triggers = {
-    alb_name = var.depends_on_hack
-  }
 }

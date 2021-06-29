@@ -5,7 +5,7 @@ locals {
 resource "aws_lb" "public_load_balancer" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name            = "${var.environment_name}-PLB"
+  name            = "${var.environment_name}-PLB${var.tmp_suffix}"
   internal        = var.internal
   security_groups = local.security_group_ids
   subnets         = var.alb_subnets
@@ -20,7 +20,7 @@ resource "aws_lb" "public_load_balancer" {
 resource "aws_lb_target_group" "target_group" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name                 = "${var.environment_name}-tg"
+  name                 = "${var.environment_name}-tg${var.tmp_suffix}"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id

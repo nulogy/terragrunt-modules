@@ -99,3 +99,8 @@ variable "datadog_env" {
   default     = "development"
   type        = string
 }
+
+variable "target_group_arn_tmp" {
+  description = "Temporary variable to be used for PM-9259"
+  default     = ""
+}

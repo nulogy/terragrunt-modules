@@ -4,30 +4,30 @@ module "log_group" {
   name = "${var.environment_name}-${var.service_name}"
 }
 
-module "public_load_balancer" {
-  source = "../../modules/public_load_balancer"
-
-  alb_subnets                      = var.public_subnets
-  cert_domain                      = var.cert_domain
-  deregistration_delay             = var.deregistration_delay
-  environment_name                 = var.environment_name
-  health_check_path                = var.health_check_path
-  health_check_timeout             = var.health_check_timeout
-  internal                         = var.internal
-  ip_address_type                  = var.lb_ip_address_type
-  lb_cert_arn                      = var.lb_cert_arn
-  lb_maintenance_mode              = var.lb_maintenance_mode
-  lb_maintenance_mode_content_type = var.lb_maintenance_mode_content_type
-  lb_maintenance_mode_page_content = var.lb_maintenance_mode_page_content
-  lb_maintenance_mode_status_code  = var.lb_maintenance_mode_status_code
-  port                             = var.container_port
-  security_group_ids               = var.lb_security_group_ids
-  slow_start                       = var.slow_start
-  stickiness_enabled               = var.stickiness_enabled
-  # Hardcoded because `ip` is the only mode supported by fargate
-  target_type                      = "ip"
-  vpc_id                           = var.vpc_id
-}
+//module "public_load_balancer" {
+//  source = "../../modules/public_load_balancer"
+//
+//  alb_subnets                      = var.public_subnets
+//  cert_domain                      = var.cert_domain
+//  deregistration_delay             = var.deregistration_delay
+//  environment_name                 = var.environment_name
+//  health_check_path                = var.health_check_path
+//  health_check_timeout             = var.health_check_timeout
+//  internal                         = var.internal
+//  ip_address_type                  = var.lb_ip_address_type
+//  lb_cert_arn                      = var.lb_cert_arn
+//  lb_maintenance_mode              = var.lb_maintenance_mode
+//  lb_maintenance_mode_content_type = var.lb_maintenance_mode_content_type
+//  lb_maintenance_mode_page_content = var.lb_maintenance_mode_page_content
+//  lb_maintenance_mode_status_code  = var.lb_maintenance_mode_status_code
+//  port                             = var.container_port
+//  security_group_ids               = var.lb_security_group_ids
+//  slow_start                       = var.slow_start
+//  stickiness_enabled               = var.stickiness_enabled
+//  # Hardcoded because `ip` is the only mode supported by fargate
+//  target_type                      = "ip"
+//  vpc_id                           = var.vpc_id
+//}
 
 module "public_load_balancer_tmp" {
   source = "../../modules/public_load_balancer"
@@ -77,12 +77,12 @@ module "ecs_service_fargate_elb" {
   security_group_name   = var.security_group_name
   service_name          = var.service_name
   subnets               = var.private_subnets
-  target_group_arn      = module.public_load_balancer.target_group_arn
+//  target_group_arn      = module.public_load_balancer.target_group_arn
   vpc_cidr              = length(var.ecs_incoming_allowed_cidr) > 0 ? var.ecs_incoming_allowed_cidr : var.vpc_cidr
   vpc_id                = var.vpc_id
 
   depends_on = [
-    module.public_load_balancer.aws_lb_listener
+    module.public_load_balancer_tmp.aws_lb_listener
   ]
 
   target_group_arn_tmp = module.public_load_balancer_tmp.target_group_arn

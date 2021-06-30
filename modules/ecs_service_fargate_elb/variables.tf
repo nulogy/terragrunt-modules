@@ -78,9 +78,9 @@ variable "service_name" {
   description = "Service name. Used for tagging."
 }
 
-variable "target_group_arn" {
-  description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
-}
+//variable "target_group_arn" {
+//  description = "Target of an Amazon ALB (Load Balancer), as given by a load balancer."
+//}
 
 variable "datadog_enabled" {
   description = "This option will activate the Datadog agent sidecar/replica container on the same ECS task. Please adjust var.cpu and/or var.memory to accommodate if necessary."

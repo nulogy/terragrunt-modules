@@ -145,24 +145,24 @@ resource "aws_ecs_task_definition" "ecs_task" {
 DEFINITION
 }
 
-resource "aws_ecs_service" "ecs_service" {
-  name            = "${local.container_name}_service"
-  cluster         = var.ecs_cluster_name
-  task_definition = aws_ecs_task_definition.ecs_task.arn
-  launch_type     = "FARGATE"
-  desired_count   = var.desired_count
-
-  load_balancer {
-    target_group_arn = var.target_group_arn
-    container_name   = local.container_name
-    container_port   = var.container_port
-  }
-
-  network_configuration {
-    subnets         = var.subnets
-    security_groups = [aws_security_group.app_worker.id]
-  }
-}
+//resource "aws_ecs_service" "ecs_service" {
+//  name            = "${local.container_name}_service"
+//  cluster         = var.ecs_cluster_name
+//  task_definition = aws_ecs_task_definition.ecs_task.arn
+//  launch_type     = "FARGATE"
+//  desired_count   = var.desired_count
+//
+//  load_balancer {
+//    target_group_arn = var.target_group_arn
+//    container_name   = local.container_name
+//    container_port   = var.container_port
+//  }
+//
+//  network_configuration {
+//    subnets         = var.subnets
+//    security_groups = [aws_security_group.app_worker.id]
+//  }
+//}
 
 resource "aws_ecs_service" "ecs_service_tmp" {
   name            = "${local.container_name}_service_tmp"

@@ -90,7 +90,8 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
       "Effect": "Allow",
       "Action": [
         "ssm:GetParameter",
-        "ssm:GetParameters"
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath"
       ],
       "Resource": [
         "arn:aws:ssm:${var.aws_region}:${var.aws_account}:parameter/${var.param_store_namespace}/*"

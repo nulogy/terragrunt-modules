@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.3.2] - 2021-07-06
+
+### Changed
+
+* Uses the `depends_on` meta argument for `modules` on ECS service module to
+  replace the existing workaround that was there
+
 ## [18.3.1] - 2021-07-06
 
 ### Changed

@@ -24,7 +24,8 @@ module "public_load_balancer" {
   security_group_ids               = var.lb_security_group_ids
   slow_start                       = var.slow_start
   stickiness_enabled               = var.stickiness_enabled
-  target_type                      = "ip" # Hardcoded because `ip` is the only mode supported by fargate
+  # Hardcoded because `ip` is the only mode supported by fargate
+  target_type                      = "ip"
   vpc_id                           = var.vpc_id
 }
 
@@ -53,5 +54,7 @@ module "ecs_service_fargate_elb" {
   vpc_cidr              = length(var.ecs_incoming_allowed_cidr) > 0 ? var.ecs_incoming_allowed_cidr : var.vpc_cidr
   vpc_id                = var.vpc_id
 
-  depends_on_hack = module.public_load_balancer.aws_lb_listener
+  depends_on = [
+    module.public_load_balancer.aws_lb_listener
+  ]
 }

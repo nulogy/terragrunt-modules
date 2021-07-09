@@ -1,5 +1,5 @@
 resource "aws_security_group" "app_worker" {
-  name   = "${var.environment_name} ${var.security_group_name == "" ? var.service_name : var.security_group_name}"
+  name   = "${var.environment_name} ${var.security_group_name == "" ? var.service_name : var.security_group_name}${var.tmp_suffix}"
   vpc_id = var.vpc_id
 
   tags = {

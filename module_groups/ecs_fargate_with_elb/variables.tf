@@ -153,3 +153,8 @@ variable "datadog_env" {
   default     = "development"
   type        = string
 }
+
+variable "tmp_suffix" {
+  description = "Temporary variable to be used in naming for PM-9259"
+  default     = ""
+}

@@ -100,7 +100,7 @@ variable "datadog_env" {
   type        = string
 }
 
-variable "target_group_arn_tmp" {
-  description = "Temporary variable to be used for PM-9259"
+variable "tmp_suffix" {
+  description = "Temporary variable to be used in naming for PM-9259"
   default     = ""
 }

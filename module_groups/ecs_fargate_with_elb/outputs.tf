@@ -29,7 +29,3 @@ output "log_group_arn" {
 output "lb_listener_arns" {
   value = module.public_load_balancer.aws_lb_listener
 }
-
-output "dns_name_tmp" {
-  value = module.public_load_balancer_tmp.dns_name
-}

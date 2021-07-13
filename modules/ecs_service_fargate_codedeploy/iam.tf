@@ -107,6 +107,7 @@ resource "aws_iam_role_policy" "parameter_store_policy" {
       "Action": [
         "ssm:GetParameter",
         "ssm:GetParameters",
+        "ssm:GetParametersByPath",
         "ssm:PutParameter"
       ],
       "Resource": [

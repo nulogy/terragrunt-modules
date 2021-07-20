@@ -2,6 +2,10 @@ output "dns_name" {
   value = module.public_load_balancer.dns_name
 }
 
+output "zone_id" {
+  value = module.public_load_balancer.zone_id
+}
+
 output "ecs_service_name" {
   value = module.ecs_service_fargate_elb.ecs_service_name
 }

@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+* Adds the zone_id output to the ecs_fargate_with_elb module group
+
 ### Changed
 ### Deprecated
 ### Removed

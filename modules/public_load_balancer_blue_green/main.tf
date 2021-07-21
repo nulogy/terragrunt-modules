@@ -20,7 +20,7 @@ resource "aws_lb" "public_load_balancer" {
 resource "aws_lb_target_group" "target_group_green" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name                 = "${replace(var.environment_name, "opscore", "oc")}-tg-green"
+  name                 = "${replace(replace(var.environment_name, "opscore", "oc"), "packmanager", "pm")}-tg-green"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
@@ -49,7 +49,7 @@ resource "aws_lb_target_group" "target_group_green" {
 resource "aws_lb_target_group" "target_group_blue" {
   count = length(var.skip) > 0 ? 0 : 1
 
-  name                 = "${replace(var.environment_name, "opscore", "oc")}-tg-blue"
+  name                 = "${replace(replace(var.environment_name, "opscore", "oc"), "packmanager", "pm")}-tg-blue"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id

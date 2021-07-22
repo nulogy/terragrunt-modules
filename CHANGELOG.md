@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.4.0] - 2021-07-22
+
+### Added
+
+* Adds the zone_id output to the ecs_fargate_with_elb module group
+
 ## [18.3.2] - 2021-07-06
 
 ### Changed

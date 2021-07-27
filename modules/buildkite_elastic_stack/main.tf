@@ -58,3 +58,49 @@ resource "aws_cloudformation_stack" "stack" {
     ignore_changes = [parameters["BuildkiteAgentToken"]]
   }
 }
+
+resource "aws_iam_policy" "deploy_policy" {
+  name   = "${var.environment_name}-terraform-deploy-policy"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "acm:*",
+        "autoscaling:*",
+        "application-autoscaling:*",
+        "cloudformation:*",
+        "cloudfront:*",
+        "cloudwatch:*",
+        "codedeploy:*",
+        "dynamodb:*",
+        "ec2:*",
+        "ecr:*",
+        "ecs:*",
+        "elasticache:*",
+        "elasticloadbalancing:*",
+        "events:*",
+        "iam:*",
+        "kms:*",
+        "lambda:*",
+        "logs:*",
+        "rds:*",
+        "route53:*",
+        "ssm:*",
+        "s3:*",
+        "sns:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_policy_attachment" {
+  policy_arn = aws_iam_policy.deploy_policy.arn
+  role       = module.buildkite_deployers.instance_role_name
+}
+

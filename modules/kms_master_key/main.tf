@@ -19,6 +19,17 @@ resource "aws_kms_key" "kms_key" {
       },
       "Action": "kms:*",
       "Resource": "*"
+    },
+    {
+        "Sid": "Allow CloudFront Flow Logs to use the key",
+        "Effect": "Allow",
+        "Principal": {
+            "Service": [
+                "delivery.logs.amazonaws.com"
+            ]
+        },
+        "Action": "kms:GenerateDataKey*",
+        "Resource": "*"
     }
   ]
 }

@@ -6,7 +6,8 @@ variable "aws_profile" {
 variable "environment_name" {
 }
 
-variable "environment_short_name" {
+variable "environment_key" {
+  description = "This should be less than 20 characters so that it can be reliably used as a backend key where character count is limited."
 }
 
 variable "logzio__api_url" {

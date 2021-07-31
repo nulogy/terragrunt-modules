@@ -8,6 +8,10 @@ variable "cert_domain" {
 variable "environment_name" {
 }
 
+variable "environment_key" {
+  description = "This should be less than 20 characters so that it can be reliably used as a backend key where character count is limited."
+}
+
 variable "health_check_path" {
   default = "/"
 }

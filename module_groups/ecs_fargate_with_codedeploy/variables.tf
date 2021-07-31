@@ -37,6 +37,10 @@ variable "environment_name" {
   description = "Environment name. Used for tagging."
 }
 
+variable "environment_key" {
+  description = "This should be less than 20 characters so that it can be reliably used as a backend key where character count is limited."
+}
+
 variable "health_check_path" {
   description = "The path that the Load Balancer will check. If it does not have a 200 OK response, then the container is killed."
 }

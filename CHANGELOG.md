@@ -14,6 +14,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.5.0] - 2021-08-02
+
+### Added
+
+* Adds a variant of the `ecs_service_fargate_elb` module called
+  `ecs_service_fargate_codedeploy` that uses AWS CodeDeploy for deployments.
+* Adds a variant of the `public_load_balancer` module called
+  `public_load_balancer_blue_green` that has two target groups called
+  Blue and Green which are used for AWS CodeDeploy for deployments.
+* Adds a variant of the `ecs_fargate_with_elb` module group called
+  `ecs_fargate_with_codedeploy` that uses AWS CodeDeploy for deployments and
+  requires two target groups to be available called Blue and Green.
+
 ## [18.4.0] - 2021-07-22
 
 ### Added

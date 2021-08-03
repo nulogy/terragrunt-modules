@@ -33,4 +33,3 @@ variable "logzio__log_group_name" {
 
 variable "logzio__log_group_arn" {
 }
-

@@ -146,7 +146,7 @@ DEFINITION
 }
 
 resource "aws_ecs_service" "ecs_service" {
-  name            = "${local.container_name}_service${var.tmp_suffix}"
+  name            = "${local.container_name}_service"
   cluster         = var.ecs_cluster_name
   task_definition = aws_ecs_task_definition.ecs_task.arn
   launch_type     = "FARGATE"

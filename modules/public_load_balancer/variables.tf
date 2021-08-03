@@ -92,8 +92,3 @@ variable "security_group_ids" {
 variable "lb_cert_arn" {
   default = ""
 }
-
-variable "tmp_suffix" {
-  description = "Temporary variable to be used in naming for PM-9259"
-  default     = ""
-}

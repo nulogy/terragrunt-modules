@@ -1,7 +1,7 @@
 module "log_group" {
   source = "../../modules/log_group"
 
-  name = "${var.environment_name}-${var.service_name}${var.tmp_suffix}"
+  name = "${var.environment_name}-${var.service_name}"
 }
 
 module "public_load_balancer" {
@@ -27,8 +27,6 @@ module "public_load_balancer" {
   # Hardcoded because `ip` is the only mode supported by fargate
   target_type                      = "ip"
   vpc_id                           = var.vpc_id
-
-  tmp_suffix = var.tmp_suffix
 }
 
 module "ecs_service_fargate_elb" {
@@ -59,6 +57,4 @@ module "ecs_service_fargate_elb" {
   depends_on = [
     module.public_load_balancer.aws_lb_listener
   ]
-
-  tmp_suffix = var.tmp_suffix
 }

@@ -18,33 +18,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* Adds a `cloudfront_s3_origin` module that can be used to set up an AWS
-  CloudFront distribution pointing to an S3 bucket as the origin. Useful for
-  setting up HTTPS redirects.
-* Adds a `s3_redirect_bucket` module whose job is to provide a redirect to
-  another URL.
-* Adds a `cloudfront_s3_redirect` module group that utilizes the
-  `cloudfront_s3_origin` and `s3_redirect_bucket` modules to perform a HTTPS
-  redirect to another URL.
+* `cloudfront_s3_origin` module that can be used to set up an AWS CloudFront 
+  distribution pointing to an S3 bucket as the origin. Useful for setting up 
+  HTTPS redirects.
+* `s3_redirect_bucket` module whose job is to provide a redirect to another URL.
+* `cloudfront_s3_redirect` module group that utilizes the `cloudfront_s3_origin`
+  and `s3_redirect_bucket` modules to perform a HTTPS redirect to another URL.
 
 ## [18.5.0] - 2021-08-02
 
 ### Added
 
-* Adds a variant of the `ecs_service_fargate_elb` module called
-  `ecs_service_fargate_codedeploy` that uses AWS CodeDeploy for deployments.
-* Adds a variant of the `public_load_balancer` module called
-  `public_load_balancer_blue_green` that has two target groups called
+* `ecs_service_fargate_codedeploy` module that uses AWS CodeDeploy for 
+  deployments.
+* `public_load_balancer_blue_green` module that has two target groups called
   Blue and Green which are used for AWS CodeDeploy for deployments.
-* Adds a variant of the `ecs_fargate_with_elb` module group called
-  `ecs_fargate_with_codedeploy` that uses AWS CodeDeploy for deployments and
-  requires two target groups to be available called Blue and Green.
+* `ecs_fargate_with_codedeploy` module group that uses AWS CodeDeploy for 
+  deployments and requires two target groups to be available called Blue and Green.
 
 ## [18.4.0] - 2021-07-22
 
 ### Added
 
-* Adds the zone_id output to the ecs_fargate_with_elb module group
+* Added the zone_id output to the ecs_fargate_with_elb module group
 
 ## [18.3.2] - 2021-07-06
 
@@ -57,7 +53,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-* Adds ssm:GetParametersByPath permission to every role that was using ssm:GetParameter
+* Added `ssm:GetParametersByPath` permission to every role that was using 
+  `ssm:GetParameter`
 
 ## [18.3.0] - 2021-05-18
 
@@ -129,7 +126,7 @@ This should ensure heartbeats properly start for databases that have no traffic.
 
 ### Added
 
-* Adds security groups variable to ecs_scheduled_task module
+* Added security groups variable to ecs_scheduled_task module
 
 ## [16.1.1] - 2020-08-10
 
@@ -225,7 +222,7 @@ This was initially released in a branch as part of a bad merge. The tag has sinc
 
 * Marks the deployments using Datadog
 * Resizes Airbrake panel on Datadog
-* Adds the Service Events panel
+* Added the Service Events panel
 
 ## [12.0.0] - 2020-06-30
 
@@ -406,7 +403,7 @@ terragrunt plan -var docker_image=<YOUR_CURRENT_DEPLOYED_GIT_HASH>
 
 ### Changed
 
-* Adds the `lb_listener_arns` output to the `ecs-fargate-with-elb` module
+* Added the `lb_listener_arns` output to the `ecs-fargate-with-elb` module
 
 ## [8.14.0] - 2020-02-25
 
@@ -418,13 +415,13 @@ terragrunt plan -var docker_image=<YOUR_CURRENT_DEPLOYED_GIT_HASH>
 
 ### Added
 
-* Adds the `lb_cert_arn` variable to the "ecs_service_fargate_elb" module
+* Added the `lb_cert_arn` variable to the "ecs_service_fargate_elb" module
 
 ## [8.12.0] - 2020-01-22
 
 ### Added
 
-* Adds the `health_check_command` variable to the "ecs_service_fargate_elb" module
+* Added the `health_check_command` variable to the "ecs_service_fargate_elb" module
 
 ## [8.11.0] - 2020-01-20
 
@@ -503,14 +500,14 @@ terragrunt plan -var docker_image=<YOUR_CURRENT_DEPLOYED_GIT_HASH>
 
 ### Added
 
-* Adds optional `security_group_ids` to `public_load_balancer` module
+* Added optional `security_group_ids` to `public_load_balancer` module
 
 ## [8.1.0] - 2019-11-27
 
 ### Added
 
 * Office IP var to the ecs_plb_platform module group
-* Adds aliases for Terragrunt `tg=terragrunt`, `tga=terragrunt apply`, `tgpa=terragrunt plan-all`, etc...
+* Added aliases for Terragrunt `tg=terragrunt`, `tga=terragrunt apply`, `tgpa=terragrunt plan-all`, etc...
 
 ### Changed
 
@@ -570,7 +567,7 @@ terragrunt plan -var docker_image=<YOUR_CURRENT_DEPLOYED_GIT_HASH>
 
 ### Changed
 
-* Adds local provider to Dockerfile
+* Added local provider to Dockerfile
 * Fixes bug in modules/public_private_subnets/outputs.tf and modules/private_subnets/outputs.tf
 
 ## [8.0.1] - 2019-09-03
@@ -597,7 +594,7 @@ Convert terragrunt `terraform.tfvars` files in the environment root and module d
 
 ### Added
 
-* Adds variable for `command` for ecs_service module container task definitions
+* Added variable for `command` for ecs_service module container task definitions
 
 ### Changed
 
@@ -607,26 +604,26 @@ Convert terragrunt `terraform.tfvars` files in the environment root and module d
 
 ### Added
 
-* Adds parameter `scale_down_period` to the "buildkite_elastic_stack" module
+* Added parameter `scale_down_period` to the "buildkite_elastic_stack" module
 
 ## [7.5.0] - 2019-08-08
 
 ### Added
 
-* Adds additional terraform providers.
+* Added additional terraform providers.
 
 
 ## [7.4.0] - 2019-07-30
 
 ### Added
 
-* Adds support for an extra security ingress to ECS Cluster. Defaults to 127.0.0.0/8 CIDR, port 65535 and UDP protocol.
+* Added support for an extra security ingress to ECS Cluster. Defaults to 127.0.0.0/8 CIDR, port 65535 and UDP protocol.
 
 ## [7.3.0] - 2019-07-17
 
 ### Added
 
-* Adds NAT Gateway public IPs as an output
+* Added NAT Gateway public IPs as an output
 
 ## [7.2.0] - 2019-07-16
 
@@ -642,7 +639,7 @@ Removed `stack_ami_version` variable for buildkite_elastic_stack module since it
 
 ### Added
 
-* Adds missing deployer permissions
+* Added missing deployer permissions
 
 ## [7.1.1] - 2019-05-30
 
@@ -698,13 +695,13 @@ Removed `stack_ami_version` variable for buildkite_elastic_stack module since it
 
 ### Changed
 
-* Adds support to maintenance pages on AWS Load Balancer level by means of 'aws_lb_listener_rule'. It can serve static content (Plain Text/HTML) content up to 1024 bytes.
+* Added support to maintenance pages on AWS Load Balancer level by means of 'aws_lb_listener_rule'. It can serve static content (Plain Text/HTML) content up to 1024 bytes.
 
 ## [6.3.1] - 2019-03-01
 
 ### Changed
 
-* Adds ssm:GetParameters permission to every role that was using ssm:GetParameter.  Shockingly, these are two
+* Added ssm:GetParameters permission to every role that was using ssm:GetParameter.  Shockingly, these are two
 permissions different.
 
 ## [6.3.0] - 2019-02-28
@@ -780,7 +777,7 @@ permissions different.
 
 ### Updated
 
-* Adds missing permissions to the CI Pipeline Policy Document: `ecr:ListTagsForResource`
+* Added missing permissions to the CI Pipeline Policy Document: `ecr:ListTagsForResource`
 
 ## [4.1.2] - 2018-12-06
 
@@ -1016,13 +1013,13 @@ Moves the docker repository from ECR to our publicly hosted Docker Hub repo.
 
 ### Added
 
-* Adds tg_aws.sh utility to make it easier to run aws commands with the right profile and region
+* Added tg_aws.sh utility to make it easier to run aws commands with the right profile and region
 
 ## [0.12.0] - 2018-04-26
 
 ### Changed
 
-* Adds ECR Lifecycle policy to ECR module that keeps newest 100 images only
+* Added ECR Lifecycle policy to ECR module that keeps newest 100 images only
 
 ## [0.11.4] - 2018-04-23
 

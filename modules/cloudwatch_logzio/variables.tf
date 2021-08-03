@@ -33,8 +33,3 @@ variable "logzio__log_group_name" {
 
 variable "logzio__log_group_arn" {
 }
-
-variable "tmp_suffix" {
-  description = "Temporary variable to be used in naming for PM-9259"
-  default     = ""
-}

@@ -7,7 +7,7 @@ data "archive_file" "lambda_zip" {
 resource "aws_lambda_function" "lambda" {
   filename         = "lambda.zip"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  function_name    = "${var.environment_short_name}-${var.logzio__module_name}-ship-logzio${var.tmp_suffix}"
+  function_name    = "${var.environment_short_name}-${var.logzio__module_name}-ship-logzio"
   role             = aws_iam_role.lambda_role.arn
   description      = "AWS Lambda Function that ingests CloudWatch logs into Logz.io. Environment: ${var.environment_name}. Terraform Module: ${var.logzio__module_name}."
   handler          = "lambda.lambda_handler"
@@ -33,7 +33,7 @@ resource "aws_cloudwatch_log_subscription_filter" "logfilter" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "${var.environment_short_name}-${var.logzio__module_name}-cloudwatch-to-logzio${var.tmp_suffix}"
+  name               = "${var.environment_short_name}-${var.logzio__module_name}-cloudwatch-to-logzio"
   assume_role_policy = <<-EOF
     {
       "Version": "2012-10-17",
@@ -59,7 +59,7 @@ resource "aws_lambda_permission" "allows_cloudwatch_execute_lambda" {
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name        = "${var.environment_short_name}-${var.logzio__module_name}-cloudwatch-to-logzio${var.tmp_suffix}"
+  name        = "${var.environment_short_name}-${var.logzio__module_name}-cloudwatch-to-logzio"
   description = "Allows Lambda to write its execution logs into CloudWatch."
   policy      = <<-EOF
     {

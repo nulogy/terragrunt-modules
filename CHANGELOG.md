@@ -14,6 +14,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.6.0] - 2021-08-02
+
+### Added
+
+* Adds a `cloudfront_s3_origin` module that can be used to set up an AWS
+  CloudFront distribution pointing to an S3 bucket as the origin. Useful for
+  setting up HTTPS redirects.
+* Adds a `s3_redirect_bucket` module whose job is to provide a redirect to
+  another URL.
+* Adds a `cloudfront_s3_redirect` module group that utilizes the
+  `cloudfront_s3_origin` and `s3_redirect_bucket` modules to perform a HTTPS
+  redirect to another URL.
+
 ## [18.5.0] - 2021-08-02
 
 ### Added

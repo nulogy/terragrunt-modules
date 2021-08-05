@@ -3,7 +3,7 @@ variable "database_address" {
 }
 
 variable "postgres_version" {
-  type = string
+  type    = string
   default = "latest"
 }
 
@@ -12,12 +12,12 @@ variable "database_name" {
 }
 
 variable "database_port" {
-  type = string
+  type    = string
   default = "5432"
 }
 
 variable "debezium_events_table" {
-  type = string
+  type    = string
   default = "message_bus_subscription_events"
 }
 
@@ -26,7 +26,7 @@ variable "debezium_password" {
 }
 
 variable "debezium_username" {
-  type = string
+  type    = string
   default = "debezium"
 }
 
@@ -36,4 +36,10 @@ variable "database_admin_username" {
 
 variable "database_admin_password" {
   type = string
+}
+
+variable "additional_commands" {
+  type        = string
+  description = "Additional SQL statements to execute when creating the user"
+  default     = ""
 }

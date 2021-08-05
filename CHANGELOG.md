@@ -14,12 +14,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [18.7.0] - 2021-08-05
+
+### Added
+
+* Added variable to run addtional SQL commands for `debezium_database_user`.
+
 ## [18.6.0] - 2021-08-02
 
 ### Added
 
-* `cloudfront_s3_origin` module that can be used to set up an AWS CloudFront 
-  distribution pointing to an S3 bucket as the origin. Useful for setting up 
+* `cloudfront_s3_origin` module that can be used to set up an AWS CloudFront
+  distribution pointing to an S3 bucket as the origin. Useful for setting up
   HTTPS redirects.
 * `s3_redirect_bucket` module whose job is to provide a redirect to another URL.
 * `cloudfront_s3_redirect` module group that utilizes the `cloudfront_s3_origin`
@@ -29,11 +35,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* `ecs_service_fargate_codedeploy` module that uses AWS CodeDeploy for 
+* `ecs_service_fargate_codedeploy` module that uses AWS CodeDeploy for
   deployments.
 * `public_load_balancer_blue_green` module that has two target groups called
   Blue and Green which are used for AWS CodeDeploy for deployments.
-* `ecs_fargate_with_codedeploy` module group that uses AWS CodeDeploy for 
+* `ecs_fargate_with_codedeploy` module group that uses AWS CodeDeploy for
   deployments and requires two target groups to be available called Blue and Green.
 
 ## [18.4.0] - 2021-07-22
@@ -53,14 +59,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-* Added `ssm:GetParametersByPath` permission to every role that was using 
+* Added `ssm:GetParametersByPath` permission to every role that was using
   `ssm:GetParameter`
 
 ## [18.3.0] - 2021-05-18
 
 ### Changed
 
-* `cloudwatch_logzio` module also considers environment variables of the log 
+* `cloudwatch_logzio` module also considers environment variables of the log
   shipping lambda when determining if it needs to apply any changes
 
 ## [18.2.0] - 2021-05-05

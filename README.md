@@ -4,7 +4,7 @@
 
 We treat this project as an internal "open source" project. Everyone at Nulogy is welcome to submit Pull Requests.
 
-The TASS Team is the maintainer of this project.
+The team responsible for maintaining this project is @nulogy/sre.
 
 ### Contributing
 
@@ -13,7 +13,7 @@ When you are happy with your changes:
 1. Add description of changes to the top of the [CHANGELOG](./CHANGELOG.md) file, under the `## [Unreleased]` section.
 1. Create a Pull Request.
 1. Notify #tass Slack channel for a review.
-   - As maintainers, TASS would like to keep up to date with any changes.
+   - As maintainers, SRE would like to keep up to date with any changes.
 1. Once approved and all comments have been resolved, [release a new version](#release-a-new-version).
    - Everyone in Product Development has write access.
 

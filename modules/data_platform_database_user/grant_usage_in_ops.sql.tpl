@@ -40,15 +40,15 @@ begin
   for r in SELECT * FROM pg_temp.schemas_without_usage
   loop
     execute 'grant usage ON schema ' || quote_ident(r.schema) || ' to ${data_platform_database_user__username}';
-    COMMIT;
-    perform pg_sleep(0.1);
+    -- COMMIT;
+    -- perform pg_sleep(0.1);
   end loop;
 
   for r in SELECT distinct(table_schema) AS schema FROM pg_temp.schema_tables_without_select_grant
   loop
     execute 'grant SELECT ON all tables in schema ' || quote_ident(r.schema) || ' to ${data_platform_database_user__username}';
-    COMMIT;
-    perform pg_sleep(0.1);
+    -- COMMIT;
+    -- perform pg_sleep(0.1);
   end loop;
 end\$$
 ;

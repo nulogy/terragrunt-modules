@@ -13,7 +13,7 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
     '${var.debezium_password}' VALID UNTIL 'infinity' IN ROLE rds_replication;
     GRANT USAGE ON SCHEMA public TO debezium;
     GRANT SELECT, INSERT, DELETE ON TABLE ${var.debezium_events_table} TO ${var.debezium_username};
-    ${var.additional_commands}
+    ${var.debezium_database_user__additional_grant_statements}
   "
 EOF
 
@@ -25,6 +25,7 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
   --username ${var.database_admin_username} \
   --dbname "${var.database_name}" \
   --command "
+    ${var.debezium_database_user__additional_revoke_statements}
     REVOKE ALL PRIVILEGES ON TABLE ${var.debezium_events_table} FROM ${var.debezium_username};
     REVOKE USAGE ON SCHEMA public FROM debezium;
     REVOKE CREATE ON DATABASE ${var.database_name} FROM ${var.debezium_username};

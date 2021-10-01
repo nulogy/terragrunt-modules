@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-* Changed invocation variables  `debezium_connection` to separate additionoal SQL statements for granting and revoking the user
+* Changed module variables in `debezium_connection` to separate additionoal SQL statements for granting and revoking the user
 
 ## [18.7.0] - 2021-08-05
 

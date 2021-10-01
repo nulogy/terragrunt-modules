@@ -38,8 +38,14 @@ variable "database_admin_password" {
   type = string
 }
 
-variable "additional_commands" {
+variable "debezium_database_user__additional_grant_statements" {
   type        = string
   description = "Additional SQL statements to execute when creating the user"
+  default     = ""
+}
+
+variable "debezium_database_user__additional_revoke_statements" {
+  type        = string
+  description = "Additional SQL statements to execute when removing the user"
   default     = ""
 }

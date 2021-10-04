@@ -31,7 +31,7 @@ variable "data_platform_database_user__password" {
 
 variable "data_platform_database_user__username" {
   type    = string
-  default = "data_platform_database_user"
+  default = "data_platform"
 }
 
 variable "postgres_version" {

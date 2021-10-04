@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [19.1.0] - 2021-10-04
+
+### Added
+
+* Added `data_platform_database_user` module for creating a Postgres user for data platform.
+
 ## [19.0.0] - 2021-08-05
 
 ### Changed

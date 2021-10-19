@@ -53,6 +53,7 @@ module "ecs_service_fargate_elb" {
   target_group_arn      = module.public_load_balancer.target_group_arn
   vpc_cidr              = length(var.ecs_incoming_allowed_cidr) > 0 ? var.ecs_incoming_allowed_cidr : var.vpc_cidr
   vpc_id                = var.vpc_id
+  ecs_service_name      = var.ecs_service_name
 
   depends_on = [
     module.public_load_balancer.aws_lb_listener

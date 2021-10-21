@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [19.2.0] - 2021-10-21
+
+### Added
+
+* Added optional field to `ecs_fargate_with_elb` and `ecs_service_fargate_elb` to allow custom ECS service names
+
+
 ## [19.1.0] - 2021-10-04
 
 ### Added

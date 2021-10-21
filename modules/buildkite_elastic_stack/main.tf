@@ -34,7 +34,7 @@ resource "aws_ssm_parameter" "agent_token" {
 
   lifecycle {
     # Once created, parameter store needs to be updated manually
-    ignore_changes = ["value"]
+    ignore_changes = [value]
   }
 }
 

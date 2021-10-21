@@ -9,17 +9,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
+
+  - Upgrade Buildkite CI Stack to 5.7.1 
+  - Store Buildkite agent token in parameter store with optional KMS encryption
+  - More sensible defaults in `buildkite_elastic_stack` variables.tf
+
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+  - Buildkite instances have no public IP by default
+  - Require Buildkite instances to use IMDSv2 for improved security usage of EC2 metadata service
 
 ## [19.2.0] - 2021-10-21
 
 ### Added
 
 * Added optional field to `ecs_fargate_with_elb` and `ecs_service_fargate_elb` to allow custom ECS service names
-
 
 ## [19.1.0] - 2021-10-04
 

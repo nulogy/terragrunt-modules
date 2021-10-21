@@ -1,28 +1,28 @@
 locals {
-  container_name              = "${var.environment_name}_${var.service_name}"
-  health_check_object         = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
+  container_name      = "${var.environment_name}_${var.service_name}"
+  health_check_object = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
 
   ## datadog will subtract from task allocated cpu and memory, please adjust var.cpu and/or var.memory to accommodate if necessary
-  container_cpu               = var.cpu    - (local.datadog_agent_cpu)
+  container_cpu               = var.cpu - (local.datadog_agent_cpu)
   container_memory            = var.memory - (local.datadog_agent_memoryReservation)
   container_memoryReservation = var.memory - (local.datadog_agent_memory)
 
   ## injects datadog service name env var in the app
   container_datadog_envars = var.datadog_enabled ? [
     {
-      "name": "DD_ENV",
-      "value": "${var.datadog_env}"
+      "name" : "DD_ENV",
+      "value" : "${var.datadog_env}"
     },
     {
-      "name": "DD_SERVICE",
-      "value": "${local.datadog_service}"
+      "name" : "DD_SERVICE",
+      "value" : "${local.datadog_service}"
     },
     {
-      "name": "DD_VERSION",
-      "value": "${var.docker_image_name}"
+      "name" : "DD_VERSION",
+      "value" : "${var.docker_image_name}"
     }
   ] : []
-  container_envars            = jsonencode(concat(jsondecode(var.envars),
+  container_envars = jsonencode(concat(jsondecode(var.envars),
     local.container_datadog_envars
   ))
 
@@ -30,11 +30,11 @@ locals {
   ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
   ## https://aws.amazon.com/fargate/pricing/
   datadog_service                 = "${var.environment_name}/${var.service_name}"
-  datadog_agent_cpu               = var.datadog_enabled ? ((log((var.cpu/256),2)*16) + 64) : 0 ## [64..128]
+  datadog_agent_cpu               = var.datadog_enabled ? ((log((var.cpu / 256), 2) * 16) + 64) : 0 ## [64..128]
   datadog_agent_memoryReservation = var.datadog_enabled ? 128 : 0
-  datadog_agent_memory            = var.datadog_enabled ? ((log((var.cpu/256),2)*32) + 128) : 0 ## [128..256]
+  datadog_agent_memory            = var.datadog_enabled ? ((log((var.cpu / 256), 2) * 32) + 128) : 0 ## [128..256]
   ## https://docs.datadoghq.com/agent/docker/?tab=standard#global-options
-  datadog_agent_envars            = <<EOF
+  datadog_agent_envars = <<EOF
   [
     {
       "name": "DD_LOG_LEVEL",
@@ -111,7 +111,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
       }
     }
   }
-  %{ if var.datadog_enabled }
+  %{if var.datadog_enabled}
   ,{
     "cpu": ${local.datadog_agent_cpu},
     "environment": ${local.datadog_agent_envars},
@@ -140,13 +140,13 @@ resource "aws_ecs_task_definition" "ecs_task" {
       }
     ]
   }
-  %{ endif }
+  %{endif}
 ]
 DEFINITION
 }
 
 resource "aws_ecs_service" "ecs_service" {
-  name            = "${local.container_name}_service"
+  name            = var.ecs_service_name == "" ? "${local.container_name}_service" : var.ecs_service_name
   cluster         = var.ecs_cluster_name
   task_definition = aws_ecs_task_definition.ecs_task.arn
   launch_type     = "FARGATE"

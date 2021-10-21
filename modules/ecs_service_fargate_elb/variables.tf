@@ -99,3 +99,8 @@ variable "datadog_env" {
   default     = "development"
   type        = string
 }
+
+variable "ecs_service_name" {
+  description = "Name of the ECS service"
+  default     = ""
+}

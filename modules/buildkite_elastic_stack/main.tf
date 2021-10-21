@@ -25,20 +25,37 @@ resource "aws_security_group" "stack_security_group" {
   }
 }
 
+resource "aws_ssm_parameter" "agent_token" {
+  name        = "/${var.stack_name}/agent-token"
+  description = "Buildkite agent token"
+  type        = length(var.kms_key) > 0 ? "SecureString" : "String"
+  key_id      = var.kms_key
+  value       = var.buildkite_agent_token
+
+  lifecycle {
+    # Once created, parameter store needs to be updated manually
+    ignore_changes = ["value"]
+  }
+}
+
 resource "aws_cloudformation_stack" "stack" {
   name         = var.stack_name
   template_url = var.stack_template_url
-  capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
+  capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]
 
+  # See: https://buildkite.com/docs/agent/v3/elastic-ci-aws/parameters#main
   parameters = {
     AgentsPerInstance              = var.agents_per_instance
     AssociatePublicIpAddress       = var.associate_public_ip_address
     BootstrapScriptUrl             = var.bootstrap_script_url
-    BuildkiteAgentToken            = var.buildkite_agent_token
+    # BuildkiteAgentToken          = var.buildkite_agent_token # Deprecated
+    BuildkiteAgentTokenParameterStorePath = aws_ssm_parameter.agent_token.name
+    BuildkiteAgentTokenParameterStoreKMSKey = var.kms_key
     BuildkiteAgentTimestampLines   = "true"
     BuildkiteQueue                 = var.buildkite_queue
     ECRAccessPolicy                = "poweruser"
     EnableDockerUserNamespaceRemap = "false"
+    IMDSv2Tokens                   = "required"
     InstanceType                   = var.instance_type
     KeyName                        = var.key_name
     ManagedPolicyARN               = var.managed_policy_arn
@@ -52,9 +69,5 @@ resource "aws_cloudformation_stack" "stack" {
     SpotPrice                      = var.spot_price
     Subnets                        = join(",", var.subnet_ids)
     VpcId                          = var.vpc_id
-  }
-
-  lifecycle {
-    ignore_changes = [parameters["BuildkiteAgentToken"]]
   }
 }

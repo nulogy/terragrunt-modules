@@ -43,8 +43,8 @@ variable "managed_policy_arn" {
 }
 
 variable "max_size" {
-  description = "Maximum number of instances. Default value is 10."
-  default     = ""
+  description = "Maximum number of instances."
+  default     = 10
 }
 
 variable "min_size" {

@@ -14,7 +14,7 @@ variable "bootstrap_script_url" {
 }
 
 variable "buildkite_agent_token" {
-  description = "Agent token to be passed during stack bootstrap. Further updates will be ignored. Update parameter store entry to update agent token."
+  description = "Buildkite agent registration token. This token will be stored in parameter store."
   sensitive   = true
 }
 

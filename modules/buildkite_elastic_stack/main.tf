@@ -31,11 +31,6 @@ resource "aws_ssm_parameter" "agent_token" {
   type        = length(var.kms_key) > 0 ? "SecureString" : "String"
   key_id      = var.kms_key
   value       = var.buildkite_agent_token
-
-  lifecycle {
-    # Once created, parameter store needs to be updated manually
-    ignore_changes = [value]
-  }
 }
 
 resource "aws_cloudformation_stack" "stack" {

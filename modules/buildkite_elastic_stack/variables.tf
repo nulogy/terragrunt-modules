@@ -90,7 +90,6 @@ variable "stack_template_url" {
 
 variable "subnet_ids" {
   description = "List of two existing VPC subnet ids where EC2 instances will run."
-  type        = list(string)
 }
 
 variable "vpc_id" {

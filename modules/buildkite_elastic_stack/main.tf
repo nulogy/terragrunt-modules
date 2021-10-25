@@ -28,7 +28,7 @@ resource "aws_security_group" "stack_security_group" {
 resource "aws_ssm_parameter" "agent_token" {
   name        = "/${var.stack_name}/agent-token"
   description = "Buildkite agent token"
-  type        = length(var.kms_key) > 0 ? "SecureString" : "String"
+  type        = "SecureString"
   key_id      = var.kms_key
   value       = var.buildkite_agent_token
 }
@@ -43,7 +43,6 @@ resource "aws_cloudformation_stack" "stack" {
     AgentsPerInstance              = var.agents_per_instance
     AssociatePublicIpAddress       = var.associate_public_ip_address
     BootstrapScriptUrl             = var.bootstrap_script_url
-    # BuildkiteAgentToken          = var.buildkite_agent_token # Deprecated
     BuildkiteAgentTokenParameterStorePath = aws_ssm_parameter.agent_token.name
     BuildkiteAgentTokenParameterStoreKMSKey = var.kms_key
     BuildkiteAgentTimestampLines   = "true"

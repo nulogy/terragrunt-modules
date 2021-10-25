@@ -24,7 +24,6 @@ variable "buildkite_queue" {
 
 variable "instance_type" {
   description = "Instance type. Comma-separated list with 1-4 instance types. The order is a prioritized preference for launching OnDemand instances, and a non-prioritized list of types to consider for Spot Instances (where used)."
-  default     = "t2.micro"
 }
 
 variable "key_name" {
@@ -34,7 +33,6 @@ variable "key_name" {
 
 variable "kms_key" {
   description = "AWS KMS key ID used to encrypt the parameter agent token in parameter store."
-  default     = ""
 }
 
 variable "managed_policy_arn" {

@@ -71,7 +71,7 @@ variable "secrets_bucket" {
 }
 
 variable "spot_price" {
-  description = "Maximum spot price to use for the instances, in instance cost per hour. Values >0 will result in 100% of instances being spot. 0 means only use normal (non-spot) instances. This parameter is deprecated - we recommend setting to 0 and using OnDemandPercentage to opt into spot instances."
+  description = "Maximum spot price to use for the instances, in instance cost per hour. Values >0 will result in 100% of instances being spot. 0 means only use normal (non-spot) instances."
   default     = 0
 }
 

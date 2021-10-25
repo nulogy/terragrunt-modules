@@ -9,14 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Changed
-
-  - Upgrade Buildkite CI Stack to 5.7.1 
-  - Store Buildkite agent token in parameter store with optional KMS encryption
-  - More sensible defaults in `buildkite_elastic_stack` variables.tf
-
 ### Deprecated
 ### Removed
 ### Fixed
+### Security
+
+## [20.0.0] - 2021-10-25
+
+### Changed
+
+  - Upgrade Buildkite CI Stack to 5.7.1 
+  - Store Buildkite agent token in parameter store. A KMS key is required to encrypt the parameter store.
+  - More sensible defaults in `buildkite_elastic_stack` variables.tf
+
 ### Security
 
   - Buildkite instances have no public IP by default

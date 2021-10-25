@@ -13,7 +13,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Upgrade Buildkite CI Stack to 5.7.1 
   - Store Buildkite agent token in parameter store with optional KMS encryption
   - More sensible defaults in `buildkite_elastic_stack` variables.tf
-  - Requires minimum Terraform version to 1.0.0
 
 ### Deprecated
 ### Removed

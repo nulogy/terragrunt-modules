@@ -5,3 +5,7 @@ output "security_group_id" {
 output "instance_role_name" {
   value = aws_cloudformation_stack.stack.outputs["InstanceRoleName"]
 }
+
+output "secrets_bucket" {
+  value = aws_cloudformation_stack.stack.outputs["ManagedSecretsBucket"]
+}

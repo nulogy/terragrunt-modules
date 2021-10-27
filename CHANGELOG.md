@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 ### Security
 
+## [20.1.0] - 2021-10-27
+
+### Added
+
+* ECS service discovery to `ecs_cluster`
+
+### Changed
+
+* ECS service fargate modules are configured to work with service discovery by 
+  default
+* ECS service fargate modules are configured to allow `enable_execute_command`
+
 ## [20.0.0] - 2021-10-25
 
 ### Changed

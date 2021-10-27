@@ -6,3 +6,6 @@ variable "container_insights" {
   description = "Enable Cloudwatch Container Insights for this cluster, which includes CPU, Memory, etc for tasks."
   default     = false
 }
+
+variable "vpc_id" {
+}

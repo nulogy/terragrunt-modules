@@ -1,6 +1,8 @@
 locals {
-  container_name              = "${var.environment_name}_${var.service_name}"
-  health_check_object         = length(var.health_check_command) > 0 ? jsonencode({ command : var.health_check_command }) : "null"
+  container_name      = "${var.environment_name}_${var.service_name}"
+  health_check_object = length(var.health_check_command) > 0 ? jsonencode({
+    command : var.health_check_command
+  }) : "null"
 
   ## datadog will subtract from task allocated cpu and memory, please adjust var.cpu and/or var.memory to accommodate if necessary
   container_cpu               = var.cpu    - (local.datadog_agent_cpu)
@@ -30,9 +32,11 @@ locals {
   ## https://nulogy-go.atlassian.net/wiki/spaces/SRE/pages/743604360/2020-Q2+Replace+New+Relic+with+Datadog#Resource-Allocation-for-Datadog-Agent
   ## https://aws.amazon.com/fargate/pricing/
   datadog_service                 = "${var.environment_name}/${var.service_name}"
-  datadog_agent_cpu               = var.datadog_enabled ? ((log((var.cpu/256),2)*16) + 64) : 0 ## [64..128]
+  ## [64..128]
+  datadog_agent_cpu               = var.datadog_enabled ? ((log((var.cpu/256), 2)*16) + 64) : 0
   datadog_agent_memoryReservation = var.datadog_enabled ? 128 : 0
-  datadog_agent_memory            = var.datadog_enabled ? ((log((var.cpu/256),2)*32) + 128) : 0 ## [128..256]
+  ## [128..256]
+  datadog_agent_memory            = var.datadog_enabled ? ((log((var.cpu/256), 2)*32) + 128) : 0
   ## https://docs.datadoghq.com/agent/docker/?tab=standard#global-options
   datadog_agent_envars            = <<EOF
   [
@@ -74,6 +78,11 @@ locals {
     }
   ]
 EOF
+}
+
+data "aws_service_discovery_dns_namespace" "private_dns_namespace" {
+  name = var.ecs_cluster_name
+  type = "DNS_PRIVATE"
 }
 
 resource "aws_ecs_task_definition" "ecs_task" {
@@ -145,12 +154,31 @@ resource "aws_ecs_task_definition" "ecs_task" {
 DEFINITION
 }
 
+resource "aws_service_discovery_service" "discovery_service" {
+  name = local.container_name
+
+  dns_config {
+    namespace_id = data.aws_service_discovery_dns_namespace.private_dns_namespace.id
+
+    dns_records {
+      ttl  = 10
+      type = "A"
+    }
+  }
+}
+
+
 resource "aws_ecs_service" "ecs_service" {
-  name            = "${local.container_name}_service"
-  cluster         = var.ecs_cluster_name
-  task_definition = aws_ecs_task_definition.ecs_task.arn
-  launch_type     = "FARGATE"
-  desired_count   = var.desired_count
+  name                   = "${local.container_name}_service"
+  cluster                = var.ecs_cluster_name
+  task_definition        = aws_ecs_task_definition.ecs_task.arn
+  launch_type            = "FARGATE"
+  desired_count          = var.desired_count
+  enable_execute_command = true
+
+  service_registries {
+    registry_arn = aws_service_discovery_service.discovery_service.arn
+  }
 
   deployment_controller {
     type = "CODE_DEPLOY"

@@ -62,4 +62,5 @@ variable "publication_name" {
 
 variable "replication_slot_name_override" {
   type    = string
+  default = ""
 }

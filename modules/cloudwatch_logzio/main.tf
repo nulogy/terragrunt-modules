@@ -1,25 +1,26 @@
 data "archive_file" "lambda_zip" {
+  output_path = "logzio-cloudwatch.zip"
+  source_dir  = "${path.module}/src"
   type        = "zip"
-  source_dir = "${path.module}/src"
-  output_path = "lambda.zip"
 }
 
 resource "aws_lambda_function" "lambda" {
-  filename         = "lambda.zip"
-  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  function_name    = "${var.environment_short_name}-${var.logzio__module_name}-ship-logzio"
-  role             = aws_iam_role.lambda_role.arn
   description      = "AWS Lambda Function that ingests CloudWatch logs into Logz.io. Environment: ${var.environment_name}. Terraform Module: ${var.logzio__module_name}."
-  handler          = "lambda.lambda_handler"
-  runtime          = "python2.7"
-  timeout          = "30"
+  filename         = data.archive_file.lambda_zip.output_path
+  function_name    = "${var.environment_short_name}-${var.logzio__module_name}-ship-logzio"
+  handler          = "lambda_function.lambda_handler"
+  memory_size      = "512"
+  role             = aws_iam_role.lambda_role.arn
+  runtime          = "python3.7"
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+  timeout          = "60"
 
   environment {
     variables = {
       FORMAT = var.logzio__logs_format
+      REGION = substr(var.aws_region, 0, 2)
       TOKEN  = var.logzio__api_key
       TYPE   = var.logzio__logs_type
-      URL    = var.logzio__api_url
     }
   }
 }

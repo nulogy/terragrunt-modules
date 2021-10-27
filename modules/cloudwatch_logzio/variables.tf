@@ -9,10 +9,6 @@ variable "environment_name" {
 variable "environment_short_name" {
 }
 
-variable "logzio__api_url" {
-  default = "https://listener.logz.io:8071"
-}
-
 variable "logzio__api_key" {
 }
 

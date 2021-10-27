@@ -22,6 +22,11 @@ data "template_file" "template" {
   }
 }
 
+data "aws_service_discovery_dns_namespace" "private_dns_namespace" {
+  name = var.ecs_cluster_name
+  type = "DNS_PRIVATE"
+}
+
 resource "aws_ecs_task_definition" "ecs_task" {
   cpu                      = var.cpu
   memory                   = var.memory
@@ -33,12 +38,30 @@ resource "aws_ecs_task_definition" "ecs_task" {
   container_definitions    = data.template_file.template.rendered
 }
 
+resource "aws_service_discovery_service" "discovery_service" {
+  name = "${var.environment_name}_${var.service_name}"
+
+  dns_config {
+    namespace_id = data.aws_service_discovery_dns_namespace.private_dns_namespace.id
+
+    dns_records {
+      ttl  = 10
+      type = "A"
+    }
+  }
+}
+
 resource "aws_ecs_service" "ecs_service" {
   name            = "${var.environment_name}_${var.service_name}_service"
   cluster         = var.ecs_cluster_name
   task_definition = aws_ecs_task_definition.ecs_task.arn
   launch_type     = "FARGATE"
   desired_count   = var.desired_count
+  enable_execute_command = true
+
+  service_registries {
+    registry_arn = aws_service_discovery_service.discovery_service.arn
+  }
 
   network_configuration {
     subnets         = var.subnets

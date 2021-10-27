@@ -1,6 +1,5 @@
 locals {
-  replication_slot_name_base = (var.replication_slot_name_override == "") ? var.connection_name : var.replication_slot_name_override
-  replication_slot_name      = "${replace(local.replication_slot_name_base, "-", "_")}_debezium_slot"
+  replication_slot_name      = (var.replication_slot_name_override == "") ? "${replace(var.connection_name, "-", "_")}_debezium_slot" : var.replication_slot_name_override
 
   heartbeat_insertion = <<EOF
     INSERT INTO public.${var.events_table}

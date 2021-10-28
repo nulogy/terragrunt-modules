@@ -15,11 +15,17 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [20.2.1] - 2021-10-27
+
+### Changed
+
+* Use the same `us-east-1` region for reaching the Logz.io listener
+
 ## [20.2.0] - 2021-10-27
 
 ### Changed
 
-* Upgraded the CloudWatch Logz.io log shipping lambda module to Python 3.7
+* Upgrade the CloudWatch Logz.io log shipping lambda module to Python 3.7
 
 ## [20.1.0] - 2021-10-27
 

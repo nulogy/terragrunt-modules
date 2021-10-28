@@ -18,7 +18,7 @@ resource "aws_lambda_function" "lambda" {
   environment {
     variables = {
       FORMAT = var.logzio__logs_format
-      REGION = substr(var.aws_region, 0, 2)
+      REGION = "us"
       TOKEN  = var.logzio__api_key
       TYPE   = var.logzio__logs_type
     }

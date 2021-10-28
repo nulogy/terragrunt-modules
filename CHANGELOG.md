@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [20.3.0] - 2021-10-28
+
+### Changed
+
+  - Allow overriding the Postgres replication slot name when configuring Debezium
+
 ## [20.2.1] - 2021-10-27
 
 ### Changed

@@ -59,3 +59,8 @@ variable "publication_name" {
   type    = string
   default = "debezium_public_events"
 }
+
+variable "replication_slot_name_override" {
+  type    = string
+  default = ""
+}

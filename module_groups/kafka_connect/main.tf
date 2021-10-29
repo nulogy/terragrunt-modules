@@ -53,12 +53,12 @@ locals {
 }
 
 module "vpc" {
-  source = "git::https://github.com/nulogy/terragrunt-modules//modules/data_shared_vpc?ref=18.1.1"
+  source = "../../modules/data_shared_vpc"
   type   = var.shared_vpc__type
 }
 
 module "kafka_connect" {
-  source = "git::https://github.com/nulogy/terragrunt-modules//modules/ecs_fargate_with_elb?ref=19.2.0"
+  source = "../ecs_fargate_with_elb"
 
   cert_domain               = var.cert_domain
   command                   = ["start"]

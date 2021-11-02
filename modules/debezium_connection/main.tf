@@ -72,9 +72,9 @@ EOF
     command = <<EOF
 curl --output /dev/null --fail -X DELETE -H "Accept:application/json" -H "Content-Type:application/json" \
   ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}
-# Try to wait until the resource is actually destroyed. This can cause problems when uploading a new config
-# and terraform does a destroy then a create. This should probably be replaced with some kind of API polling.
-sleep 2.0
+# Like most Kafka Connect API calls, this is done asynchronously and will be eventually consistent across the cluster.
+# Sleep to give it some time to delete the connector, so that Terraform does not immediately try to do a create after a delete.
+sleep 10.0
 EOF
   }
 }

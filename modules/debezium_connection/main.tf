@@ -14,7 +14,7 @@ locals {
       now()
     );
   EOF
-  // This is exposed because PackManager will need to override it to change the search_path to include extensions
+  // This is exposed because OpsCore needs to customize it. They need to include the extensions schema for the `uuid_generate_v4` function to work.
   default_heartbeat_query = <<EOF
     SET search_path TO public;
 

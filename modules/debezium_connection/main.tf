@@ -1,6 +1,12 @@
 locals {
   replication_slot_name = (var.replication_slot_name_override == "") ? "${replace(var.connection_name, "-", "_")}_debezium_slot" : var.replication_slot_name_override
-  heartbeat_insertion   = <<EOF
+  heartbeat_topic       = "heartbeat-${var.connection_name}"
+  heartbeat_query       = <<EOF
+    SET search_path TO ${join(",", var.postgres_search_paths)};
+
+    DELETE FROM public.${var.events_table}
+    WHERE created_at < now() - INTERVAL '${var.subscription_events_ttl}';
+
     INSERT INTO public.${var.events_table}
       (id, subscription_id, partition_key, topic_name, company_uuid, event_json, created_at)
     VALUES (
@@ -13,19 +19,7 @@ locals {
       now()
     );
   EOF
-  // This is exposed because OpsCore needs to customize it. They need to include the extensions schema for the `uuid_generate_v4` function to work.
-  default_heartbeat_query = <<EOF
-    SET search_path TO ${join(",", var.postgres_search_paths)};
-
-    DELETE FROM public.${var.events_table}
-    WHERE created_at < now() - INTERVAL '${var.subscription_events_ttl}';
-
-    ${local.heartbeat_insertion}
-  EOF
-  heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
-  heartbeat_topic         = "heartbeat-${var.connection_name}"
-  pg_docker_image         = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
-
+  pg_docker_image       = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
 }
 
 data "template_file" "debezium_config" {

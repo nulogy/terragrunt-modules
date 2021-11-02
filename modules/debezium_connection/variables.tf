@@ -38,11 +38,6 @@ variable "events_table" {
   default     = "message_bus_subscription_events"
 }
 
-variable "heartbeat_query" {
-  type    = string
-  default = "use default"
-}
-
 variable "kafka_bootstrap_servers" {
   type = string
 }

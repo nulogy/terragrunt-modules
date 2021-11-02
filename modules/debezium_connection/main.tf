@@ -40,6 +40,7 @@ data "template_file" "debezium_config" {
   }
 }
 
+// Writing to a local file avoids awkward escaping of single and double quotes when posting with curl
 resource "local_file" "json" {
   sensitive_content = data.template_file.debezium_config.rendered
   filename          = "${path.module}/debezium-config.json"
@@ -50,6 +51,7 @@ resource "null_resource" "upload_config" {
   triggers = {
     cluster_url     = var.kafka_connect_url
     connection_name = var.connection_name
+    config          = data.template_file.debezium_config.rendered
   }
 
   provisioner "local-exec" {

@@ -64,3 +64,9 @@ variable "replication_slot_name_override" {
   type    = string
   default = ""
 }
+
+variable "subscription_events_ttl" {
+  type        = string
+  description = "Delete older Message Bus subscription events older than this value. Must be a string passable to the SQL INTERVAL function."
+  default     = "7 days"
+}

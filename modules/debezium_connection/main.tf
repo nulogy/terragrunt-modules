@@ -19,7 +19,7 @@ locals {
     SET search_path TO public;
 
     DELETE FROM public.${var.events_table}
-    WHERE created_at < now() - INTERVAL '3 days';
+    WHERE created_at < now() - INTERVAL '${var.subscription_events_ttl}';
 
     ${local.heartbeat_insertion}
   EOF

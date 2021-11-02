@@ -73,3 +73,9 @@ variable "subscription_events_ttl" {
   description = "Delete older Message Bus subscription events older than this value. Must be a string passable to the SQL INTERVAL function."
   default     = "7 days"
 }
+
+variable "postgres_search_paths" {
+  description = "The search_path to use when executing a heartbeat."
+  type        = list(string)
+  default     = ["public"]
+}

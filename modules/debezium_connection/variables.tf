@@ -33,8 +33,9 @@ variable "database_password" {
 }
 
 variable "events_table" {
-  type    = string
-  default = "message_bus_subscription_events"
+  description = "The database table where subscription events are written to. Configurable in the Message Bus Producer gem."
+  type        = string
+  default     = "message_bus_subscription_events"
 }
 
 variable "heartbeat_query" {
@@ -51,8 +52,9 @@ variable "kafka_connect_url" {
 }
 
 variable "postgres_version" {
-  type    = string
-  default = "latest"
+  description = "Version of Postgres to use when executing statements from a Docker image. Using the same major version should be sufficient. e.g. 11.5"
+  type        = string
+  default     = "latest"
 }
 
 variable "publication_name" {
@@ -61,8 +63,9 @@ variable "publication_name" {
 }
 
 variable "replication_slot_name_override" {
-  type    = string
-  default = ""
+  description = "Override the default (computed) name of the replication slot to use. Helpful in recovery scenarios."
+  type        = string
+  default     = ""
 }
 
 variable "subscription_events_ttl" {

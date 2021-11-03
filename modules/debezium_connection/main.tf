@@ -1,7 +1,12 @@
 locals {
-  replication_slot_name      = (var.replication_slot_name_override == "") ? "${replace(var.connection_name, "-", "_")}_debezium_slot" : var.replication_slot_name_override
+  replication_slot_name = (var.replication_slot_name_override == "") ? "${replace(var.connection_name, "-", "_")}_debezium_slot" : var.replication_slot_name_override
+  heartbeat_topic       = "heartbeat-${var.connection_name}"
+  heartbeat_query       = <<EOF
+    SET search_path TO ${join(",", var.postgres_search_paths)};
 
-  heartbeat_insertion = <<EOF
+    DELETE FROM public.${var.events_table}
+    WHERE created_at < now() - INTERVAL '${var.subscription_events_ttl}';
+
     INSERT INTO public.${var.events_table}
       (id, subscription_id, partition_key, topic_name, company_uuid, event_json, created_at)
     VALUES (
@@ -14,19 +19,7 @@ locals {
       now()
     );
   EOF
-  // This is exposed because PackManager will need to override it to change the search_path to include extensions
-  default_heartbeat_query = <<EOF
-    SET search_path TO public;
-
-    DELETE FROM public.${var.events_table}
-    WHERE created_at < now() - INTERVAL '3 days';
-
-    ${local.heartbeat_insertion}
-  EOF
-  heartbeat_query         = (var.heartbeat_query == "use default") ? local.default_heartbeat_query : var.heartbeat_query
-  heartbeat_topic         = "heartbeat-${var.connection_name}"
-  pg_docker_image         = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
-
+  pg_docker_image       = var.postgres_version == "latest" ? "postgres:alpine" : "postgres:${var.postgres_version}-alpine"
 }
 
 data "template_file" "debezium_config" {
@@ -47,6 +40,7 @@ data "template_file" "debezium_config" {
   }
 }
 
+// Writing to a local file avoids awkward escaping of single and double quotes when posting with curl
 resource "local_file" "json" {
   sensitive_content = data.template_file.debezium_config.rendered
   filename          = "${path.module}/debezium-config.json"
@@ -57,6 +51,7 @@ resource "null_resource" "upload_config" {
   triggers = {
     cluster_url     = var.kafka_connect_url
     connection_name = var.connection_name
+    config          = data.template_file.debezium_config.rendered
   }
 
   provisioner "local-exec" {
@@ -72,9 +67,9 @@ EOF
     command = <<EOF
 curl --output /dev/null --fail -X DELETE -H "Accept:application/json" -H "Content-Type:application/json" \
   ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}
-# Try to wait until the resource is actually destroyed. This can cause problems when uploading a new config
-# and terraform does a destroy then a create. This should probably be replaced with some kind of API polling.
-sleep 2.0
+# Like most Kafka Connect API calls, this is done asynchronously and will be eventually consistent across the cluster.
+# Sleep to give it some time to delete the connector, so that Terraform does not immediately try to do a create after a delete.
+sleep 10.0
 EOF
   }
 }

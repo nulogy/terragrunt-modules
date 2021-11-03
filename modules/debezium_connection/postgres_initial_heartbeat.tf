@@ -1,5 +1,6 @@
-locals {
-  initial_heartbeat = <<EOF
+resource "null_resource" "postgres_initial_heartbeat" {
+  provisioner "local-exec" {
+    command = <<EOF
 docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" ${local.pg_docker_image} \
   psql \
   --host ${var.database_address} \
@@ -12,14 +13,5 @@ docker run -e PGPASSWORD="${var.database_admin_password}" --rm --entrypoint="" $
   END\$\$
 "
 EOF
-}
-
-resource "null_resource" "postgres_initial_heartbeat" {
-  triggers = {
-    initial_heartbeat = local.initial_heartbeat
-  }
-
-  provisioner "local-exec" {
-    command = self.triggers.initial_heartbeat
   }
 }

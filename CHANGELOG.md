@@ -15,6 +15,17 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [21.0.0] - 2021-11-02
+
+### Added
+
+* Added variable `subscription_events_ttl` to `debezium_config` defaulting to seven days (to match Message Bus Kafka topic deletion policy).
+* Added variable `postgres_search_paths` to `debezium_config` to modify the Postgres `search_path` when executing heartbeats.
+
+### Removed
+
+* Removed the `heartbeat_query` variable from `debezium_config`.
+
 ## [20.3.0] - 2021-10-28
 
 ### Changed

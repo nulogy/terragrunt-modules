@@ -1,10 +1,10 @@
 locals {
   zone_name              = trimsuffix(var.environment_dns_zone_name, ".")
-  kafka_connect_dns_name = "${local.normalized_service_name}.${local.zone_name}"
+  kafka_connect_dns_name = "${local.normalized_cluster_name}.${local.zone_name}"
 }
 
 resource "aws_ecs_service" "restarter" {
-  name            = "${local.normalized_service_name}-restarter"
+  name            = "${local.normalized_cluster_name}-restarter"
   cluster         = var.ecs_cluster_name
   task_definition = aws_ecs_task_definition.restarter.arn
   desired_count   = 1
@@ -17,11 +17,11 @@ resource "aws_ecs_service" "restarter" {
 
 module "log_group" {
   source = "git::https://github.com/nulogy/terragrunt-modules//modules/log_group"
-  name   = "${local.normalized_service_name}-kafka-connect-restarter-task"
+  name   = "${local.normalized_cluster_name}-kafka-connect-restarter-task"
 }
 
 resource "aws_ecs_task_definition" "restarter" {
-  family                   = "${local.normalized_service_name}-kafka-connect-restarter"
+  family                   = "${local.normalized_cluster_name}-kafka-connect-restarter"
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = aws_iam_role.ecs_executionrole.arn
   cpu                      = "256"
@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "restarter" {
         "options": {
           "awslogs-group": "${module.log_group.log_group_name}",
           "awslogs-region": "${var.aws_region}",
-          "awslogs-stream-prefix": "${local.normalized_service_name}-restarter"
+          "awslogs-stream-prefix": "${local.normalized_cluster_name}-restarter"
         }
       }
     }
@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "restarter" {
 }
 
 resource "aws_iam_role" "ecs_executionrole" {
-  name               = "${local.normalized_service_name}-ecs-restarter-execution-role"
+  name               = "${local.normalized_cluster_name}-ecs-restarter-execution-role"
   assume_role_policy = <<EOF
 {
   "Version": "2008-10-17",
@@ -70,7 +70,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "fargate_task_execution_role_policy" {
-  name   = "${local.normalized_service_name}-fargate-ecs-restarter-task-execution"
+  name   = "${local.normalized_cluster_name}-fargate-ecs-restarter-task-execution"
   role   = aws_iam_role.ecs_executionrole.id
   policy = <<EOF
 {
@@ -95,12 +95,12 @@ EOF
 }
 
 resource "aws_security_group" "app_worker" {
-  name   = "${local.normalized_service_name} restarter"
+  name   = "${local.normalized_cluster_name} restarter"
   vpc_id = module.vpc.vpc_id
 
   tags = {
-    Name           = "${local.normalized_service_name} restarter"
-    resource_group = local.normalized_service_name
+    Name           = "${local.normalized_cluster_name} restarter"
+    resource_group = local.normalized_cluster_name
   }
 
 }

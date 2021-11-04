@@ -1,5 +1,5 @@
 resource "aws_security_group" "lb_security_group" {
-  name_prefix = "${local.normalized_service_name}-lb-sg-kafka connect"
+  name_prefix = "${local.normalized_cluster_name}-lb-sg-kafka connect"
 
   vpc_id = module.vpc.vpc_id
 
@@ -21,8 +21,8 @@ resource "aws_security_group" "lb_security_group" {
   }
 
   tags = {
-    Name           = "${local.normalized_service_name} kafka connect load balancer security group"
-    resource_group = local.normalized_service_name
+    Name           = "${local.normalized_cluster_name} kafka connect load balancer security group"
+    resource_group = local.normalized_cluster_name
   }
 
   lifecycle {

@@ -40,8 +40,8 @@ variable "kafka_connect__ecs_cpu" {
   default = 1024
 }
 
-variable "kafka_connect__connector_name" {
-  description = "A name for the logical connector. This scopes this Kafka Connect cluster to be independent of others."
+variable "kafka_connect__cluster_name" {
+  description = "A name for the logical cluster. This scopes this Kafka Connect cluster to be independent of others."
   type        = string
 }
 

@@ -1,20 +1,20 @@
 locals {
-    connector_name = "${var.environment_name}-snowflake-connector"
-    kafka_topics = "opscore.qa"
+  connector_name = "${var.environment_name}-snowflake-connector"
+  kafka_topics   = "opscore.qa"
 }
 
 data "template_file" "snowflake_connector_config" {
   template = file("${path.module}/snowflake-connector-config.tpl")
 
   vars = {
-    connector_name     = local.connection_name
-    kafka_topics   = local.kafka_topics
-    snowflake_database   = var.snowflake_database
-    snowflake_private_key   = var.snowflake_private_key
-    snowflake_private_key_passphrase   = var.snowflake_private_key_passphrase
-    snowflake_topic2table   = var.snowflake_topic2table
-    snowflake_url   = var.snowflake_url
-    snowflake_username   = var.snowflake_username
+    connector_name                   = local.connection_name
+    kafka_topics                     = local.kafka_topics
+    snowflake_database               = var.snowflake_database
+    snowflake_private_key            = var.snowflake_private_key
+    snowflake_private_key_passphrase = var.snowflake_private_key_passphrase
+    snowflake_topic2table            = var.snowflake_topic2table
+    snowflake_url                    = var.snowflake_url
+    snowflake_username               = var.snowflake_username
   }
 }
 

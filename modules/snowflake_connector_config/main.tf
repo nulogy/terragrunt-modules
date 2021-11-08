@@ -1,6 +1,5 @@
 locals {
-  connector_name = "${var.environment_name}-snowflake-connector"
-  kafka_topics   = "opscore.qa"
+  connector_name = "${var.data_datacenter}.${var.kafka_topic_domain}.${var.kafka_topic_data_type}.${var.environment_name}.${var.data_version}"
 }
 
 data "template_file" "snowflake_connector_config" {
@@ -8,7 +7,7 @@ data "template_file" "snowflake_connector_config" {
 
   vars = {
     connector_name                   = local.connection_name
-    kafka_topics                     = local.kafka_topics
+    kafka_topic                      = var.kafka_topic
     snowflake_database               = var.snowflake_database
     snowflake_private_key            = var.snowflake_private_key
     snowflake_private_key_passphrase = var.snowflake_private_key_passphrase

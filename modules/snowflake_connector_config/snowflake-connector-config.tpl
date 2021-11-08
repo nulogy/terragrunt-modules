@@ -9,11 +9,11 @@
   "snowflake.private.key": "{snowflake_private_key}
   "snowflake.private.key.passphrase": "{snowflake_private_key_passphrase}
   "snowflake.schema.name": "PUBLIC",
-  "snowflake.topic2table.map": "{snowflake_topic2table}:INBOX",
+  "snowflake.topic2table.map": "{kafka_topic}:INBOX",
   "snowflake.url.name": "${snowflake_url}",
   "snowflake.user.name": "${snowflake_username}",
   "tasks.max": "4",
-  "topics": "${kafka_topics}",
+  "topics": "${kafka_topic}",
   "value.converter": "com.snowflake.kafka.connector.records.SnowflakeJsonConverter"
 }
 

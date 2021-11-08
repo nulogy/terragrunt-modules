@@ -7,7 +7,7 @@ variable "kafka_topics" {
   description = "Comma-separated list of topics to sync to Snowflake"
 }
 
-variable "snowflake_url_name" {
+variable "snowflake_url" {
   type        = string
   description = "The full URL for accessing Snowflake.  Protocol and port are optional"
 }

@@ -19,7 +19,7 @@ data "template_file" "snowflake_connector_config" {
 }
 
 resource "local_file" "json" {
-  sensitive_content = data.template_file.debezium_config.rendered
+  sensitive_content = data.template_file.snowflake_connector_config.rendered
   filename          = "${path.module}/snowflake-connector-config.json"
 }
 

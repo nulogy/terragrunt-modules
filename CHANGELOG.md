@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [21.1.0] - 2021-11-08
+
+### Added
+
+* Added module `kafka_connect_cluster` for starting an isolated set of ECS tasks for each Kafka Connect service (e.g. Debezium for Message Bus in OpsCore NA)
+
 ## [21.0.0] - 2021-11-02
 
 ### Added

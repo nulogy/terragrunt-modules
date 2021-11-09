@@ -1,12 +1,11 @@
 locals {
-  connector_name = "${var.data_datacenter}.${var.kafka_topic_domain}.${var.kafka_topic_data_type}.${var.environment_name}.${var.data_version}"
 }
 
 data "template_file" "snowflake_connector_config" {
   template = file("${path.module}/snowflake-connector-config.tpl")
 
   vars = {
-    connector_name                   = local.connection_name
+    connector_name                   = var.connection_name
     kafka_topic                      = var.kafka_topic
     snowflake_database               = var.snowflake_database
     snowflake_private_key            = var.snowflake_private_key

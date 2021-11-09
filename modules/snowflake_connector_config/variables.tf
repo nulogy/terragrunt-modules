@@ -1,7 +1,6 @@
-variable "data_version" {
-  type        = number
-  description = "Zero-indexed version for the data inside of this topic."
-  default     = 0
+variable "connector_name" {
+  type = string
+  description = "Name for the Kafka Connect connector.  Use kabab-case."
 }
 
 variable "kafka_connect_url" {
@@ -11,17 +10,6 @@ variable "kafka_connect_url" {
 variable "kafka_topic" {
   type        = string
   description = "Comma-separated list of topics to sync to Snowflake"
-}
-
-variable "kafka_topic_domain" {
-  type        = string
-  description = "The domain of the data that is being sent to Snowflake. E.g. OpsCore, Eco, Production Scheduling (kabab-case)"
-}
-
-variable "kafka_topic_data_type" {
-  type        = string
-  description = "Type of data being sent to snowflake.  E.g. cdc (change data capture), cmd (commands)"
-  default     = "cdc"
 }
 
 variable "snowflake_url" {

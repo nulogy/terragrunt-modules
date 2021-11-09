@@ -15,18 +15,36 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [22.0.0] - 2021-11-08
+
+### Changed
+
+* ECS service autoscaling fargate modules are configured to work with service
+  discovery by default
+* ECS service autoscaling fargate modules are configured to
+  allow `enable_execute_command`
+
+### Removed
+
+* Removed service discovery configuration from CodeDeploy ECS module since it is
+  not being used at the moment. It is not necessary for CodeDeploy based ECS
+  tasks to communicate with other ECS services through service discovery.
+
 ## [21.1.0] - 2021-11-08
 
 ### Added
 
-* Added module `kafka_connect_cluster` for starting an isolated set of ECS tasks for each Kafka Connect service (e.g. Debezium for Message Bus in OpsCore NA)
+* Added module `kafka_connect_cluster` for starting an isolated set of ECS tasks
+  for each Kafka Connect service (e.g. Debezium for Message Bus in OpsCore NA)
 
 ## [21.0.0] - 2021-11-02
 
 ### Added
 
-* Added variable `subscription_events_ttl` to `debezium_config` defaulting to seven days (to match Message Bus Kafka topic deletion policy).
-* Added variable `postgres_search_paths` to `debezium_config` to modify the Postgres `search_path` when executing heartbeats.
+* Added variable `subscription_events_ttl` to `debezium_config` defaulting to
+  seven days (to match Message Bus Kafka topic deletion policy).
+* Added variable `postgres_search_paths` to `debezium_config` to modify the
+  Postgres `search_path` when executing heartbeats.
 
 ### Removed
 
@@ -36,7 +54,7 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-  - Allow overriding the Postgres replication slot name when configuring Debezium
+* Allow overriding the Postgres replication slot name when configuring Debezium
 
 ## [20.2.1] - 2021-10-27
 

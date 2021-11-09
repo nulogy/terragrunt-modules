@@ -68,4 +68,3 @@ resource "aws_ecs_service" "ecs_service" {
     security_groups = var.security_groups
   }
 }
-

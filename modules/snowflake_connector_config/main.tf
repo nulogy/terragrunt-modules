@@ -10,7 +10,6 @@ data "template_file" "snowflake_connector_config" {
     snowflake_database               = var.snowflake_database
     snowflake_private_key            = var.snowflake_private_key
     snowflake_private_key_passphrase = var.snowflake_private_key_passphrase
-    snowflake_topic2table            = var.snowflake_topic2table
     snowflake_url                    = var.snowflake_url
     snowflake_username               = var.snowflake_username
   }

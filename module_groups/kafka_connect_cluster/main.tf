@@ -65,7 +65,7 @@ module "kafka_connect" {
   container_port            = "8083"
   cpu                       = var.kafka_connect__ecs_cpu
   desired_count             = var.kafka_connect__task_count
-  docker_image_name         = "nulogy/debezium-connect:1.6.2.Final"
+  docker_image_name         = var.kafka_connect__docker_image_name
   ecs_cluster_name          = var.ecs_cluster_name
   ecs_service_name          = local.normalized_cluster_name
   ecs_incoming_allowed_cidr = module.vpc.vpc_cidr

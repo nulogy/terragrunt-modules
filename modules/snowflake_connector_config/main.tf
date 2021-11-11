@@ -5,7 +5,7 @@ data "template_file" "snowflake_connector_config" {
   template = file("${path.module}/snowflake-connector-config.tpl")
 
   vars = {
-    connector_name                   = var.connection_name
+    connector_name                   = var.connector_name
     kafka_topic                      = var.kafka_topic
     snowflake_database               = var.snowflake_database
     snowflake_private_key            = var.snowflake_private_key
@@ -23,14 +23,14 @@ resource "local_file" "json" {
 resource "null_resource" "upload_config" {
   triggers = {
     cluster_url     = var.kafka_connect_url
-    connection_name = var.connection_name
+    connector_name = var.connector_name
   }
 
   provisioner "local-exec" {
     command = <<EOF
 curl -X PUT -H "Accept:application/json" -H "Content-Type:application/json" \
   -d "@${local_file.json.filename}" \
-  ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}/config
+  ${self.triggers.cluster_url}/connectors/${self.triggers.connector_name}/config
 EOF
   }
 

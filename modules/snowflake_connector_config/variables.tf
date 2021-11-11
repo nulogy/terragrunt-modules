@@ -32,7 +32,7 @@ variable "snowflake_private_key_passphrase" {
   description = "The passphrase to decrypt the private key"
 }
 
-variable "snowflake_database_name" {
+variable "snowflake_database" {
   type        = string
   description = "The name of the database that contains the table to insert rows into"
 }

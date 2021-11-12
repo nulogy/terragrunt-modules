@@ -38,7 +38,7 @@ EOF
     when    = destroy
     command = <<EOF
 curl --output /dev/null --fail -X DELETE -H "Accept:application/json" -H "Content-Type:application/json" \
-  ${self.triggers.cluster_url}/connectors/${self.triggers.connection_name}
+  ${self.triggers.cluster_url}/connectors/${self.triggers.connector_name}
 # Try to wait until the resource is actually destroyed. This can cause problems when uploading a new config
 # and terraform does a destroy then a create. This should probably be replaced with some kind of API polling.
 sleep 2.0

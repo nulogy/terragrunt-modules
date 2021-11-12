@@ -1,3 +1,6 @@
+variable "environment_name" {
+}
+
 variable "connector_name" {
   type = string
   description = "Name for the Kafka Connect connector.  Use kabab-case."
@@ -21,16 +24,6 @@ variable "snowflake_url" {
 variable "snowflake_username" {
   type        = string
   description = "Username to use with this Snowflake connector"
-}
-
-variable "snowflake_private_key" {
-  type        = string
-  description = "The private key to authenticate the user. Include only the key, not the header or footer."
-}
-
-variable "snowflake_private_key_passphrase" {
-  type        = string
-  description = "The passphrase to decrypt the private key"
 }
 
 variable "snowflake_database" {

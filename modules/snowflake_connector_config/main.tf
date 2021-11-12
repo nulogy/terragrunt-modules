@@ -1,4 +1,9 @@
-locals {
+data "aws_ssm_parameter" "snowflake_private_key" {
+  name = "/${var.environment_name}/data-platform/${var.connector_name}/snowflake-private-key"
+}
+
+data "aws_ssm_parameter" "snowflake_private_key_passphrase" {
+  name = "/${var.environment_name}/data-platform/${var.connector_name}/snowflake-private-key-passphrase"
 }
 
 data "template_file" "snowflake_connector_config" {
@@ -8,8 +13,8 @@ data "template_file" "snowflake_connector_config" {
     connector_name                   = var.connector_name
     kafka_topic                      = var.kafka_topic
     snowflake_database               = var.snowflake_database
-    snowflake_private_key            = var.snowflake_private_key
-    snowflake_private_key_passphrase = var.snowflake_private_key_passphrase
+    snowflake_private_key            = data.aws_ssm_parameter.snowflake_private_key.value
+    snowflake_private_key_passphrase = data.aws_ssm_parameter.snowflake_private_key_passphrase.value
     snowflake_url                    = var.snowflake_url
     snowflake_username               = var.snowflake_username
   }

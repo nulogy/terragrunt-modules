@@ -4,6 +4,7 @@ variable "connector_name" {
 }
 
 variable "kafka_connect_url" {
+  description = "URL, including https://, of Kafka Connect to run the connector on"
   type = string
 }
 

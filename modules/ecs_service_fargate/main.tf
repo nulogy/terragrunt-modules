@@ -59,12 +59,12 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count          = var.desired_count
   enable_execute_command = true
 
-  service_registries {
-    registry_arn = aws_service_discovery_service.discovery_service.arn
-  }
-
   network_configuration {
     subnets         = var.subnets
     security_groups = var.security_groups
+  }
+
+  service_registries {
+    registry_arn = aws_service_discovery_service.discovery_service.arn
   }
 }

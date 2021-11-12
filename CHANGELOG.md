@@ -15,6 +15,16 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [22.0.1] - 2021-11-12
+
+### Changed
+
+* ECS service fargate modules expose the task execution role ID so
+  that additional policies can be attached
+* ECS service fargate autoscaling module exposes the container name as an output
+* ECS service fargate autoscaling module provides the container name template
+  variable for the task definition JSON file
+
 ## [22.0.0] - 2021-11-08
 
 ### Changed

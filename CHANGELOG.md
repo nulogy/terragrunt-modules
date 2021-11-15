@@ -15,6 +15,19 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [22.1.0] - 2021-11-15
+
+### Added
+
+* Added `snowflake_connector_config` module to configure Kafka Connect Connector for Snowflake
+
+### Changed
+
+* Added input parameter `kafka_connect__docker_image_name` to
+  `kafka_connect_cluster` module to allow different Kafka Connect Connectors
+  to be run.  This change is backwards compatible, as Debezium 1.6.2 is used
+  as a default.
+
 ## [22.0.1] - 2021-11-12
 
 ### Changed

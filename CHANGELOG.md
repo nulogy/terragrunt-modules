@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [22.1.1] - 2021-11-19
+
+### Fixed
+
+* Allow multiple Buildkite queues per account by assuring that agent token SSM name and Cloudformation stack names are unique
+
 ## [22.1.0] - 2021-11-15
 
 ### Added

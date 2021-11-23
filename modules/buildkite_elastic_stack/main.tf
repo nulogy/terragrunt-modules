@@ -26,7 +26,7 @@ resource "aws_security_group" "stack_security_group" {
 }
 
 resource "aws_ssm_parameter" "agent_token" {
-  name        = "/${var.stack_name}/agent-token"
+  name        = "/${var.stack_name}/${var.buildkite_queue}/agent-token"
   description = "Buildkite agent token"
   type        = "SecureString"
   key_id      = var.kms_key
@@ -34,7 +34,7 @@ resource "aws_ssm_parameter" "agent_token" {
 }
 
 resource "aws_cloudformation_stack" "stack" {
-  name         = var.stack_name
+  name         = "${var.stack_name}-${var.buildkite_queue}"
   template_url = var.stack_template_url
   capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]
 

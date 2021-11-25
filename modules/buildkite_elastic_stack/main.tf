@@ -51,6 +51,7 @@ resource "aws_cloudformation_stack" "stack" {
     EnableDockerUserNamespaceRemap = "false"
     IMDSv2Tokens                   = "required"
     InstanceType                   = var.instance_type
+    InstanceRoleName               = var.instance_role_name
     KeyName                        = var.key_name
     ManagedPolicyARN               = var.managed_policy_arn
     MaxSize                        = var.max_size

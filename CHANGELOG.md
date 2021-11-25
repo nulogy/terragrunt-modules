@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [22.2.0] - 2021-11-19
+
+### Changed
+
+* `buildkite_elastic_stack` now supports receiving an `instance_role_name` variable to explicitly set the Cloudformation `InstanceRoleName` needed to specify the name of the IAM role auto-created by the Cloudformation stack.
+
 ## [22.1.1] - 2021-11-19
 
 ### Fixed

@@ -35,6 +35,11 @@ variable "kms_key" {
   description = "AWS KMS key ID used to encrypt the parameter agent token in parameter store."
 }
 
+variable "instance_role_name" {
+  description = "Explicit role name to create"
+  default     = ""
+}
+
 variable "managed_policy_arn" {
   description = "Comma separated list of managed IAM policy ARNs to attach to the instance role."
   default     = ""

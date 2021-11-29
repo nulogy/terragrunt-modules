@@ -15,6 +15,13 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [22.3.0] - 2021-11-28
+
+### Added
+
+* Opinionated LaunchDarkly module that works in tandem with the Nulogy
+  `feature_flagging` gem
+
 ## [22.2.0] - 2021-11-19
 
 ### Changed

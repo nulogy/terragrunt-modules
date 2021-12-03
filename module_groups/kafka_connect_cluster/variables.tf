@@ -59,6 +59,6 @@ variable "kafka_connect__task_count" {
 
 variable "additional_envars" {
   description = "List of objects which map to environment variables to pass into the container task. e.g. [{name: MY_ENVAR, value: MY_VALUE}]"
-  type        = list(object)
+  type        = list(map(any))
   default     = []
 }

@@ -30,7 +30,7 @@ variable "kafka_connect__additional_ingress_cidrs" {
   default     = []
 }
 
-variable "kafka_connect__bootstrap_servers" {}
+variable "kafka_connect__bootstrap_brokers" {}
 
 variable "kafka_connect__docker_image_name" {
   description = "Docker image to use for Kafka Connect ECS tasks. E.g. an image containing debezium, or the snowflake connector"

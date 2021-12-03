@@ -1,4 +1,4 @@
-variable "bootstrap_servers" {
+variable "bootstrap_brokers" {
   description = "Kafka's bootstrap server(s) to connect to"
 }
 

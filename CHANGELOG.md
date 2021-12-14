@@ -15,6 +15,19 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [23.0.0] - 2021-12-14
+
+### Changed
+
+* `kafka_connect_cluster` renamed the `kafka_bootstrap_servers` to `kafka_bootstrap_brokers`
+
+### Added
+
+* Added `additional_envars` to `kafka_connect_cluster`
+
+This allows creating environment variables to configure Kafka Connnect.
+
+
 ## [22.3.0] - 2021-11-28
 
 ### Added

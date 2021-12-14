@@ -26,7 +26,7 @@ data "template_file" "debezium_config" {
   template = file("${path.module}/debezium-config.tpl")
 
   vars = {
-    bootstrap_servers  = var.kafka_bootstrap_servers
+    bootstrap_brokers  = var.kafka_bootstrap_brokers
     connection_name    = var.connection_name
     database_address   = var.database_address
     database_name      = var.database_name

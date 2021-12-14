@@ -30,7 +30,7 @@ variable "kafka_connect__additional_ingress_cidrs" {
   default     = []
 }
 
-variable "kafka_connect__bootstrap_servers" {}
+variable "kafka_connect__bootstrap_brokers" {}
 
 variable "kafka_connect__docker_image_name" {
   description = "Docker image to use for Kafka Connect ECS tasks. E.g. an image containing debezium, or the snowflake connector"
@@ -55,4 +55,10 @@ variable "kafka_connect__task_count" {
   description = "Number of Kafka Connect nodes to run"
   type        = number
   default     = 1
+}
+
+variable "additional_envars" {
+  description = "List of objects which map to environment variables to pass into the container task. e.g. [{name: MY_ENVAR, value: MY_VALUE}]"
+  type        = list(map(any))
+  default     = []
 }

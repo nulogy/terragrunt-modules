@@ -1,5 +1,5 @@
 {
-  "bootstrap.servers": "${bootstrap_servers}",
+  "bootstrap.servers": "${bootstrap_brokers}",
   "acks": "all",
 
   "database.dbname": "${database_name}",

@@ -2,10 +2,12 @@ locals {
   normalized_cluster_name = replace(var.kafka_connect__cluster_name, "_", "-")
 
   // Connect ENVARS reference: https://hub.docker.com/r/debezium/connect-base
-  envars = jsonencode([
+  default_envars = [
+    // required
+    // List of Kafka brokers.
     {
       name  = "BOOTSTRAP_SERVERS",
-      value = var.kafka_connect__bootstrap_servers
+      value = var.kafka_connect__bootstrap_brokers
     },
     // required
     // Kafka topic where the Kafka Connect services in the group store connector configurations
@@ -49,7 +51,11 @@ locals {
       name  = "ENVIRONMENT",
       value = local.normalized_cluster_name
     }
-  ])
+  ]
+
+  kafka_connect_envars = jsonencode(
+    concat(local.default_envars, var.additional_envars)
+  )
 }
 
 module "vpc" {
@@ -69,7 +75,7 @@ module "kafka_connect" {
   ecs_cluster_name          = var.ecs_cluster_name
   ecs_service_name          = local.normalized_cluster_name
   ecs_incoming_allowed_cidr = module.vpc.vpc_cidr
-  envars                    = local.envars
+  envars                    = local.kafka_connect_envars
   environment_name          = local.normalized_cluster_name
   health_check_path         = "/connectors"
   internal                  = true

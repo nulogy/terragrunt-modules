@@ -38,7 +38,7 @@ variable "events_table" {
   default     = "message_bus_subscription_events"
 }
 
-variable "kafka_bootstrap_servers" {
+variable "kafka_bootstrap_brokers" {
   type = string
 }
 

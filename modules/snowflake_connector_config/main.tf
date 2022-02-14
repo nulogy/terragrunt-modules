@@ -17,6 +17,11 @@ data "template_file" "snowflake_connector_config" {
     snowflake_private_key_passphrase = data.aws_ssm_parameter.snowflake_private_key_passphrase.value
     snowflake_url                    = var.snowflake_url
     snowflake_username               = var.snowflake_username
+    max_record_count                 = var.max_record_count
+    max_buffer_size                  = var.max_buffer_size
+    flush_time                       = var.flush_time
+    table                            = var.target_table
+    tasks                            = var.tasks_count
   }
 }
 
@@ -27,7 +32,7 @@ resource "local_file" "json" {
 
 resource "null_resource" "upload_config" {
   triggers = {
-    cluster_url     = var.kafka_connect_url
+    cluster_url    = var.kafka_connect_url
     connector_name = var.connector_name
   }
 

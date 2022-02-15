@@ -20,6 +20,7 @@ data "template_file" "snowflake_connector_config" {
     max_record_count                 = var.max_record_count
     max_buffer_size                  = var.max_buffer_size
     flush_time                       = var.flush_time
+    schema                           = var.target_schema
     table                            = var.target_table
     tasks                            = var.tasks_count
   }

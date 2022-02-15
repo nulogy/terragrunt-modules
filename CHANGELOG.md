@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [23.1.0] - 2022-02-15
+
+### Changed
+
+* `snowflake_connector_config` exposes more variables for customization
+
 ## [23.0.0] - 2021-12-14
 
 ### Changed

@@ -92,3 +92,11 @@ variable "security_group_ids" {
 variable "lb_cert_arn" {
   default = ""
 }
+
+variable "access_log_bucket" {
+  default = ""
+}
+
+variable "access_log_prefix" {
+  default = ""
+}

@@ -11,6 +11,12 @@ resource "aws_lb" "public_load_balancer" {
   subnets         = var.alb_subnets
   ip_address_type = var.ip_address_type
 
+  access_logs {
+    bucket = var.access_log_bucket
+    prefix = var.access_log_prefix
+    enabled = var.access_log_bucket != ""
+  }
+
   tags = {
     Name           = "${var.environment_name} public load balancer"
     resource_group = var.environment_name

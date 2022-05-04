@@ -6,6 +6,14 @@ variable "cert_domain" {
   description = "Certificate for the load balancer to use. eg. *.packmanager-test.nulogy.com"
 }
 
+variable "access_log_bucket" {
+  default = ""
+}
+
+variable "access_log_prefix" {
+  default = ""
+}
+
 variable "cpu" {
   description = "How much CPU to allocate per container. 1024 = 1 vCPU."
 }

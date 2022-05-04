@@ -8,6 +8,8 @@ module "public_load_balancer" {
   source = "../../modules/public_load_balancer"
 
   alb_subnets                      = var.public_subnets
+  access_log_bucket                = var.access_log_bucket
+  access_log_prefix                = var.access_log_prefix
   cert_domain                      = var.cert_domain
   deregistration_delay             = var.deregistration_delay
   environment_name                 = var.environment_name

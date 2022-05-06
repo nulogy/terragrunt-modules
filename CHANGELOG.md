@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [23.2.0] - 2022-05-04
+
+### Added
+
+* Added `access_log_bucket` and `access_log_prefix` variables to `ecs_fargate_with_elb` & optional `access_logs` to `public_load_balancer`
+
 ## [23.1.0] - 2022-02-15
 
 ### Changed

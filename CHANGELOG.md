@@ -21,6 +21,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 * Added `access_log_bucket` and `access_log_prefix` variables to `ecs_fargate_with_elb` & optional `access_logs` to `public_load_balancer`
 
+This allows access logs to be enabled for public load balancers.
+
 ## [23.1.0] - 2022-02-15
 
 ### Changed

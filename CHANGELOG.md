@@ -10,6 +10,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Added
 ### Changed
+
+* Enabled customization of `docker_user_namespace_remap for improved security on Buildkite containers
+* Enabled customization of ecr_access_policy for deployment only Buildkite pipelines
+* Deprecated spot_price in favour of on_demand_percentage on Buildkite stack configuration
+* Upgraded Buildkite Elastic CI Stack for AWS
+
 ### Deprecated
 ### Removed
 ### Fixed

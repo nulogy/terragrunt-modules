@@ -22,6 +22,16 @@ variable "buildkite_queue" {
   description = "Queue name that agents will use, targeted in pipeline steps using queue={value}."
 }
 
+variable "docker_user_namespace_remap" {
+  description = "Enables Docker user namespace remapping so docker runs as buildkite-agent. Set to false for backwards compatibility, but enabling is highly recommended for security."
+  default     = false
+}
+
+variable "ecr_access_policy" {
+  description = "ECR access policy to give container instances. While default poweruser is suitable for builders and for backwards compatibility, deployers should use readonly."
+  default     = "poweruser"
+}
+
 variable "instance_type" {
   description = "Instance type. Comma-separated list with 1-4 instance types. The order is a prioritized preference for launching OnDemand instances, and a non-prioritized list of types to consider for Spot Instances (where used)."
 }
@@ -52,6 +62,11 @@ variable "max_size" {
 
 variable "min_size" {
   description = "Minimum number of instances."
+  default     = 0
+}
+
+variable "on_demand_percentage" {
+  description = "Percentage of total instances that should launch as OnDemand."
   default     = 0
 }
 
@@ -87,7 +102,7 @@ variable "stack_name" {
 
 variable "stack_template_url" {
   description = "Stack template URL. See https://github.com/buildkite/elastic-ci-stack-for-aws/releases for options."
-  default     = "https://s3.amazonaws.com/buildkite-aws-stack/v5.7.1/aws-stack.yml"
+  default     = "https://s3.amazonaws.com/buildkite-aws-stack/v5.12.0/aws-stack.yml"
 }
 
 variable "subnet_ids" {

@@ -47,8 +47,8 @@ resource "aws_cloudformation_stack" "stack" {
     BuildkiteAgentTokenParameterStoreKMSKey = var.kms_key
     BuildkiteAgentTimestampLines   = "true"
     BuildkiteQueue                 = var.buildkite_queue
-    ECRAccessPolicy                = "poweruser"
-    EnableDockerUserNamespaceRemap = "false"
+    ECRAccessPolicy                = var.ecr_access_policy
+    EnableDockerUserNamespaceRemap = var.docker_user_namespace_remap
     IMDSv2Tokens                   = "required"
     InstanceType                   = var.instance_type
     InstanceRoleName               = var.instance_role_name
@@ -56,12 +56,12 @@ resource "aws_cloudformation_stack" "stack" {
     ManagedPolicyARN               = var.managed_policy_arn
     MaxSize                        = var.max_size
     MinSize                        = var.min_size
+    OnDemandPercentage             = var.on_demand_percentage
     RootVolumeSize                 = var.root_volume_size
     SecretsBucket                  = var.secrets_bucket
     SecurityGroupId                = aws_security_group.stack_security_group.id
     ScaleInIdlePeriod              = var.scale_in_idle_period
     ScaleOutFactor                 = var.scale_out_factor
-    SpotPrice                      = var.spot_price
     Subnets                        = join(",", var.subnet_ids)
     VpcId                          = var.vpc_id
   }

@@ -8,12 +8,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
 ### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
+
+* Changed `helm_secrets` module to remove references to hardcoded SSO role, redundant var.account_id and var.aws_profile in favour of standardized var.environment_name as aws_profile should be used for authentication only
 
 ## [23.2.0] - 2022-05-04
 

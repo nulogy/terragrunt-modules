@@ -9,11 +9,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
+
+* Added `kms_multi_region_key` to be used initially by `helm_secrets` module to encrypt/decrypt secrets using a KMS key that is highly available across primary and replica regions 
 
 ## [23.2.0] - 2022-05-04
 

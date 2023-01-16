@@ -10,6 +10,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Added
 ### Changed
+
+* Changed the `stack_template_url` to use the latest version v5.15.0 url
+
 ### Deprecated
 ### Removed
 ### Fixed

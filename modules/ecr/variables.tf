@@ -10,3 +10,8 @@ variable "skip" {
   default = ""
 }
 
+variable "image_lifecycle_count" {
+  description = "How many images should be retained in the ECR repo?"
+  default = "100"
+}
+

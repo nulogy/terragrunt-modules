@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [23.4.0] - 2023-01-05
+
+### Added
+
+* Added `image_lifecycle_count` key to control ECR replication counts
+
 ## [23.3.0] - 2023-01-05
 
 ### Added

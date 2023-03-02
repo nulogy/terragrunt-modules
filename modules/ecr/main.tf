@@ -15,7 +15,7 @@ resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
   "rules": [
     {
       "rulePriority": 1,
-      "description": "Only maintain the newest 500 images",
+      "description": "Only maintain the newest ${var.image_lifecycle_count} images",
       "selection": {
         "tagStatus": "any",
         "countType": "imageCountMoreThan",

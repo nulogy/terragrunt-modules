@@ -2,6 +2,10 @@ variable "cpu" {
   description = "CPU per Fargate container. Units are 1024 = 1 vCPU."
 }
 
+variable "capacity_provider" {
+  description = "Type of capacity provider that the service will run."
+}
+
 variable "desired_count" {
   description = "How many Fargate containers to run initially."
 }

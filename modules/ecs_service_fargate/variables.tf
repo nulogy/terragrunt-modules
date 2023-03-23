@@ -7,6 +7,11 @@ variable "capacity_provider" {
   default = ""
 }
 
+variable "capacity_provider_weight" {
+  description = "Weight of the capacity provider."
+  default = 0
+}
+
 variable "desired_count" {
   description = "How many Fargate containers to run initially."
 }

@@ -70,6 +70,6 @@ resource "aws_ecs_service" "ecs_service" {
 
   capacity_provider_strategy {
     capacity_provider = var.capacity_provider
-    weight = 1
+    weight = var.capacity_provider_weight
   }
 }

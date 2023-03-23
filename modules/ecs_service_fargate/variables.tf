@@ -4,6 +4,7 @@ variable "cpu" {
 
 variable "capacity_provider" {
   description = "Type of capacity provider that the service will run."
+  default = ""
 }
 
 variable "desired_count" {

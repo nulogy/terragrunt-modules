@@ -4,12 +4,12 @@ variable "cpu" {
 
 variable "capacity_provider" {
   description = "Type of capacity provider that the service will run."
-  default = ""
+  default = "FARGATE"
 }
 
 variable "capacity_provider_weight" {
   description = "Weight of the capacity provider."
-  default = 0
+  default = 1
 }
 
 variable "desired_count" {

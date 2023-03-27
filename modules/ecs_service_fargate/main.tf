@@ -55,7 +55,6 @@ resource "aws_ecs_service" "ecs_service" {
   name                   = "${var.environment_name}_${var.service_name}_service"
   cluster                = var.ecs_cluster_name
   task_definition        = aws_ecs_task_definition.ecs_task.arn
-  launch_type            = "FARGATE"
   desired_count          = var.desired_count
   enable_execute_command = true
 

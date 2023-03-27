@@ -12,6 +12,7 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Changed
 ### Deprecated
 ### Removed
+* Removed `launch_type` attribute from `ecs_service`
 ### Fixed
 ### Security
 

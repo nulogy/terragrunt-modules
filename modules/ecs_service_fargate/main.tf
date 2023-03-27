@@ -67,4 +67,9 @@ resource "aws_ecs_service" "ecs_service" {
   service_registries {
     registry_arn = aws_service_discovery_service.discovery_service.arn
   }
+
+  capacity_provider_strategy {
+    capacity_provider = var.capacity_provider
+    weight = var.capacity_provider_weight
+  }
 }

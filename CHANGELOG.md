@@ -15,7 +15,15 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [23.8.0] - 2023-03-27
+
+### Removed
+
+* Removed `launch_type` attribute from `ecs_service`
+
 ## [23.7.0] - 2023-03-27
+
+### Added
 
 * Added support for ECS capacity provider. Defaults to `FARGATE`.
 

@@ -15,7 +15,7 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
-## [23.8.0]
+## [23.8.0] - 2023-03-27
 
 ### Removed
 

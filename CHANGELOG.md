@@ -9,6 +9,7 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
+* Added support for ECS capacity provider. Defaults to `FARGATE`. 
 ### Changed
 ### Deprecated
 ### Removed

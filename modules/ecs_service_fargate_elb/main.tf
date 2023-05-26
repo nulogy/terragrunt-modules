@@ -149,7 +149,6 @@ resource "aws_ecs_service" "ecs_service" {
   name            = var.ecs_service_name == "" ? "${local.container_name}_service" : var.ecs_service_name
   cluster         = var.ecs_cluster_name
   task_definition = aws_ecs_task_definition.ecs_task.arn
-  launch_type     = "FARGATE"
   desired_count   = var.desired_count
 
   load_balancer {
@@ -161,5 +160,10 @@ resource "aws_ecs_service" "ecs_service" {
   network_configuration {
     subnets         = var.subnets
     security_groups = [aws_security_group.app_worker.id]
+  }
+
+  capacity_provider_strategy {
+    capacity_provider = var.capacity_provider
+    weight = var.capacity_provider_weight
   }
 }

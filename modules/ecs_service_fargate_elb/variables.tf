@@ -3,6 +3,16 @@ variable "cpu" {
   type        = number
 }
 
+variable "capacity_provider" {
+  description = "Type of capacity provider that the service will run."
+  default = "FARGATE"
+}
+
+variable "capacity_provider_weight" {
+  description = "Weight of the capacity provider."
+  default = 1
+}
+
 variable "command" {
   description = "Commands to execute after entrypoint"
   default     = ["/bin/echo", "Start command not supplied, just exiting"]

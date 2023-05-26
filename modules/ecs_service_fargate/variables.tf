@@ -12,6 +12,11 @@ variable "capacity_provider_weight" {
   default = 1
 }
 
+variable "enable_service_discovery" {
+  description = "Enables service discovery"
+  default = true
+}
+
 variable "desired_count" {
   description = "How many Fargate containers to run initially."
 }

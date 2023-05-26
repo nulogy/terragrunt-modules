@@ -41,6 +41,8 @@ resource "aws_ecs_task_definition" "ecs_task" {
 resource "aws_service_discovery_service" "discovery_service" {
   name = "${var.environment_name}_${var.service_name}"
 
+  count = var.enable_service_discovery ? 1 : 0
+
   dns_config {
     namespace_id = data.aws_service_discovery_dns_namespace.private_dns_namespace.id
 
@@ -64,7 +66,9 @@ resource "aws_ecs_service" "ecs_service" {
   }
 
   service_registries {
-    registry_arn = aws_service_discovery_service.discovery_service.arn
+    registry_arn = aws_service_discovery_service.discovery_service[0].arn
+
+    count = var.enable_service_discovery ? 1 : 0
   }
 
   capacity_provider_strategy {

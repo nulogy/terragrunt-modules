@@ -10,8 +10,9 @@ locals {
   origin = concat(
     [
      {
-       domain_name = aws_s3_bucket_website_configuration.cloudfront.website_endpoint
-       origin_id   = "maintenance-errors"
+       domain_name            = aws_s3_bucket_website_configuration.cloudfront.website_endpoint
+       origin_id              = "maintenance-errors"
+       origin_protocol_policy = "http-only"
      }
     ],
     var.origin
@@ -46,7 +47,7 @@ resource "aws_cloudfront_distribution" "this" {
         https_port               = 443
         origin_read_timeout      = 60
         origin_keepalive_timeout = 5
-        origin_protocol_policy   = "https-only"
+        origin_protocol_policy   = lookup(i.value, "origin_protocol_policy", "https-only")
         origin_ssl_protocols     = ["TLSv1.1", "TLSv1.2"]
       }
 

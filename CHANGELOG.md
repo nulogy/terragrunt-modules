@@ -9,11 +9,10 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
+
+* Adds `cloudfront` module with the option to set `web_acl_id` with WAF configuration
+* Generalizes pattern used on different systems for consistency
+* Fixes [configuration changes](https://github.com/hashicorp/terraform-provider-aws/issues/28353) to bucket ACLs introduced by AWS on April, 2023
 
 ## [23.8.0] - 2023-03-27
 

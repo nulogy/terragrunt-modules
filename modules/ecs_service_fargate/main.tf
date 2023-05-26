@@ -25,6 +25,8 @@ data "template_file" "template" {
 data "aws_service_discovery_dns_namespace" "private_dns_namespace" {
   name = var.ecs_cluster_name
   type = "DNS_PRIVATE"
+
+  count = var.enable_service_discovery ? 1 : 0
 }
 
 resource "aws_ecs_task_definition" "ecs_task" {
@@ -44,7 +46,7 @@ resource "aws_service_discovery_service" "discovery_service" {
   count = var.enable_service_discovery ? 1 : 0
 
   dns_config {
-    namespace_id = data.aws_service_discovery_dns_namespace.private_dns_namespace.id
+    namespace_id = data.aws_service_discovery_dns_namespace.private_dns_namespace[0].id
 
     dns_records {
       ttl  = 10

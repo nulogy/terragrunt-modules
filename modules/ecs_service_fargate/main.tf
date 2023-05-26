@@ -65,10 +65,12 @@ resource "aws_ecs_service" "ecs_service" {
     security_groups = var.security_groups
   }
 
-  service_registries {
-    registry_arn = aws_service_discovery_service.discovery_service[0].arn
+  dynamic service_registries {
+    for_each = var.enable_service_discovery == true ? [1] : []
 
-    count = var.enable_service_discovery ? 1 : 0
+    content {
+      registry_arn = aws_service_discovery_service.discovery_service[0].arn
+    }
   }
 
   capacity_provider_strategy {

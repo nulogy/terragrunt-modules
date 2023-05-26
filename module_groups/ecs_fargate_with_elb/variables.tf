@@ -2,6 +2,11 @@ variable "ecs_cluster_name" {
   description = "Cluster to put the Fargate container in. Add it to the same one as any background workers."
 }
 
+variable "capacity_provider" {
+  description = "Type of capacity provider that the service will run."
+  default = "FARGATE"
+}
+
 variable "cert_domain" {
   description = "Certificate for the load balancer to use. eg. *.packmanager-test.nulogy.com"
 }

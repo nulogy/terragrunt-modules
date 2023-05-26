@@ -34,6 +34,7 @@ module "public_load_balancer" {
 module "ecs_service_fargate_elb" {
   source = "../../modules/ecs_service_fargate_elb"
 
+  capacity_provider     = var.capacity_provider
   command               = var.command
   container_port        = var.container_port
   cpu                   = var.cpu

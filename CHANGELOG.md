@@ -9,6 +9,15 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [23.9.0] - 2023-05-30
+
+### Added
 
 * Adds `cloudfront` module with the option to set `web_acl_id` with WAF configuration
 * Generalizes pattern used on different systems for consistency

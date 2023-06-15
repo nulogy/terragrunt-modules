@@ -126,22 +126,22 @@ resource "aws_s3_bucket_object" "page_500" {
   bucket       = aws_s3_bucket.cloudfront.id
   content_type = "text/html"
   key          = "500.html"
-  source       = "files/500.html"
-  etag         = filemd5("files/500.html")
+  source       = "${path.module}/files/500.html"
+  etag         = filemd5("${path.module}/files/500.html")
 }
 
 resource "aws_s3_bucket_object" "page_404" {
   bucket       = aws_s3_bucket.cloudfront.id
   content_type = "text/html"
   key          = "404.html"
-  source       = "files/404.html"
-  etag         = filemd5("files/404.html")
+  source       = "${path.module}/files/404.html"
+  etag         = filemd5("${path.module}/files/404.html")
 }
 
 resource "aws_s3_bucket_object" "maintenance" {
   bucket       = aws_s3_bucket.cloudfront.id
   content_type = "text/html"
   key          = "maintenance.html"
-  source       = "files/maintenance.html"
-  etag         = filemd5("files/maintenance.html")
+  source       = "${path.module}/files/maintenance.html"
+  etag         = filemd5("${path.module}/files/maintenance.html")
 }

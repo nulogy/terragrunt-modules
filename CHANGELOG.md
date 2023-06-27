@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+
+## [23.11.0] - 2023-06-27
+
+* Adds `waf` module
+* Fixes `cloudfront` module
+
 ## [23.10.0] - 2023-05-30
 
 ### Added

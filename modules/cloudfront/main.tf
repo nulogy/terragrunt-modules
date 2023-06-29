@@ -18,7 +18,8 @@ locals {
     var.origin
   )
 
-  maintenance = var.default_origin_id == "maintenance-errors"
+  default_origin_id = lookup(var.default_cache_behavior, "target_origin_id", "maintenance-errors")
+  maintenance_mode  = local.default_origin_id == "maintenance-errors"
 }
 
 resource "aws_cloudfront_distribution" "this" {
@@ -27,12 +28,6 @@ resource "aws_cloudfront_distribution" "this" {
   price_class = "PriceClass_100"
   web_acl_id  = var.web_acl_id
   tags        = local.tags
-
-  logging_config {
-    include_cookies = false
-    bucket          = aws_s3_bucket.logs.bucket_domain_name
-    prefix          = null
-  }
 
   dynamic "origin" {
     for_each = local.origin
@@ -63,22 +58,23 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = var.default_origin_id
-
-    forwarded_values {
-      query_string = true
-      headers      = [local.maintenance ? "None" : "*"]
-
-      cookies {
-        forward = local.maintenance ? "none" : "all"
-      }
-    }
+    allowed_methods        = lookup(var.default_cache_behavior, "allowed_methods", ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
+    cached_methods         = lookup(var.default_cache_behavior, "cached_methods", ["GET", "HEAD"])
+    compress               = lookup(var.default_cache_behavior, "compress", null)
     default_ttl            = 0
     max_ttl                = 0
     min_ttl                = 0
+    target_origin_id       = local.default_origin_id
     viewer_protocol_policy = "redirect-to-https"
+
+    forwarded_values {
+      query_string = lookup(var.default_cache_behavior, "forward_query_string", !local.maintenance_mode)
+      headers      = lookup(var.default_cache_behavior, "forward_headers", local.maintenance_mode ? ["None"] : ["*"])
+
+      cookies {
+        forward = lookup(var.default_cache_behavior, "forward_cookies", local.maintenance_mode ? "none" : "all")
+      }
+    }
   }
 
   dynamic "ordered_cache_behavior" {
@@ -86,18 +82,19 @@ resource "aws_cloudfront_distribution" "this" {
     iterator = i
 
     content {
-      path_pattern           = i.value.path_pattern
-      target_origin_id       = i.value.target_origin_id
-      viewer_protocol_policy = lookup(i.value, "viewer_protocol_policy", "redirect-to-https")
       allowed_methods        = lookup(i.value, "allowed_methods", ["GET", "HEAD", "OPTIONS"])
       cached_methods         = lookup(i.value, "cached_methods", ["GET", "HEAD", "OPTIONS"])
       compress               = lookup(i.value, "compress", true)
-      min_ttl                = lookup(i.value, "min_ttl", null)
       default_ttl            = lookup(i.value, "default_ttl", null)
+      min_ttl                = lookup(i.value, "min_ttl", null)
       max_ttl                = lookup(i.value, "max_ttl", null)
+      path_pattern           = i.value.path_pattern
+      target_origin_id       = i.value.target_origin_id
+      viewer_protocol_policy = lookup(i.value, "viewer_protocol_policy", "redirect-to-https")
 
       forwarded_values {
         query_string = lookup(i.value, "query_string", false)
+        headers      = lookup(i.value, "headers", null)
 
         cookies {
           forward = lookup(i.value, "cookies_forward", "none")
@@ -106,49 +103,32 @@ resource "aws_cloudfront_distribution" "this" {
     }
   }
 
-  viewer_certificate {
-    acm_certificate_arn      = lookup(var.viewer_certificate, "acm_certificate_arn", null)
-    minimum_protocol_version = lookup(var.viewer_certificate, "minimum_protocol_version", "TLSv1.2_2018")
-    ssl_support_method       = lookup(var.viewer_certificate, "ssl_support_method", "sni-only")
+  dynamic "custom_error_response" {
+    for_each = local.maintenance_mode ? [400, 404, 405] : []
+    iterator = i
+
+    content {
+      error_code         = i.value
+      response_code      = 503
+      response_page_path = "/maintenance.html"
+    }
   }
 
-  custom_error_response {
-    # This case handles GET calls made during maintenance
-    error_code         = 404
-    response_code      = local.maintenance ? 503 : 0
-    response_page_path = local.maintenance ? "/maintenance.html" : ""
+  dynamic "custom_error_response" {
+    for_each = [502, 503, 504]
+    iterator = i
+
+    content {
+      error_code         = i.value
+      response_code      = i.value
+      response_page_path = "/500.html"
+    }
   }
 
-  custom_error_response {
-    # This case handles POST, PUT and DELETE calls made during maintenance
-    error_code         = 405
-    response_code      = local.maintenance ? 503 : 0
-    response_page_path = local.maintenance ? "/maintenance.html" : ""
-  }
-
-  custom_error_response {
-    # This case handles OPTIONS calls made during maintenance
-    error_code         = 400
-    response_code      = local.maintenance ? 503 : 0
-    response_page_path = local.maintenance ? "/maintenance.html" : ""
-  }
-
-  custom_error_response {
-    error_code         = 504
-    response_code      = 504
-    response_page_path = "/500.html"
-  }
-
-  custom_error_response {
-    error_code         = 503
-    response_code      = 503
-    response_page_path = "/503.html"
-  }
-
-  custom_error_response {
-    error_code         = 502
-    response_code      = 502
-    response_page_path = "/500.html"
+  logging_config {
+    include_cookies = false
+    bucket          = aws_s3_bucket.logs.bucket_domain_name
+    prefix          = null
   }
 
   restrictions {
@@ -156,5 +136,11 @@ resource "aws_cloudfront_distribution" "this" {
       restriction_type = "none"
       locations        = []
     }
+  }
+
+  viewer_certificate {
+    acm_certificate_arn      = lookup(var.viewer_certificate, "acm_certificate_arn", null)
+    minimum_protocol_version = lookup(var.viewer_certificate, "minimum_protocol_version", "TLSv1.2_2018")
+    ssl_support_method       = lookup(var.viewer_certificate, "ssl_support_method", "sni-only")
   }
 }

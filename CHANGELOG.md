@@ -8,13 +8,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
 ### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
 
+* Allows customizing default cache behavior
 
 ## [23.11.0] - 2023-06-27
 

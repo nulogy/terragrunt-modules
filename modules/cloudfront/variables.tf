@@ -3,12 +3,6 @@ variable "environment_name" {
   type        = string
 }
 
-variable "default_origin_id" {
-  description = "Set default origin ID to maintenance-errors, please override to app via configuration."
-  type        = string
-  default     = "maintenance-errors"
-}
-
 variable "aliases" {
   description = "Extra CNAMEs (alternate domain names), if any, for this distribution."
   type        = list(string)
@@ -19,6 +13,12 @@ variable "origin" {
   description = "One or more origins for this distribution (multiples allowed)."
   type        = any
   default     = []
+}
+
+variable "default_cache_behavior" {
+  description = "The default cache behaviors resource for this distribution. If default_cache_behavior.target_origin_id is unset, CloudFront will default to maintenance page mode."
+  type        = any
+  default     = {}
 }
 
 variable "ordered_cache_behavior" {

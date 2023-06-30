@@ -9,11 +9,10 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
+
+* Custom error responses
+* Maintenance mode
+* Default root object (for SPA's)
 
 ## [24.0.0] - 2023-06-29
 

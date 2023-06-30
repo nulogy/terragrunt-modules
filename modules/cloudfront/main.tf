@@ -1,11 +1,5 @@
 locals {
-  tags = merge(
-    {
-      Name           = "${var.environment_name} CloudFront Distribution"
-      resource_group = var.environment_name
-    },
-    var.tags,
-  )
+  custom_error_response_codes = [for c in var.custom_error_response : c.error_code]
 
   origin = concat(
     [
@@ -18,16 +12,22 @@ locals {
     var.origin
   )
 
-  default_origin_id = lookup(var.default_cache_behavior, "target_origin_id", "maintenance-errors")
-  maintenance_mode  = local.default_origin_id == "maintenance-errors"
+  tags = merge(
+    {
+      Name           = "${var.environment_name} CloudFront Distribution"
+      resource_group = var.environment_name
+    },
+    var.tags,
+  )
 }
 
 resource "aws_cloudfront_distribution" "this" {
-  aliases     = var.aliases
-  enabled     = true
-  price_class = "PriceClass_100"
-  web_acl_id  = var.web_acl_id
-  tags        = local.tags
+  aliases             = var.aliases
+  default_root_object = var.default_root_object
+  enabled             = true
+  price_class         = "PriceClass_100"
+  web_acl_id          = var.web_acl_id
+  tags                = local.tags
 
   dynamic "origin" {
     for_each = local.origin
@@ -57,22 +57,27 @@ resource "aws_cloudfront_distribution" "this" {
     }
   }
 
-  default_cache_behavior {
-    allowed_methods        = lookup(var.default_cache_behavior, "allowed_methods", ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
-    cached_methods         = lookup(var.default_cache_behavior, "cached_methods", ["GET", "HEAD"])
-    compress               = lookup(var.default_cache_behavior, "compress", null)
-    default_ttl            = 0
-    max_ttl                = 0
-    min_ttl                = 0
-    target_origin_id       = local.default_origin_id
-    viewer_protocol_policy = "redirect-to-https"
+  dynamic "default_cache_behavior" {
+    for_each = [var.default_cache_behavior]
+    iterator = i
 
-    forwarded_values {
-      query_string = lookup(var.default_cache_behavior, "forward_query_string", !local.maintenance_mode)
-      headers      = lookup(var.default_cache_behavior, "forward_headers", local.maintenance_mode ? ["None"] : ["*"])
+    content {
+      allowed_methods        = lookup(i.value, "allowed_methods", ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
+      cached_methods         = lookup(i.value, "cached_methods", ["GET", "HEAD"])
+      compress               = lookup(i.value, "compress", null)
+      default_ttl            = lookup(i.value, "default_ttl", 0)
+      max_ttl                = lookup(i.value, "max_ttl", 0)
+      min_ttl                = lookup(i.value, "min_ttl", 0)
+      target_origin_id       = var.maintenance_mode ? "maintenance-errors" : i.value.target_origin_id
+      viewer_protocol_policy = lookup(i.value, "viewer_protocol_policy", "redirect-to-https")
 
-      cookies {
-        forward = lookup(var.default_cache_behavior, "forward_cookies", local.maintenance_mode ? "none" : "all")
+      forwarded_values {
+        query_string = lookup(i.value, "forward_query_string", !var.maintenance_mode)
+        headers      = lookup(i.value, "forward_headers", var.maintenance_mode ? ["None"] : ["*"])
+
+        cookies {
+          forward = lookup(i.value, "forward_cookies", var.maintenance_mode ? "none" : "all")
+        }
       }
     }
   }
@@ -86,25 +91,25 @@ resource "aws_cloudfront_distribution" "this" {
       cached_methods         = lookup(i.value, "cached_methods", ["GET", "HEAD", "OPTIONS"])
       compress               = lookup(i.value, "compress", true)
       default_ttl            = lookup(i.value, "default_ttl", null)
-      min_ttl                = lookup(i.value, "min_ttl", null)
       max_ttl                = lookup(i.value, "max_ttl", null)
+      min_ttl                = lookup(i.value, "min_ttl", null)
       path_pattern           = i.value.path_pattern
       target_origin_id       = i.value.target_origin_id
       viewer_protocol_policy = lookup(i.value, "viewer_protocol_policy", "redirect-to-https")
 
       forwarded_values {
-        query_string = lookup(i.value, "query_string", false)
-        headers      = lookup(i.value, "headers", null)
+        query_string = lookup(i.value, "forward_query_string", false)
+        headers      = lookup(i.value, "forward_headers", null)
 
         cookies {
-          forward = lookup(i.value, "cookies_forward", "none")
+          forward = lookup(i.value, "forward_cookies", "none")
         }
       }
     }
   }
 
   dynamic "custom_error_response" {
-    for_each = local.maintenance_mode ? [400, 404, 405] : []
+    for_each = var.maintenance_mode ? [400, 404, 405] : []
     iterator = i
 
     content {
@@ -115,13 +120,36 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   dynamic "custom_error_response" {
-    for_each = [502, 503, 504]
+    for_each = var.maintenance_mode ? [] : setsubtract([404], local.custom_error_response_codes)
+    iterator = i
+
+    content {
+      error_code         = i.value
+      response_code      = i.value
+      response_page_path = "/${i.value}.html"
+    }
+  }
+
+  dynamic "custom_error_response" {
+    for_each = setsubtract([502, 503, 504], local.custom_error_response_codes)
     iterator = i
 
     content {
       error_code         = i.value
       response_code      = i.value
       response_page_path = "/500.html"
+    }
+  }
+
+  dynamic "custom_error_response" {
+    for_each = var.maintenance_mode ? [] : var.custom_error_response
+    iterator = i
+
+    content {
+      error_code            = i.value.error_code
+      error_caching_min_ttl = lookup(i.value, "error_caching_min_ttl", null)
+      response_code         = i.value.response_code
+      response_page_path    = i.value.response_page_path
     }
   }
 

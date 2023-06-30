@@ -3,10 +3,10 @@ variable "environment_name" {
   type        = string
 }
 
-variable "default_origin_id" {
-  description = "Set default origin ID to maintenance-errors, please override to app via configuration."
-  type        = string
-  default     = "maintenance-errors"
+variable "maintenance_mode" {
+  description = "Show a maintenance page."
+  type        = bool
+  default     = false
 }
 
 variable "aliases" {
@@ -15,10 +15,27 @@ variable "aliases" {
   default     = null
 }
 
+variable "custom_error_response" {
+  description = "A list of custom error response elements."
+  type        = any
+  default     = []
+}
+
 variable "origin" {
   description = "One or more origins for this distribution (multiples allowed)."
   type        = any
   default     = []
+}
+
+variable "default_root_object" {
+  description = "Object that you want CloudFront to return (for example, index.html) when an end user requests the root URL."
+  default     = null
+}
+
+variable "default_cache_behavior" {
+  description = "The default cache behaviors resource for this distribution."
+  type        = any
+  default     = {}
 }
 
 variable "ordered_cache_behavior" {

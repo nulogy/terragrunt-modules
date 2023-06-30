@@ -15,6 +15,25 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [24.1.0] - 2023-06-29
+
+### Added
+
+* Custom error responses
+* Maintenance mode
+* Default root object (for SPA's)
+
+## [24.0.0] - 2023-06-29
+
+### Changed
+
+* Allows customizing default cache behavior
+
+## [23.11.0] - 2023-06-27
+
+* Adds `waf` module
+* Fixes `cloudfront` module 
+
 ## [23.10.0] - 2023-05-30
 
 ### Added

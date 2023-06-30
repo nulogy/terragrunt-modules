@@ -3,10 +3,22 @@ variable "environment_name" {
   type        = string
 }
 
+variable "maintenance_mode" {
+  description = "Show a maintenance page."
+  type        = bool
+  default     = false
+}
+
 variable "aliases" {
   description = "Extra CNAMEs (alternate domain names), if any, for this distribution."
   type        = list(string)
   default     = null
+}
+
+variable "custom_error_response" {
+  description = "A list of custom error response elements."
+  type        = any
+  default     = []
 }
 
 variable "origin" {
@@ -15,8 +27,13 @@ variable "origin" {
   default     = []
 }
 
+variable "default_root_object" {
+  description = "Object that you want CloudFront to return (for example, index.html) when an end user requests the root URL."
+  default     = null
+}
+
 variable "default_cache_behavior" {
-  description = "The default cache behaviors resource for this distribution. If default_cache_behavior.target_origin_id is unset, CloudFront will default to maintenance page mode."
+  description = "The default cache behaviors resource for this distribution."
   type        = any
   default     = {}
 }

@@ -87,7 +87,7 @@ variable "stack_name" {
 
 variable "stack_template_url" {
   description = "Stack template URL. See https://github.com/buildkite/elastic-ci-stack-for-aws/releases for options."
-  default     = "https://s3.amazonaws.com/buildkite-aws-stack/v5.7.1/aws-stack.yml"
+  default     = "https://s3.amazonaws.com/buildkite-aws-stack/v5.21.0/aws-stack.yml"
 }
 
 variable "subnet_ids" {

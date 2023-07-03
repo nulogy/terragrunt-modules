@@ -8,12 +8,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
-### Changed
-### Deprecated
-### Removed
 ### Fixed
-### Security
+
+* Cloudfront maintenance mode
 
 ## [24.1.0] - 2023-06-29
 

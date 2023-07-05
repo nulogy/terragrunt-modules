@@ -3,11 +3,14 @@ locals {
 
   origin = concat(
     [
-     {
-       domain_name            = aws_s3_bucket_website_configuration.cloudfront.website_endpoint
-       origin_id              = "maintenance-errors"
-       origin_protocol_policy = "http-only"
-     }
+      {
+        domain_name = aws_s3_bucket.default.bucket_regional_domain_name
+        origin_id   = "default"
+
+        s3_origin_config = {
+          origin_access_identity = aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path
+        }
+      }
     ],
     var.origin
   )
@@ -37,21 +40,47 @@ resource "aws_cloudfront_distribution" "this" {
       domain_name = i.value.domain_name
       origin_id   = i.value.origin_id
 
-      custom_origin_config {
-        http_port                = 80
-        https_port               = 443
-        origin_read_timeout      = 60
-        origin_keepalive_timeout = 5
-        origin_protocol_policy   = lookup(i.value, "origin_protocol_policy", "https-only")
-        origin_ssl_protocols     = ["TLSv1.1", "TLSv1.2"]
-      }
-
       dynamic "custom_header" {
         for_each = lookup(i.value, "custom_header", [])
 
         content {
           name  = custom_header.value.name
           value = custom_header.value.value
+        }
+      }
+
+      # default custom origin config if neither custom_origin_config or s3_origin_config are specified
+      dynamic "custom_origin_config" {
+        for_each = length(keys(lookup(i.value, "custom_origin_config", {}))) > 0 || length(keys(lookup(i.value, "s3_origin_config", {}))) > 0 ? [] : [true]
+
+        content {
+          http_port                = 80
+          https_port               = 443
+          origin_read_timeout      = 60
+          origin_keepalive_timeout = 5
+          origin_protocol_policy   = "https-only"
+          origin_ssl_protocols     = ["TLSv1.1", "TLSv1.2"]
+        }
+      }
+
+      dynamic "custom_origin_config" {
+        for_each = length(keys(lookup(i.value, "custom_origin_config", {}))) > 0 ? [i.value.custom_origin_config] : []
+
+        content {
+          http_port                = lookup(custom_origin_config.value, "http_port", 80)
+          https_port               = lookup(custom_origin_config.value, "https_port", 443)
+          origin_read_timeout      = lookup(custom_origin_config.value, "origin_read_timeout", 60)
+          origin_keepalive_timeout = lookup(custom_origin_config.value, "origin_keepalive_timeout", 5)
+          origin_protocol_policy   = lookup(custom_origin_config.value, "origin_protocol_policy", "https-only")
+          origin_ssl_protocols     = ["TLSv1.1", "TLSv1.2"]
+        }
+      }
+
+      dynamic "s3_origin_config" {
+        for_each = length(keys(lookup(i.value, "s3_origin_config", {}))) > 0 ? [i.value.s3_origin_config] : []
+
+        content {
+          origin_access_identity = lookup(s3_origin_config.value, "origin_access_identity", null)
         }
       }
     }
@@ -68,15 +97,23 @@ resource "aws_cloudfront_distribution" "this" {
       default_ttl            = lookup(i.value, "default_ttl", 0)
       max_ttl                = lookup(i.value, "max_ttl", 0)
       min_ttl                = lookup(i.value, "min_ttl", 0)
-      target_origin_id       = var.maintenance_mode ? "maintenance-errors" : i.value.target_origin_id
+      target_origin_id       = var.maintenance_mode ? "default" : i.value.target_origin_id
       viewer_protocol_policy = lookup(i.value, "viewer_protocol_policy", "redirect-to-https")
 
-      forwarded_values {
-        query_string = lookup(i.value, "forward_query_string", !var.maintenance_mode)
-        headers      = lookup(i.value, "forward_headers", var.maintenance_mode ? ["None"] : ["*"])
+      dynamic "forwarded_values" {
+        for_each = [lookup(i.value, "forwarded_values", {})]
 
-        cookies {
-          forward = lookup(i.value, "forward_cookies", var.maintenance_mode ? "none" : "all")
+        content {
+          query_string = lookup(forwarded_values.value, "query_string", !var.maintenance_mode)
+          headers      = lookup(forwarded_values.value, "headers", var.maintenance_mode ? ["None"] : ["*"])
+
+          dynamic "cookies" {
+            for_each = [lookup(forwarded_values.value, "cookies", {})]
+
+            content {
+              forward = lookup(cookies.value, "forward", var.maintenance_mode ? "none" : "all")
+            }
+          }
         }
       }
     }
@@ -97,19 +134,27 @@ resource "aws_cloudfront_distribution" "this" {
       target_origin_id       = i.value.target_origin_id
       viewer_protocol_policy = lookup(i.value, "viewer_protocol_policy", "redirect-to-https")
 
-      forwarded_values {
-        query_string = lookup(i.value, "forward_query_string", false)
-        headers      = lookup(i.value, "forward_headers", null)
+      dynamic "forwarded_values" {
+        for_each = [lookup(i.value, "forwarded_values", {})]
 
-        cookies {
-          forward = lookup(i.value, "forward_cookies", "none")
+        content {
+          query_string = lookup(forwarded_values.value, "query_string", false)
+          headers      = lookup(forwarded_values.value, "headers", null)
+
+          dynamic "cookies" {
+            for_each = [lookup(forwarded_values.value, "cookies", {})]
+
+            content {
+              forward = lookup(cookies.value, "forward", "none")
+            }
+          }
         }
       }
     }
   }
 
   dynamic "custom_error_response" {
-    for_each = var.maintenance_mode ? [400, 404, 405] : []
+    for_each = var.maintenance_mode ? [400, 403, 404, 405] : []
     iterator = i
 
     content {
@@ -146,8 +191,8 @@ resource "aws_cloudfront_distribution" "this" {
     iterator = i
 
     content {
-      error_code            = i.value.error_code
       error_caching_min_ttl = lookup(i.value, "error_caching_min_ttl", null)
+      error_code            = i.value.error_code
       response_code         = i.value.response_code
       response_page_path    = i.value.response_page_path
     }
@@ -171,4 +216,8 @@ resource "aws_cloudfront_distribution" "this" {
     minimum_protocol_version = lookup(var.viewer_certificate, "minimum_protocol_version", "TLSv1.2_2018")
     ssl_support_method       = lookup(var.viewer_certificate, "ssl_support_method", "sni-only")
   }
+}
+
+resource "aws_cloudfront_origin_access_identity" "default" {
+  comment = "${var.environment_name} origin access identity"
 }

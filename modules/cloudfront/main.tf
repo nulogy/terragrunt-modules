@@ -154,7 +154,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   dynamic "custom_error_response" {
-    for_each = var.maintenance_mode ? [400, 403, 404, 405] : []
+    for_each = var.maintenance_mode ? [400, 403, 404, 405, 414, 416] : []
     iterator = i
 
     content {
@@ -176,7 +176,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   dynamic "custom_error_response" {
-    for_each = setsubtract([502, 503, 504], local.custom_error_response_codes)
+    for_each = setsubtract([500, 501, 502, 503, 504], local.custom_error_response_codes)
     iterator = i
 
     content {

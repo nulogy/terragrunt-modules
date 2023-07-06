@@ -15,6 +15,13 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [24.2.2] - 2023-07-06
+
+### Fixed
+
+* Additional maintenance page status codes
+* Additional cloudfront module outputs
+
 ## [24.2.1] - 2023-06-29
 
 ### Fixed

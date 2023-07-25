@@ -15,6 +15,16 @@ locals {
     var.origin
   )
 
+  ordered_cache_behavior = concat(
+    var.ordered_cache_behavior,
+    [
+      {
+        path_pattern     = "/500.html"
+        target_origin_id = "default"
+      }
+    ]
+  )
+
   tags = merge(
     {
       Name           = "${var.environment_name} CloudFront Distribution"
@@ -120,7 +130,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   dynamic "ordered_cache_behavior" {
-    for_each = var.ordered_cache_behavior
+    for_each = local.ordered_cache_behavior
     iterator = i
 
     content {
@@ -161,17 +171,6 @@ resource "aws_cloudfront_distribution" "this" {
       error_code         = i.value
       response_code      = 503
       response_page_path = "/maintenance.html"
-    }
-  }
-
-  dynamic "custom_error_response" {
-    for_each = var.maintenance_mode ? [] : setsubtract([404], local.custom_error_response_codes)
-    iterator = i
-
-    content {
-      error_code         = i.value
-      response_code      = i.value
-      response_page_path = "/${i.value}.html"
     }
   }
 

@@ -8,12 +8,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
-### Changed
-### Deprecated
-### Removed
 ### Fixed
-### Security
+
+* Cloudfront module custom response errors. No longer serving custom 404, we will let the application process the response as it needs. Keep only custom errors for 500s.
 
 ## [24.2.2] - 2023-07-06
 

@@ -125,14 +125,6 @@ resource "aws_s3_bucket_object" "page_500" {
   etag         = filemd5("${path.module}/files/500.html")
 }
 
-resource "aws_s3_bucket_object" "page_404" {
-  bucket       = aws_s3_bucket.default.id
-  content_type = "text/html"
-  key          = "404.html"
-  source       = "${path.module}/files/404.html"
-  etag         = filemd5("${path.module}/files/404.html")
-}
-
 resource "aws_s3_bucket_object" "maintenance" {
   bucket       = aws_s3_bucket.default.id
   content_type = "text/html"

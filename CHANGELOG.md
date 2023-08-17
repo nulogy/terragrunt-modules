@@ -15,6 +15,15 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [25.0.0] - 2023-08-17
+
+### Removed
+
+* Removed `snowflake_connector_config` module
+
+It was re-written using a customer Terraform provider and inlined into the Data Platform project.
+It was created solely for the Platform team and should not be used elsewhere.
+
 ## [24.2.3] - 2023-07-25
 
 ### Fixed

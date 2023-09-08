@@ -32,3 +32,9 @@ variable "enable_block" {
   type        = bool
   default     = false
 }
+
+variable "aws_managed_rules" {
+  description = "List of AWS managed rules to enable."
+  type        = list(string)
+  default     = []
+}

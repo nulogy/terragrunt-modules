@@ -161,6 +161,32 @@ resource "aws_wafv2_web_acl" "main" {
     }
   }
 
+  dynamic "rule" {
+    for_each = var.aws_managed_rules
+
+    content {
+      name     = "AWS-${rule.value}"
+      priority = (rule.key * 10) + 50
+
+      override_action {
+        none {}
+      }
+
+      statement {
+        managed_rule_group_statement {
+          name        = rule.value
+          vendor_name = "AWS"
+        }
+      }
+
+      visibility_config {
+        cloudwatch_metrics_enabled = true
+        metric_name                = "AWS-${rule.value}"
+        sampled_requests_enabled   = true
+      }
+    }
+  }
+
   tags = var.tags
 
   visibility_config {

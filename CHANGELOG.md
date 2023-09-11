@@ -9,11 +9,8 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
+
+* Added AWS managed rules to WAF.
 
 ## [25.0.0] - 2023-08-17
 

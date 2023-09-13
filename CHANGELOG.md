@@ -8,12 +8,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
-### Changed
-### Deprecated
-### Removed
 ### Fixed
-### Security
+
+* Fixed cloudfront 500 error page to remove hardcoded PackManager
 
 ## [25.1.0] - 2023-09-11
 

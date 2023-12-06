@@ -75,11 +75,6 @@ variable "secrets_bucket" {
   default     = ""
 }
 
-variable "spot_price" {
-  description = "Maximum spot price to use for the instances, in instance cost per hour. Values >0 will result in 100% of instances being spot. 0 means only use normal (non-spot) instances."
-  default     = 0
-}
-
 variable "stack_name" {
   description = "Name used to tag resources."
   default     = "buildkite"
@@ -87,7 +82,7 @@ variable "stack_name" {
 
 variable "stack_template_url" {
   description = "Stack template URL. See https://github.com/buildkite/elastic-ci-stack-for-aws/releases for options."
-  default     = "https://s3.amazonaws.com/buildkite-aws-stack/v5.21.0/aws-stack.yml"
+  default     = "https://s3.amazonaws.com/buildkite-aws-stack/v6.10.0/aws-stack.yml"
 }
 
 variable "subnet_ids" {

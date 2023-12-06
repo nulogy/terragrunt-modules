@@ -50,18 +50,17 @@ resource "aws_cloudformation_stack" "stack" {
     ECRAccessPolicy                = "poweruser"
     EnableDockerUserNamespaceRemap = "false"
     IMDSv2Tokens                   = "required"
-    InstanceType                   = var.instance_type
+    InstanceTypes                  = var.instance_type
     InstanceRoleName               = var.instance_role_name
     KeyName                        = var.key_name
-    ManagedPolicyARN               = var.managed_policy_arn
+    ManagedPolicyARNs              = var.managed_policy_arn
     MaxSize                        = var.max_size
     MinSize                        = var.min_size
     RootVolumeSize                 = var.root_volume_size
     SecretsBucket                  = var.secrets_bucket
-    SecurityGroupId                = aws_security_group.stack_security_group.id
+    SecurityGroupIds               = aws_security_group.stack_security_group.id
     ScaleInIdlePeriod              = var.scale_in_idle_period
     ScaleOutFactor                 = var.scale_out_factor
-    SpotPrice                      = var.spot_price
     Subnets                        = join(",", var.subnet_ids)
     VpcId                          = var.vpc_id
   }

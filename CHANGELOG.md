@@ -10,11 +10,16 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Added
 ### Changed
-* Changed `buildkite_elastic_stack` to use variables for v6.0.0 and upwards.
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [26.0.0] - 2023-12-06
+
+### Changed
+
+* Changed `buildkite_elastic_stack` module to use variables for template v6.10.0.
 
 ## [25.1.1] - 2023-09-13
 

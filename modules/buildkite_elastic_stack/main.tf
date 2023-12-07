@@ -66,3 +66,27 @@ resource "aws_cloudformation_stack" "stack" {
     VpcId                          = var.vpc_id
   }
 }
+
+resource "aws_iam_policy" "ssm" {
+  name = "${aws_cloudformation_stack.stack.name}_ssm"
+  description = "allow Buildkite instance to read agent token"
+ policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ssm:GetParameter"
+      ],
+      "Effect": "Allow",
+      "Resource": "${aws_ssm_parameter.agent_token.arn}"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "ec2" {
+  policy_arn = aws_iam_policy.ssm.arn
+  role = aws_cloudformation_stack.stack.outputs["InstanceRoleName"]
+}

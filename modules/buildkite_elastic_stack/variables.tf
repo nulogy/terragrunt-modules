@@ -55,6 +55,11 @@ variable "min_size" {
   default     = 0
 }
 
+variable "on_demand_percentage" {
+  description = "Percentage of total instances that should launch as OnDemand. Default is 100% OnDemand - reduce this to use some Spot Instances when they're available and cheaper than the OnDemand price. A value of 70 means 70% OnDemand and 30% Spot Instances."
+  default     = 100
+}
+
 variable "root_volume_size" {
   description = "Size of each instance's root EBS volume (in GB)."
   default     = 250

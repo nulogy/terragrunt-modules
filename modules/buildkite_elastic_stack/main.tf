@@ -56,6 +56,7 @@ resource "aws_cloudformation_stack" "stack" {
     ManagedPolicyARNs              = var.managed_policy_arn
     MaxSize                        = var.max_size
     MinSize                        = var.min_size
+    OnDemandPercentage             = var.on_demand_percentage
     RootVolumeSize                 = var.root_volume_size
     SecretsBucket                  = var.secrets_bucket
     SecurityGroupIds               = aws_security_group.stack_security_group.id

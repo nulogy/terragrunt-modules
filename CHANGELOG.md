@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [26.0.1] - 2024-05-09
+
+### Added
+
+* Added support for `on_demand_percentage` to `buildkite_elastic_stack`
+
 ## [26.0.0] - 2023-12-08
 
 ### Changed

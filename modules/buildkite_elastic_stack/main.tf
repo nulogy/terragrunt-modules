@@ -43,6 +43,7 @@ resource "aws_cloudformation_stack" "stack" {
     AgentsPerInstance                       = var.agents_per_instance
     AssociatePublicIpAddress                = var.associate_public_ip_address
     BootstrapScriptUrl                      = var.bootstrap_script_url
+    BuildkiteAgentTags                      = var.buildkite_agent_tags
     BuildkiteAgentTokenParameterStorePath   = aws_ssm_parameter.agent_token.name
     BuildkiteAgentTokenParameterStoreKMSKey = var.kms_key
     BuildkiteAgentTimestampLines            = "true"

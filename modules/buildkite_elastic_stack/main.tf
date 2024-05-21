@@ -40,29 +40,29 @@ resource "aws_cloudformation_stack" "stack" {
 
   # See: https://buildkite.com/docs/agent/v3/elastic-ci-aws/parameters#main
   parameters = {
-    AgentsPerInstance              = var.agents_per_instance
-    AssociatePublicIpAddress       = var.associate_public_ip_address
-    BootstrapScriptUrl             = var.bootstrap_script_url
-    BuildkiteAgentTokenParameterStorePath = aws_ssm_parameter.agent_token.name
+    AgentsPerInstance                       = var.agents_per_instance
+    AssociatePublicIpAddress                = var.associate_public_ip_address
+    BootstrapScriptUrl                      = var.bootstrap_script_url
+    BuildkiteAgentTokenParameterStorePath   = aws_ssm_parameter.agent_token.name
     BuildkiteAgentTokenParameterStoreKMSKey = var.kms_key
-    BuildkiteAgentTimestampLines   = "true"
-    BuildkiteQueue                 = var.buildkite_queue
-    ECRAccessPolicy                = "poweruser"
-    EnableDockerUserNamespaceRemap = "false"
-    IMDSv2Tokens                   = "required"
-    InstanceTypes                  = var.instance_type
-    InstanceRoleName               = var.instance_role_name
-    KeyName                        = var.key_name
-    ManagedPolicyARNs              = var.managed_policy_arn
-    MaxSize                        = var.max_size
-    MinSize                        = var.min_size
-    OnDemandPercentage             = var.on_demand_percentage
-    RootVolumeSize                 = var.root_volume_size
-    SecretsBucket                  = var.secrets_bucket
-    SecurityGroupIds               = aws_security_group.stack_security_group.id
-    ScaleInIdlePeriod              = var.scale_in_idle_period
-    ScaleOutFactor                 = var.scale_out_factor
-    Subnets                        = join(",", var.subnet_ids)
-    VpcId                          = var.vpc_id
+    BuildkiteAgentTimestampLines            = "true"
+    BuildkiteQueue                          = var.buildkite_queue
+    ECRAccessPolicy                         = "poweruser"
+    EnableDockerUserNamespaceRemap          = "false"
+    IMDSv2Tokens                            = "required"
+    InstanceTypes                           = var.instance_type
+    InstanceRoleName                        = var.instance_role_name
+    KeyName                                 = var.key_name
+    ManagedPolicyARNs                       = var.managed_policy_arn
+    MaxSize                                 = var.max_size
+    MinSize                                 = var.min_size
+    OnDemandPercentage                      = var.on_demand_percentage
+    RootVolumeSize                          = var.root_volume_size
+    SecretsBucket                           = var.secrets_bucket
+    SecurityGroupIds                        = aws_security_group.stack_security_group.id
+    ScaleInIdlePeriod                       = var.scale_in_idle_period
+    ScaleOutFactor                          = var.scale_out_factor
+    Subnets                                 = join(",", var.subnet_ids)
+    VpcId                                   = var.vpc_id
   }
 }

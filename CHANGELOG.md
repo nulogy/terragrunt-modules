@@ -9,6 +9,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
+
+* Expose `BuildkiteAgentTags` variable in `buildkite_elastic_stack`
+
 ### Changed
 ### Deprecated
 ### Removed

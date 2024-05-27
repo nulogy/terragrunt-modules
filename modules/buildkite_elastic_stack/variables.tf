@@ -13,6 +13,12 @@ variable "bootstrap_script_url" {
   default     = ""
 }
 
+variable "buildkite_agent_tags" {
+  description = "Additional Buildkite agent tags. https://buildkite.com/docs/agent/v3/cli-start#setting-tags"
+  default     = ""
+}
+
+
 variable "buildkite_agent_token" {
   description = "Buildkite agent registration token. This token will be stored in parameter store. If you don't know your agent token, there is a Reveal Agent Token button available on the right-hand side of the [Agents page](https://buildkite.com/organizations/-/agents)."
   sensitive   = true

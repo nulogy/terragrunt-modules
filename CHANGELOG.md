@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+# [26.1.0] - 2024-05-27
+
+### Added
+
+* Expose `BuildkiteAgentTags` variable in `buildkite_elastic_stack`
+
 ## [26.0.1] - 2024-05-09
 
 ### Added
@@ -84,7 +90,7 @@ It was created solely for the Platform team and should not be used elsewhere.
 ## [23.11.0] - 2023-06-27
 
 * Adds `waf` module
-* Fixes `cloudfront` module 
+* Fixes `cloudfront` module
 
 ## [23.10.0] - 2023-05-30
 
@@ -116,7 +122,7 @@ It was created solely for the Platform team and should not be used elsewhere.
 
 ### Added
 
-* Added `kms_multi_region_key` to be used initially by `helm_secrets` module to encrypt/decrypt secrets using a KMS key that is highly available across primary and replica regions 
+* Added `kms_multi_region_key` to be used initially by `helm_secrets` module to encrypt/decrypt secrets using a KMS key that is highly available across primary and replica regions
 
 ## [23.2.0] - 2022-05-04
 

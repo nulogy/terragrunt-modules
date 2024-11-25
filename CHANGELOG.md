@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [27.0.0] - 2024-11-25
+
+### Changed
+
+* `kafka_connect_cluster` now connects to Kafka via TLS
+
 # [26.1.0] - 2024-05-27
 
 ### Added

@@ -32,6 +32,24 @@ variable "kafka_connect__additional_ingress_cidrs" {
 
 variable "kafka_connect__bootstrap_brokers" {}
 
+variable "kafka_connect__config_storage_replication_factor" {
+  description = "The replication factor for the Kafka topic used to store the Kafka Connect configuration."
+  type        = number
+  default     = 3
+}
+
+variable "kafka_connect__offset_replication_factor" {
+  description = "The replication factor for the Kafka topic used to store the Kafka Connect offsets."
+  type        = number
+  default     = 3
+}
+
+variable "kafka_connect__status_storage_replication_factor" {
+  description = "The replication factor for the Kafka topic used to store the Kafka Connect statuses."
+  type        = number
+  default     = 3
+}
+
 variable "kafka_connect__docker_image_name" {
   description = "Docker image to use for Kafka Connect ECS tasks. E.g. an image containing debezium, or the snowflake connector"
   type        = string

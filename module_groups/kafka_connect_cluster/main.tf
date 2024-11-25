@@ -51,10 +51,19 @@ locals {
       name  = "ENVIRONMENT",
       value = local.normalized_cluster_name
     },
+    // Use TLS for communication with Kafka
     {
       name  = "CONNECT_SECURITY_PROTOCOL",
       value = "SSL"
-    }
+    },
+    {
+      name  = "CONNECT_CONSUMER_SECURITY_PROTOCOL",
+      value = "SSL"
+    },
+    {
+      name  = "CONNECT_PRODUCER_SECURITY_PROTOCOL",
+      value = "SSL"
+    },
   ]
 
   kafka_connect_envars = jsonencode(

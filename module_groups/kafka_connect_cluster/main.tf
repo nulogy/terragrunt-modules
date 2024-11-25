@@ -18,7 +18,7 @@ locals {
     },
     {
       name  = "CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR",
-      value = "3"
+      value = tostring(var.kafka_connect__config_storage_replication_factor)
     },
     // required
     // Kafka topic where the Kafka Connect services in the group store connector offsets
@@ -29,7 +29,7 @@ locals {
     },
     {
       name  = "CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR",
-      value = "3"
+      value = tostring(var.kafka_connect__offset_replication_factor)
     },
     // should be provided
     // Kafka topic where the Kafka Connect services in the group store connector status
@@ -40,7 +40,7 @@ locals {
     },
     {
       name  = "CONNECT_STATUS_STORAGE_REPLICATION_FACTOR",
-      value = "3"
+      value = tostring(var.kafka_connect__status_storage_replication_factor)
     },
     // Uniquely identifies a Kafka connect cluster
     {

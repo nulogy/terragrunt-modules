@@ -50,6 +50,10 @@ locals {
     {
       name  = "ENVIRONMENT",
       value = local.normalized_cluster_name
+    },
+    {
+      name  = "CONNECT_SECURITY_PROTOCOL",
+      value = "SSL"
     }
   ]
 

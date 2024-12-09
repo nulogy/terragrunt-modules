@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [27.0.1] - 2024-12-09
+
+### Removed
+
+* (Non-breaking) Removed creation of heartbeat topic from `debezium_connection`
+
 ## [27.0.0] - 2024-11-25
 
 ### Changed

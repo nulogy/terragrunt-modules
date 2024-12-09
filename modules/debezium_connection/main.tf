@@ -47,7 +47,7 @@ resource "local_file" "json" {
 }
 
 resource "null_resource" "upload_config" {
-  depends_on = [null_resource.heartbeat_kafta_topic, null_resource.postgres_publication]
+  depends_on = [null_resource.postgres_publication]
   triggers = {
     cluster_url     = var.kafka_connect_url
     connection_name = var.connection_name

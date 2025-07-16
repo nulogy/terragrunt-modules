@@ -9,6 +9,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
+
+* Exposed `log_group_class` for `log_group` module
+
 ### Changed
 ### Deprecated
 ### Removed

@@ -9,3 +9,7 @@ variable "skip" {
   default = ""
 }
 
+variable "log_group_class" {
+  default = "STANDARD"
+}
+

@@ -17,6 +17,6 @@ variable "image_lifecycle_count" {
 
 variable "enable_default_lifecycle_policy" {
   type        = bool
-  description = "It creates the lifecucle_policy resources included by default in this module"
+  description = "It enable/disable the lifecycle_policy resources included by default in this module"
   default     = true
 }

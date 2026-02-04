@@ -12,6 +12,11 @@ variable "skip" {
 
 variable "image_lifecycle_count" {
   description = "How many images should be retained in the ECR repo?"
-  default = "100"
+  default     = "100"
 }
 
+variable "enable_default_lifecycle_policy" {
+  type        = bool
+  description = "It creates the lifecucle_policy resources included by default in this module"
+  default     = true
+}

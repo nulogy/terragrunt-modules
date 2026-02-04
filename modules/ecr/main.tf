@@ -6,7 +6,7 @@ resource "aws_ecr_repository" "ecr_repo" {
 }
 
 resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
-  count = length(var.skip) > 0 || !(var.enable_default_lifecycle_policy) ? 0 : 1
+  count = length(var.skip) < 0 && var.enable_default_lifecycle_policy ? 1 : 0
 
   repository = aws_ecr_repository.ecr_repo[0].name
 

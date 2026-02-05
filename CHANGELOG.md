@@ -15,6 +15,16 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [27.0.3] - 2026-02-05
+
+### Added
+
+* Include variable to control the default lifecycle policy creation from external implementations
+
+### Changed
+
+* Conditions to deploy the default lifecycle policy
+
 ## [27.0.2] - 2025-07-16
 
 ### Added

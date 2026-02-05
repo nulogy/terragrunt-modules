@@ -1,12 +1,10 @@
 resource "aws_ecr_repository" "ecr_repo" {
-  count = length(var.skip) > 0 ? 0 : 1
-
   name                 = var.name
   image_tag_mutability = var.image_tag_mutability
 }
 
 resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
-  count = length(var.skip) > 0 ? 0 : 1
+  count = var.enable_default_lifecycle_policy ? 1 : 0
 
   repository = aws_ecr_repository.ecr_repo[0].name
 
@@ -30,4 +28,3 @@ resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
 EOF
 
 }
-

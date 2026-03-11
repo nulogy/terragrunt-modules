@@ -15,6 +15,9 @@ module "public_load_balancer" {
   environment_name                 = var.environment_name
   health_check_path                = var.health_check_path
   health_check_timeout             = var.health_check_timeout
+  health_check_interval            = var.health_check_interval
+  health_check_healthy_threshold   = var.health_check_healthy_threshold
+  health_check_unhealthy_threshold = var.health_check_unhealthy_threshold
   internal                         = var.internal
   ip_address_type                  = var.lb_ip_address_type
   lb_cert_arn                      = var.lb_cert_arn

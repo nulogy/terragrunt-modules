@@ -17,6 +17,21 @@ variable "health_check_timeout" {
   default     = 5
 }
 
+variable "health_check_interval" {
+  description = "Approximate amount of time, in seconds, between health checks of an individual target."
+  default     = 30
+}
+
+variable "health_check_healthy_threshold" {
+  description = "Number of consecutive health check successes required before considering a target healthy."
+  default     = 3
+}
+
+variable "health_check_unhealthy_threshold" {
+  description = "Number of consecutive health check failures required before considering a target unhealthy. "
+  default     = 3
+}
+
 variable "skip" {
   default = ""
 }

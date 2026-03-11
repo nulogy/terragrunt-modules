@@ -9,6 +9,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
+
+* Exposed more variables to modify load balancer health checks
+
 ### Changed
 ### Deprecated
 ### Removed

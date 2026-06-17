@@ -20,6 +20,7 @@ data "template_file" "grant_usage_in_ops_query" {
   vars     = {
      data_platform_database_user__username = var.data_platform_database_user__username
      data_platform_database_user__password = var.data_platform_database_user__password
+     additional_commands                   = var.additional_commands
   }
 }
 

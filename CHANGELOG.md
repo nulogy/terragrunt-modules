@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [27.0.5] - 2026-06-30
+
+### Fixed
+
+* `ecr` module: reference `aws_ecr_repository.ecr_repo` directly instead of the stale `ecr_repo[0]` index left behind when `count` was removed in 27.0.3. The index is invalid with no `count` on the repository, so it failed `terraform validate`/`plan` for every consumer — regardless of `enable_default_lifecycle_policy`, since the bad reference is rejected statically before the policy's `count` is even evaluated.
+
 ## [27.0.4] - 2026-03-11
 
 ### Added

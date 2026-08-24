@@ -15,6 +15,12 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Fixed
 ### Security
 
+## [27.1.0] - 2026-08-23
+
+### Added
+
+* Expose `BuildkiteAgentEnableGitMirrors` variable in `buildkite_elastic_stack`. With it enabled, the agents on one instance share a single bare mirror of the repository, so only the first agent to need it clones over the network and the rest clone from local disk. On a freshly provisioned instance running many agents, that removes a full concurrent clone per agent.
+
 ## [27.0.5] - 2026-06-30
 
 ### Fixed

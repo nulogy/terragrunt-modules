@@ -13,6 +13,11 @@ variable "bootstrap_script_url" {
   default     = ""
 }
 
+variable "buildkite_agent_enable_git_mirrors" {
+  description = "Share one bare mirror of each repository per instance, so agents clone from local disk instead of each cloning over the network."
+  default     = false
+}
+
 variable "buildkite_agent_tags" {
   description = "Additional Buildkite agent tags. https://buildkite.com/docs/agent/v3/cli-start#setting-tags"
   default     = ""

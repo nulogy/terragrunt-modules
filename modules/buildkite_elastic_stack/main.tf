@@ -47,7 +47,7 @@ resource "aws_cloudformation_stack" "stack" {
     BuildkiteAgentTags                      = var.buildkite_agent_tags
     BuildkiteAgentTokenParameterStorePath   = aws_ssm_parameter.agent_token.name
     BuildkiteAgentTokenParameterStoreKMSKey = var.kms_key
-    BuildkiteAgentTimestampLines            = "true"
+    BuildkiteAgentTimestampLines            = strcontains(var.stack_template_url, "v7.") ? null : "true"
     BuildkiteQueue                          = var.buildkite_queue
     ECRAccessPolicy                         = "poweruser"
     EnableDockerUserNamespaceRemap          = "false"

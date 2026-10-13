@@ -13,6 +13,9 @@ to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Deprecated
 ### Removed
 ### Fixed
+
+* Fix support for `buildkite_elastic_stack` with stack version v7. The environment variable `BuildkiteAgentTimestampLines` is unavailable in v7 but set to `true` in previous versions.
+
 ### Security
 
 ## [27.1.0] - 2026-08-23

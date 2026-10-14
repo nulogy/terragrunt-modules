@@ -1,0 +1,16 @@
+versions.env
+  h_4c6a40fcb4fca3 1
+CHANGELOG.md
+  h_4c6a40fcb4fca3 16,18,20-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "086b2d58d951d7663b351b4a9c9f3607dc1e8e52",
+  "prompts": {},
+  "humans": {
+    "h_4c6a40fcb4fca3": {
+      "author": "Yusaira Khan <yusairak@nulogy.com>"
+    }
+  }
+}

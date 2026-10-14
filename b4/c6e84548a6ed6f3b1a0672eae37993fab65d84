@@ -1,0 +1,16 @@
+CHANGELOG.md
+  h_4c6a40fcb4fca3 16-18
+modules/buildkite_elastic_stack/main.tf
+  h_4c6a40fcb4fca3 50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b4c6e84548a6ed6f3b1a0672eae37993fab65d84",
+  "prompts": {},
+  "humans": {
+    "h_4c6a40fcb4fca3": {
+      "author": "Yusaira Khan <yusairak@nulogy.com>"
+    }
+  }
+}
